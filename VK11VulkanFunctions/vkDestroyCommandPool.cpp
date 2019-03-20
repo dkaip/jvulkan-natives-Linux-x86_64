@@ -18,24 +18,24 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkDestroyCommandPool
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandPool;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandPool;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkDestroyCommandPool
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyCommandPool
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkCommandPool, jobject jAlternateAllocator)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)hwjvi::getHandleValue(env, jVkCommandPool);
+    VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)jvulkan::getHandleValue(env, jVkCommandPool);
     if (env->ExceptionOccurred())
     {
         return;
@@ -45,7 +45,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
     vkDestroyCommandPool(logicalDeviceHandle, commandPoolHandle, allocatorCallbacks);

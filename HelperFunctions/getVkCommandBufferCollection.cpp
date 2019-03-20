@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkCommandBufferCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkCommandBuffer_T *vkCommandBufferHandle = (VkCommandBuffer_T *)hwjvi::getHandleValue(env, jVkCommandBufferHandleObject);
+            VkCommandBuffer_T *vkCommandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBufferHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

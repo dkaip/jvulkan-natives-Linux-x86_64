@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSpecializationMapEntry(
             JNIEnv *env,
@@ -287,10 +287,10 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineShaderStageCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineShaderStageCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getStage", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkShaderStageFlagBits;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getStage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -317,7 +317,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getModule", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkShaderModule;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getModule", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkShaderModule;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -329,7 +329,7 @@ namespace hwjvi
             return;
         }
 
-        VkShaderModule_T *shaderModuleHandle = (VkShaderModule_T *)hwjvi::getHandleValue(env, jVkShaderModuleObject);
+        VkShaderModule_T *shaderModuleHandle = (VkShaderModule_T *)jvulkan::getHandleValue(env, jVkShaderModuleObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -357,7 +357,7 @@ namespace hwjvi
         env->ReleaseStringUTFChars(jTheName, tempString);
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getSpecializationInfo", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkSpecializationInfo;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getSpecializationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSpecializationInfo;");
         if (env->ExceptionOccurred())
         {
             return;

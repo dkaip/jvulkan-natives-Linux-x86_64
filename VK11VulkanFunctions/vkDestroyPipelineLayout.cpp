@@ -18,18 +18,18 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkDestroyPipelineLayout
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipelineLayout;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkDestroyPipelineLayout
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyPipelineLayout
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipelineLayout, jobject jAlternateAllocator)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -39,10 +39,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)hwjvi::getHandleValue(env, jVkPipelineLayout);
+    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayout);
     if (env->ExceptionOccurred())
     {
         return;

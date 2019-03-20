@@ -21,21 +21,21 @@ using namespace std;
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkEnumerateDeviceExtensionProperties
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Ljava/lang/String;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Ljava/lang/String;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkEnumerateDeviceExtensionProperties
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkEnumerateDeviceExtensionProperties
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jstring jlayerName, jobject jEnumerateDeviceExtensionPropertiesCollection)
 {
-    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
 //    jclass vkPhysicalDeviceClass = env->GetObjectClass(jVkPhysicalDevice);
@@ -64,7 +64,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         layerName = env->GetStringUTFChars(jlayerName, 0);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
@@ -75,7 +75,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             nullptr);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
     if (numberOfPhysicalDeviceExtensionProperties != 0)
@@ -89,25 +89,25 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
                 extensionList.data());
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, result);
+            return jvulkan::createVkResult(env, result);
         }
 
-        jclass javaClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtensionProperties");
+        jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtensionProperties");
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         jclass collectionClass = env->GetObjectClass(jEnumerateDeviceExtensionPropertiesCollection);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         for (const auto& extension : extensionList)
@@ -115,50 +115,50 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             jmethodID constructor = env->GetMethodID(javaClass, "<init>", "()V");
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             jobject newObject = env->NewObject(javaClass, constructor);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             jmethodID methodId = env->GetMethodID(javaClass, "setExtensionName", "(Ljava/lang/String;)V");
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             jstring extensionName = env->NewStringUTF(extension.extensionName);
             env->CallVoidMethod(newObject, methodId, extensionName);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             methodId = env->GetMethodID(javaClass, "setSpecVersion", "(I)V");
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             env->CallVoidMethod(newObject, methodId, extension.specVersion);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             bool addResult = env->CallBooleanMethod(jEnumerateDeviceExtensionPropertiesCollection, addMethodId, newObject);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             if (addResult == false)
             {
                 cout << "Error VkPhysicalDevice element did not get added." << endl;
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
         }
     }
@@ -168,9 +168,9 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         env->GetStringUTFChars(jlayerName, (unsigned char *)layerName);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }

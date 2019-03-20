@@ -21,7 +21,7 @@ using namespace std;
 //#include <vulkan/vulkan.h>
 //#include <vulkan/vulkan_core.h>
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 static jobject getdeviceLimits(JNIEnv *env, VkPhysicalDeviceLimits *deviceLimits);
@@ -29,14 +29,14 @@ static jobject getVkSampleCountFlagBits(JNIEnv *env, VkSampleCountFlags vkSample
 static jobject getSparseProperties(JNIEnv *env, VkPhysicalDeviceSparseProperties *sparseProperties);
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceProperties
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceProperties
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceProperties
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jPhysicalDeviceProperties)
 {
-    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
         return;
     }
 
-    jclass physicalDevicePropertiesClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+    jclass physicalDevicePropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
     if (env->ExceptionOccurred())
     {
         return;
@@ -156,13 +156,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             return;
     }
 
-    jclass enumClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPhysicalDeviceType");
+    jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType");
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    jfieldID fieldId = env->GetStaticFieldID(enumClass, deviceTypeName, "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPhysicalDeviceType;");
+    jfieldID fieldId = env->GetStaticFieldID(enumClass, deviceTypeName, "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType;");
     if (env->ExceptionOccurred())
     {
         return;
@@ -174,7 +174,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
         return;
     }
 
-    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setDeviceType", "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPhysicalDeviceType;)V");
+    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setDeviceType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType;)V");
     if (env->ExceptionOccurred())
     {
         return;
@@ -228,7 +228,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     ///////////////////////////////////////////////////////////////////////////
 
-    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setLimits", "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits;)V");
+    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setLimits", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits;)V");
     if (env->ExceptionOccurred())
     {
         return;
@@ -248,7 +248,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     ///////////////////////////////////////////////////////////////////////////
 
-    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setSparseProperties", "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties;)V");
+    methodId = env->GetMethodID(physicalDevicePropertiesClass, "setSparseProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties;)V");
     if (env->ExceptionOccurred())
     {
         return;
@@ -269,7 +269,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
 static jobject getSparseProperties(JNIEnv *env, VkPhysicalDeviceSparseProperties *sparseProperties)
 {
-    jclass sparsePropertiesClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties");
+    jclass sparsePropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties");
     jmethodID constructorMethod = env->GetMethodID(sparsePropertiesClass, "<init>", "()V");
     if (env->ExceptionOccurred())
     {
@@ -353,7 +353,7 @@ static jobject getSparseProperties(JNIEnv *env, VkPhysicalDeviceSparseProperties
 
 static jobject getdeviceLimits(JNIEnv *env, VkPhysicalDeviceLimits *deviceLimits)
 {
-    jclass deviceLimitsClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits");
+    jclass deviceLimitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits");
     jmethodID constructorMethod = env->GetMethodID(deviceLimitsClass, "<init>", "()V");
     if (env->ExceptionOccurred())
     {
@@ -2043,8 +2043,8 @@ static jobject getdeviceLimits(JNIEnv *env, VkPhysicalDeviceLimits *deviceLimits
 
 static jobject getVkSampleCountFlagBits(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags)
 {
-    char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSampleCountFlagBits";
-    char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSampleCountFlagBits;";
+    char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits";
+    char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;";
     /*
      * Create the EnumSet for the flags.
      */

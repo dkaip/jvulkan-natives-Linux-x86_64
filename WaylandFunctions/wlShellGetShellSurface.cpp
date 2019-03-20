@@ -19,24 +19,24 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "../headers/HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlShellGetShellSurface
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlShell;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlSurface;)Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlShellSurface;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlShell;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlSurface;)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlShellSurface;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_wlShellGetShellSurface
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellGetShellSurface
   (JNIEnv *env, jobject, jobject jWlShell, jobject jWlSurface)
 {
-    wl_shell *shellInterfaceHandle = (wl_shell *)hwjvi::getHandleValue(env, jWlShell);
+    wl_shell *shellInterfaceHandle = (wl_shell *)jvulkan::getHandleValue(env, jWlShell);
     if (env->ExceptionOccurred())
     {
         return nullptr;
     }
 
-    wl_surface *surfaceHandle = (wl_surface *)hwjvi::getHandleValue(env, jWlSurface);
+    wl_surface *surfaceHandle = (wl_surface *)jvulkan::getHandleValue(env, jWlSurface);
     if (env->ExceptionOccurred())
     {
         return nullptr;
@@ -47,7 +47,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     jobject returnHandle = nullptr;
     if (shellSurface != nullptr)
     {
-        returnHandle = hwjvi::createHandle(env, "com/CIMthetics/hwjvi/Wayland/Handles/WlShellSurface", shellSurface);
+        returnHandle = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlShellSurface", shellSurface);
         if (env->ExceptionOccurred())
         {
             return nullptr;

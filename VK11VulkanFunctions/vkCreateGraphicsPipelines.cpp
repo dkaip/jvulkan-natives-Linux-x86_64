@@ -18,37 +18,37 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateGraphicsPipelines
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipelineCache;Ljava/util/Collection;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineCache;Ljava/util/Collection;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateGraphicsPipelines
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateGraphicsPipelines
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipelineCache, jobject jVkGraphicsPipelineCreateInfoCollection, jobject jAlternateAllocator, jobject jVkPipelineCollection)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
     VkPipelineCache_T *pipelineCacheHandle = nullptr;
     if (jVkPipelineCache != nullptr)
     {
-        pipelineCacheHandle = (VkPipelineCache_T *)hwjvi::getHandleValue(env, jVkPipelineCache);
+        pipelineCacheHandle = (VkPipelineCache_T *)jvulkan::getHandleValue(env, jVkPipelineCache);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
@@ -56,7 +56,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     int numberOfCreateInfos = 0;
     VkGraphicsPipelineCreateInfo *vkGraphicsPipelineCreateInfo = nullptr;
 
-    hwjvi::getCollectionOfVkGraphicsPipelineCreateInfo(
+    jvulkan::getCollectionOfVkGraphicsPipelineCreateInfo(
             env,
             jVkGraphicsPipelineCreateInfoCollection,
             &vkGraphicsPipelineCreateInfo,
@@ -64,7 +64,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkPipeline *pipelines = (VkPipeline *)calloc(numberOfCreateInfos, sizeof(VkPipeline *));
@@ -81,60 +81,60 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     delete allocatorCallbacks;
     allocatorCallbacks = nullptr;
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 
     jclass vkPipelineCollectionClass = env->GetObjectClass(jVkPipelineCollection);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID methodId = env->GetMethodID(vkPipelineCollectionClass, "size", "()I");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jint numberOfElements = env->CallIntMethod(jVkPipelineCollection, methodId);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     if (numberOfCreateInfos != numberOfElements)
     {
         std::cerr << "ERROR: The collection size for resulting pipeline collection must be the same as jVkGraphicsPipelineCreateInfoCollection." << std::endl;
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID iteratorMethodId = env->GetMethodID(vkPipelineCollectionClass, "iterator", "()Ljava/util/Iterator;");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject iteratorObject = env->CallObjectMethod(jVkPipelineCollection, iteratorMethodId);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jclass iteratorClass = env->GetObjectClass(iteratorObject);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     int i = 0;
@@ -160,12 +160,12 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         /*
          * Now transfer the VkDevice data to Java
          */
-        hwjvi::setHandleValue(env, jVkPipelineObject, pipelines[i]);
+        jvulkan::setHandleValue(env, jVkPipelineObject, pipelines[i]);
 
         i++;
     } while(true);
 
     free(pipelines);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }

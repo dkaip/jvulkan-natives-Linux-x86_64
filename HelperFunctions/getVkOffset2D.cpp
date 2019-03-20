@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkOffset2D(
             JNIEnv *env,

@@ -17,28 +17,28 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateRenderPass2KHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkRenderPassCreateInfo2KHR;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkRenderPass;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkRenderPassCreateInfo2KHR;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateRenderPass2KHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateRenderPass2KHR
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkRenderPassCreateInfo2KHR, jobject jAlternateAllocator, jobject jVkRenderPass)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
 
@@ -46,10 +46,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     VkRenderPassCreateInfo2KHR vkRenderPassCreateInfo2KHR = {};
     std::vector<void *> memoryToFree(10);
 
-    hwjvi::getVkRenderPassCreateInfo2KHR(env, jVkRenderPassCreateInfo2KHR, &vkRenderPassCreateInfo2KHR, &memoryToFree);
+    jvulkan::getVkRenderPassCreateInfo2KHR(env, jVkRenderPassCreateInfo2KHR, &vkRenderPassCreateInfo2KHR, &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
 
@@ -62,13 +62,13 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     delete allocatorCallbacks;
     allocatorCallbacks = nullptr;
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 
     /*
      * Now transfer the VkDevice data to Java
      */
-    hwjvi::setHandleValue(env, jVkRenderPass, renderPassHandle);
+    jvulkan::setHandleValue(env, jVkRenderPass, renderPassHandle);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 

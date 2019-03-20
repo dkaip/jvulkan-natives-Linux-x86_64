@@ -20,18 +20,18 @@ using namespace std;
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceFeatures
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceFeatures
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceFeatures
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jPhysicalDeviceFeatures)
 {
-    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -44,7 +44,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
         return;
     }
 
-    jclass physicalDeviceFeaturesClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures");
+    jclass physicalDeviceFeaturesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures");
     if (env->ExceptionOccurred())
     {
         return;

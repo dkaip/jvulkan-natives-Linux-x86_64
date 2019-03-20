@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDynamicStateCollection(
             JNIEnv *env,

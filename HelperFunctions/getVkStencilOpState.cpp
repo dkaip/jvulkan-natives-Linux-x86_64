@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkStencilOpState(
             JNIEnv *env,
@@ -34,7 +34,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkStencilOpStateClass, "getFailOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkStencilOp;");
+        jmethodID methodId = env->GetMethodID(vkStencilOpStateClass, "getFailOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStencilOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -61,7 +61,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkStencilOpStateClass, "getPassOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkStencilOp;");
+        methodId = env->GetMethodID(vkStencilOpStateClass, "getPassOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStencilOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -88,7 +88,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkStencilOpStateClass, "getDepthFailOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkStencilOp;");
+        methodId = env->GetMethodID(vkStencilOpStateClass, "getDepthFailOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStencilOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -115,7 +115,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkStencilOpStateClass, "getCompareOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCompareOp;");
+        methodId = env->GetMethodID(vkStencilOpStateClass, "getCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompareOp;");
         if (env->ExceptionOccurred())
         {
             return;

@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkViewport(
             JNIEnv *env,
@@ -260,7 +260,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineViewportStateCreateInfoClass, "getViewports", "()Ljava/util/Collection;");

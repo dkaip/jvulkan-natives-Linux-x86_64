@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSamplerCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkSampler_T *vkSamplerHandle = (VkSampler_T *)hwjvi::getHandleValue(env, jVkSamplerHandleObject);
+            VkSampler_T *vkSamplerHandle = (VkSampler_T *)jvulkan::getHandleValue(env, jVkSamplerHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

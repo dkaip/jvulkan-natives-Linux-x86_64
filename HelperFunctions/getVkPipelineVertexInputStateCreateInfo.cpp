@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkVertexInputBindingDescription(
             JNIEnv *env,
@@ -60,7 +60,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkVertexInputBindingDescriptionClass, "getInputRate", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkVertexInputRate;");
+        methodId = env->GetMethodID(vkVertexInputBindingDescriptionClass, "getInputRate", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkVertexInputRate;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -223,7 +223,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkVertexInputAttributeDescriptionClass, "getFormat", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkVertexInputAttributeDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -404,7 +404,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////

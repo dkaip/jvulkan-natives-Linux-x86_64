@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorSetAllocateInfo(
             JNIEnv *env,
@@ -54,7 +54,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorSetAllocateInfoClass, "getDescriptorPool", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDescriptorPool;");
+        methodId = env->GetMethodID(vkDescriptorSetAllocateInfoClass, "getDescriptorPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorPool;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -66,7 +66,7 @@ namespace hwjvi
             return;
         }
 
-        VkDescriptorPool_T *descriptorPoolHandle = (VkDescriptorPool_T *)hwjvi::getHandleValue(env, jDescriptorPoolObject);
+        VkDescriptorPool_T *descriptorPoolHandle = (VkDescriptorPool_T *)jvulkan::getHandleValue(env, jDescriptorPoolObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -90,7 +90,7 @@ namespace hwjvi
 
         if (jVkDescriptorSetLayoutCollection != nullptr)
         {
-            hwjvi::getVkDescriptorSetLayoutCollection(
+            jvulkan::getVkDescriptorSetLayoutCollection(
                     env,
                     jVkDescriptorSetLayoutCollection,
                     &vkDescriptorSetLayouts,

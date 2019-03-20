@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkImageSubresourceLayers(
             JNIEnv *env,
@@ -44,7 +44,7 @@ namespace hwjvi
         VkImageAspectFlags aspectMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkImageSubresourceLayersClass, "getMipLevel", "()I");

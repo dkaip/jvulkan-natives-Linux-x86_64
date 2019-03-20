@@ -19,12 +19,12 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     jobject getVkMemoryHeapFlagsAsEnumSet(JNIEnv *env, VkMemoryHeapFlags memoryHeapFlags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */

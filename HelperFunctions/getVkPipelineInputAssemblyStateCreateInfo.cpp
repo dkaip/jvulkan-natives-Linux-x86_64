@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineInputAssemblyStateCreateInfo(
             JNIEnv *env,
@@ -64,10 +64,10 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineInputAssemblyStateCreateInfoClass, "getTopology", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPrimitiveTopology;");
+        methodId = env->GetMethodID(vkPipelineInputAssemblyStateCreateInfoClass, "getTopology", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPrimitiveTopology;");
         if (env->ExceptionOccurred())
         {
             return;

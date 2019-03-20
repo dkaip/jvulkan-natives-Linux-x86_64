@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkBufferCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkBufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBufferCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -91,11 +91,11 @@ namespace hwjvi
         VkBufferUsageFlags bufferUsageFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBufferUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferUsageFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
             return;

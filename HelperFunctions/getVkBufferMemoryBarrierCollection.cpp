@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkBufferMemoryBarrier(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkAccessFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -77,7 +77,7 @@ namespace hwjvi
         VkAccessFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getSrcQueueFamilyIndex", "()I");
@@ -106,7 +106,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getBuffer", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkBuffer;");
+        methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -118,7 +118,7 @@ namespace hwjvi
             return;
         }
 
-        VkBuffer_T *vkBufferHandle = (VkBuffer_T *)hwjvi::getHandleValue(env, jVkBufferObject);
+        VkBuffer_T *vkBufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferObject);
         if (env->ExceptionOccurred())
         {
             return;

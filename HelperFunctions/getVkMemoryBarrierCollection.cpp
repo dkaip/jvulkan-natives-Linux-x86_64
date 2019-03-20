@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkMemoryBarrier(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkPipelineStageFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkMemoryBarrierClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -77,7 +77,7 @@ namespace hwjvi
         VkPipelineStageFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         vkMemoryBarrier->sType = (VkStructureType)sTypeValue;
         vkMemoryBarrier->pNext = (void *)pNext;

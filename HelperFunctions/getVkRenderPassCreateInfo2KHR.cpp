@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkRenderPassCreateInfo2KHR(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkRenderPassCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkRenderPassCreateInfo2KHRClass, "getAttachments", "()Ljava/util/Collection;");
@@ -83,7 +83,7 @@ namespace hwjvi
         VkAttachmentDescription2KHR *vkAttachmentDescription2KHR = nullptr;
         if (jVkAttachmentDescription2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkAttachmentDescription2KHRCollection(
+            jvulkan::getVkAttachmentDescription2KHRCollection(
                     env,
                     jVkAttachmentDescription2KHRCollectionObject,
                     &vkAttachmentDescription2KHR,
@@ -112,7 +112,7 @@ namespace hwjvi
         VkSubpassDescription2KHR *vkSubpassDescription2KHR = nullptr;
         if (jVkSubpassDescription2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkSubpassDescription2KHRCollection(
+            jvulkan::getVkSubpassDescription2KHRCollection(
                     env,
                     jVkSubpassDescription2KHRCollectionObject,
                     &vkSubpassDescription2KHR,
@@ -141,7 +141,7 @@ namespace hwjvi
         VkSubpassDependency2KHR *vkSubpassDependency2KHR = nullptr;
         if (jVkSubpassDependency2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkSubpassDependency2KHRCollection(
+            jvulkan::getVkSubpassDependency2KHRCollection(
                     env,
                     jVkSubpassDependency2KHRCollectionObject,
                     &vkSubpassDependency2KHR,
@@ -170,7 +170,7 @@ namespace hwjvi
         uint32_t *correlatedViewMasks = nullptr;
         if (jCorrelatedViewMasksCollectionObject != nullptr)
         {
-            hwjvi::getBitSetCollection(
+            jvulkan::getBitSetCollection(
                     env,
                     jCorrelatedViewMasksCollectionObject,
                     &correlatedViewMasks,

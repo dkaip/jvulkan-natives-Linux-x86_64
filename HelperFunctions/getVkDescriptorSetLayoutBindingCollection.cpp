@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorSetLayoutBinding(
             JNIEnv *env,
@@ -47,7 +47,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getDescriptorType", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDescriptorType;");
+        methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -97,7 +97,7 @@ namespace hwjvi
         VkShaderStageFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getImmutableSamplers", "()Ljava/util/Collection;");
@@ -117,7 +117,7 @@ namespace hwjvi
 
         if (jVkSamplerCollection != nullptr)
         {
-            hwjvi::getVkSamplerCollection(
+            jvulkan::getVkSamplerCollection(
                     env,
                     jVkSamplerCollection,
                     &vkSamplers,

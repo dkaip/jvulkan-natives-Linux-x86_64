@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkWriteDescriptorSet(
             JNIEnv *env,
@@ -54,7 +54,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -66,7 +66,7 @@ namespace hwjvi
             return;
         }
 
-        VkDescriptorSet_T *descriptorSetHandle = (VkDescriptorSet_T *)hwjvi::getHandleValue(env, jVkDescriptorSetObject);
+        VkDescriptorSet_T *descriptorSetHandle = (VkDescriptorSet_T *)jvulkan::getHandleValue(env, jVkDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -99,7 +99,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDescriptorType", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDescriptorType;");
+        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -143,7 +143,7 @@ namespace hwjvi
 
         if (jVkDescriptorImageInfoCollection != nullptr)
         {
-            hwjvi::getVkDescriptorImageInfoCollection(
+            jvulkan::getVkDescriptorImageInfoCollection(
                     env,
                     jVkDescriptorImageInfoCollection,
                     &vkDescriptorImageInfos,
@@ -173,7 +173,7 @@ namespace hwjvi
 
         if (jVkDescriptorBufferInfoCollection != nullptr)
         {
-            hwjvi::getVkDescriptorBufferInfoCollection(
+            jvulkan::getVkDescriptorBufferInfoCollection(
                     env,
                     jVkDescriptorBufferInfoCollection,
                     &vkDescriptorBufferInfos,
@@ -203,7 +203,7 @@ namespace hwjvi
 
         if (jVkBufferViewCollection != nullptr)
         {
-            hwjvi::getVkBufferViewCollection(
+            jvulkan::getVkBufferViewCollection(
                     env,
                     jVkBufferViewCollection,
                     &vkBufferViews,

@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorPoolSize(
             JNIEnv *env,
@@ -34,7 +34,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorPoolSizeClass, "getType", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDescriptorType;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorPoolSizeClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
             return;

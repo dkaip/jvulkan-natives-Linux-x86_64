@@ -18,33 +18,33 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceSurfaceFormatsKHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkSurfaceKHR;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceSurfaceFormatsKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceSurfaceFormatsKHR
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jVkSurfaceKHR, jobject jVkSurfaceFormatKHRCollection)
 {
-    VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkSurfaceKHR_T *surfaceKHRHandle = (VkSurfaceKHR_T *)hwjvi::getHandleValue(env, jVkSurfaceKHR);
+    VkSurfaceKHR_T *surfaceKHRHandle = (VkSurfaceKHR_T *)jvulkan::getHandleValue(env, jVkSurfaceKHR);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     if (jVkSurfaceFormatKHRCollection == nullptr)
     {
         cout << "ERROR: jVkSurfaceFormatKHRCollection must be created before calling vkGetPhysicalDeviceSurfaceFormatsKHR." << endl;
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     unsigned int numberOfSurfaceFormats = 0;
@@ -52,12 +52,12 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     VkResult result = vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfSurfaceFormats, nullptr);
     if (result != VK_SUCCESS)
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
     if (numberOfSurfaceFormats == 0)
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
     std::vector<VkSurfaceFormatKHR> surfaceFormats(numberOfSurfaceFormats);
@@ -65,34 +65,34 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     result = vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfSurfaceFormats, surfaceFormats.data());
     if (result != VK_SUCCESS)
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
-    jclass vkSurfaceFormatKHRClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkSurfaceFormatKHR");
+    jclass vkSurfaceFormatKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSurfaceFormatKHR");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID vkSurfaceFormatKHRConstructor = env->GetMethodID(
             vkSurfaceFormatKHRClass,
             "<init>",
-            "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;)V");
+            "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;)V");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jclass collectionClass = env->GetObjectClass(jVkSurfaceFormatKHRCollection);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID methodId = nullptr;
@@ -101,17 +101,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     {
         ///////////////////////////////////////////////////////////////////////////
 
-        jclass vkFormatClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat");
+        jclass vkFormatClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat");
         if (env->ExceptionOccurred())
         {
-            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat" << endl;
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat" << endl;
             return nullptr;
         }
 
-        methodId = env->GetStaticMethodID(vkFormatClass, "fromValue", "(I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetStaticMethodID(vkFormatClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
-            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;" << endl;
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;" << endl;
             return nullptr;
         }
 
@@ -119,17 +119,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
 
         ///////////////////////////////////////////////////////////////////////////
 
-        jclass vkColorSpaceKHRClass = env->FindClass("com/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR");
+        jclass vkColorSpaceKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR");
         if (env->ExceptionOccurred())
         {
-            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "ccom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR" << endl;
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "ccom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR" << endl;
             return nullptr;
         }
 
-        methodId = env->GetStaticMethodID(vkColorSpaceKHRClass, "fromValue", "(I)Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
+        methodId = env->GetStaticMethodID(vkColorSpaceKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
         if (env->ExceptionOccurred())
         {
-            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;" << endl;
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;" << endl;
             return nullptr;
         }
 
@@ -140,7 +140,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         jobject newVkSurfaceFormatKHR = env->NewObject(vkSurfaceFormatKHRClass, vkSurfaceFormatKHRConstructor, formatEnum, colorspaceEnum);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         bool successfulAdd = false;
@@ -151,6 +151,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         }
     }
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 

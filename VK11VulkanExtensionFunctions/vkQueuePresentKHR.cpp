@@ -18,28 +18,28 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkQueuePresentKHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkQueue;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPresentInfoKHR;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkQueue;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPresentInfoKHR;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkQueuePresentKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkQueuePresentKHR
   (JNIEnv *env, jobject, jobject jVkQueue, jobject jVkPresentInfoKHR)
 {
-    VkQueue_T *vkQueueHandle = (VkQueue_T *)hwjvi::getHandleValue(env, jVkQueue);
+    VkQueue_T *vkQueueHandle = (VkQueue_T *)jvulkan::getHandleValue(env, jVkQueue);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     std::vector<void *> memoryToFree(5);
     VkPresentInfoKHR vkPresentInfoKHR = {};
     jobject jVkResultsCollectionObject = nullptr;
 
-    hwjvi::getVkPresentInfoKHR(
+    jvulkan::getVkPresentInfoKHR(
             env,
             jVkPresentInfoKHR,
             &vkPresentInfoKHR,
@@ -47,7 +47,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     int result = vkQueuePresentKHR(
@@ -59,38 +59,38 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         jclass vkResultsCollectionClass = env->GetObjectClass(jVkResultsCollectionObject);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         jmethodID addMethodId = env->GetMethodID(vkResultsCollectionClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         for (uint32_t i = 0; i < vkPresentInfoKHR.swapchainCount; i++)
         {
-            jobject jVkResultObject = hwjvi::createVkResult(env, vkPresentInfoKHR.pResults[i]);
+            jobject jVkResultObject = jvulkan::createVkResult(env, vkPresentInfoKHR.pResults[i]);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             jboolean added = env->CallBooleanMethod(jVkResultsCollectionObject, addMethodId, jVkResultObject);
             if (env->ExceptionOccurred())
             {
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
 
             if (added == 0)
             {
                 std::cerr << "Could not add VkResult to output collection." << std::endl;
-                return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
             }
         }
     }
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }

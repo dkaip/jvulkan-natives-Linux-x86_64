@@ -17,15 +17,15 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdWriteAccelerationStructurePropertiesNVX
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkQueryType;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkQueryPool;I)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryType;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkQueryPool;I)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCmdWriteAccelerationStructurePropertiesNVX
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdWriteAccelerationStructurePropertiesNVX
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jint)
 {
     std::cerr << "Not implemented yet." << std::endl;

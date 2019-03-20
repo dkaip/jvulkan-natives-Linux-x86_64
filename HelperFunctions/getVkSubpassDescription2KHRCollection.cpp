@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSubpassDescription2KHR(
             JNIEnv *env,
@@ -64,10 +64,10 @@ namespace hwjvi
         VkSubpassDescriptionFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSubpassDescriptionFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSubpassDescriptionFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSubpassDescription2KHRClass, "getPipelineBindPoint", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
+        methodId = env->GetMethodID(vkSubpassDescription2KHRClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -164,7 +164,7 @@ namespace hwjvi
         VkAttachmentReference2KHR *inputAttachments = nullptr;
         if (jVkAttachmentReference2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkAttachmentReference2KHRCollection(
+            jvulkan::getVkAttachmentReference2KHRCollection(
                     env,
                     jVkAttachmentReference2KHRCollectionObject,
                     &inputAttachments,
@@ -193,7 +193,7 @@ namespace hwjvi
         VkAttachmentReference2KHR *colorAttachments = nullptr;
         if (jVkAttachmentReference2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkAttachmentReference2KHRCollection(
+            jvulkan::getVkAttachmentReference2KHRCollection(
                     env,
                     jVkAttachmentReference2KHRCollectionObject,
                     &colorAttachments,
@@ -222,7 +222,7 @@ namespace hwjvi
         VkAttachmentReference2KHR *resolveAttachments = nullptr;
         if (jVkAttachmentReference2KHRCollectionObject != nullptr)
         {
-            hwjvi::getVkAttachmentReference2KHRCollection(
+            jvulkan::getVkAttachmentReference2KHRCollection(
                     env,
                     jVkAttachmentReference2KHRCollectionObject,
                     &resolveAttachments,
@@ -235,7 +235,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSubpassDescription2KHRClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkAttachmentReference2KHR;");
+        methodId = env->GetMethodID(vkSubpassDescription2KHRClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkAttachmentReference2KHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -253,7 +253,7 @@ namespace hwjvi
         {
             depthStencilAttachment = (VkAttachmentReference2KHR *)calloc(1, sizeof(VkAttachmentReference2KHR));
             memoryToFree->push_back(depthStencilAttachment);
-            hwjvi::getVkAttachmentReference2KHR(
+            jvulkan::getVkAttachmentReference2KHR(
                     env,
                     jVkAttachmentReference2KHRObject,
                     depthStencilAttachment,

@@ -18,24 +18,24 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkFreeCommandBuffers
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandPool;Ljava/util/Collection;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandPool;Ljava/util/Collection;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkFreeCommandBuffers
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkFreeCommandBuffers
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkCommandPool, jobject jVkCommandBufferCollectionObject)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)hwjvi::getHandleValue(env, jVkCommandPool);
+    VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)jvulkan::getHandleValue(env, jVkCommandPool);
     if (env->ExceptionOccurred())
     {
         return;
@@ -117,7 +117,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             break;
         }
 
-        VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)hwjvi::getHandleValue(env, vkCommandBufferObject);
+        VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, vkCommandBufferObject);
         if (env->ExceptionOccurred())
         {
             return;

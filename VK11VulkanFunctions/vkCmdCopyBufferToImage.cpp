@@ -18,30 +18,30 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdCopyBufferToImage
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkBuffer;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkImage;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;Ljava/util/Collection;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;Ljava/util/Collection;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCmdCopyBufferToImage
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdCopyBufferToImage
   (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkBuffer, jobject jVkImage, jobject jVkImageLayoutObject, jobject jVkBufferImageCopyCollectionObject)
 {
-    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)hwjvi::getHandleValue(env, jVkCommandBuffer);
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    VkBuffer_T *bufferHandle = (VkBuffer_T *)hwjvi::getHandleValue(env, jVkBuffer);
+    VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBuffer);
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    VkImage_T *imageHandle = (VkImage_T *)hwjvi::getHandleValue(env, jVkImage);
+    VkImage_T *imageHandle = (VkImage_T *)jvulkan::getHandleValue(env, jVkImage);
     if (env->ExceptionOccurred())
     {
         return;
@@ -67,7 +67,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkBufferImageCopyCollectionObject != nullptr)
     {
-        hwjvi::getVkBufferImageCopyCollection(
+        jvulkan::getVkBufferImageCopyCollection(
                 env,
                 jVkBufferImageCopyCollectionObject,
                 &vkBufferImageCopies,
@@ -87,5 +87,5 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             numberOfVkBufferImageCopies,
             vkBufferImageCopies);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 }

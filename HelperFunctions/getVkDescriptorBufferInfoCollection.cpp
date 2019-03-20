@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorBufferInfo(
             JNIEnv *env,
@@ -34,7 +34,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getBuffer", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -46,7 +46,7 @@ namespace hwjvi
             return;
         }
 
-        VkBuffer_T *bufferHandle = (VkBuffer_T *)hwjvi::getHandleValue(env, jVkBufferObject);
+        VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferObject);
         if (env->ExceptionOccurred())
         {
             return;

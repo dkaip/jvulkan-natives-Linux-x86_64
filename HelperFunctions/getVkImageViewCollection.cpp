@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkImageViewCollection(
             JNIEnv *env,
@@ -105,7 +105,7 @@ namespace hwjvi
                 break;
             }
 
-            VkImageView_T *imageViewHandle = (VkImageView_T *)hwjvi::getHandleValue(env, jVkImageViewObject);
+            VkImageView_T *imageViewHandle = (VkImageView_T *)jvulkan::getHandleValue(env, jVkImageViewObject);
             if (env->ExceptionOccurred())
             {
                 return;

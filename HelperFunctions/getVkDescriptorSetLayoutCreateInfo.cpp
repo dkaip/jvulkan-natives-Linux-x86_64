@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorSetLayoutCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkDescriptorSetLayoutCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDescriptorSetLayoutCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorSetLayoutCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorSetLayoutCreateInfoClass, "getBindings", "()Ljava/util/Collection;");
@@ -84,7 +84,7 @@ namespace hwjvi
 
         if (jVkDescriptorSetLayoutBindingCollection != nullptr)
         {
-            hwjvi::getVkDescriptorSetLayoutBindingCollection(
+            jvulkan::getVkDescriptorSetLayoutBindingCollection(
                     env,
                     jVkDescriptorSetLayoutBindingCollection,
                     &vkDescriptorSetLayoutBindings,

@@ -18,18 +18,18 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkUpdateDescriptorSets
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;Ljava/util/Collection;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;Ljava/util/Collection;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkUpdateDescriptorSets
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkUpdateDescriptorSets
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkWriteDescriptorSetCollectionObject, jobject jVkCopyDescriptorSetCollectionObject)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -41,7 +41,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkWriteDescriptorSetCollectionObject != nullptr)
     {
-        hwjvi::getVkWriteDescriptorSetCollection(
+        jvulkan::getVkWriteDescriptorSetCollection(
                 env,
                 jVkWriteDescriptorSetCollectionObject,
                 &vkWriteDescriptorSets,
@@ -58,7 +58,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkCopyDescriptorSetCollectionObject != nullptr)
     {
-        hwjvi::getVkCopyDescriptorSetCollection(
+        jvulkan::getVkCopyDescriptorSetCollection(
                 env,
                 jVkCopyDescriptorSetCollectionObject,
                 &vkCopyDescriptorSets,
@@ -77,6 +77,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             numberOfVkCopyDescriptorSets,
             vkCopyDescriptorSets);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 }
 

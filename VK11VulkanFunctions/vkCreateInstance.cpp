@@ -18,15 +18,15 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateInstance
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkInstanceCreateInfo;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkInstance;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkInstanceCreateInfo;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateInstance
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateInstance
   (JNIEnv *env, jobject, jobject jInstanceCreateInfo, jobject jAlternateAllocator, jobject jVkInstance)
 {
     VkApplicationInfo applicationInfo = {};
@@ -34,17 +34,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
 
     std::vector<void *> memoryToFree(30);
 
-    hwjvi::getInstanceCreateInfo(env, jInstanceCreateInfo, &instanceCreateInfo, &applicationInfo, &memoryToFree);
+    jvulkan::getInstanceCreateInfo(env, jInstanceCreateInfo, &instanceCreateInfo, &applicationInfo, &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
     VkInstance instance;
@@ -57,10 +57,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     /*
      * Now transfer the VkInstance data to Java
      */
-    hwjvi::setHandleValue(env, jVkInstance, instance);
+    jvulkan::setHandleValue(env, jVkInstance, instance);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 

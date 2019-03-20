@@ -20,18 +20,18 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "../headers/HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlRegistryBind
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlRegistry;ILjava/lang/String;I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VulkanHandle;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlRegistry;ILjava/lang/String;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_wlRegistryBind
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRegistryBind
   (JNIEnv *env, jobject, jobject jWlRegistry, jint interfaceId, jstring jTextInterfaceName, jint interfaceVersion)
 {
-    wl_registry *waylandRegistryHandle = (wl_registry *)hwjvi::getHandleValue(env, jWlRegistry);
+    wl_registry *waylandRegistryHandle = (wl_registry *)jvulkan::getHandleValue(env, jWlRegistry);
 
     const char *interfaceName = nullptr;
 
@@ -148,7 +148,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             interfacePointer,
             interfaceVersion);
 
-    jobject jInterfacePointer = hwjvi::createHandle(env, "com/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VulkanHandle", result);
+    jobject jInterfacePointer = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle", result);
 
     return jInterfacePointer;
 }

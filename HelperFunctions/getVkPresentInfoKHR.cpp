@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPresentInfoKHR(
             JNIEnv *env,
@@ -72,7 +72,7 @@ namespace hwjvi
 
         if (jWaitSemaphoreCollection != nullptr)
         {
-            hwjvi::getVkSemaphoreCollection(
+            jvulkan::getVkSemaphoreCollection(
                     env,
                     jWaitSemaphoreCollection,
                     &waitSemaphores,
@@ -102,7 +102,7 @@ namespace hwjvi
 
         if (jWaitSemaphoreCollection != nullptr)
         {
-            hwjvi::getVkSwapchainKHRCollection(
+            jvulkan::getVkSwapchainKHRCollection(
                     env,
                     jSwapchainCollection,
                     &swapchains,

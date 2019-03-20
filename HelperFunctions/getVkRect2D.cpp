@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkRect2D(
             JNIEnv *env,
@@ -34,7 +34,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkRect2DClass, "getOffset", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkOffset2D;");
+        jmethodID methodId = env->GetMethodID(vkRect2DClass, "getOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset2D;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -53,7 +53,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRect2DClass, "getExtent", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtent2D;");
+        methodId = env->GetMethodID(vkRect2DClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
             return;

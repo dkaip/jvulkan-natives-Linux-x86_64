@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkBufferCopyCollection(
             JNIEnv *env,
@@ -80,7 +80,7 @@ namespace hwjvi
             return;
         }
 
-        jclass vkBufferCopyClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkBufferCopy");
+        jclass vkBufferCopyClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkBufferCopy");
         if (env->ExceptionOccurred())
         {
             return;

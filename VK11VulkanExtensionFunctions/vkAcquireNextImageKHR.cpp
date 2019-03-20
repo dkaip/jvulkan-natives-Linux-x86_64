@@ -18,50 +18,50 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkAcquireNextImageKHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSwapchainKHR;JLcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSemaphore;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkFence;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/IntReturnValue;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;JLcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSemaphore;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/IntReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkAcquireNextImageKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkAcquireNextImageKHR
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkSwapchainKHR, jlong jTimeout, jobject jVkSemaphore, jobject jVkFence, jobject jImageIndex)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkSwapchainKHR_T *swapchainHandle = nullptr;
     if (jVkSwapchainKHR != nullptr)
     {
-        swapchainHandle = (VkSwapchainKHR_T *)hwjvi::getHandleValue(env, jVkSwapchainKHR);
+        swapchainHandle = (VkSwapchainKHR_T *)jvulkan::getHandleValue(env, jVkSwapchainKHR);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
     VkSemaphore_T *semaphoreHandle = nullptr;
     if (jVkSemaphore != nullptr)
     {
-        semaphoreHandle = (VkSemaphore_T *)hwjvi::getHandleValue(env, jVkSemaphore);
+        semaphoreHandle = (VkSemaphore_T *)jvulkan::getHandleValue(env, jVkSemaphore);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
     VkFence_T *fenceHandle = nullptr;
     if (jVkFence != nullptr)
     {
-        fenceHandle = (VkFence_T *)hwjvi::getHandleValue(env, jVkFence);
+        fenceHandle = (VkFence_T *)jvulkan::getHandleValue(env, jVkFence);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
@@ -75,7 +75,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             fenceHandle,
             &imageIndex);
 
-    hwjvi::setIntReturnValue(env, jImageIndex, imageIndex);
+    jvulkan::setIntReturnValue(env, jImageIndex, imageIndex);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }

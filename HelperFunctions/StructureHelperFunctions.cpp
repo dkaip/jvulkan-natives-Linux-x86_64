@@ -25,7 +25,7 @@ using namespace std;
 
 void jobjectToVkPhysicalDeviceFeatures(JNIEnv *env, jobject jPhysicalDeviceFeatures, VkPhysicalDeviceFeatures *vkPDF);
 
-namespace hwjvi
+namespace jvulkan
 {
     void collectionOfStringsToAOPTC(
             JNIEnv *env,
@@ -69,7 +69,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
 
 //        cout << "Got getFlagsAsInt" << endl;
 //        cout << "going for getEnabledLayerNamesAsStringArray" << endl;
@@ -132,7 +132,7 @@ namespace hwjvi
         instanceCreateInfo->ppEnabledExtensionNames = arrayOfPointersToExtensionNames;
         instanceCreateInfo->pApplicationInfo = applicationInfo;
 
-        methodId = env->GetMethodID(instanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkApplicationInfo;");
+        methodId = env->GetMethodID(instanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkApplicationInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -360,7 +360,7 @@ namespace hwjvi
             int32_t flags = getEnumSetValue(
                     env,
                     flagsObject,
-                    "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
+                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
 
             jint queueFamilyIndex = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueFamilyIndexMethodId);
             if (env->ExceptionOccurred())
@@ -446,7 +446,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDeviceCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceCreateFlagBits");
 
         methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledLayerNames", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
@@ -495,7 +495,7 @@ namespace hwjvi
             }
         }
 
-        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;");
+        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -651,13 +651,13 @@ namespace hwjvi
             JNIEnv *env,
             const jobject vulkanStructureObject)
     {
-        jclass vulkanStructureClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
+        jclass vulkanStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
         if (env->ExceptionOccurred())
         {
             return -1;
         }
 
-        jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkStructureType;");
+        jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType;");
         if (env->ExceptionOccurred())
         {
             cout << "ERROR could not find getSType method" << endl;
@@ -670,7 +670,7 @@ namespace hwjvi
             return -1;
         }
 
-        jclass enumClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkStructureType");
+        jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
         if (env->ExceptionOccurred())
         {
             return -1;
@@ -934,17 +934,17 @@ namespace hwjvi
             env->ExceptionClear();
         }
 
-        jclass vkResultClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult");
+        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult");
         if (env->ExceptionOccurred())
         {
-            cout << "createVkResult: could not find class " << "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult" << endl;
+            cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult" << endl;
             return nullptr;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;");
+        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;");
         if (env->ExceptionOccurred())
         {
-            cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;" << endl;
+            cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;" << endl;
             return nullptr;
         }
 
@@ -953,8 +953,8 @@ namespace hwjvi
 
     jobject getVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageUsageFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageUsageFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */
@@ -1134,8 +1134,8 @@ namespace hwjvi
 
     jobject getVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;";
         /*
          * Create the EnumSet for the flags.
          */
@@ -1246,8 +1246,8 @@ namespace hwjvi
 
     jobject getVkFormatFeatureFlagsEnumSet(JNIEnv *env, VkFormatFeatureFlags flags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits;";
 
         /*
          * Create the EnumSet for the flags.
@@ -1634,8 +1634,8 @@ namespace hwjvi
 
     jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;";
         /*
          * Create the EnumSet for the flags.
          */
@@ -1864,10 +1864,10 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkSwapchainCreateFlagBitsKHR");
+                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSwapchainCreateFlagBitsKHR");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getSurface", "()Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkSurfaceKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getSurface", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -1895,7 +1895,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageFormat", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -1922,7 +1922,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageColorSpace", "()Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageColorSpace", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -1949,7 +1949,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtent2D;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2021,10 +2021,10 @@ namespace hwjvi
         int32_t imageUsage = getEnumSetValue(
                 env,
                 imageUsageObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageSharingMode", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2080,7 +2080,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPreTransform", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPreTransform", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2107,7 +2107,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getCompositeAlpha", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getCompositeAlpha", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2134,7 +2134,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPresentMode", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPresentModeKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPresentMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPresentModeKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2182,7 +2182,7 @@ namespace hwjvi
         ////////////////////////////////////////////////////////////////////////
         VkSwapchainKHR_T *oldSwapchainHandle = nullptr;
 
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getOldSwapchain", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSwapchainKHR;");
+        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getOldSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2274,10 +2274,10 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageViewCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getImage", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkImage;");
+        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2296,7 +2296,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getViewType", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageViewType;");
+        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getViewType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2323,7 +2323,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getFormat", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2350,7 +2350,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getComponents", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkComponentMapping;");
+        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getComponents", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkComponentMapping;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2375,7 +2375,7 @@ namespace hwjvi
                 return;
             }
 
-            methodId = env->GetMethodID(componentsObjectClass, "getR", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+            methodId = env->GetMethodID(componentsObjectClass, "getR", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -2401,7 +2401,7 @@ namespace hwjvi
                 return;
             }
 
-            methodId = env->GetMethodID(componentsObjectClass, "getG", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+            methodId = env->GetMethodID(componentsObjectClass, "getG", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -2419,7 +2419,7 @@ namespace hwjvi
                 return;
             }
 
-            methodId = env->GetMethodID(componentsObjectClass, "getB", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+            methodId = env->GetMethodID(componentsObjectClass, "getB", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -2437,7 +2437,7 @@ namespace hwjvi
                 return;
             }
 
-            methodId = env->GetMethodID(componentsObjectClass, "getA", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+            methodId = env->GetMethodID(componentsObjectClass, "getA", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -2457,7 +2457,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getSubresourceRange", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkImageSubresourceRange;");
+        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getSubresourceRange", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresourceRange;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2485,7 +2485,7 @@ namespace hwjvi
         int32_t aspectMaskFlags = getEnumSetValue(
                 env,
                 aspectMaskObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
 
         methodId = env->GetMethodID(subresourceRangeObjectClass, "getBaseMipLevel", "()I");
         if (env->ExceptionOccurred())
@@ -2659,49 +2659,49 @@ namespace hwjvi
                     return;
                 }
 
-                getFormatMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFormat", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+                getFormatMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getSamplesMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getSamples", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+                getSamplesMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getLoadOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+                getLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStoreOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+                getStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getStencilLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilLoadOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+                getStencilLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getStencilStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilStoreOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+                getStencilStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getInitialLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getInitialLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+                getInitialLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
                 if (env->ExceptionOccurred())
                 {
                     return;
                 }
 
-                getFinalLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFinalLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+                getFinalLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFinalLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
                 if (env->ExceptionOccurred())
                 {
                     return;
@@ -2714,7 +2714,7 @@ namespace hwjvi
             int32_t flags = getEnumSetValue(
                     env,
                     flagsObject,
-                    "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentDescriptionFlagBits");
+                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentDescriptionFlagBits");
 
             ////////////////////////////////////////////////////////////////////////
             jobject vkFormatEnumObject = env->CallObjectMethod(jVkAttachmentDescriptionObject, getFormatMethodId);
@@ -2922,7 +2922,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentReferenceClass, "getLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkAttachmentReferenceClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -3150,7 +3150,7 @@ namespace hwjvi
                     return;
                 }
 
-                getPipelineBindPointMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getPipelineBindPoint", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
+                getPipelineBindPointMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
                 if (env->ExceptionOccurred())
                 {
                     return;
@@ -3174,7 +3174,7 @@ namespace hwjvi
                     return;
                 }
 
-                getDepthStencilAttachmentMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAttachmentReference;");
+                getDepthStencilAttachmentMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAttachmentReference;");
                 if (env->ExceptionOccurred())
                 {
                     return;
@@ -3192,7 +3192,7 @@ namespace hwjvi
             int32_t flags = getEnumSetValue(
                     env,
                     flagsObject,
-                    "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSubpassDescriptionFlagBits");
+                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSubpassDescriptionFlagBits");
 
             ////////////////////////////////////////////////////////////////////////
             jobject vkPipelineBindPointEnumObject = env->CallObjectMethod(jVkSubpassDescriptionObject, getPipelineBindPointMethodId);
@@ -3371,7 +3371,7 @@ namespace hwjvi
         int32_t srcStageMask = getEnumSetValue(
                 env,
                 enumSetObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependencyClass, "getDstStageMask", "()Ljava/util/EnumSet;");
@@ -3384,7 +3384,7 @@ namespace hwjvi
         int32_t dstStageMask = getEnumSetValue(
                 env,
                 enumSetObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependencyClass, "getSrcAccessMask", "()Ljava/util/EnumSet;");
@@ -3397,7 +3397,7 @@ namespace hwjvi
         int32_t srcAccessMask = getEnumSetValue(
                 env,
                 enumSetObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependencyClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -3410,7 +3410,7 @@ namespace hwjvi
         int32_t dstAccessMask = getEnumSetValue(
                 env,
                 enumSetObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         methodId = env->GetMethodID(vkSubpassDependencyClass, "getDependencyFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
@@ -3422,7 +3422,7 @@ namespace hwjvi
         int32_t dependencyFlags = getEnumSetValue(
                 env,
                 enumSetObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDependencyFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDependencyFlagBits");
 
         subpassDependency->srcSubpass = (uint32_t)srcSubpass;
         subpassDependency->dstSubpass = (uint32_t)dstSubpass;
@@ -3568,7 +3568,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getAttachments", "()Ljava/util/Collection;");
@@ -3705,7 +3705,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkShaderModuleCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderModuleCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getCodeSize", "()J");

@@ -18,15 +18,15 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdPipelineBarrier
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandBuffer;Ljava/util/EnumSet;Ljava/util/EnumSet;Ljava/util/EnumSet;Ljava/util/Collection;Ljava/util/Collection;Ljava/util/Collection;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Ljava/util/EnumSet;Ljava/util/EnumSet;Ljava/util/EnumSet;Ljava/util/Collection;Ljava/util/Collection;Ljava/util/Collection;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCmdPipelineBarrier
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPipelineBarrier
   (JNIEnv *env,
    jobject,
    jobject jVkCommandBuffer,
@@ -37,29 +37,29 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
    jobject jVkBufferMemoryBarriersCollectionObject,
    jobject jVkImageMemoryBarriersCollectionObject)
 {
-    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)hwjvi::getHandleValue(env, jVkCommandBuffer);
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
     {
         return;
     }
 
     ////////////////////////////////////////////////////////////////////////
-    VkPipelineStageFlags srcStageMask = hwjvi::getEnumSetValue(
+    VkPipelineStageFlags srcStageMask = jvulkan::getEnumSetValue(
             env,
             jSrcStageMaskObject,
-            "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
     ////////////////////////////////////////////////////////////////////////
-    VkPipelineStageFlags dstStageMask = hwjvi::getEnumSetValue(
+    VkPipelineStageFlags dstStageMask = jvulkan::getEnumSetValue(
             env,
             jDstStageMaskObject,
-            "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
     ////////////////////////////////////////////////////////////////////////
-    VkDependencyFlags dependencyFlags = hwjvi::getEnumSetValue(
+    VkDependencyFlags dependencyFlags = jvulkan::getEnumSetValue(
             env,
             jDependencyFlagsObject,
-            "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDependencyFlagBits");
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDependencyFlagBits");
 
     ////////////////////////////////////////////////////////////////////////
     std::vector<void *> memoryToFree(5);
@@ -68,7 +68,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkMemoryBarriersCollectionObject != nullptr)
     {
-        hwjvi::getVkMemoryBarrierCollection(
+        jvulkan::getVkMemoryBarrierCollection(
                 env,
                 jVkMemoryBarriersCollectionObject,
                 &vkMemoryBarriers,
@@ -86,7 +86,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkBufferMemoryBarriersCollectionObject != nullptr)
     {
-        hwjvi::getVkBufferMemoryBarrierCollection(
+        jvulkan::getVkBufferMemoryBarrierCollection(
                 env,
                 jVkBufferMemoryBarriersCollectionObject,
                 &vkBufferMemoryBarriers,
@@ -104,7 +104,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     if (jVkImageMemoryBarriersCollectionObject != nullptr)
     {
-        hwjvi::getVkImageMemoryBarrierCollection(
+        jvulkan::getVkImageMemoryBarrierCollection(
                 env,
                 jVkImageMemoryBarriersCollectionObject,
                 &vkImageMemoryBarriers,
@@ -128,5 +128,5 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             numberOfVkImageMemoryBarriers,
             vkImageMemoryBarriers);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 }

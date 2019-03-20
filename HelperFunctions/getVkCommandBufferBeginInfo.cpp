@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkCommandBufferBeginInfo(
             JNIEnv *env,
@@ -64,11 +64,11 @@ namespace hwjvi
         VkCommandBufferUsageFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCommandBufferUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCommandBufferUsageFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferBeginInfoClass, "getInheritanceInfo", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkCommandBufferInheritanceInfo;");
+        methodId = env->GetMethodID(vkCommandBufferBeginInfoClass, "getInheritanceInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkCommandBufferInheritanceInfo;");
         if (env->ExceptionOccurred())
         {
             return;

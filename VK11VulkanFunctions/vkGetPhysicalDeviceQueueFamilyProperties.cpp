@@ -21,21 +21,21 @@ using namespace std;
 //#include <vulkan/vulkan.h>
 //#include <vulkan/vulkan_core.h>
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 static jobject getVkQueueFlagBits(JNIEnv *env, VkQueueFlags vkQueueFlagBits);
 
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceQueueFamilyProperties
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Ljava/util/Collection;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Ljava/util/Collection;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceQueueFamilyProperties
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceQueueFamilyProperties
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jQueueFamilyPropertiesCollection)
 {
-    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -65,7 +65,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             return;
         }
 
-        jclass javaClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkQueueFamilyProperties");
+        jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties");
         if (env->ExceptionOccurred())
         {
             return;
@@ -152,7 +152,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
             ///////////////////////////////////////////////////////////////////////////
 
-            jclass vkExtent3DClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtent3D");
+            jclass vkExtent3DClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -174,7 +174,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
                 return;
             }
 
-            methodId = env->GetMethodID(javaClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtent3D;)V");
+            methodId = env->GetMethodID(javaClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;)V");
             if (env->ExceptionOccurred())
             {
                 return;
@@ -237,8 +237,8 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
 static jobject getVkQueueFlagBits(JNIEnv *env, VkQueueFlags vkQueueFlagBits)
 {
-    char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkQueueFlagBits";
-    char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkQueueFlagBits;";
+    char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueueFlagBits";
+    char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueueFlagBits;";
     /*
      * Create the EnumSet for the flags.
      */

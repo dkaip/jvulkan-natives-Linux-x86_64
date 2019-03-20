@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkBufferViewCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkBufferView_T *vkBufferViewrHandle = (VkBufferView_T *)hwjvi::getHandleValue(env, jVkBufferViewHandleObject);
+            VkBufferView_T *vkBufferViewrHandle = (VkBufferView_T *)jvulkan::getHandleValue(env, jVkBufferViewHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

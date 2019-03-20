@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSemaphoreCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkSemaphore_T *vkSemaphoreHandle = (VkSemaphore_T *)hwjvi::getHandleValue(env, jVkSemaphoreHandleObject);
+            VkSemaphore_T *vkSemaphoreHandle = (VkSemaphore_T *)jvulkan::getHandleValue(env, jVkSemaphoreHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

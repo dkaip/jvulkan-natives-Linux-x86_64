@@ -18,30 +18,30 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkQueueSubmit
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkQueue;Ljava/util/Collection;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkFence;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkQueue;Ljava/util/Collection;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkQueueSubmit
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkQueueSubmit
   (JNIEnv *env, jobject, jobject jVkQueue, jobject jVkSubmitInfoCollection, jobject jVkFence)
 {
-    VkQueue_T *vkQueueHandle = (VkQueue_T *)hwjvi::getHandleValue(env, jVkQueue);
+    VkQueue_T *vkQueueHandle = (VkQueue_T *)jvulkan::getHandleValue(env, jVkQueue);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkFence_T *vkFenceHandle = nullptr;
     if (jVkFence != nullptr)
     {
-        vkFenceHandle = (VkFence_T *)hwjvi::getHandleValue(env, jVkFence);
+        vkFenceHandle = (VkFence_T *)jvulkan::getHandleValue(env, jVkFence);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
@@ -49,7 +49,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     int numberOfVkSubmitInfos = 0;
     VkSubmitInfo *vkSubmitInfos = nullptr;
 
-    hwjvi::getVkSubmitInfoCollection(
+    jvulkan::getVkSubmitInfoCollection(
             env,
             jVkSubmitInfoCollection,
             &vkSubmitInfos,
@@ -57,7 +57,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     int result = vkQueueSubmit(
@@ -66,7 +66,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
             vkSubmitInfos,
             vkFenceHandle);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }

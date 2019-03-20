@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkFramebufferCreateInfo(
             JNIEnv *env,
@@ -64,10 +64,10 @@ namespace hwjvi
         VkFramebufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFramebufferCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFramebufferCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkFramebufferCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkRenderPass;");
+        methodId = env->GetMethodID(vkFramebufferCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -79,7 +79,7 @@ namespace hwjvi
             return;
         }
 
-        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)hwjvi::getHandleValue(env, jRenderPassHandleObject);
+        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)jvulkan::getHandleValue(env, jRenderPassHandleObject);
         if (env->ExceptionOccurred())
         {
             return;

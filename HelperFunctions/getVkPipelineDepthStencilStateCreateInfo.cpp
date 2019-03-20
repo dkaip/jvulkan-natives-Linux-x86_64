@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineDepthStencilStateCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineDepthStencilStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineDepthStencilStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "isDepthTestEnable", "()Z");
@@ -93,7 +93,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getDepthCompareOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCompareOp;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getDepthCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompareOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -146,7 +146,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getFront", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkStencilOpState;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getFront", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkStencilOpState;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -173,7 +173,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getBack", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkStencilOpState;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getBack", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkStencilOpState;");
         if (env->ExceptionOccurred())
         {
             return;

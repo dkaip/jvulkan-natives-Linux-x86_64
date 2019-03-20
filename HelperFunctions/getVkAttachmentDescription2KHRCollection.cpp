@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkAttachmentDescription2KHR(
             JNIEnv *env,
@@ -64,10 +64,10 @@ namespace hwjvi
         VkAttachmentDescriptionFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentDescriptionFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentDescriptionFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getFormat", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -94,7 +94,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getSamples", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -121,7 +121,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getLoadOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -148,7 +148,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStoreOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -175,7 +175,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStencilLoadOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStencilLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -202,7 +202,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStencilStoreOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getStencilStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -229,7 +229,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getInitialLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -256,7 +256,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getFinalLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkAttachmentDescription2KHRClass, "getFinalLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;

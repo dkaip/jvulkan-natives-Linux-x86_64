@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkCommandBufferInheritanceInfo(
             JNIEnv *env,
@@ -54,7 +54,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkRenderPass;");
+        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -66,7 +66,7 @@ namespace hwjvi
             return;
         }
 
-        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)hwjvi::getHandleValue(env, jVkRenderPassObject);
+        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)jvulkan::getHandleValue(env, jVkRenderPassObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -86,7 +86,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getFramebuffer", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkFramebuffer;");
+        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFramebuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -98,7 +98,7 @@ namespace hwjvi
             return;
         }
 
-        VkFramebuffer_T *framebufferHandle = (VkFramebuffer_T *)hwjvi::getHandleValue(env, jVkFramebufferObject);
+        VkFramebuffer_T *framebufferHandle = (VkFramebuffer_T *)jvulkan::getHandleValue(env, jVkFramebufferObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -128,7 +128,7 @@ namespace hwjvi
         VkQueryControlFlags vkQueryControlFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkQueryControlFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryControlFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -142,7 +142,7 @@ namespace hwjvi
         VkQueryPipelineStatisticFlags vkQueryPipelineStatisticFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkQueryPipelineStatisticFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryPipelineStatisticFlagBits");
 
         vkCommandBufferInheritanceInfo->sType = (VkStructureType)sTypeValue;
         vkCommandBufferInheritanceInfo->pNext = (void *)pNext;

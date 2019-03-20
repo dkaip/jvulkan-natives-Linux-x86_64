@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineTessellationStateCreateInfo(
             JNIEnv *env,
@@ -69,7 +69,7 @@ namespace hwjvi
         VkPipelineTessellationStateCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineTessellationStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineTessellationStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineTessellationStateCreateInfoClass, "getPatchControlPoints", "()I");

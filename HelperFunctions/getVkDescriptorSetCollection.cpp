@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorSetCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkDescriptorSet_T *vkDescriptorSetHandle = (VkDescriptorSet_T *)hwjvi::getHandleValue(env, jVkDescriptorSetHandleObject);
+            VkDescriptorSet_T *vkDescriptorSetHandle = (VkDescriptorSet_T *)jvulkan::getHandleValue(env, jVkDescriptorSetHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

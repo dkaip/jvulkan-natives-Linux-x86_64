@@ -21,24 +21,24 @@ using namespace std;
 //#include <vulkan/vulkan_core.h>
 //#include <vulkan/vulkan_wayland.h>
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceWaylandPresentationSupportKHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;ILcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlDisplay;)Z
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;ILcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;)Z
  */
-JNIEXPORT jboolean JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceWaylandPresentationSupportKHR
+JNIEXPORT jboolean JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceWaylandPresentationSupportKHR
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jint queueFamilyIndex, jobject jWlDisplay)
 {
-    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
         return false;
     }
 
-    struct wl_display *wlDisplayHandle = (struct wl_display *)hwjvi::getHandleValue(env, jWlDisplay);
+    struct wl_display *wlDisplayHandle = (struct wl_display *)jvulkan::getHandleValue(env, jWlDisplay);
     if (env->ExceptionOccurred())
     {
         return false;

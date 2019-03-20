@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineColorBlendStateCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineMultisampleStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineMultisampleStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "isLogicOpEnable", "()Z");
@@ -80,7 +80,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "getLogicOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkLogicOp;");
+        methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "getLogicOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkLogicOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -123,7 +123,7 @@ namespace hwjvi
         VkPipelineColorBlendAttachmentState *vkPipelineColorBlendAttachmentState = nullptr;
         if (jVkPipelineColorBlendAttachmentStateCollectionObject != nullptr)
         {
-            hwjvi::getVkPipelineColorBlendAttachmentStateCollection(
+            jvulkan::getVkPipelineColorBlendAttachmentStateCollection(
                     env,
                     jVkPipelineColorBlendAttachmentStateCollectionObject,
                     &vkPipelineColorBlendAttachmentState,

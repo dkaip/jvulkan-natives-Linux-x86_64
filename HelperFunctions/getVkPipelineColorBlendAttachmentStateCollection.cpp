@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineColorBlendAttachmentState(
             JNIEnv *env,
@@ -47,7 +47,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getSrcColorBlendFactor", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendFactor;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getSrcColorBlendFactor", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendFactor;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -74,7 +74,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getDstColorBlendFactor", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendFactor;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getDstColorBlendFactor", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendFactor;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -101,7 +101,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getColorBlendOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendOp;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getColorBlendOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -128,7 +128,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getSrcAlphaBlendFactor", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendFactor;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getSrcAlphaBlendFactor", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendFactor;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -155,7 +155,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getDstAlphaBlendFactor", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendFactor;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getDstAlphaBlendFactor", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendFactor;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -182,7 +182,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getAlphaBlendOp", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBlendOp;");
+        methodId = env->GetMethodID(vkPipelineColorBlendAttachmentStateClass, "getAlphaBlendOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBlendOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -219,7 +219,7 @@ namespace hwjvi
         VkColorComponentFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkColorComponentFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkColorComponentFlagBits");
 
 
 

@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkClearValue(
             JNIEnv *env,
@@ -33,7 +33,7 @@ namespace hwjvi
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkClearValueClass, "getClearColorValue", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkClearColorValue;");
+        jmethodID methodId = env->GetMethodID(vkClearValueClass, "getClearColorValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkClearColorValue;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -129,7 +129,7 @@ namespace hwjvi
              * Okay, we have determined that the VkClearValue is a VkClearDepthStencilValue
              * object.
              */
-            methodId = env->GetMethodID(vkClearValueClass, "getClearDepthStencilValue", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkClearDepthStencilValue;");
+            methodId = env->GetMethodID(vkClearValueClass, "getClearDepthStencilValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkClearDepthStencilValue;");
             if (env->ExceptionOccurred())
             {
                 return;

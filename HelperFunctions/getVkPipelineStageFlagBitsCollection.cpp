@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineStageFlagsCollection(
             JNIEnv *env,
@@ -103,7 +103,7 @@ namespace hwjvi
             VkPipelineStageFlags flags = getEnumSetValue(
                     env,
                     jVkPipelineStageFlagsObject,
-                    "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
             (*vkPipelineStageFlags)[i] = flags;
 

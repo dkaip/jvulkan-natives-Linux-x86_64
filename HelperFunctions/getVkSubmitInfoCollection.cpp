@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSubmitInfo(
             JNIEnv *env,
@@ -71,7 +71,7 @@ namespace hwjvi
 
         if (jWaitSemaphoreCollection != nullptr)
         {
-            hwjvi::getVkSemaphoreCollection(
+            jvulkan::getVkSemaphoreCollection(
                     env,
                     jWaitSemaphoreCollection,
                     &waitSemaphores,
@@ -101,7 +101,7 @@ namespace hwjvi
 
         if (jWaitDstStageMaskCollection != nullptr)
         {
-            hwjvi::getVkPipelineStageFlagsCollection(
+            jvulkan::getVkPipelineStageFlagsCollection(
                     env,
                     jWaitDstStageMaskCollection,
                     &pipelineStageFlags,
@@ -131,7 +131,7 @@ namespace hwjvi
 
         if (jCommandBufferCollection != nullptr)
         {
-            hwjvi::getVkCommandBufferCollection(
+            jvulkan::getVkCommandBufferCollection(
                     env,
                     jCommandBufferCollection,
                     &commandBuffers,
@@ -161,7 +161,7 @@ namespace hwjvi
 
         if (jWaitSemaphoreCollection != nullptr)
         {
-            hwjvi::getVkSemaphoreCollection(
+            jvulkan::getVkSemaphoreCollection(
                     env,
                     jSignalSemaphoreCollection,
                     &signalSemaphores,

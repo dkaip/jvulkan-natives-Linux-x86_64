@@ -19,12 +19,12 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     jobject getVkMemoryPropertyFlagsAsEnumSet(JNIEnv *env, VkMemoryPropertyFlags memoryPropertyFlags)
     {
-        char const *enumClassString = "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */

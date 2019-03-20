@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineRasterizationStateCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineRasterizationStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineRasterizationStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "isDepthClampEnable", "()Z");
@@ -99,7 +99,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getPolygonMode", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPolygonMode;");
+        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getPolygonMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPolygonMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -136,10 +136,10 @@ namespace hwjvi
         int32_t cullModeFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCullModeFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCullModeFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getFrontFace", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFrontFace;");
+        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getFrontFace", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFrontFace;");
         if (env->ExceptionOccurred())
         {
             return;

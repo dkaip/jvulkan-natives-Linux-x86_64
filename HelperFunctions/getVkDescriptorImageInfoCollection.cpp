@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorImageInfo(
             JNIEnv *env,
@@ -34,7 +34,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getSampler", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSampler;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getSampler", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSampler;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -46,14 +46,14 @@ namespace hwjvi
             return;
         }
 
-        VkSampler_T *samplerHandle = (VkSampler_T *)hwjvi::getHandleValue(env, jVkSamplerObject);
+        VkSampler_T *samplerHandle = (VkSampler_T *)jvulkan::getHandleValue(env, jVkSamplerObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageView", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkImageView;");
+        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageView", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImageView;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -65,14 +65,14 @@ namespace hwjvi
             return;
         }
 
-        VkImageView_T *imageViewHandle = (VkImageView_T *)hwjvi::getHandleValue(env, jVkImageViewObject);
+        VkImageView_T *imageViewHandle = (VkImageView_T *)jvulkan::getHandleValue(env, jVkImageViewObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;

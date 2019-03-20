@@ -18,68 +18,68 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateSemaphore
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkSemaphoreCreateInfo;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSemaphore;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkSemaphoreCreateInfo;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSemaphore;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateSemaphore
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateSemaphore
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkSemaphoreCreateInfoObject, jobject jAlternateAllocator, jobject jVkSemaphore)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
     jclass vkSemaphoreCreateInfoClass = env->GetObjectClass(jVkSemaphoreCreateInfoObject);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     ////////////////////////////////////////////////////////////////////////
-    int sTypeValue = hwjvi::getSTypeAsInt(env, jVkSemaphoreCreateInfoObject);
+    int sTypeValue = jvulkan::getSTypeAsInt(env, jVkSemaphoreCreateInfoObject);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     ////////////////////////////////////////////////////////////////////////
     jmethodID methodId = env->GetMethodID(vkSemaphoreCreateInfoClass, "getpNext", "()J");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jlong pNext = env->CallLongMethod(jVkSemaphoreCreateInfoObject, methodId);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     ////////////////////////////////////////////////////////////////////////
     methodId = env->GetMethodID(vkSemaphoreCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject flagsObject = env->CallObjectMethod(jVkSemaphoreCreateInfoObject, methodId);
-    VkSemaphoreCreateFlags flags = hwjvi::getEnumSetValue(
+    VkSemaphoreCreateFlags flags = jvulkan::getEnumSetValue(
             env,
             flagsObject,
-            "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSemaphoreCreateFlagBits");
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSemaphoreCreateFlagBits");
 
     VkSemaphoreCreateInfo vkSemaphoreCreateInfo = {};
     vkSemaphoreCreateInfo.sType = (VkStructureType)sTypeValue;
@@ -96,8 +96,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     /*
      * Now transfer the VkDevice data to Java
      */
-    hwjvi::setHandleValue(env, jVkSemaphore, semaphoreHandle);
+    jvulkan::setHandleValue(env, jVkSemaphore, semaphoreHandle);
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 

@@ -18,27 +18,27 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetSwapchainImagesKHR
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkSwapchainKHR;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetSwapchainImagesKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetSwapchainImagesKHR
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkSwapchainKHR, jobject jswapchainImageCollection)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkSwapchainKHR_T *swapchainHandle = (VkSwapchainKHR_T *)hwjvi::getHandleValue(env, jVkSwapchainKHR);
+    VkSwapchainKHR_T *swapchainHandle = (VkSwapchainKHR_T *)jvulkan::getHandleValue(env, jVkSwapchainKHR);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
 
@@ -47,7 +47,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     int result = vkGetSwapchainImagesKHR(logicalDeviceHandle, swapchainHandle, &numberOfImages, nullptr);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
     VkImage_T **swapchainImageHandles = (VkImage_T **)calloc(numberOfImages, sizeof(VkImage *));
@@ -55,33 +55,33 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     result = vkGetSwapchainImagesKHR(logicalDeviceHandle, swapchainHandle, &numberOfImages, swapchainImageHandles);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, result);
+        return jvulkan::createVkResult(env, result);
     }
 
     jclass collectionClass = env->GetObjectClass(jswapchainImageCollection);
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
     if (env->ExceptionOccurred())
     {
-        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     for (uint32_t i = 0; i < numberOfImages; i++)
     {
-        jobject vkImageHandle = hwjvi::createHandle(env, "com/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkImage", swapchainImageHandles[i]);
+        jobject vkImageHandle = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage", swapchainImageHandles[i]);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         jboolean addResult = env->CallBooleanMethod(jswapchainImageCollection, addMethodId, vkImageHandle);
         if (env->ExceptionOccurred())
         {
-            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
         if (addResult == false)
@@ -91,6 +91,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     }
 
     free(swapchainImageHandles);
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 

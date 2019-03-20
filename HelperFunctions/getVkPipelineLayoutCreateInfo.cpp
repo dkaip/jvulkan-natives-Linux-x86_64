@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getCollectionOfVkDescriptorSetLayout(
             JNIEnv *env,
@@ -105,7 +105,7 @@ namespace hwjvi
                 break;
             }
 
-            VkDescriptorSetLayout_T *descriptorSetLayoutHandle = (VkDescriptorSetLayout_T *)hwjvi::getHandleValue(env, jVkDescriptorSetLayoutObject);
+            VkDescriptorSetLayout_T *descriptorSetLayoutHandle = (VkDescriptorSetLayout_T *)jvulkan::getHandleValue(env, jVkDescriptorSetLayoutObject);
             if (env->ExceptionOccurred())
             {
                 return;
@@ -139,7 +139,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPushConstantRangeClass, "getOffset", "()I");
@@ -303,7 +303,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineLayoutCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineLayoutCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineLayoutCreateInfoClass, "getSetLayouts", "()Ljava/util/Collection;");

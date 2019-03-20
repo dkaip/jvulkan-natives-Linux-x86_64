@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkCopyDescriptorSet(
             JNIEnv *env,
@@ -54,7 +54,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getSrcSet", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getSrcSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -66,7 +66,7 @@ namespace hwjvi
             return;
         }
 
-        VkDescriptorSet_T *srcSetHandle = (VkDescriptorSet_T *)hwjvi::getHandleValue(env, jVkDescriptorSetObject);
+        VkDescriptorSet_T *srcSetHandle = (VkDescriptorSet_T *)jvulkan::getHandleValue(env, jVkDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -99,7 +99,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -111,7 +111,7 @@ namespace hwjvi
             return;
         }
 
-        VkDescriptorSet_T *dstSetHandle = (VkDescriptorSet_T *)hwjvi::getHandleValue(env, jVkDescriptorSetObject);
+        VkDescriptorSet_T *dstSetHandle = (VkDescriptorSet_T *)jvulkan::getHandleValue(env, jVkDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
             return;

@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkGraphicsPipelineCreateInfo(
             JNIEnv *env,
@@ -63,7 +63,7 @@ namespace hwjvi
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ namespace hwjvi
         VkPipelineShaderStageCreateInfo *vkPipelineShaderStageCreateInfos = nullptr;
         if (jVkPipelineShaderStageCreateInfos != nullptr)
         {
-            hwjvi::getVkPipelineShaderStageCreateInfoCollection(
+            jvulkan::getVkPipelineShaderStageCreateInfoCollection(
                     env,
                     jVkPipelineShaderStageCreateInfos,
                     &vkPipelineShaderStageCreateInfos,
@@ -96,7 +96,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getVertexInputState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineVertexInputStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getVertexInputState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineVertexInputStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -114,7 +114,7 @@ namespace hwjvi
             vkPipelineVertexInputStateCreateInfo = (VkPipelineVertexInputStateCreateInfo *)calloc(1, sizeof(VkPipelineVertexInputStateCreateInfo));
             memoryToFree->push_back(vkPipelineVertexInputStateCreateInfo);
 
-            hwjvi::getVkPipelineVertexInputStateCreateInfo(
+            jvulkan::getVkPipelineVertexInputStateCreateInfo(
                     env,
                     jVkPipelineVertexInputStateCreateInfoObject,
                     vkPipelineVertexInputStateCreateInfo,
@@ -126,7 +126,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getInputAssemblyState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineInputAssemblyStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getInputAssemblyState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineInputAssemblyStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -144,7 +144,7 @@ namespace hwjvi
             vkPipelineInputAssemblyStateCreateInfo = (VkPipelineInputAssemblyStateCreateInfo *)calloc(1, sizeof(VkPipelineInputAssemblyStateCreateInfo));
             memoryToFree->push_back(vkPipelineInputAssemblyStateCreateInfo);
 
-            hwjvi::getVkPipelineInputAssemblyStateCreateInfo(
+            jvulkan::getVkPipelineInputAssemblyStateCreateInfo(
                     env,
                     jVkPipelineInputAssemblyStateCreateInfoObject,
                     vkPipelineInputAssemblyStateCreateInfo,
@@ -156,7 +156,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getTessellationState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineTessellationStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getTessellationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineTessellationStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -174,7 +174,7 @@ namespace hwjvi
             vkPipelineTessellationStateCreateInfo = (VkPipelineTessellationStateCreateInfo *)calloc(1, sizeof(VkPipelineTessellationStateCreateInfo));
             memoryToFree->push_back(vkPipelineTessellationStateCreateInfo);
 
-            hwjvi::getVkPipelineTessellationStateCreateInfo(
+            jvulkan::getVkPipelineTessellationStateCreateInfo(
                     env,
                     jVkPipelineTessellationStateCreateInfoObject,
                     vkPipelineTessellationStateCreateInfo,
@@ -186,7 +186,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getViewportState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineViewportStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getViewportState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineViewportStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -204,7 +204,7 @@ namespace hwjvi
             vkPipelineViewportStateCreateInfo = (VkPipelineViewportStateCreateInfo *)calloc(1, sizeof(VkPipelineViewportStateCreateInfo));
             memoryToFree->push_back(vkPipelineViewportStateCreateInfo);
 
-            hwjvi::getVkPipelineViewportStateCreateInfo(
+            jvulkan::getVkPipelineViewportStateCreateInfo(
                     env,
                     jVkPipelineViewportStateCreateInfoObject,
                     vkPipelineViewportStateCreateInfo,
@@ -216,7 +216,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRasterizationState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineRasterizationStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRasterizationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineRasterizationStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -234,7 +234,7 @@ namespace hwjvi
             vkPipelineRasterizationStateCreateInfo = (VkPipelineRasterizationStateCreateInfo *)calloc(1, sizeof(VkPipelineRasterizationStateCreateInfo));
             memoryToFree->push_back(vkPipelineRasterizationStateCreateInfo);
 
-            hwjvi::getVkPipelineRasterizationStateCreateInfo(
+            jvulkan::getVkPipelineRasterizationStateCreateInfo(
                     env,
                     jVkPipelineRasterizationStateCreateInfo,
                     vkPipelineRasterizationStateCreateInfo,
@@ -246,7 +246,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getMultisampleState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineMultisampleStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getMultisampleState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineMultisampleStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -264,7 +264,7 @@ namespace hwjvi
             vkPipelineMultisampleStateCreateInfo = (VkPipelineMultisampleStateCreateInfo *)calloc(1, sizeof(VkPipelineMultisampleStateCreateInfo));
             memoryToFree->push_back(vkPipelineMultisampleStateCreateInfo);
 
-            hwjvi::getVkPipelineMultisampleStateCreateInfo(
+            jvulkan::getVkPipelineMultisampleStateCreateInfo(
                     env,
                     jVkPipelineMultisampleStateCreateInfo,
                     vkPipelineMultisampleStateCreateInfo,
@@ -276,7 +276,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDepthStencilState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDepthStencilStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDepthStencilState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDepthStencilStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -294,7 +294,7 @@ namespace hwjvi
             vkPipelineDepthStencilStateCreateInfo = (VkPipelineDepthStencilStateCreateInfo *)calloc(1, sizeof(VkPipelineDepthStencilStateCreateInfo));
             memoryToFree->push_back(vkPipelineDepthStencilStateCreateInfo);
 
-            hwjvi::getVkPipelineDepthStencilStateCreateInfo(
+            jvulkan::getVkPipelineDepthStencilStateCreateInfo(
                     env,
                     jVkPipelineDepthStencilStateCreateInfo,
                     vkPipelineDepthStencilStateCreateInfo,
@@ -306,7 +306,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getColorBlendState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineColorBlendStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getColorBlendState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineColorBlendStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -324,7 +324,7 @@ namespace hwjvi
         memoryToFree->push_back(vkPipelineColorBlendStateCreateInfo);
         if (jVkPipelineColorBlendStateCreateInfo != nullptr)
         {
-            hwjvi::getVkPipelineColorBlendStateCreateInfo(
+            jvulkan::getVkPipelineColorBlendStateCreateInfo(
                     env,
                     jVkPipelineColorBlendStateCreateInfo,
                     vkPipelineColorBlendStateCreateInfo,
@@ -336,7 +336,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDynamicState", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDynamicStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDynamicState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDynamicStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -354,7 +354,7 @@ namespace hwjvi
             vkPipelineDynamicStateCreateInfo = (VkPipelineDynamicStateCreateInfo *)calloc(1, sizeof(VkPipelineDynamicStateCreateInfo));
             memoryToFree->push_back(vkPipelineDynamicStateCreateInfo);
 
-            hwjvi::getVkPipelineDynamicStateCreateInfo(
+            jvulkan::getVkPipelineDynamicStateCreateInfo(
                     env,
                     jVkPipelineDynamicStateCreateInfo,
                     vkPipelineDynamicStateCreateInfo,
@@ -366,7 +366,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipelineLayout;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -378,14 +378,14 @@ namespace hwjvi
             return;
         }
 
-        VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)hwjvi::getHandleValue(env, jVkPipelineLayoutObject);
+        VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayoutObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkRenderPass;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -397,7 +397,7 @@ namespace hwjvi
             return;
         }
 
-        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)hwjvi::getHandleValue(env, jVkRenderPassObject);
+        VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)jvulkan::getHandleValue(env, jVkRenderPassObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -417,7 +417,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipeline;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -432,7 +432,7 @@ namespace hwjvi
         VkPipeline_T *baseipelineLayoutHandle = nullptr;
         if (jVkPipelineObject != nullptr)
         {
-            baseipelineLayoutHandle = (VkPipeline_T *)hwjvi::getHandleValue(env, jVkPipelineObject);
+            baseipelineLayoutHandle = (VkPipeline_T *)jvulkan::getHandleValue(env, jVkPipelineObject);
             if (env->ExceptionOccurred())
             {
                 return;

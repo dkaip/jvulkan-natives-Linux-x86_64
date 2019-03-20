@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSubpassDependency2KHR(
             JNIEnv *env,
@@ -90,7 +90,7 @@ namespace hwjvi
         VkPipelineStageFlags srcStageMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependency2KHRClass, "getDstStageMask", "()Ljava/util/EnumSet;");
@@ -103,7 +103,7 @@ namespace hwjvi
         VkPipelineStageFlags dstStageMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependency2KHRClass, "getSrcAccessMask", "()Ljava/util/EnumSet;");
@@ -116,7 +116,7 @@ namespace hwjvi
         VkAccessFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependency2KHRClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -129,7 +129,7 @@ namespace hwjvi
         VkAccessFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependency2KHRClass, "getDependencyFlags", "()Ljava/util/EnumSet;");
@@ -142,7 +142,7 @@ namespace hwjvi
         VkDependencyFlags dependencyFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDependencyFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDependencyFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkSubpassDependency2KHRClass, "getViewOffset", "()I");

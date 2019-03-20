@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkCommandBufferAllocateInfo(
             JNIEnv *env,
@@ -54,7 +54,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getCommandPool", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandPool;");
+        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getCommandPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandPool;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -66,14 +66,14 @@ namespace hwjvi
             return;
         }
 
-        VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)hwjvi::getHandleValue(env, jVkCommandPool);
+        VkCommandPool_T *commandPoolHandle = (VkCommandPool_T *)jvulkan::getHandleValue(env, jVkCommandPool);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getLevel", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkCommandBufferLevel;");
+        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getLevel", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCommandBufferLevel;");
         if (env->ExceptionOccurred())
         {
             return;

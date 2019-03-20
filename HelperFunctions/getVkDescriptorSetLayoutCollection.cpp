@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorSetLayoutCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkDescriptorSetLayout_T *vkDescriptorSetLayoutHandle = (VkDescriptorSetLayout_T *)hwjvi::getHandleValue(env, jVkDescriptorSetLayoutHandleObject);
+            VkDescriptorSetLayout_T *vkDescriptorSetLayoutHandle = (VkDescriptorSetLayout_T *)jvulkan::getHandleValue(env, jVkDescriptorSetLayoutHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

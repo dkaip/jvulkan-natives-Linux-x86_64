@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkBufferImageCopy(
             JNIEnv *env,
@@ -73,7 +73,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageSubresource", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkImageSubresourceLayers;");
+        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresourceLayers;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -94,7 +94,7 @@ namespace hwjvi
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageOffset", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkOffset3D;");
+        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset3D;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -113,7 +113,7 @@ namespace hwjvi
                 memoryToFree);
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageExtent", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkExtent3D;");
+        methodId = env->GetMethodID(vkBufferImageCopyClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;");
         if (env->ExceptionOccurred())
         {
             return;

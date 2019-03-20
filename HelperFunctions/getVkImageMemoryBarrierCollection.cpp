@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkImageMemoryBarrier(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkAccessFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -77,10 +77,10 @@ namespace hwjvi
         VkAccessFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getOldLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getOldLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -107,7 +107,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getNewLayout", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getNewLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -158,7 +158,7 @@ namespace hwjvi
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getImage", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkImage;");
+        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -170,14 +170,14 @@ namespace hwjvi
             return;
         }
 
-        VkImage_T *vkImageHandle = (VkImage_T *)hwjvi::getHandleValue(env, jVkImageObject);
+        VkImage_T *vkImageHandle = (VkImage_T *)jvulkan::getHandleValue(env, jVkImageObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getSubresourceRange", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkImageSubresourceRange;");
+        methodId = env->GetMethodID(vkImageMemoryBarrierClass, "getSubresourceRange", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresourceRange;");
         if (env->ExceptionOccurred())
         {
             return;

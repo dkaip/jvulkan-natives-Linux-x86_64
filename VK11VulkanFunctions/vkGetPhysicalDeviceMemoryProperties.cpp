@@ -18,18 +18,18 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceMemoryProperties
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceMemoryProperties
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceMemoryProperties
   (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jVkPhysicalDeviceMemoryPropertiesObject)
 {
-    VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
         return;
@@ -80,13 +80,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
         return;
     }
 
-    jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkMemoryType;");
+    jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryType;");
     if (env->ExceptionOccurred())
     {
         return;
     }
 
-    jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkMemoryHeap;");
+    jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryHeap;");
     if (env->ExceptionOccurred())
     {
         return;
@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryTypeCount; i++)
     {
-        jobject jEnumSetObject = hwjvi::getVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
+        jobject jEnumSetObject = jvulkan::getVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
         if (env->ExceptionOccurred())
         {
             return;
@@ -146,7 +146,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
 
     for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryHeapCount; i++)
     {
-        jobject jEnumSetObject = hwjvi::getVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
+        jobject jEnumSetObject = jvulkan::getVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
         if (env->ExceptionOccurred())
         {
             return;

@@ -20,7 +20,7 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "../headers/HelperFunctions.hh"
 
 // TODO these may need to get cleaned up if the registry is destroyed
@@ -59,7 +59,7 @@ static void globalRegistryAddAnnouncementCallback(
         return;
     }
 
-    jobject wlRegistryObject = hwjvi::createHandle(localEnv, "com/CIMthetics/hwjvi/Wayland/Handles/WlRegistry", wl_registry);
+    jobject wlRegistryObject = jvulkan::createHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
 
     jstring interfaceNameText = localEnv->NewStringUTF(interface);
 
@@ -73,7 +73,7 @@ static void globalRegistryAddAnnouncementCallback(
     jmethodID callbackMethodId = localEnv->GetMethodID(
             javaClass,
             "registryAddEventHandler",
-            "(Ljava/lang/Object;Lcom/CIMthetics/hwjvi/Wayland/Handles/WlRegistry;ILjava/lang/String;I)V");
+            "(Ljava/lang/Object;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistry;ILjava/lang/String;I)V");
 
     if (localEnv->ExceptionOccurred())
     {
@@ -117,7 +117,7 @@ static void globalRegistryRemovalAnnouncementCallback(
         return;
     }
 
-    jobject wlRegistryObject = hwjvi::createHandle(localEnv, "com/CIMthetics/hwjvi/Wayland/Handles/WlRegistry", wl_registry);
+    jobject wlRegistryObject = jvulkan::createHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
 
     jclass javaClass = localEnv->GetObjectClass(savedCallbackObject);
     if (localEnv->ExceptionOccurred())
@@ -129,7 +129,7 @@ static void globalRegistryRemovalAnnouncementCallback(
     jmethodID callbackMethodId = localEnv->GetMethodID(
             javaClass,
             "registryRemoveEventHandler",
-            "(Ljava/lang/Object;Lcom/CIMthetics/hwjvi/Wayland/Handles/WlRegistry;I)V");
+            "(Ljava/lang/Object;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistry;I)V");
 
     if (localEnv->ExceptionOccurred())
     {
@@ -152,11 +152,11 @@ static const struct wl_registry_listener registry_listener =
 };
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlRegistryAddListener
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/WlRegistry;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/WlRegistryListener;Ljava/lang/Object;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlRegistry;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/WlRegistryListener;Ljava/lang/Object;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_wlRegistryAddListener
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRegistryAddListener
   (JNIEnv *env, jobject, jobject jWlRegistry, jobject jWlRegistryListener, jobject jUserData)
 {
     if (g_JavaVM == nullptr)
@@ -170,7 +170,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_w
         }
     }
 
-    wl_registry *waylandRegistryHandle = (wl_registry *)hwjvi::getHandleValue(env, jWlRegistry);
+    wl_registry *waylandRegistryHandle = (wl_registry *)jvulkan::getHandleValue(env, jWlRegistry);
 
     // Need to get a global ref because this will be used later in a callback.
     jobject callbackObject = env->NewGlobalRef(jWlRegistryListener);

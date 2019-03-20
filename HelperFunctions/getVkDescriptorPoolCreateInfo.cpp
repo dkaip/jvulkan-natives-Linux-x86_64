@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkDescriptorPoolCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkDescriptorPoolCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkDescriptorPoolCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorPoolCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorPoolCreateInfoClass, "getMaxSets", "()I");
@@ -97,7 +97,7 @@ namespace hwjvi
 
         if (jVkDescriptorPoolSizeCollection != nullptr)
         {
-            hwjvi::getVkDescriptorPoolSizeCollection(
+            jvulkan::getVkDescriptorPoolSizeCollection(
                     env,
                     jVkDescriptorPoolSizeCollection,
                     &vkDescriptorPoolSizes,

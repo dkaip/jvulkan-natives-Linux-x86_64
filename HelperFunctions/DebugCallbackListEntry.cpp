@@ -21,7 +21,7 @@
  */
 #include "DebugCallbackListEntry.h"
 
-using namespace hwjvi;
+using namespace jvulkan;
 //{
 //    class DebugCallbackListEntry
 //    {

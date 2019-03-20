@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkPipelineDynamicStateCreateInfo(
             JNIEnv *env,
@@ -64,7 +64,7 @@ namespace hwjvi
         VkPipelineDynamicStateCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineDynamicStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineDynamicStateCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ namespace hwjvi
 
         int numberOfVkDynamicStates = 0;
         VkDynamicState *vkDynamicStates = nullptr;
-        hwjvi::getVkDynamicStateCollection(
+        jvulkan::getVkDynamicStateCollection(
                 env,
                 jVkDynamicStates,
                 &vkDynamicStates,

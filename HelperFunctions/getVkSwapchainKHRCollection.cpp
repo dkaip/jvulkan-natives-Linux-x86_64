@@ -19,7 +19,7 @@
 
 #include "HelperFunctions.hh"
 
-namespace hwjvi
+namespace jvulkan
 {
     void getVkSwapchainKHRCollection(
             JNIEnv *env,
@@ -100,7 +100,7 @@ namespace hwjvi
                 break;
             }
 
-            VkSwapchainKHR_T *vkSwapchainKHRHandle = (VkSwapchainKHR_T *)hwjvi::getHandleValue(env, jVkSwapchainKHRHandleObject);
+            VkSwapchainKHR_T *vkSwapchainKHRHandle = (VkSwapchainKHR_T *)jvulkan::getHandleValue(env, jVkSwapchainKHRHandleObject);
             if (env->ExceptionOccurred())
             {
                 return;

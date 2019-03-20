@@ -18,18 +18,18 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdBindDescriptorSets
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkPipelineBindPoint;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipelineLayout;ILjava/util/Collection;[I)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineBindPoint;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;ILjava/util/Collection;[I)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCmdBindDescriptorSets
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdBindDescriptorSets
   (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkPipelineBindPoint, jobject jVkPipelineLayout, jint jFirstSet, jobject jVkDescriptorSetCollectionObject, jintArray jDynamicOffsets)
 {
-    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)hwjvi::getHandleValue(env, jVkCommandBuffer);
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
     {
         return;
@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
     }
 
     ////////////////////////////////////////////////////////////////////////
-    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)hwjvi::getHandleValue(env, jVkPipelineLayout);
+    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayout);
     if (env->ExceptionOccurred())
     {
         return;
@@ -61,7 +61,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
     int numberOfVkDescriptorSets = 0;
     VkDescriptorSet *vkDescriptorSets = nullptr;
 
-    hwjvi::getVkDescriptorSetCollection(
+    jvulkan::getVkDescriptorSetCollection(
             env,
             jVkDescriptorSetCollectionObject,
             &vkDescriptorSets,
@@ -99,6 +99,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
             numberOfDynamicOffsets,
             (uint32_t *)dynamicOffsetsArray);
 
-    hwjvi::freeMemory(&memoryToFree);
+    jvulkan::freeMemory(&memoryToFree);
 }
 
