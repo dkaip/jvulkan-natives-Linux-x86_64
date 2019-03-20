@@ -29,7 +29,7 @@
 #ifndef STRUCTUREHELPERFUNCTIONS_HH_
 #define STRUCTUREHELPERFUNCTIONS_HH_
 
-namespace hwjvi
+namespace jvulkan
 {
     void getInstanceCreateInfo(
             JNIEnv *env,
