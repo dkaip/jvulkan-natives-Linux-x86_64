@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * comCIMtheticshwjviVulkanCoreVK10VulkanCoreProxy.cpp
+ * comCIMtheticsjvulkanVulkanCoreVK10VulkanCoreProxy.cpp
  *
  *  Created on: Jul 12, 2018
  *      Author: Douglas Kaip
@@ -27,14 +27,14 @@
 
 using namespace std;
 
-#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 #include "DebugCallbackListEntry.h"
 
-using namespace hwjvi;
+using namespace jvulkan;
 
 std::atomic<unsigned long long>g_uniqueNumber { 1 };
-std::vector<hwjvi::DebugCallbackListEntry *>g_debugCallbackList;
+std::vector<jvulkan::DebugCallbackListEntry *>g_debugCallbackList;
 std::mutex g_debugCallbackListMutex;
 
 JavaVM *g_JavaVM;
@@ -147,7 +147,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
 //    cout << "Got noneOfMethod" << endl;
 
-    jclass enumClass = localEnv->FindClass("com/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
+    jclass enumClass = localEnv->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
 
     jobject enumSetObject = localEnv->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
     if (localEnv->ExceptionOccurred())
@@ -183,7 +183,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (flags & VK_DEBUG_REPORT_INFORMATION_BIT_EXT)
     {
-        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_INFORMATION_BIT_EXT", "Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
+        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_INFORMATION_BIT_EXT", "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
@@ -192,7 +192,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT)
     {
-        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_WARNING_BIT_EXT", "Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
+        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_WARNING_BIT_EXT", "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
@@ -201,7 +201,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (flags & VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT)
     {
-        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT", "Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
+        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT", "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
@@ -210,7 +210,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT)
     {
-        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_ERROR_BIT_EXT", "Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
+        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_ERROR_BIT_EXT", "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
@@ -219,7 +219,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT)
     {
-        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_DEBUG_BIT_EXT", "Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
+        jfieldID fieldId = localEnv->GetStaticFieldID(enumClass, "VK_DEBUG_REPORT_DEBUG_BIT_EXT", "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT;");
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
@@ -273,11 +273,11 @@ VkResult CreateDebugReportCallbackEXT(
 }
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateDebugReportCallbackEXT
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Structures/CreateInfos/VkDebugReportCallbackCreateInfoEXT;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/CreateInfos/VkDebugReportCallbackCreateInfoEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateDebugReportCallbackEXT
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateDebugReportCallbackEXT
 (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugReportCallbackCreateInfoEXT, jobject jAlternateAllocator, jobject jVkDebugReportCallbackEXT)
 {
     if (g_JavaVM == nullptr)
@@ -287,21 +287,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
         {
             cout << "ERROR: Could not get a pointer to the JVM." << endl;
             // TODO need to throw an exception here.
-            hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+            jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
 
-    VkInstance_T *vkInstanceHandle = (VkInstance_T *)hwjvi::getHandleValue(env, jVkInstance);
+    VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
 //    VkInstance vkInstance = (VkInstance)instanceHandle;
@@ -311,13 +311,13 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     jclass vkDebugReportCallbackCreateInfoEXTClass = env->GetObjectClass(jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     int sTypeValue = getSTypeAsInt(env, jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
 //    cout << "Got getSTypeAsInt" << endl;
@@ -325,7 +325,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getpNext", "()J");
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     void *pNext = (void *)env->CallLongMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
@@ -335,21 +335,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject flagsObject = env->CallObjectMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
     int32_t flags = getEnumSetValue(
             env,
             flagsObject,
-            "com/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
+            "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
 
 //    cout << "Got getFlagsAsInt" << endl;
 
-    methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getCallbackObject", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/VkDebugReportCallback;");
+    methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getCallbackObject", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/VkDebugReportCallback;");
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject localCallbackObject = env->CallObjectMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
@@ -362,7 +362,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getUserData", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
     {
-        hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject localUserData = env->CallObjectMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
@@ -406,8 +406,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     if (result == VK_SUCCESS)
     {
 //        cout << "Created debug callback handle is " << vkDebugReportCallbackEXT << endl;
-        hwjvi::DebugCallbackListEntry *callbackListEntry =
-            new hwjvi::DebugCallbackListEntry((void *)key, globalCallbackObject, globalUserData, vkDebugReportCallbackEXT);
+        jvulkan::DebugCallbackListEntry *callbackListEntry =
+            new jvulkan::DebugCallbackListEntry((void *)key, globalCallbackObject, globalUserData, vkDebugReportCallbackEXT);
 
         std::lock_guard<std::mutex> lock(g_debugCallbackListMutex);
 
@@ -419,14 +419,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxie
     /*
      * Now transfer the VkInstance data to Java
      */
-    hwjvi::setHandleValue(env, jVkDebugReportCallbackEXT, vkDebugReportCallbackEXT);
+    jvulkan::setHandleValue(env, jVkDebugReportCallbackEXT, vkDebugReportCallbackEXT);
 //    jclass javaClass = env->GetObjectClass(jVkDebugReportCallbackEXT);
 //    methodId = env->GetMethodID(javaClass, "setHandle", "(J)V");
 //    env->CallVoidMethod(jVkDebugReportCallbackEXT, methodId, vkDebugReportCallbackEXT);
 //
 //    cout << "Debug callback handle " << vkDebugReportCallbackEXT << endl;
 
-    return hwjvi::createVkResult(env, result);
+    return jvulkan::createVkResult(env, result);
 }
 
 void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator)
@@ -439,14 +439,14 @@ void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT
 }
 
 /*
- * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkDestroyDebugReportCallbackEXT
- * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkDestroyDebugReportCallbackEXT
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyDebugReportCallbackEXT
   (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugReportCallbackEXT, jobject jAlternateAllocator)
 {
-    VkInstance_T *vkInstanceHandle = (VkInstance_T *)hwjvi::getHandleValue(env, jVkInstance);
+    VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
     {
         return;
@@ -456,10 +456,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_v
     if (jAlternateAllocator != nullptr)
     {
         allocatorCallbacks = new VkAllocationCallbacks();
-        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    VkDebugReportCallbackEXT_T *vkDebugReportCallbackEXTHandle = (VkDebugReportCallbackEXT_T *)hwjvi::getHandleValue(env, jVkDebugReportCallbackEXT);
+    VkDebugReportCallbackEXT_T *vkDebugReportCallbackEXTHandle = (VkDebugReportCallbackEXT_T *)jvulkan::getHandleValue(env, jVkDebugReportCallbackEXT);
     if (env->ExceptionOccurred())
     {
         return;
