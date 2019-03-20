@@ -1,0 +1,156 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
+
+/*
+ * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Method:    vkCreateGraphicsPipelines
+ * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPipelineCache;Ljava/util/Collection;Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkAllocationCallbacks;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkCreateGraphicsPipelines
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipelineCache, jobject jVkGraphicsPipelineCreateInfoCollection, jobject jAlternateAllocator, jobject jVkPipelineCollection)
+{
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)hwjvi::getHandleValue(env, jVkDevice);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkAllocationCallbacks *allocatorCallbacks = nullptr;
+    if (jAlternateAllocator != nullptr)
+    {
+        allocatorCallbacks = new VkAllocationCallbacks();
+        hwjvi::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+    }
+
+    VkPipelineCache_T *pipelineCacheHandle = nullptr;
+    if (jVkPipelineCache != nullptr)
+    {
+        pipelineCacheHandle = (VkPipelineCache_T *)hwjvi::getHandleValue(env, jVkPipelineCache);
+        if (env->ExceptionOccurred())
+        {
+            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+    }
+
+    std::vector<void *> memoryToFree(5);
+    int numberOfCreateInfos = 0;
+    VkGraphicsPipelineCreateInfo *vkGraphicsPipelineCreateInfo = nullptr;
+
+    hwjvi::getCollectionOfVkGraphicsPipelineCreateInfo(
+            env,
+            jVkGraphicsPipelineCreateInfoCollection,
+            &vkGraphicsPipelineCreateInfo,
+            &numberOfCreateInfos,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkPipeline *pipelines = (VkPipeline *)calloc(numberOfCreateInfos, sizeof(VkPipeline *));
+
+    int result = vkCreateGraphicsPipelines(
+            logicalDeviceHandle,
+            pipelineCacheHandle,
+            numberOfCreateInfos,
+            vkGraphicsPipelineCreateInfo,
+            allocatorCallbacks,
+            pipelines);
+
+    // Free up the allocator callback structure if created.
+    delete allocatorCallbacks;
+    allocatorCallbacks = nullptr;
+
+    hwjvi::freeMemory(&memoryToFree);
+
+    jclass vkPipelineCollectionClass = env->GetObjectClass(jVkPipelineCollection);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID methodId = env->GetMethodID(vkPipelineCollectionClass, "size", "()I");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jint numberOfElements = env->CallIntMethod(jVkPipelineCollection, methodId);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    if (numberOfCreateInfos != numberOfElements)
+    {
+        std::cerr << "ERROR: The collection size for resulting pipeline collection must be the same as jVkGraphicsPipelineCreateInfoCollection." << std::endl;
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID iteratorMethodId = env->GetMethodID(vkPipelineCollectionClass, "iterator", "()Ljava/util/Iterator;");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jobject iteratorObject = env->CallObjectMethod(jVkPipelineCollection, iteratorMethodId);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jclass iteratorClass = env->GetObjectClass(iteratorObject);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    int i = 0;
+    do
+    {
+        jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
+        if (env->ExceptionOccurred())
+        {
+            break;
+        }
+
+        if (hasNext == false)
+        {
+            break;
+        }
+
+        jobject jVkPipelineObject = env->CallObjectMethod(iteratorObject, nextMethod);
+        if (env->ExceptionOccurred())
+        {
+            break;
+        }
+
+        /*
+         * Now transfer the VkDevice data to Java
+         */
+        hwjvi::setHandleValue(env, jVkPipelineObject, pipelines[i]);
+
+        i++;
+    } while(true);
+
+    free(pipelines);
+
+    return hwjvi::createVkResult(env, result);
+}

@@ -1,0 +1,146 @@
+#include <cstring>
+#include <iostream>
+#include <stdlib.h>
+
+#include "HelperFunctions.hh"
+
+namespace hwjvi
+{
+    void getVkBufferCreateInfo(
+            JNIEnv *env,
+            jobject jVkBufferCreateInfoObject,
+            VkBufferCreateInfo *vkBufferCreateInfo,
+            std::vector<void *> *memoryToFree)
+    {
+        jclass vkBufferCreateInfoClass = env->GetObjectClass(jVkBufferCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        int sTypeValue = getSTypeAsInt(env, jVkBufferCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        jmethodID methodId = env->GetMethodID(vkBufferCreateInfoClass, "getpNext", "()J");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jlong pNext = env->CallLongMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jobject flagsObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        VkBufferCreateFlags flags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBufferCreateFlagBits");
+
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSize", "()J");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jlong jBufferSize = env->CallLongMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getUsage", "()Ljava/util/EnumSet;");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        flagsObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        VkBufferUsageFlags bufferUsageFlags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkBufferUsageFlagBits");
+
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkSharingMode;");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jobject jVkSharingModeObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jclass vkSharingModeEnumClass = env->GetObjectClass(jVkSharingModeObject);
+
+        jmethodID valueOfMethodId = env->GetMethodID(vkSharingModeEnumClass, "valueOf", "()I");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        VkSharingMode vkSharingModeEnumValue = (VkSharingMode)env->CallIntMethod(jVkSharingModeObject, valueOfMethodId);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getQueueFamilyIndices", "()[I");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jintArray jQueueFamilyIndices = (jintArray)env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        int *queueFamilyIndicesArray = nullptr;
+        jsize arrayLength = 0;
+        if (jQueueFamilyIndices != nullptr)
+        {
+            arrayLength = env->GetArrayLength(jQueueFamilyIndices);
+
+            queueFamilyIndicesArray = (int *)calloc(arrayLength, sizeof(int));
+            memoryToFree->push_back(queueFamilyIndicesArray);
+
+            env->GetIntArrayRegion(jQueueFamilyIndices, 0, arrayLength, queueFamilyIndicesArray);
+            if (env->ExceptionOccurred())
+            {
+                return;
+            }
+        }
+
+        vkBufferCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkBufferCreateInfo->pNext = (void *)pNext;
+        vkBufferCreateInfo->flags = flags;
+        vkBufferCreateInfo->size = jBufferSize;
+        vkBufferCreateInfo->usage = bufferUsageFlags;
+        vkBufferCreateInfo->sharingMode = vkSharingModeEnumValue;
+        vkBufferCreateInfo->pQueueFamilyIndices = (uint32_t *)queueFamilyIndicesArray;
+    }
+}

@@ -1,0 +1,141 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#include "com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
+
+/*
+ * Class:     com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies
+ * Method:    vkGetPhysicalDeviceSurfaceFormatsKHR
+ * Signature: (Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Handles/VkSurfaceKHR;Ljava/util/Collection;)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_hwjvi_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceSurfaceFormatsKHR
+  (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jVkSurfaceKHR, jobject jVkSurfaceFormatKHRCollection)
+{
+    VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)hwjvi::getHandleValue(env, jVkPhysicalDevice);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkSurfaceKHR_T *surfaceKHRHandle = (VkSurfaceKHR_T *)hwjvi::getHandleValue(env, jVkSurfaceKHR);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    if (jVkSurfaceFormatKHRCollection == nullptr)
+    {
+        cout << "ERROR: jVkSurfaceFormatKHRCollection must be created before calling vkGetPhysicalDeviceSurfaceFormatsKHR." << endl;
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    unsigned int numberOfSurfaceFormats = 0;
+
+    VkResult result = vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfSurfaceFormats, nullptr);
+    if (result != VK_SUCCESS)
+    {
+        return hwjvi::createVkResult(env, result);
+    }
+
+    if (numberOfSurfaceFormats == 0)
+    {
+        return hwjvi::createVkResult(env, result);
+    }
+
+    std::vector<VkSurfaceFormatKHR> surfaceFormats(numberOfSurfaceFormats);
+
+    result = vkGetPhysicalDeviceSurfaceFormatsKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfSurfaceFormats, surfaceFormats.data());
+    if (result != VK_SUCCESS)
+    {
+        return hwjvi::createVkResult(env, result);
+    }
+
+    jclass vkSurfaceFormatKHRClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Structures/VkSurfaceFormatKHR");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID vkSurfaceFormatKHRConstructor = env->GetMethodID(
+            vkSurfaceFormatKHRClass,
+            "<init>",
+            "(Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;)V");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jclass collectionClass = env->GetObjectClass(jVkSurfaceFormatKHRCollection);
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
+    if (env->ExceptionOccurred())
+    {
+        return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID methodId = nullptr;
+
+    for (const auto& surfaceFormat : surfaceFormats)
+    {
+        ///////////////////////////////////////////////////////////////////////////
+
+        jclass vkFormatClass = env->FindClass("com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat");
+        if (env->ExceptionOccurred())
+        {
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "com/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat" << endl;
+            return nullptr;
+        }
+
+        methodId = env->GetStaticMethodID(vkFormatClass, "fromValue", "(I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;");
+        if (env->ExceptionOccurred())
+        {
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/hwjvi/VulkanCore/VK11/Enums/VkFormat;" << endl;
+            return nullptr;
+        }
+
+        jobject formatEnum = env->CallStaticObjectMethod(vkFormatClass, methodId, surfaceFormat.format);
+
+        ///////////////////////////////////////////////////////////////////////////
+
+        jclass vkColorSpaceKHRClass = env->FindClass("com/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR");
+        if (env->ExceptionOccurred())
+        {
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "ccom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR" << endl;
+            return nullptr;
+        }
+
+        methodId = env->GetStaticMethodID(vkColorSpaceKHRClass, "fromValue", "(I)Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
+        if (env->ExceptionOccurred())
+        {
+            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/hwjvi/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;" << endl;
+            return nullptr;
+        }
+
+        jobject colorspaceEnum = env->CallStaticObjectMethod(vkColorSpaceKHRClass, methodId, surfaceFormat.colorSpace);
+
+        ///////////////////////////////////////////////////////////////////////////
+
+        jobject newVkSurfaceFormatKHR = env->NewObject(vkSurfaceFormatKHRClass, vkSurfaceFormatKHRConstructor, formatEnum, colorspaceEnum);
+        if (env->ExceptionOccurred())
+        {
+            return hwjvi::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+
+        bool successfulAdd = false;
+        successfulAdd = env->CallBooleanMethod(jVkSurfaceFormatKHRCollection, addMethodId, newVkSurfaceFormatKHR);
+        if (successfulAdd == false)
+        {
+            cout << "ERROR:vkGetPhysicalDeviceSurfaceFormatsKHR the new VkSurfaceFormatKHR element was not added to jVkSurfaceFormatKHRCollection" << endl;
+        }
+    }
+
+    return hwjvi::createVkResult(env, result);
+}
+
