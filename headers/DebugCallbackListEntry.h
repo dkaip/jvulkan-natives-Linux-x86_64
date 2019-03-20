@@ -27,7 +27,7 @@
 #ifndef DEBUGCALLBACKLISTENTRY_H_
 #define DEBUGCALLBACKLISTENTRY_H_
 
-namespace hwjvi
+namespace jvulkan
 {
     class DebugCallbackListEntry
     {
@@ -47,6 +47,6 @@ namespace hwjvi
             VkDebugReportCallbackEXT getVkDebugReportCallbackEXT();
 
     };
-} /* namespace hwjvi */
+} /* namespace jvulkan */
 
 #endif /* DEBUGCALLBACKLISTENTRY_H_ */
