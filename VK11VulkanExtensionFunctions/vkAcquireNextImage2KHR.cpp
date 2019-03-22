@@ -27,13 +27,31 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAcquireNextImageInfoKHR;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkAcquireNextImage2KHR
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject JVkAcquireNextImageInfoKHR, jint imageIndex)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkAcquireNextImageInfoKHR, jint jImageIndex)
 {
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
+
+    VkAcquireNextImageInfoKHR vkAcquireNextImageInfoKHR = {};
+    std::vector<void *> memoryToFree(5);
+
+    jvulkan::getVkAcquireNextImageInfoKHR(env, jVkAcquireNextImageInfoKHR, &vkAcquireNextImageInfoKHR, &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    unsigned int imageIndex = (unsigned int)jImageIndex;
+
+    int result = vkAcquireNextImage2KHR(
+            logicalDeviceHandle,
+            &vkAcquireNextImageInfoKHR,
+            &imageIndex);
+
+    jvulkan::freeMemory(&memoryToFree);
 
     return jvulkan::createVkResult(env, result);
 }
