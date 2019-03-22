@@ -777,6 +777,12 @@ namespace jvulkan
             jobject jVkRenderPassCreateInfo2KHRObject,
             VkRenderPassCreateInfo2KHR *vkRenderPassCreateInfo2KHR,
             std::vector<void *> *memoryToFree);
+
+    void getVkAcquireNextImageInfoKHR(
+            JNIEnv *env,
+            jobject jVkAcquireNextImageInfoKHRObject,
+            VkAcquireNextImageInfoKHR *vkAcquireNextImageInfoKHR,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

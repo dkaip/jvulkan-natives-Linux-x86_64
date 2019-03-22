@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkAcquireNextImage2KHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAcquireNextImageInfoKHR;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkAcquireNextImage2KHR
+  (JNIEnv *, jobject, jobject, jobject, jint);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkAcquireNextImageKHR
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;JLcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSemaphore;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/IntReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
