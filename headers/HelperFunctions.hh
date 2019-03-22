@@ -783,6 +783,19 @@ namespace jvulkan
             jobject jVkAcquireNextImageInfoKHRObject,
             VkAcquireNextImageInfoKHR *vkAcquireNextImageInfoKHR,
             std::vector<void *> *memoryToFree);
+
+    void getVkBindBufferMemoryInfo(
+            JNIEnv *env,
+            const jobject jVkBindBufferMemoryInfoObject,
+            VkBindBufferMemoryInfo *vkBindBufferMemoryInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkBindBufferMemoryInfoCollection(
+            JNIEnv *env,
+            const jobject jVkBindBufferMemoryInfoCollectionObject,
+            VkBindBufferMemoryInfo **vkBindBufferMemoryInfo,
+            int *numberOfVkBindBufferMemoryInfos,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

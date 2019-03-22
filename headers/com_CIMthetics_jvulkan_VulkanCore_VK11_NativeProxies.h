@@ -73,6 +73,22 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkBindBufferMemory2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindBufferMemory2
+  (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkBindBufferMemory2KHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindBufferMemory2KHR
+  (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkBindImageMemory
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;J)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */

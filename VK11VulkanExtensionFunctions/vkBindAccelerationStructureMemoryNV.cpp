@@ -22,10 +22,10 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkBindAccelerationStructureMemoryNVX
+ * Method:    vkBindAccelerationStructureMemoryNV
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindAccelerationStructureMemoryNVX
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindAccelerationStructureMemoryNV
   (JNIEnv *env, jobject, jobject, jobject)
 {
     std::cerr << "Not implemented yet." << std::endl;
