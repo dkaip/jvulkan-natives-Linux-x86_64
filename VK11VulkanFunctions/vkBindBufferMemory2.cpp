@@ -43,12 +43,12 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     std::vector<void *> memoryToFree(5);
     int numberOfBindBufferMemoryInfos = 0;
-    VkBindBufferMemoryInfo *vkBindBufferMemoryInfoInfo = nullptr;
+    VkBindBufferMemoryInfo *vkBindBufferMemoryInfos = nullptr;
 
     jvulkan::getVkBindBufferMemoryInfoCollection(
             env,
             jVkBindBufferMemoryInfoCollection,
-            &vkBindBufferMemoryInfoInfo,
+            &vkBindBufferMemoryInfos,
             &numberOfBindBufferMemoryInfos,
             &memoryToFree);
     if (env->ExceptionOccurred())
@@ -59,7 +59,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     int result = vkBindBufferMemory2(
             logicalDeviceHandle,
             numberOfBindBufferMemoryInfos,
-            vkBindBufferMemoryInfoInfo);
+            vkBindBufferMemoryInfos);
 
     jvulkan::freeMemory(&memoryToFree);
 
