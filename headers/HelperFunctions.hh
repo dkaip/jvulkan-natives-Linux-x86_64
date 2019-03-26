@@ -796,6 +796,19 @@ namespace jvulkan
             VkBindBufferMemoryInfo **vkBindBufferMemoryInfo,
             int *numberOfVkBindBufferMemoryInfos,
             std::vector<void *> *memoryToFree);
+
+    void getVkBindImageMemoryInfo(
+            JNIEnv *env,
+            const jobject jVkBindImageMemoryInfoObject,
+            VkBindImageMemoryInfo *vkBindImageMemoryInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkBindImageMemoryInfoCollection(
+            JNIEnv *env,
+            const jobject jVkBindImageMemoryInfoCollectionObject,
+            VkBindImageMemoryInfo **vkBindImageMemoryInfo,
+            int *numberOfVkBindImageMemoryInfos,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
