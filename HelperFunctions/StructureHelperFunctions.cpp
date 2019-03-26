@@ -392,7 +392,7 @@ namespace jvulkan
             memoryToFree->push_back(heapQueuePriorities);
             if (data != nullptr)
             {
-                memcpy(heapQueuePriorities, data, sizeOfQueuePriorities);
+                memcpy(heapQueuePriorities, data, sizeOfQueuePriorities * sizeof(float));
                 env->ReleaseFloatArrayElements(queuePrioritiesArray, data, JNI_ABORT);
             }
 

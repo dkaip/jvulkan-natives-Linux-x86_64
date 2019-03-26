@@ -26,9 +26,35 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindAccelerationStructureMemoryNV
-  (JNIEnv *env, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkBindAccelerationStructureMemoryInfoNVCollection)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
+    if (env->ExceptionOccurred())
+    {
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    std::vector<void *> memoryToFree(5);
+    int numberOfBindAccelerationStructureMemoryInfos = 0;
+    VkBindAccelerationStructureMemoryInfoNV *vkBindAccelerationStructureMemoryInfos = nullptr;
+
+    jvulkan::getVkBindAccelerationStructureMemoryInfoNVCollection(
+            env,
+            jVkBindAccelerationStructureMemoryInfoNVCollection,
+            &vkBindAccelerationStructureMemoryInfos,
+            &numberOfBindAccelerationStructureMemoryInfos,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    int result = vkBindAccelerationStructureMemoryNV(
+            logicalDeviceHandle,
+            numberOfBindAccelerationStructureMemoryInfos,
+            vkBindAccelerationStructureMemoryInfos);
+
+    jvulkan::freeMemory(&memoryToFree);
+
+    return jvulkan::createVkResult(env, result);
 }
