@@ -97,6 +97,22 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkBindImageMemory2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindImageMemory2
+  (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkBindImageMemory2KHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkBindImageMemory2KHR
+  (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdBeginConditionalRenderingEXT
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkConditionalRenderingBeginInfoEXT;)V
  */
