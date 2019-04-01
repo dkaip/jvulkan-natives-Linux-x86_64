@@ -822,6 +822,49 @@ namespace jvulkan
             VkBindAccelerationStructureMemoryInfoNV **vkBindAccelerationStructureMemoryInfoNVs,
             int *numberOfVkBindAccelerationStructureMemoryInfoNVs,
             std::vector<void *> *memoryToFree);
+
+    void getVkAccelerationStructureCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkAccelerationStructureCreateInfoNVObject,
+            VkAccelerationStructureCreateInfoNV *vkAccelerationStructureCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkAccelerationStructureInfoNV(
+            JNIEnv *env,
+            jobject jVkAccelerationStructureInfoNVObject,
+            VkAccelerationStructureInfoNV *vkAccelerationStructureInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGeometryNV(
+            JNIEnv *env,
+            const jobject jVkGeometryNVObject,
+            VkGeometryNV *vkGeometryNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGeometryNVCollection(
+            JNIEnv *env,
+            const jobject jVkGeometryNVCollectionObject,
+            VkGeometryNV **vkGeometryNVs,
+            int *numberOfVkGeometryNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGeometryDataNV(
+            JNIEnv *env,
+            const jobject jVkGeometryDataNVObject,
+            VkGeometryDataNV *vkGeometryDataNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGeometryTrianglesNV(
+            JNIEnv *env,
+            const jobject jVkGeometryTrianglesNVObject,
+            VkGeometryTrianglesNV *vkGeometryTrianglesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGeometryAABBNV(
+            JNIEnv *env,
+            const jobject jVkGeometryAABBNVObject,
+            VkGeometryAABBNV *vkGeometryAABBNV,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

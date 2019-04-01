@@ -59,7 +59,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     int result = vkCreateAccelerationStructureNV(
             logicalDeviceHandle,
-            vkAccelerationStructureCreateInfoNV,
+            &vkAccelerationStructureCreateInfoNVObject,
             allocatorCallbacks,
             &vkAccelerationStructureNV);
     /*
@@ -67,6 +67,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
      */
     jvulkan::setHandleValue(env, jVkAccelerationStructureNVObject, vkAccelerationStructureNV);
 
+    jvulkan::freeMemory(&memoryToFree);
 
     return jvulkan::createVkResult(env, result);
 }
