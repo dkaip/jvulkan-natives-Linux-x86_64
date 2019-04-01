@@ -865,6 +865,12 @@ namespace jvulkan
             const jobject jVkGeometryAABBNVObject,
             VkGeometryAABBNV *vkGeometryAABBNV,
             std::vector<void *> *memoryToFree);
+
+    void getVkBufferViewCreateInfo(
+            JNIEnv *env,
+            jobject jVkBufferViewCreateInfoObject,
+            VkBufferViewCreateInfo *vkBufferViewCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
