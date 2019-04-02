@@ -146,7 +146,6 @@ namespace jvulkan
             return;
         }
 
-
         vkBufferViewCreateInfo->sType   = (VkStructureType)sTypeValue;
         vkBufferViewCreateInfo->pNext   = (void *)pNext;
         vkBufferViewCreateInfo->flags   = flags;

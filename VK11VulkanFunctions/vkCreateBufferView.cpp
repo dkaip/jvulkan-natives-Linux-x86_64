@@ -73,7 +73,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jvulkan::freeMemory(&memoryToFree);
 
     /*
-     * Now transfer the VkDevice data to Java
+     * Now transfer the VkBufferView data to Java
      */
     jvulkan::setHandleValue(env, jVkBufferView, vkBufferView);
 

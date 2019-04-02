@@ -871,6 +871,19 @@ namespace jvulkan
             jobject jVkBufferViewCreateInfoObject,
             VkBufferViewCreateInfo *vkBufferViewCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkComputePipelineCreateInfoCollection(
+            JNIEnv *env,
+            const jobject jVkComputePipelineCreateInfoCollectionObject,
+            VkComputePipelineCreateInfo **vkComputePipelineCreateInfos,
+            int *numberOfCreateInfos,
+            std::vector<void *> *memoryToFree);
+
+    void getVkComputePipelineCreateInfo(
+            JNIEnv *env,
+            jobject jVkComputePipelineCreateInfoObject,
+            VkComputePipelineCreateInfo *vkComputePipelineCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
