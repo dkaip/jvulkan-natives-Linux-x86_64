@@ -1,7 +1,7 @@
 # jvulkan-natives-Linux-x86_64
 
 jvulkan-natives-Linux-x86_64 is a native library written in c++ that is used (required) by the 
-jvulkan (Java
+jvulkan (Java Vulkan SDK project).
 
 ## Building
 From the root directory,
