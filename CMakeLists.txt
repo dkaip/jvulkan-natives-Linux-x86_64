@@ -1,32 +1,45 @@
 cmake_minimum_required(VERSION 3.8)
 
+# This batch of set statements will need their values changed to values
+# that are appropriate for your development environment.
+set(NormalSystemLibraries "/usr/lib64")
+set(WaylandLibraries "/usr/lib64")
+set(VulkanSDKLibraries "/home/dkaip/Downloads/VulkanSDK/1.1.101.0/x86_64/lib")
+
+set(JNIHeaders1 "/usr/lib/jvm/java-1.8.0/include/linux")
+set(JNIHeaders2 "/usr/lib/jvm/java-1.8.0/include")
+
+set(VulkanSDKHeaders "/home/dkaip/Downloads/VulkanSDK/1.1.101.0/x86_64/include")
+
+set(WaylandHeaders "/home/dkaip/wayland/wayland-1.16.92/src")
+
+# Now get on with business and get the library built
 project(jvulkan-natives-Linux-x86_64)
 
 file(GLOB vulkan_natives_sources ./*.cpp ./*/*.cpp)
-SET( vulkan_natives_srcs ${vulkan_natives_sources}) 
+set(vulkan_natives_srcs ${vulkan_natives_sources}) 
 
 # Add link library paths, BTW, this line needs to be before the add_library line below
-link_directories(/usr/lib64 /home/dkaip/Downloads/VulkanSDK/1.1.101.0/x86_64/lib)
+link_directories(${NormalSystemLibraries} ${WaylandLibraries} ${VulkanSDKLibraries})
 
 add_library(jvulkan-natives-Linux-x86_64 SHARED ${vulkan_natives_srcs})
 
 target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ./headers)
 
 # Headers for JNI stuff
-target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE /usr/lib/jvm/java-1.8.0/include/linux)
-target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE /usr/lib/jvm/java-1.8.0/include)
+target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${JNIHeaders1})
+target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${JNIHeaders2})
 
 # Headers for Vulkan SDK, currently 1.1.101.0
-target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE /home/dkaip/Downloads/VulkanSDK/1.1.101.0/x86_64/include)
+target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${VulkanSDKHeaders})
 
 # Headers for Wayland stuff
-target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE /home/dkaip/wayland/wayland-1.16.92/src)
+target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${WaylandHeaders})
 
 # Add wayland modules
 target_link_libraries(jvulkan-natives-Linux-x86_64 PRIVATE wayland-client)
 
 # Add vulkan modules
-# target_link_libraries(jvulkan-natives-Linux-x86_64 PRIVATE vulkan VkLayer_api_dump VkLayer_assistant_layer VkLayer_core_validation VkLayer_device_simulation VkLayer_monitor VkLayer_object_tracker VkLayer_parameter_validation VkLayer_screenshot VkLayer_threading VkLayer_unique_objects VkLayer_utils VkLayer_vktrace_layer)
 target_link_libraries(jvulkan-natives-Linux-x86_64 PRIVATE vulkan)
 target_link_libraries(jvulkan-natives-Linux-x86_64 PRIVATE VkLayer_api_dump)
 target_link_libraries(jvulkan-natives-Linux-x86_64 PRIVATE VkLayer_assistant_layer)
