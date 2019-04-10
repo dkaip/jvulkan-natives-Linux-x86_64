@@ -4,16 +4,25 @@ jvulkan-natives-Linux-x86_64 is a native library written in c++ that is used (re
 jvulkan (Java Vulkan SDK project).
 
 ## Building
-From the root directory,
+<code>cd</code> to the root directory.<br/>
+Edit the <code>CMakeLists.txt</code> file.<br/>
+Alter the second arguments of the <code>set</code> statements that are 
+before the <code>project</code> statement and replace the values that are 
+currently there with values that are appropriate for your system / development 
+environment.
+<p>
+Just as a side note, I was not able to debug the native code with a debugger while 
+developing it.  Possibly since this code's job is to interface between code written
+in Java and the libraries provided in the LunarG Vulkan SDK. I had to debug the old fashioned way with print statements (<code>cout</code>).
 
-For a debug version:
+To produce a debug version:
 
 mkdir Debug<br/>
 cd Debug<br/>
 cmake -DCMAKE_BUILD_TYPE=Debug ..<br/>
 make -j32 (You may leave out the -j option it just tells make how many cores it may use.)<br/>
 
-For a release version:
+To produce a release version:
 
 mkdir Release<br/>
 cd Release<br/>
