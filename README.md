@@ -23,7 +23,7 @@ This will create a <code>jvulkan-natives-Linux-x86_64</code> directory in your c
 
 ## Building
 Change your current directory (<code>cd</code>) to the project root directory.  If you used the 
-command above it would be <code>cd jvulkan-natives-Linux-x86_64.</code>  
+command above it would be <code>cd jvulkan-natives-Linux-x86_64</code>.    
 
 Edit the <code>CMakeLists.txt</code> file.</br>
 Alter the second arguments of the <code>set</code> statements that are 
