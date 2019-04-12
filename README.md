@@ -51,7 +51,7 @@ cd Release</br>
 cmake -DCMAKE_BUILD_TYPE=Release ..</br>
 make -j32 (You may leave out the -j option it just tells make how many cores it may use.)</br> </code>
 
-
+In both of these cases the file of interest is <code>libjvulkan-natives-Linux-x86_64.so</code>.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.  
