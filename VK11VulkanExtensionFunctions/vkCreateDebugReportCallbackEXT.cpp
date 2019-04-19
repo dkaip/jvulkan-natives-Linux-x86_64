@@ -33,11 +33,12 @@ using namespace std;
 
 using namespace jvulkan;
 
-std::atomic<unsigned long long>g_uniqueNumber { 1 };
-std::vector<jvulkan::DebugCallbackListEntry *>g_debugCallbackList;
-std::mutex g_debugCallbackListMutex;
+std::atomic<unsigned long long>g_vkDebugReportCallbackList_UniqueNumber { 1 };
+std::vector<jvulkan::DebugCallbackListEntry *>g_vkDebugReportCallbackList;
+std::mutex g_vkDebugReportCallbackListMutex;
 
-JavaVM *g_JavaVM;
+static JavaVM *l_JavaVM;
+static std::mutex l_JavaVM_Mutex;
 
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugReportFlagsEXT flags,
@@ -49,34 +50,32 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     const char* msg,
     void* userData)
 {
-    void *callbackReference = userData;
+    void *the1stKey = userData;
     jobject javaCallbackObject = nullptr;
     jobject javaUserData = nullptr;
 
-    cout << "Callback called key is " <<  (jobject *)callbackReference << endl;
-
     unsigned long int entryNumber = 0;
     bool foundIt = false;
+
     /*
      * Lock the debugCallbackList vector so that we may
      * work with it.
      */
     {
-        std::lock_guard<std::mutex> lock(g_debugCallbackListMutex);
+        std::lock_guard<std::mutex> lock(g_vkDebugReportCallbackListMutex);
 
-        for (; entryNumber < g_debugCallbackList.size(); entryNumber++)
+        for (; entryNumber < g_vkDebugReportCallbackList.size(); entryNumber++)
         {
-            if (callbackReference == (void *)g_debugCallbackList[entryNumber]->getCallbackHandle())
+        	if (the1stKey == (void *)g_vkDebugReportCallbackList[entryNumber]->getThe1stKey())
             {
-                javaCallbackObject = g_debugCallbackList[entryNumber]->getObjectReference();
-                javaUserData = g_debugCallbackList[entryNumber]->getJavaUserData();
+                javaCallbackObject = g_vkDebugReportCallbackList[entryNumber]->getObjectReference();
+                javaUserData = g_vkDebugReportCallbackList[entryNumber]->getJavaUserData();
                 foundIt = true;
                 break;
             }
         }
     }
 
-    cout << "Go data from list entry" << endl;
     if (foundIt == false)
     {
         //TODO
@@ -88,10 +87,10 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     }
 
     JNIEnv *localEnv;
-    int envStatus = g_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
+    int envStatus = l_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
     if (envStatus == JNI_EDETACHED)
     {
-        if (g_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
+        if (l_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
         {
             cout << "Failed to attach" << endl;
         }
@@ -106,8 +105,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         return (VkBool32)false;
     }
 
-//    cout << "Fixed java env" << endl;
-
     /*
      * Okay, we have found the exception information.  Now we need to use it in
      * order execute the callback in the java code.
@@ -115,11 +112,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     jstring layerPrefixString = localEnv->NewStringUTF(layerPrefix);
     jstring msgString         = localEnv->NewStringUTF(msg);
 
-//    cout << "Layer Prefix String:" << layerPrefixString << endl;
-//    cout << "Message:" << msgString << endl;
-//
-//    cout << "callback getting class " << javaCallbackObject << endl;
-//
     jclass javaClass = localEnv->GetObjectClass(javaCallbackObject);
     if (localEnv->ExceptionOccurred())
     {
@@ -136,7 +128,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         cout << "Error finding EnumSet class ... returning" << endl;
         return false;
     }
-//    cout << "Found EnumSet class" << endl;
 
     jmethodID enumSetNoneOfMethod = localEnv->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
     if (localEnv->ExceptionOccurred() != 0)
@@ -144,8 +135,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         cout << "Error getting noneOf ... returning" << endl;
         return false;
     }
-
-//    cout << "Got noneOfMethod" << endl;
 
     jclass enumClass = localEnv->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
 
@@ -155,8 +144,6 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         cout << "Error CallStaticObjectMethod on enumset object class ... returning" << endl;
         return false;
     }
-
-//    cout << "Made the empty EnumSet flags is " << flags << endl;
 
     jclass setClass = localEnv->FindClass("java/util/Set");
     jmethodID setAddMethod = localEnv->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
@@ -252,18 +239,17 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     localEnv->DeleteLocalRef(layerPrefixString);
     localEnv->DeleteLocalRef(msgString);
 
-    g_JavaVM->DetachCurrentThread();
+    l_JavaVM->DetachCurrentThread();
 
     return (VkBool32)result;
 }
 
-VkResult CreateDebugReportCallbackEXT(
+static VkResult CreateDebugReportCallbackEXT(
         VkInstance instance,
         const VkDebugReportCallbackCreateInfoEXT* pDebugReportCallbackCreateInfo,
         const VkAllocationCallbacks* pAllocator,
         VkDebugReportCallbackEXT* pCallback)
 {
-//    cout << "pCallback is " << pCallback << endl;
     auto func = (PFN_vkCreateDebugReportCallbackEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
     if (func != nullptr) {
         return func(instance, pDebugReportCallbackCreateInfo, pAllocator, pCallback);
@@ -280,15 +266,23 @@ VkResult CreateDebugReportCallbackEXT(
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateDebugReportCallbackEXT
 (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugReportCallbackCreateInfoEXT, jobject jAlternateAllocator, jobject jVkDebugReportCallbackEXT)
 {
-    if (g_JavaVM == nullptr)
     {
-        jint returnValue = env->GetJavaVM(&g_JavaVM);
-        if (returnValue < 0)
-        {
-            cout << "ERROR: Could not get a pointer to the JVM." << endl;
-            // TODO need to throw an exception here.
-            jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-        }
+    	/*
+    	 * Lock the Mutex for the l_JavaVM variable.  It should only be
+    	 * needed here since once set the variable should not change
+    	 * for the duration of the program's execution.
+    	 */
+        std::lock_guard<std::mutex> lock(l_JavaVM_Mutex);
+		if (l_JavaVM == nullptr)
+		{
+			jint returnValue = env->GetJavaVM(&l_JavaVM);
+			if (returnValue < 0)
+			{
+				cout << "ERROR: Could not get a pointer to the JVM." << endl;
+				// TODO need to throw an exception here.
+				jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+			}
+		}
     }
 
     VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
@@ -303,10 +297,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         allocatorCallbacks = new VkAllocationCallbacks();
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
-
-//    VkInstance vkInstance = (VkInstance)instanceHandle;
-
-//    cout << "createdebugcallback vkinstance is " << vkInstance << endl;
 
     jclass vkDebugReportCallbackCreateInfoEXTClass = env->GetObjectClass(jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
@@ -320,8 +310,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-//    cout << "Got getSTypeAsInt" << endl;
-
     jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getpNext", "()J");
     if (env->ExceptionOccurred())
     {
@@ -329,8 +317,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     void *pNext = (void *)env->CallLongMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
-
-//    cout << "Got pNext" << endl;
 
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
@@ -344,8 +330,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             flagsObject,
             "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
 
-//    cout << "Got getFlagsAsInt" << endl;
-
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getCallbackObject", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/VkDebugReportCallback;");
     if (env->ExceptionOccurred())
     {
@@ -356,8 +340,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     // Need to get a global ref because this will be used later in a callback.
     jobject globalCallbackObject = reinterpret_cast<jobject>(env->NewGlobalRef(localCallbackObject));
-
-//    cout << "Got callback object " << globalCallbackObject << endl;
 
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getUserData", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
@@ -370,9 +352,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     // Need to get a global ref because this will be used later in a callback.
     jobject globalUserData = reinterpret_cast<jobject>(env->NewGlobalRef(localUserData));
 
-//    cout << "Got user data object" << endl;
-
-
     VkDebugReportCallbackCreateInfoEXT debugReportCallbackCreateInfoEXT = {};
     debugReportCallbackCreateInfoEXT.sType = (VkStructureType)sTypeValue;
     debugReportCallbackCreateInfoEXT.flags = flags;
@@ -382,9 +361,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     /*
      * put the info on the "list" and if the call fails take it off again.
      */
-    unsigned long long key = g_uniqueNumber.fetch_add( 1, std::memory_order_relaxed);
-
-    // FIXME This is probably only okay if the pointers are 64-bit
+    unsigned long long key = g_vkDebugReportCallbackList_UniqueNumber.fetch_add( 1, std::memory_order_relaxed);
+    /*
+     * Save a unique number in the user data so we can use that as a key in
+     * order to look up the callback information we are going to need.
+     */
     debugReportCallbackCreateInfoEXT.pUserData = (void *)key;
 
     /*
@@ -393,6 +374,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
      * java callback object and the user data object supplied, if any.
      */
     debugReportCallbackCreateInfoEXT.pfnCallback = debugCallback;
+
 
     VkDebugReportCallbackEXT vkDebugReportCallbackEXT;
 
@@ -405,71 +387,32 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     if (result == VK_SUCCESS)
     {
-//        cout << "Created debug callback handle is " << vkDebugReportCallbackEXT << endl;
+    	/*
+    	 * We are using a unique number as the first key and the value of the
+    	 * returned vkDebugReportCallbackEXT handle as the second search key.
+    	 * This is because we do not have the value of vkDebugReportCallbackEXT
+    	 * until after the call to CreateDebugReportCallbackEXT.
+    	 *
+    	 * When a callback occurs we will look up the unique number that was
+    	 * saved in the userData field in order to get information needed to
+    	 * execute the callback.
+    	 */
+
+    	// FIXME This is probably only okay if the pointers are 64-bit
         jvulkan::DebugCallbackListEntry *callbackListEntry =
-            new jvulkan::DebugCallbackListEntry((void *)key, globalCallbackObject, globalUserData, vkDebugReportCallbackEXT);
+            new jvulkan::DebugCallbackListEntry(key, vkDebugReportCallbackEXT, globalCallbackObject, globalUserData);
 
-        std::lock_guard<std::mutex> lock(g_debugCallbackListMutex);
+        std::lock_guard<std::mutex> lock(g_vkDebugReportCallbackListMutex);
 
-        g_debugCallbackList.push_back(callbackListEntry);
+        g_vkDebugReportCallbackList.push_back(callbackListEntry);
     }
-
-//    cout << "*pCallback is " << vkDebugReportCallbackEXT << endl;
 
     /*
      * Now transfer the VkInstance data to Java
      */
     jvulkan::setHandleValue(env, jVkDebugReportCallbackEXT, vkDebugReportCallbackEXT);
-//    jclass javaClass = env->GetObjectClass(jVkDebugReportCallbackEXT);
-//    methodId = env->GetMethodID(javaClass, "setHandle", "(J)V");
-//    env->CallVoidMethod(jVkDebugReportCallbackEXT, methodId, vkDebugReportCallbackEXT);
-//
-//    cout << "Debug callback handle " << vkDebugReportCallbackEXT << endl;
 
     return jvulkan::createVkResult(env, result);
 }
 
-void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT callback, const VkAllocationCallbacks* pAllocator)
-{
-    auto func = (PFN_vkDestroyDebugReportCallbackEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT");
-    if (func != nullptr)
-    {
-        func(instance, callback, pAllocator);
-    }
-}
-
-/*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkDestroyDebugReportCallbackEXT
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
- */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyDebugReportCallbackEXT
-  (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugReportCallbackEXT, jobject jAlternateAllocator)
-{
-    VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    VkAllocationCallbacks *allocatorCallbacks = nullptr;
-    if (jAlternateAllocator != nullptr)
-    {
-        allocatorCallbacks = new VkAllocationCallbacks();
-        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
-    }
-
-    VkDebugReportCallbackEXT_T *vkDebugReportCallbackEXTHandle = (VkDebugReportCallbackEXT_T *)jvulkan::getHandleValue(env, jVkDebugReportCallbackEXT);
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    DestroyDebugReportCallbackEXT(vkInstanceHandle, vkDebugReportCallbackEXTHandle, allocatorCallbacks);
-    if (env->ExceptionOccurred())
-    {
-        cout << "vkDestroyDebugReportCallbackEXT exception" << endl;
-        return;
-    }
-}
 

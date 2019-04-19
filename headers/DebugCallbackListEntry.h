@@ -32,19 +32,19 @@ namespace jvulkan
     class DebugCallbackListEntry
     {
         private:
-            void                       *callbackHandle;
+    	    unsigned long long          the1stKey;
+            VkDebugReportCallbackEXT    the2ndKey;
             jobject                     objectReference;
             jobject                     javaUserData;
-            VkDebugReportCallbackEXT    vkDebugReportCallbackEXT;
 
         public:
-            DebugCallbackListEntry(void *callbackHandle, jobject objectReference, jobject userData, VkDebugReportCallbackEXT vkDebugReportCallbackEXT);
+            DebugCallbackListEntry(unsigned long long the1stKey, VkDebugReportCallbackEXT the2ndKey, jobject objectReference, jobject userData);
             virtual ~DebugCallbackListEntry();
 
-            void     *getCallbackHandle();
+            unsigned long long getThe1stKey();
+            VkDebugReportCallbackEXT getThe2ndKey();
             jobject   getObjectReference();
             jobject   getJavaUserData();
-            VkDebugReportCallbackEXT getVkDebugReportCallbackEXT();
 
     };
 } /* namespace jvulkan */

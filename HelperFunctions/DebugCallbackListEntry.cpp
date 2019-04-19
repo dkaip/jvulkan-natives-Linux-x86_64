@@ -22,38 +22,33 @@
 #include "DebugCallbackListEntry.h"
 
 using namespace jvulkan;
-//{
-//    class DebugCallbackListEntry
-//    {
-//        public:
-DebugCallbackListEntry::DebugCallbackListEntry(void *callbackHandle, jobject objectReference, jobject userData, VkDebugReportCallbackEXT vkDebugReportCallbackEXT) :
-                callbackHandle(callbackHandle),
+
+DebugCallbackListEntry::DebugCallbackListEntry(unsigned long long the1stKey, VkDebugReportCallbackEXT the2ndKey, jobject objectReference, jobject userData) :
+		        the1stKey(the1stKey),
+				the2ndKey(the2ndKey),
                 objectReference(objectReference),
-                javaUserData(userData),
-                vkDebugReportCallbackEXT(vkDebugReportCallbackEXT) {}
+                javaUserData(userData) {}
 
 DebugCallbackListEntry::~DebugCallbackListEntry()
-            {
-            }
+{
+}
 
-void *DebugCallbackListEntry::getCallbackHandle()
-            {
-                return callbackHandle;
-            }
+unsigned long long DebugCallbackListEntry::getThe1stKey()
+{
+	return the1stKey;
+}
 
-            jobject DebugCallbackListEntry::getObjectReference()
-            {
-                return objectReference;
-            }
+VkDebugReportCallbackEXT DebugCallbackListEntry::getThe2ndKey()
+{
+	return the2ndKey;
+}
 
-            jobject DebugCallbackListEntry::getJavaUserData()
-            {
-                return javaUserData;
-            }
+jobject DebugCallbackListEntry::getObjectReference()
+{
+	return objectReference;
+}
 
-            VkDebugReportCallbackEXT DebugCallbackListEntry::getVkDebugReportCallbackEXT()
-            {
-                return vkDebugReportCallbackEXT;
-            }
-//    };
-//}
+jobject DebugCallbackListEntry::getJavaUserData()
+{
+	return javaUserData;
+}
