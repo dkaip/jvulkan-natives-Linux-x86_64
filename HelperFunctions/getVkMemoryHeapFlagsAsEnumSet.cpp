@@ -103,19 +103,6 @@ namespace jvulkan
             }
         }
 
-        if (memoryHeapFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_HOST_COHERENT_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_HOST_COHERENT_BIT to EnumSet" << std::endl;
-                return nullptr;
-            }
-        }
-
         if (memoryHeapFlags & VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_HEAP_MULTI_INSTANCE_BIT_KHR", enumObjectString);
