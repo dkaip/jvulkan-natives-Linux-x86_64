@@ -24,24 +24,137 @@
 #include <iostream>
 #include <string.h>
 #include <jni.h>
+#include <mutex>
 
 #ifndef HEADERS_SLF4J_H_
 #define HEADERS_SLF4J_H_
 
+#define FORMAT_BUFFER_SIZE 128
+#define TEXT_BUFFER_SIZE 4096
+
+// The following define (SOURCE_PATH_SIZE) comes from the CMakeLists.txt file.
+#define __SHORTFILENAME__ (__FILE__ + SOURCE_PATH_SIZE)
+
 #ifdef __GNUC__
 
-#define LOGINFO(format, ...) (Logger.getInstance()->info(__FILE__, __PRETTY_FUNCTION__,__LINE__, format, ##__VA_ARGS__);)
-#define LOGDEBUG(format, ...) (Logger.getInstance()->debug(__FILE__, __PRETTY_FUNCTION__,__LINE__, format, ##__VA_ARGS__);)
-#define LOGTRACE(format, ...) (Logger.getInstance()->trace(__FILE__, __PRETTY_FUNCTION__,__LINE__, format, ##__VA_ARGS__);)
-#define LOGWARN(format, ...) (Logger.getInstance()->warn(__FILE__, __PRETTY_FUNCTION__,__LINE__, format, ##__VA_ARGS__);)
-#define LOGERROR(format, ...) (Logger.getInstance()->error(__FILE__, __PRETTY_FUNCTION__,__LINE__, format, ##__VA_ARGS__);)
+#define BASE_FORMAT_STRING "%s:Line %d:Function %s:"
+
+#define LOGINFO(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->info(env, textBuffer);\
+})
+#define LOGDEBUG(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->debug(env, textBuffer);\
+})
+#define LOGTRACE(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->trace(env, textBuffer);\
+})
+#define LOGWARN(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->warn(env, textBuffer);\
+})
+#define LOGERROR(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->error(env, textBuffer);\
+})
 
 #else
-#define LOGINFO(format, ...) (Logger.getInstance()->info(__FILE__, "",__LINE__, format, ##__VA_ARGS__);)
-#define LOGDEBUG(format, ...) (Logger.getInstance()->debug(__FILE__, "",__LINE__, format, ##__VA_ARGS__);)
-#define LOGTRACE(format, ...) (Logger.getInstance()->trace(__FILE__, "",__LINE__, format, ##__VA_ARGS__);)
-#define LOGWARN(format, ...) (Logger.getInstance()->warn(__FILE__, "",__LINE__, format, ##__VA_ARGS__);)
-#define LOGERROR(format, ...) (Logger.getInstance()->error(__FILE__, "",__LINE__, format, ##__VA_ARGS__);)
+
+#define BASE_FORMAT_STRING "%s:Line %d:"
+
+#define LOGINFO(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->info(env, textBuffer);\
+})
+#define LOGDEBUG(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->debug(env, textBuffer);\
+})
+#define LOGTRACE(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->trace(env, textBuffer);\
+})
+#define LOGWARN(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->warn(env, textBuffer);\
+})
+#define LOGERROR(env, format, ...) (\
+{\
+	char formatString[FORMAT_BUFFER_SIZE];\
+	formatString[0] = '\0';\
+    strcpy(formatString, BASE_FORMAT_STRING);\
+    strcat(formatString, format);\
+	char textBuffer[TEXT_BUFFER_SIZE];\
+    textBuffer[0] = '\0';\
+    sprintf(textBuffer, formatString, __SHORTFILENAME__, __LINE__, __func__, ##__VA_ARGS__);\
+    slf4j::Logger::getInstance(env)->error(env, textBuffer);\
+})
+
 #endif
 
 namespace slf4j
@@ -49,91 +162,20 @@ namespace slf4j
     class Logger
 	{
 		private:
-    	    const char *loggerName = "jvulkan-natives";
     		static Logger *instance;
     		static std::mutex creation_Mutex;
-    		static jobject slf4jLoggerObject;
     		static jclass loggerClass;
     		static jmethodID infoMethodId;
     		static jmethodID debugMethodId;
     		static jmethodID traceMethodId;
     		static jmethodID warnMethodId;
     		static jmethodID errorMethodId;
+    		static jobject slf4jLoggerObject;
 
-    		Logger(JNIEnv *env)
-    		{
-    			loggerClass = env->FindClass("org/slf4j/Logger");
-    			if (loggerClass == nullptr)
-    			{
-    				std::cerr << "Could not find class org/slf4j/Logger...it is required." << std::endl;
-    			}
-
-    			jclass loggerFactoryClass = env->FindClass("org/slf4j/LoggerFactory");
-    			if (loggerClass == nullptr)
-    			{
-    				std::cerr << "Could not find class org/slf4j/LoggerFactory...it is required." << std::endl;
-    			}
-
-    			jmethodID methodId = env->GetStaticMethodID(loggerFactoryClass, "getLogger", "(Ljava/lang/String;)Lorg/slf4j/Logger;");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method getLogger in org/slf4j/LoggerFactory with signature \"(Ljava/lang/String;)Lorg/slf4j/Logger;\"...it is required." << std::endl;
-    			}
-
-    		    jstring loggerNameString = env->NewStringUTF(loggerName);
-
-    		    if (env->ExceptionOccurred())
-    		    {
-    		        return;
-    		    }
-
-    		    jobject localLoggerObject = env->CallObjectMethod(loggerFactoryClass, methodId, loggerNameString);
-
-    		    env->DeleteLocalRef(loggerNameString);
-
-    		    /*
-    		     * We need to get a global ref because this will be used later in all logging calls.
-    		     *
-    		     * We are not deleting the global ref anywhere because it should hang around until
-    		     * the program exits.
-    		     */
-    		    slf4jLoggerObject = reinterpret_cast<jobject>(env->NewGlobalRef(localLoggerObject));
-
-
-
-    		    infoMethodId = env->GetMethodID(loggerClass, "info", "(Ljava/lang/String;)V");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method info in org/slf4j/Logger with signature \"(Ljava/lang/String;)V\"...it is required." << std::endl;
-    			}
-
-    		    debugMethodId = env->GetMethodID(loggerClass, "debug", "(Ljava/lang/String;)V");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method debug in org/slf4j/Logger with signature \"(Ljava/lang/String;)V\"...it is required." << std::endl;
-    			}
-
-    		    traceMethodId = env->GetMethodID(loggerClass, "trace", "(Ljava/lang/String;)V");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method trace in org/slf4j/Logger with signature \"(Ljava/lang/String;)V\"...it is required." << std::endl;
-    			}
-
-    		    warnMethodId = env->GetMethodID(loggerClass, "warn", "(Ljava/lang/String;)V");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method warn in org/slf4j/Logger with signature \"(Ljava/lang/String;)V\"...it is required." << std::endl;
-    			}
-
-    		    errorMethodId = env->GetMethodID(loggerClass, "error", "(Ljava/lang/String;)V");
-    			if (methodId == nullptr)
-    			{
-    				std::cerr << "Could not find method error in org/slf4j/Logger with signature \"(Ljava/lang/String;)V\"...it is required." << std::endl;
-    			}
-    		}
+    		Logger(JNIEnv *env);
 
 		public:
-    		Logger* getInstance(JNIEnv *env)
+    		static Logger* getInstance(JNIEnv *env)
     	 	{
     			{
 					std::lock_guard<std::mutex> lock(creation_Mutex);
@@ -146,14 +188,16 @@ namespace slf4j
     	 		return instance;
     	 	}
 
-    	 	 Logger(Logger const&)			= delete;
+			 Logger(Logger const&)			= delete;
+			 Logger(Logger const&&)			= delete;
     	 	 void operator=(Logger const&)	= delete;
+    	 	 void operator=(Logger const&&)	= delete;
 
-    	 	 void info(JNIEnv *env, const char *fileName, const char *methodName, int lineNumber, const char *formatString, ...);
-    	 	 void debug(JNIEnv *env, const char *fileName, const char *methodName, int lineNumber, const char *formatString, ...);
-    	 	 void trace(JNIEnv *env, const char *fileName, const char *methodName, int lineNumber, const char *formatString, ...);
-    	 	 void warn(JNIEnv *env, const char *fileName, const char *methodName, int lineNumber, const char *formatString, ...);
-    	 	 void error(JNIEnv *env, const char *fileName, const char *methodName, int lineNumber, const char *formatString, ...);
+    	 	 void info(JNIEnv *env, const char *textString);
+    	 	 void debug(JNIEnv *env, const char *textString);
+    	 	 void trace(JNIEnv *env, const char *textString);
+    	 	 void warn(JNIEnv *env, const char *textString);
+    	 	 void error(JNIEnv *env, const char *textString);
 	};
 }
 
