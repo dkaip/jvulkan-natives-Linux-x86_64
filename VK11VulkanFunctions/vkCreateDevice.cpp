@@ -84,7 +84,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     std::vector<void *> memoryToFree(30);
 
-    jvulkan::getQueueCreateInfo(env,
+    jvulkan::getVkDeviceQueueCreateInfo(env,
             collectionClass,
             jVkDeviceQueueCreateInfoObjects,
             queueCreateInfos,
@@ -96,7 +96,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     VkDeviceCreateInfo deviceCreateInfo = {};
 
-    jvulkan::getDeviceCreateInfo(env, jVkDeviceCreateInfo, &deviceCreateInfo, &memoryToFree);
+    jvulkan::getVkDeviceCreateInfo(env, jVkDeviceCreateInfo, &deviceCreateInfo, &memoryToFree);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
