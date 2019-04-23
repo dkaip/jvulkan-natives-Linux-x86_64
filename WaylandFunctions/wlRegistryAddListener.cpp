@@ -59,7 +59,7 @@ static void globalRegistryAddAnnouncementCallback(
         return;
     }
 
-    jobject wlRegistryObject = jvulkan::createHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
+    jobject wlRegistryObject = jvulkan::createVulkanHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
 
     jstring interfaceNameText = localEnv->NewStringUTF(interface);
 
@@ -117,7 +117,7 @@ static void globalRegistryRemovalAnnouncementCallback(
         return;
     }
 
-    jobject wlRegistryObject = jvulkan::createHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
+    jobject wlRegistryObject = jvulkan::createVulkanHandle(localEnv, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", wl_registry);
 
     jclass javaClass = localEnv->GetObjectClass(savedCallbackObject);
     if (localEnv->ExceptionOccurred())

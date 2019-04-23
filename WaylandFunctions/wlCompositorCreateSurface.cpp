@@ -42,7 +42,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return nullptr;
     }
 
-    jobject jInterfacePointer = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurface", surface);
+    jobject jInterfacePointer = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurface", surface);
 
     return jInterfacePointer;
 }

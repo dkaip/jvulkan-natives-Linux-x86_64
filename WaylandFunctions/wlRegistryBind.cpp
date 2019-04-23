@@ -148,7 +148,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             interfacePointer,
             interfaceVersion);
 
-    jobject jInterfacePointer = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle", result);
+    jobject jInterfacePointer = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle", result);
 
     return jInterfacePointer;
 }

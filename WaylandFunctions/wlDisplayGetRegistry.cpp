@@ -41,7 +41,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     /*
      * Now transfer the WlDisplay data to Java
      */
-    jobject jWlRegistry = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", registry);
+    jobject jWlRegistry = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", registry);
 
     return jWlRegistry;
 }
