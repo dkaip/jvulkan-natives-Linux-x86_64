@@ -16,6 +16,12 @@ set(WaylandHeaders "/home/dkaip/wayland/wayland-1.16.92/src")
 # Now get on with business and get the library built
 project(jvulkan-natives-Linux-x86_64)
 
+# The additional / is important to remove the last character from the path.
+# Note that it does not matter if the OS uses / or \, because we are only
+# saving the path size.
+string(LENGTH "${CMAKE_SOURCE_DIR}/" SOURCE_PATH_SIZE)
+add_definitions("-DSOURCE_PATH_SIZE=${SOURCE_PATH_SIZE}")
+
 file(GLOB vulkan_natives_sources ./*.cpp ./*/*.cpp)
 set(vulkan_natives_srcs ${vulkan_natives_sources}) 
 
