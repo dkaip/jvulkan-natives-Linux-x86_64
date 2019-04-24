@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -32,6 +33,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkQueue_T *vkQueueHandle = (VkQueue_T *)jvulkan::getHandleValue(env, jVkQueue);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkQueue handle");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -41,6 +43,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         vkFenceHandle = (VkFence_T *)jvulkan::getHandleValue(env, jVkFence);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not retrieve VkFence handle");
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
@@ -57,6 +60,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Failed on call to getVkSubmitInfoCollection");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 

@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
 
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -30,6 +28,7 @@ namespace jvulkan
         jclass vkSubmitInfoClass = env->GetObjectClass(jVkSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class of jVkSubmitInfoObject");
             return;
         }
 
@@ -37,6 +36,7 @@ namespace jvulkan
         int sTypeValue = getSTypeAsInt(env, jVkSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");
             return;
         }
 
@@ -44,6 +44,7 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkSubmitInfoClass, "getpNext", "()J");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find methodId for getpNext");
             return;
         }
 
@@ -57,6 +58,7 @@ namespace jvulkan
         methodId = env->GetMethodID(vkSubmitInfoClass, "getWaitSemaphores", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find methodId for getWaitSemaphores");
             return;
         }
 
@@ -79,6 +81,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Call to getVkSemaphoreCollection failed");
                 return;
             }
         }
@@ -87,6 +90,7 @@ namespace jvulkan
         methodId = env->GetMethodID(vkSubmitInfoClass, "getWaitDstStageMask", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find methodId for getWaitDstStageMask");
             return;
         }
 
@@ -109,6 +113,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Call to getVkPipelineStageFlagsCollection failed");
                 return;
             }
         }
@@ -117,6 +122,7 @@ namespace jvulkan
         methodId = env->GetMethodID(vkSubmitInfoClass, "getCommandBuffers", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find methodId for getCommandBuffers");
             return;
         }
 
@@ -139,6 +145,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Call to getVkCommandBufferCollection failed");
                 return;
             }
         }
@@ -147,6 +154,7 @@ namespace jvulkan
         methodId = env->GetMethodID(vkSubmitInfoClass, "getSignalSemaphores", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find methodId for getSignalSemaphores");
             return;
         }
 
@@ -169,6 +177,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Call to getVkSemaphoreCollection failed");
                 return;
             }
         }
@@ -194,18 +203,21 @@ namespace jvulkan
         jclass vkSubmitInfoCollectionClass = env->GetObjectClass(jVkSubmitInfoCollectionObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class for jVkSubmitInfoCollectionObject");
             return;
         }
 
         jmethodID methodId = env->GetMethodID(vkSubmitInfoCollectionClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get methodId for size");
             return;
         }
 
         jint numberOfElements = env->CallIntMethod(jVkSubmitInfoCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "CallIntMethod failed for size");
             return;
         }
 
@@ -216,30 +228,35 @@ namespace jvulkan
         jmethodID iteratorMethodId = env->GetMethodID(vkSubmitInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get methodId for iterator");
             return;
         }
 
         jobject iteratorObject = env->CallObjectMethod(jVkSubmitInfoCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "CallObjectMethod failed for iterator");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "GetObjectClass failed for iterator");
             return;
         }
 
         jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get methodId for hasNext");
             return;
         }
 
         jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get methodId for next");
             return;
         }
 
@@ -249,6 +266,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "CallBooleanMethod failed for hasNext");
                 break;
             }
 
@@ -260,6 +278,7 @@ namespace jvulkan
             jobject jVkSubmitInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "CallObjectMethod failed for next");
                 break;
             }
 
@@ -270,6 +289,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "getVkSubmitInfo failed");
                 return;
             }
 

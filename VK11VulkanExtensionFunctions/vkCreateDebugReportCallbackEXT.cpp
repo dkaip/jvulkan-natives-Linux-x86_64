@@ -20,7 +20,6 @@
  *      Author: Douglas Kaip
  */
 
-#include <iostream>
 #include <atomic>
 #include <vector>
 #include <mutex>
@@ -30,6 +29,7 @@ using namespace std;
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 #include "DebugReportCallbackListEntry.h"
+#include "slf4j.hh"
 
 using namespace jvulkan;
 
@@ -57,6 +57,26 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     unsigned long int entryNumber = 0;
     bool foundIt = false;
 
+    JNIEnv *localEnv;
+    int envStatus = l_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
+    if (envStatus == JNI_EDETACHED)
+    {
+        if (l_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
+        {
+            cout << "Failed to attach" << endl;
+        }
+    }
+    else if (envStatus == JNI_OK)
+    {
+        ;
+    }
+    else if (envStatus == JNI_EVERSION)
+    {
+        cout << "JNI_VERSION_1_6 not supported." << endl;
+        return (VkBool32)false;
+    }
+
+    LOGWARN(localEnv, "%s", "A debug callback has been triggered");
     /*
      * Lock the debugCallbackList vector so that we may
      * work with it.
@@ -78,31 +98,14 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
 
     if (foundIt == false)
     {
+        LOGERROR(localEnv, "%s", "We were not able to find the stored callback information on the g_vkDebugReportCallbackList");
+
         //TODO
         /*
          * We have a problem here...We cannot find the callback information
          * we need.
          */
-        throw 99999;
-    }
-
-    JNIEnv *localEnv;
-    int envStatus = l_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
-    if (envStatus == JNI_EDETACHED)
-    {
-        if (l_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
-        {
-            cout << "Failed to attach" << endl;
-        }
-    }
-    else if (envStatus == JNI_OK)
-    {
-        ;
-    }
-    else if (envStatus == JNI_EVERSION)
-    {
-        cout << "JNI_VERSION_1_6 not supported." << endl;
-        return (VkBool32)false;
+        return false;
     }
 
     /*
@@ -115,7 +118,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     jclass javaClass = localEnv->GetObjectClass(javaCallbackObject);
     if (localEnv->ExceptionOccurred())
     {
-        cout << "Error getting callback object class ... returning" << endl;
+        LOGERROR(localEnv, "%s", "Could not get the class for the callback object");
         return false;
     }
 
@@ -125,14 +128,14 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     jclass enumSetClass = localEnv->FindClass("java/util/EnumSet");
     if (localEnv->ExceptionOccurred())
     {
-        cout << "Error finding EnumSet class ... returning" << endl;
+        LOGERROR(localEnv, "%s", "Could not find the class java/util/EnumSet");
         return false;
     }
 
     jmethodID enumSetNoneOfMethod = localEnv->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
     if (localEnv->ExceptionOccurred() != 0)
     {
-        cout << "Error getting noneOf ... returning" << endl;
+        LOGERROR(localEnv, "%s", "Could not find the static methodId for noneOf");
         return false;
     }
 
@@ -141,6 +144,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     jobject enumSetObject = localEnv->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
     if (localEnv->ExceptionOccurred())
     {
+        LOGERROR(localEnv, "%s", "Failed calling CallStaticObjectMethod on EnumSet object");
         cout << "Error CallStaticObjectMethod on enumset object class ... returning" << endl;
         return false;
     }
@@ -149,7 +153,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     jmethodID setAddMethod = localEnv->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
     if (localEnv->ExceptionOccurred())
     {
-        cout << "Error getting add method on EnumSet ... returning" << endl;
+        LOGERROR(localEnv, "%s", "Could not find the methodId for add for the EnumSet");
         return false;
     }
 
@@ -164,7 +168,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
           VK_DEBUG_REPORT_ERROR_BIT_EXT |
           VK_DEBUG_REPORT_DEBUG_BIT_EXT)) != 0)
     {
-        cout << "ERROR: Unhandled case for flags...value is " << flags << endl;
+        LOGERROR(localEnv, "Unhandled case for flags %d", flags);
         return false;
     }
 
@@ -174,7 +178,10 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-        cout << "The add result was " << addResult << endl;
+        if (addResult == false)
+        {
+        	LOGWARN(localEnv, "%s", "Failed to add VK_DEBUG_REPORT_INFORMATION_BIT_EXT to EnumSet");
+        }
     }
 
     if (flags & VK_DEBUG_REPORT_WARNING_BIT_EXT)
@@ -183,7 +190,10 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-        cout << "The add result was " << addResult << endl;
+        if (addResult == false)
+        {
+        	LOGWARN(localEnv, "%s", "Failed to add VK_DEBUG_REPORT_WARNING_BIT_EXT to EnumSet");
+        }
     }
 
     if (flags & VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT)
@@ -192,7 +202,10 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-        cout << "The add result was " << addResult << endl;
+        if (addResult == false)
+        {
+        	LOGWARN(localEnv, "%s", "Failed to add VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT to EnumSet");
+        }
     }
 
     if (flags & VK_DEBUG_REPORT_ERROR_BIT_EXT)
@@ -201,7 +214,10 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-        cout << "The add result was Z" << addResult << endl;
+        if (addResult == false)
+        {
+        	LOGWARN(localEnv, "%s", "Failed to add VK_DEBUG_REPORT_ERROR_BIT_EXT to EnumSet");
+        }
     }
 
     if (flags & VK_DEBUG_REPORT_DEBUG_BIT_EXT)
@@ -210,14 +226,16 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
         jobject theEnum = localEnv->GetStaticObjectField(enumClass, fieldId);
 
         bool addResult = localEnv->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-        cout << "The add result was " << addResult << endl;
+        if (addResult == false)
+        {
+        	LOGWARN(localEnv, "%s", "Failed to add VK_DEBUG_REPORT_DEBUG_BIT_EXT to EnumSet");
+        }
     }
 
-    cout << "callback got add method" << endl;
     jmethodID methodId = localEnv->GetMethodID(javaClass, "invoke", "(Ljava/util/EnumSet;IJJILjava/lang/String;Ljava/lang/String;Ljava/lang/Object;)Z");
     if (localEnv->ExceptionOccurred())
     {
-        cout << "oops" << endl;
+        LOGERROR(localEnv, "%s", "Could not find the methodId for invoke");
         return false;
     }
 
@@ -251,9 +269,12 @@ static VkResult CreateDebugReportCallbackEXT(
         VkDebugReportCallbackEXT* pCallback)
 {
     auto func = (PFN_vkCreateDebugReportCallbackEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugReportCallbackEXT");
-    if (func != nullptr) {
+    if (func != nullptr)
+    {
         return func(instance, pDebugReportCallbackCreateInfo, pAllocator, pCallback);
-    } else {
+    }
+    else
+    {
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 }
@@ -278,7 +299,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 			jint returnValue = env->GetJavaVM(&l_JavaVM);
 			if (returnValue < 0)
 			{
-				cout << "ERROR: Could not get a pointer to the JVM." << endl;
+				LOGERROR(env, "%s", "Could not get pointer to the JVM");
 				// TODO need to throw an exception here.
 				jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 			}
@@ -288,6 +309,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Failed trying to get the value of jVkInstance");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -301,18 +323,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jclass vkDebugReportCallbackCreateInfoEXTClass = env->GetObjectClass(jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Failed trying to get the object class for jVkDebugReportCallbackCreateInfoEXT");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     int sTypeValue = getSTypeAsInt(env, jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Failed trying to get getSTypeAsInt");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getpNext", "()J");
     if (env->ExceptionOccurred())
     {
+        LOGERROR(env, "%s", "Could not find the methodId for getpNext");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -321,6 +346,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
+        LOGERROR(env, "%s", "Could not find the methodId for getFlags");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -333,6 +359,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getCallbackObject", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/VkDebugReportCallback;");
     if (env->ExceptionOccurred())
     {
+        LOGERROR(env, "%s", "Could not find the methodId for getCallbackObject");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -344,6 +371,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getUserData", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
     {
+        LOGERROR(env, "%s", "Could not find the methodId for getUserData");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -405,6 +433,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         std::lock_guard<std::mutex> lock(g_vkDebugReportCallbackListMutex);
 
         g_vkDebugReportCallbackList.push_back(callbackListEntry);
+//        LOGDEBUG(env, "Put callback information on g_vkDebugReportCallbackList current size is %d, key is %ld", g_vkDebugReportCallbackList.size(), key);
     }
 
     /*

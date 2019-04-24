@@ -169,8 +169,8 @@ namespace jvulkan
 
 			jint queueCount = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueCountMethodId);
 			if (env->ExceptionOccurred())
-				LOGERROR(env, "%s", "Failed on CallIntMethod for queueCount");
 			{
+				LOGERROR(env, "%s", "Failed on CallIntMethod for queueCount");
 				break;
 			}
 
