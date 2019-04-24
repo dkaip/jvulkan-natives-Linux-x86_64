@@ -72,7 +72,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     for (uint32_t i = 0; i < numberOfImages; i++)
     {
-        jobject vkImageHandle = jvulkan::createHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage", swapchainImageHandles[i]);
+        jobject vkImageHandle = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage", swapchainImageHandles[i]);
         if (env->ExceptionOccurred())
         {
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
