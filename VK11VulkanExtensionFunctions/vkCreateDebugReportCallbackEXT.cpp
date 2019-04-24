@@ -29,16 +29,16 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
-#include "DebugCallbackListEntry.h"
+#include "DebugReportCallbackListEntry.h"
 
 using namespace jvulkan;
 
 std::atomic<unsigned long long>g_vkDebugReportCallbackList_UniqueNumber { 1 };
-std::vector<jvulkan::DebugCallbackListEntry *>g_vkDebugReportCallbackList;
+std::vector<jvulkan::DebugReportCallbackListEntry *>g_vkDebugReportCallbackList;
 std::mutex g_vkDebugReportCallbackListMutex;
 
-static JavaVM *l_JavaVM;
-static std::mutex l_JavaVM_Mutex;
+JavaVM *l_JavaVM;
+std::mutex l_JavaVM_Mutex;
 
 static VKAPI_ATTR VkBool32 VKAPI_CALL debugCallback(
     VkDebugReportFlagsEXT flags,
@@ -325,7 +325,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     jobject flagsObject = env->CallObjectMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
-    int32_t flags = getEnumSetValue(
+    VkDebugReportFlagsEXT flags = getEnumSetValue(
             env,
             flagsObject,
             "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportFlagBitsEXT");
@@ -399,8 +399,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     	 */
 
     	// FIXME This is probably only okay if the pointers are 64-bit
-        jvulkan::DebugCallbackListEntry *callbackListEntry =
-            new jvulkan::DebugCallbackListEntry(key, vkDebugReportCallbackEXT, globalCallbackObject, globalUserData);
+        jvulkan::DebugReportCallbackListEntry *callbackListEntry =
+            new jvulkan::DebugReportCallbackListEntry(key, vkDebugReportCallbackEXT, globalCallbackObject, globalUserData);
 
         std::lock_guard<std::mutex> lock(g_vkDebugReportCallbackListMutex);
 
@@ -414,5 +414,3 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     return jvulkan::createVkResult(env, result);
 }
-
-

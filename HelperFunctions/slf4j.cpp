@@ -20,10 +20,11 @@
  *      Author: Douglas Kaip
  */
 
+#include "../headers/slf4j.hh"
+
 #include <stdarg.h>
 #include <string.h>
 #include <mutex>
-#include "slf4j.h"
 
 #define LOGGER_NAME "jvulkan-natives"
 

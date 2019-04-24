@@ -34,7 +34,7 @@ namespace jvulkan
             int *numberOfStrings,
             std::vector<void *> *memoryToFree);
 
-	void getInstanceCreateInfo(
+	void getVkInstanceCreateInfo(
 	        JNIEnv *env,
 	        const jobject jInstanceCreateInfo,
 	        VkInstanceCreateInfo *instanceCreateInfo,
@@ -225,189 +225,7 @@ namespace jvulkan
 //        cout << "Got API Version " << apiVersion << endl;
 	}
 
-    void getQueueCreateInfo(
-            JNIEnv *env,
-            const jclass jVkQueueCreateInfoCollectionClass,
-            const jobject jVkQueueCreateInfoCollection,
-            VkDeviceQueueCreateInfo queueCreateInfo[],
-            std::vector<void *> *memoryToFree)
-    {
-        jmethodID iteratorMethodId = env->GetMethodID(jVkQueueCreateInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject iteratorObject = env->CallObjectMethod(jVkQueueCreateInfoCollection, iteratorMethodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jclass iteratorClass = env->GetObjectClass(iteratorObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jclass vkDeviceQueueCreateInfoClass = nullptr;
-        jmethodID getpNextMethodId = nullptr;
-        jmethodID getFlagsMethodId = nullptr;
-        jmethodID getQueueFamilyIndexMethodId = nullptr;
-        jmethodID getQueueCountMethodId = nullptr;
-        jmethodID getQueuePrioritiesMethodId = nullptr;
-        int i = 0;
-        do
-        {
-            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            if (hasNext == false)
-            {
-                break;
-            }
-
-            jobject vkDeviceQueueCreateInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            if(i == 0)
-            {
-                vkDeviceQueueCreateInfoClass = env->GetObjectClass(vkDeviceQueueCreateInfoObject);
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-
-//                getSTypeAsIntMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getSTypeAsInt", "()I");
-//                if (env->ExceptionOccurred())
-//                {
-//                    break;
-//                }
-//
-                getpNextMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getpNext", "()J");
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-
-                getFlagsMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-
-                getQueueFamilyIndexMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueFamilyIndex", "()I");
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-
-                getQueueCountMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueCount", "()I");
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-
-                getQueuePrioritiesMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueuePriorities", "()[F");
-                if (env->ExceptionOccurred())
-                {
-                    break;
-                }
-            }
-
-            int sTypeValue = getSTypeAsInt(env, vkDeviceQueueCreateInfoObject);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-//            jint sType = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getSTypeAsIntMethodId);
-//            if (env->ExceptionOccurred())
-//            {
-//                break;
-//            }
-//
-            jlong pNext = env->CallLongMethod(vkDeviceQueueCreateInfoObject, getpNextMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-//            jint flags = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getFlagsAsIntMethodId);
-//            if (env->ExceptionOccurred())
-//            {
-//                break;
-//            }
-//
-            jobject flagsObject = env->CallObjectMethod(vkDeviceQueueCreateInfoObject, getFlagsMethodId);
-            int32_t flags = getEnumSetValue(
-                    env,
-                    flagsObject,
-                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
-
-            jint queueFamilyIndex = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueFamilyIndexMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            jint queueCount = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueCountMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            jfloatArray queuePrioritiesArray = (jfloatArray)env->CallObjectMethod(vkDeviceQueueCreateInfoObject, getQueuePrioritiesMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            jsize sizeOfQueuePriorities = env->GetArrayLength(queuePrioritiesArray);
-//            cout << "Size of queuePriorities array is " << sizeOfQueuePriorities << endl;
-            if (sizeOfQueuePriorities != queueCount)
-            {
-                cout << "ERROR:The size of the queue priorities array must be the same as the queue count." << endl;
-            }
-
-            float *data = env->GetFloatArrayElements(queuePrioritiesArray, 0);
-            float *heapQueuePriorities = (float *)calloc((size_t)sizeOfQueuePriorities, sizeof(float));
-            memoryToFree->push_back(heapQueuePriorities);
-            if (data != nullptr)
-            {
-                memcpy(heapQueuePriorities, data, sizeOfQueuePriorities * sizeof(float));
-                env->ReleaseFloatArrayElements(queuePrioritiesArray, data, JNI_ABORT);
-            }
-
-            queueCreateInfo[i].sType = (VkStructureType)sTypeValue;
-            queueCreateInfo[i].pNext = (const void *)pNext;
-            queueCreateInfo[i].flags = flags;
-            queueCreateInfo[i].queueFamilyIndex = queueFamilyIndex;
-            queueCreateInfo[i].queueCount = queueCount;
-            queueCreateInfo[i].pQueuePriorities = heapQueuePriorities;
-
-            i++;
-        } while(true);
-    }
-
-    void getDeviceCreateInfo(
+    void getVkDeviceCreateInfo(
             JNIEnv *env,
             const jobject jVkDeviceCreateInfo,
             VkDeviceCreateInfo *deviceCreateInfo,
@@ -647,162 +465,162 @@ namespace jvulkan
         }
     }
 
-    int getSTypeAsInt(
-            JNIEnv *env,
-            const jobject vulkanStructureObject)
-    {
-        jclass vulkanStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType;");
-        if (env->ExceptionOccurred())
-        {
-            cout << "ERROR could not find getSType method" << endl;
-            return -1;
-        }
-
-        jobject sTypeObject = env->CallObjectMethod(vulkanStructureObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        methodId = env->GetMethodID(enumClass, "valueOf", "()I");
-        if (env->ExceptionOccurred())
-        {
-            cout << "ERROR could not find valueOf method" << endl;
-            return -1;
-        }
-
-        jint result = env->CallIntMethod(sTypeObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        return result;
-    }
-
-    int32_t getEnumSetValue(
-            JNIEnv *env,
-            const jobject enumSetObject,
-            const char *enumClassName)
-    {
-//        cout << "Trying to process EnumSet class " << enumClassName << endl;
-        jclass setClass = env->FindClass("java/util/Set");
-        if (env->ExceptionOccurred())
-        {
-            cout << "Error finding EnumSet class ... returning" << endl;
-            return -1;
-        }
-
-//        jmethodID sizeMethod = env->GetMethodID(setClass, "size", "()I");
-//        jint size = env->CallIntMethod(enumSetObject, sizeMethod);
-//        cout << "EnumSet size is " << size << endl;
+//    int getSTypeAsInt(
+//            JNIEnv *env,
+//            const jobject vulkanStructureObject)
+//    {
+//        jclass vulkanStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
 //
-        jmethodID iteratorMethodId = env->GetMethodID(setClass, "iterator", "()Ljava/util/Iterator;");
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jobject iteratorObject = env->CallObjectMethod(enumSetObject, iteratorMethodId);
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jclass iteratorClass = env->GetObjectClass(iteratorObject);
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
-        if (env->ExceptionOccurred())
-        {
-            return -1;
-        }
-
-        jclass enumClass = env->FindClass(enumClassName);
-        if (env->ExceptionOccurred())
-        {
-            cout << "Error finding Enum class name " << enumClassName << " ... returning" << endl;
-            return -1;
-        }
-
-//        int signatureLength = strlen(enumClassName) + 5;
-//        char signature[signatureLength];
-//        signature[0] = '(';
-//        signature[1] = ')';
-//        signature[2] = 'L';
-//        strcpy(&signature[2], enumClassName);
-//        signature[signatureLength - 1] = ';';
-//        signature[signatureLength] = '\0';
+//        jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType;");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "ERROR could not find getSType method" << endl;
+//            return -1;
+//        }
 //
-//        jmethodID valueOfMethod = env->GetMethodID(enumClass, "valueOf", signature);
-        jmethodID valueOfMethod = env->GetMethodID(enumClass, "valueOf", "()I");
-        if (env->ExceptionOccurred())
-        {
-//            cout << "ERROR finding valueOf method with signature " << signature << endl;
-            cout << "ERROR finding valueOf method with signature " << "()I" << endl;
-            return -1;
-        }
-
-        int32_t result = 0;
-        do
-        {
-            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
-            if (env->ExceptionOccurred())
-            {
-                result = -1;
-                break;
-            }
-
-            if (hasNext == false)
-            {
-//                cout << "leaving Loop" << endl;
-                break;
-            }
-
-            jobject enumObject = env->CallObjectMethod(iteratorObject, nextMethod);
-            if (env->ExceptionOccurred())
-            {
-                result = -1;
-                break;
-            }
-
-            jint value = env->CallIntMethod(enumObject, valueOfMethod);
-            if (env->ExceptionOccurred())
-            {
-                result = -1;
-                break;
-            }
-
-            result |= value;
-
-//            cout << "result " << result << " value " << value << endl;
-
-        } while(true);
-
-//        cout << "returning EnumSet value of " << std::hex << result << " for enum " << enumClassName << endl;
-        return result;
-    }
+//        jobject sTypeObject = env->CallObjectMethod(vulkanStructureObject, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        methodId = env->GetMethodID(enumClass, "valueOf", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "ERROR could not find valueOf method" << endl;
+//            return -1;
+//        }
+//
+//        jint result = env->CallIntMethod(sTypeObject, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        return result;
+//    }
+//
+//    int32_t getEnumSetValue(
+//            JNIEnv *env,
+//            const jobject enumSetObject,
+//            const char *enumClassName)
+//    {
+////        cout << "Trying to process EnumSet class " << enumClassName << endl;
+//        jclass setClass = env->FindClass("java/util/Set");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "Error finding EnumSet class ... returning" << endl;
+//            return -1;
+//        }
+//
+////        jmethodID sizeMethod = env->GetMethodID(setClass, "size", "()I");
+////        jint size = env->CallIntMethod(enumSetObject, sizeMethod);
+////        cout << "EnumSet size is " << size << endl;
+////
+//        jmethodID iteratorMethodId = env->GetMethodID(setClass, "iterator", "()Ljava/util/Iterator;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jobject iteratorObject = env->CallObjectMethod(enumSetObject, iteratorMethodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jclass iteratorClass = env->GetObjectClass(iteratorObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return -1;
+//        }
+//
+//        jclass enumClass = env->FindClass(enumClassName);
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "Error finding Enum class name " << enumClassName << " ... returning" << endl;
+//            return -1;
+//        }
+//
+////        int signatureLength = strlen(enumClassName) + 5;
+////        char signature[signatureLength];
+////        signature[0] = '(';
+////        signature[1] = ')';
+////        signature[2] = 'L';
+////        strcpy(&signature[2], enumClassName);
+////        signature[signatureLength - 1] = ';';
+////        signature[signatureLength] = '\0';
+////
+////        jmethodID valueOfMethod = env->GetMethodID(enumClass, "valueOf", signature);
+//        jmethodID valueOfMethod = env->GetMethodID(enumClass, "valueOf", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+////            cout << "ERROR finding valueOf method with signature " << signature << endl;
+//            cout << "ERROR finding valueOf method with signature " << "()I" << endl;
+//            return -1;
+//        }
+//
+//        int32_t result = 0;
+//        do
+//        {
+//            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
+//            if (env->ExceptionOccurred())
+//            {
+//                result = -1;
+//                break;
+//            }
+//
+//            if (hasNext == false)
+//            {
+////                cout << "leaving Loop" << endl;
+//                break;
+//            }
+//
+//            jobject enumObject = env->CallObjectMethod(iteratorObject, nextMethod);
+//            if (env->ExceptionOccurred())
+//            {
+//                result = -1;
+//                break;
+//            }
+//
+//            jint value = env->CallIntMethod(enumObject, valueOfMethod);
+//            if (env->ExceptionOccurred())
+//            {
+//                result = -1;
+//                break;
+//            }
+//
+//            result |= value;
+//
+////            cout << "result " << result << " value " << value << endl;
+//
+//        } while(true);
+//
+////        cout << "returning EnumSet value of " << std::hex << result << " for enum " << enumClassName << endl;
+//        return result;
+//    }
 
 
 
@@ -892,65 +710,65 @@ namespace jvulkan
         env->CallVoidMethod(jReturnValue, methodId, value);
     }
 
-    jobject createHandle(JNIEnv *env, const char *className, void *value)
-    {
-        jclass handleClass = env->FindClass(className);
-        if (env->ExceptionOccurred())
-        {
-            cout << "createHandle: could not find class " << className << endl;
-            return nullptr;
-        }
-
-        jmethodID methodId = env->GetMethodID(handleClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-            cout << "createHandle: constructor error for class " << className << endl;
-            return nullptr;
-        }
-
-        jobject handleObject = env->NewObject(handleClass, methodId);
-
-        setHandleValue(env, handleObject, value);
-
-        env->CallVoidMethod(handleObject, methodId, value);
-
-        return handleObject;
-    }
-
-    jobject createVkResult(JNIEnv *env, jint value)
-    {
-        /*
-         * This function is usually called just before the caller is returning
-         * back to Java.  If value does not correspond to VK_SUCCESS it may be
-         * because some other function call has failed and thrown an exception.
-         * In that case our "env" methods will not work properly.  Since the
-         * calling function is most likely going to return with the result of
-         * this call immediately we are going to clear the exception so that
-         * we can properly create the appropriate response.
-         */
-        jboolean handlingException = env->ExceptionCheck();
-        if (handlingException == true)
-        {
-            env->ExceptionClear();
-        }
-
-        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult");
-        if (env->ExceptionOccurred())
-        {
-            cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult" << endl;
-            return nullptr;
-        }
-
-        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;");
-        if (env->ExceptionOccurred())
-        {
-            cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;" << endl;
-            return nullptr;
-        }
-
-        return env->CallStaticObjectMethod(vkResultClass, methodId, value);
-    }
-
+//    jobject createVulkanHandle(JNIEnv *env, const char *className, void *value)
+//    {
+//        jclass handleClass = env->FindClass(className);
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "createHandle: could not find class " << className << endl;
+//            return nullptr;
+//        }
+//
+//        jmethodID methodId = env->GetMethodID(handleClass, "<init>", "()V");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "createHandle: constructor error for class " << className << endl;
+//            return nullptr;
+//        }
+//
+//        jobject handleObject = env->NewObject(handleClass, methodId);
+//
+//        setHandleValue(env, handleObject, value);
+//
+//        env->CallVoidMethod(handleObject, methodId, value);
+//
+//        return handleObject;
+//    }
+//
+//    jobject createVkResult(JNIEnv *env, jint value)
+//    {
+//        /*
+//         * This function is usually called just before the caller is returning
+//         * back to Java.  If value does not correspond to VK_SUCCESS it may be
+//         * because some other function call has failed and thrown an exception.
+//         * In that case our "env" methods will not work properly.  Since the
+//         * calling function is most likely going to return with the result of
+//         * this call immediately we are going to clear the exception so that
+//         * we can properly create the appropriate response.
+//         */
+//        jboolean handlingException = env->ExceptionCheck();
+//        if (handlingException == true)
+//        {
+//            env->ExceptionClear();
+//        }
+//
+//        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult" << endl;
+//            return nullptr;
+//        }
+//
+//        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;" << endl;
+//            return nullptr;
+//        }
+//
+//        return env->CallStaticObjectMethod(vkResultClass, methodId, value);
+//    }
+//
     jobject getVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags)
     {
         char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits";
@@ -3661,98 +3479,5 @@ namespace jvulkan
         renderPassCreateInfo->pSubpasses = vkSubpassDescription;
         renderPassCreateInfo->dependencyCount = (uint32_t)numberOfSubpassDependencies;
         renderPassCreateInfo->pDependencies = vkSubpassDependency;
-    }
-
-    void getVkShaderModuleCreateInfo(
-        JNIEnv *env,
-        const jobject jVkShaderModuleCreateInfoObject,
-        VkShaderModuleCreateInfo *shaderModuleCreateInfo,
-        std::vector<void *> *memoryToFree)
-    {
-        jclass vkShaderModuleCreateInfoClass = env->GetObjectClass(jVkShaderModuleCreateInfoObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkShaderModuleCreateInfoObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jmethodID methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getpNext", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jlong pNext = env->CallLongMethod(jVkShaderModuleCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject flagsObject = env->CallObjectMethod(jVkShaderModuleCreateInfoObject, methodId);
-        int32_t flags = getEnumSetValue(
-                env,
-                flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderModuleCreateFlagBits");
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getCodeSize", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jlong codeSize = env->CallLongMethod(jVkShaderModuleCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getCode", "()[B");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jintArray jcodeArray = (jintArray)env->CallObjectMethod(jVkShaderModuleCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        uint32_t *code = nullptr;
-        jsize arrayLength = 0;
-        if (jcodeArray != nullptr)
-        {
-            arrayLength = env->GetArrayLength(jcodeArray);
-
-            code = (uint32_t *)calloc(arrayLength, sizeof(int));
-            memoryToFree->push_back(code);
-
-            env->GetIntArrayRegion(jcodeArray, 0, arrayLength, (int *)code);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-        }
-
-        shaderModuleCreateInfo->sType = (VkStructureType)sTypeValue;
-        shaderModuleCreateInfo->pNext = (void *)pNext;
-        shaderModuleCreateInfo->flags = flags;
-        shaderModuleCreateInfo->codeSize = (size_t)codeSize;
-        shaderModuleCreateInfo->pCode = (uint32_t *)code;
     }
 }

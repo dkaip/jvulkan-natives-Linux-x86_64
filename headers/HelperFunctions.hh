@@ -17,7 +17,7 @@
  * StructureHelperFunctions.hh
  *
  *  Created on: Jul 13, 2018
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include <vector>
@@ -31,7 +31,7 @@
 
 namespace jvulkan
 {
-    void getInstanceCreateInfo(
+    void getVkInstanceCreateInfo(
             JNIEnv *env,
             const jobject jInstanceCreateInfo,
             VkInstanceCreateInfo *instanceCreateInfo,
@@ -43,14 +43,14 @@ namespace jvulkan
             const jobject jAlternateAllocator,
             VkAllocationCallbacks *allocatorCallbacks);
 
-    void getQueueCreateInfo(
+    void getVkDeviceQueueCreateInfo(
             JNIEnv *env,
             const jclass jVkQueueCreateInfoCollectionClass,
             const jobject jVkQueueCreateInfoCollection,
             VkDeviceQueueCreateInfo queueCreateInfo[],
             std::vector<void *> *memoryToFree);
 
-    void getDeviceCreateInfo(
+    void getVkDeviceCreateInfo(
             JNIEnv *env,
             const jobject jVkDeviceCreateInfo,
             VkDeviceCreateInfo *deviceCreateInfo,
@@ -74,7 +74,7 @@ namespace jvulkan
 
     void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value);
 
-    jobject createHandle(JNIEnv *env, const char *className, void *value);
+    jobject createVulkanHandle(JNIEnv *env, const char *className, void *value);
 
     jobject createVkResult(JNIEnv *env, jint value);
 
@@ -884,6 +884,48 @@ namespace jvulkan
             jobject jVkComputePipelineCreateInfoObject,
             VkComputePipelineCreateInfo *vkComputePipelineCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkDebugUtilsLabelEXT(
+            JNIEnv *env,
+            const jobject jVkDebugUtilsLabelEXT,
+			VkDebugUtilsLabelEXT *vkDebugUtilsLabelEXT,
+            std::vector<void *> *memoryToFree);
+
+	void getVkDebugUtilsMessengerCreateInfoEXT(
+        JNIEnv *env,
+        const jobject jVkDebugUtilsMessengerCreateInfoEXTObject,
+		VkDebugUtilsMessengerCreateInfoEXT *vkDebugUtilsMessengerCreateInfoEXT,
+        std::vector<void *> *memoryToFree);
+
+    jobject getVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessageTypeFlagsEXT messageTypes);
+
+    jobject getVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags);
+
+    jobject createVkDebugUtilsMessageSeverityFlagBitsEXT(JNIEnv *env, jint value);
+
+    jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData);
+
+    jobject createVkDebugUtilsLabelEXTCollection(JNIEnv *env, int labelsCount, const VkDebugUtilsLabelEXT labels[]);
+
+    jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData);
+
+    jobject createVkDebugUtilsMessengerCallbackDataEXT(JNIEnv *env, const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData);
+
+    jobject createVkDebugUtilsObjectNameInfoEXT(JNIEnv *env, const VkDebugUtilsObjectNameInfoEXT *objectNameInfo);
+
+    jobject createVkDebugUtilsObjectNameInfoEXTCollection(JNIEnv *env, int objectCount, const VkDebugUtilsObjectNameInfoEXT objects[]);
+
+	void getVkDebugUtilsObjectNameInfoEXT(
+        JNIEnv *env,
+        const jobject jVkDebugUtilsObjectNameInfoEXTObject,
+		VkDebugUtilsObjectNameInfoEXT *vkDebugUtilsObjectNameInfoEXT,
+        std::vector<void *> *memoryToFree);
+
+	void getVkDebugUtilsObjectTagInfoEXT(
+        JNIEnv *env,
+        const jobject jVkDebugUtilsObjectTagInfoEXTObject,
+		VkDebugUtilsObjectTagInfoEXT *vkDebugUtilsObjectTagInfoEXT,
+        std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

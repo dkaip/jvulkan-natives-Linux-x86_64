@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkDestroyDebugReportCallbackEXT.cpp
+ * vkDestroyDebugUtilsMessengerEXT.cpp
  *
- *  Created on: Apr 17, 2019
+ *  Created on: Apr 24, 2019
  *      Author: Douglas Kaip
  */
 
@@ -27,17 +27,17 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
-#include "DebugReportCallbackListEntry.h"
+#include "DebugUtilsMessengerCallbackListEntry.h"
 #include "../headers/slf4j.hh"
 
 using namespace jvulkan;
 
-extern std::vector<jvulkan::DebugReportCallbackListEntry *>g_vkDebugReportCallbackList;
-extern std::mutex g_vkDebugReportCallbackListMutex;
+extern std::vector<jvulkan::DebugUtilsMessengerCallbackListEntry *>g_vkCreateDebugUtilsMessengerList;
+extern std::mutex g_vkCreateDebugUtilsMessengerListMutex;
 
-static void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCallbackEXT handle, const VkAllocationCallbacks* pAllocator)
+static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT handle, const VkAllocationCallbacks* pAllocator)
 {
-    auto func = (PFN_vkDestroyDebugReportCallbackEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugReportCallbackEXT");
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr)
     {
         func(instance, handle, pAllocator);
@@ -46,11 +46,11 @@ static void DestroyDebugReportCallbackEXT(VkInstance instance, VkDebugReportCall
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkDestroyDebugReportCallbackEXT
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDebugReportCallbackEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
+ * Method:    vkDestroyDebugUtilsMessengerEXT
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDebugUtilsMessengerEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyDebugReportCallbackEXT
-  (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugReportCallbackEXT, jobject jAlternateAllocator)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDestroyDebugUtilsMessengerEXT
+  (JNIEnv *env, jobject, jobject jVkInstance, jobject jVkDebugUtilsMessengerEXT, jobject jAlternateAllocator)
 {
     VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
@@ -66,10 +66,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    VkDebugReportCallbackEXT_T *vkDebugReportCallbackEXTHandle = (VkDebugReportCallbackEXT_T *)jvulkan::getHandleValue(env, jVkDebugReportCallbackEXT);
+    VkDebugUtilsMessengerEXT_T *vkDebugUtilsMessengerEXTHandle = (VkDebugUtilsMessengerEXT_T *)jvulkan::getHandleValue(env, jVkDebugUtilsMessengerEXT);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error retrieving vkDebugReportCallbackEXTHandle");
+    	LOGERROR(env, "%s", "Error retrieving vkDebugUtilsMessengerEXTHandle");
         return;
     }
 
@@ -78,9 +78,9 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * work with it.
      */
     {
-        std::lock_guard<std::mutex> lock(g_vkDebugReportCallbackListMutex);
+        std::lock_guard<std::mutex> lock(g_vkCreateDebugUtilsMessengerListMutex);
 
-        for (int entryNumber = 0; entryNumber < g_vkDebugReportCallbackList.size(); entryNumber++)
+        for (int entryNumber = 0; entryNumber < g_vkCreateDebugUtilsMessengerList.size(); entryNumber++)
         {
         	/*
         	 * We now need to remove the entry in the g_vkDebugReportCallbackList
@@ -92,13 +92,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         	 * g_vkDebugReportCallbackList and perform the needed processing
         	 * on it.
         	 */
-        	if (vkDebugReportCallbackEXTHandle == g_vkDebugReportCallbackList[entryNumber]->getThe2ndKey())
+        	if (vkDebugUtilsMessengerEXTHandle == g_vkCreateDebugUtilsMessengerList[entryNumber]->getThe2ndKey())
             {
             	/*
             	 * We found the entry we need to deal with.
             	 */
-                jobject javaCallbackObject = g_vkDebugReportCallbackList[entryNumber]->getObjectReference();
-                jobject javaUserData = g_vkDebugReportCallbackList[entryNumber]->getJavaUserData();
+                jobject javaCallbackObject = g_vkCreateDebugUtilsMessengerList[entryNumber]->getObjectReference();
+                jobject javaUserData = g_vkCreateDebugUtilsMessengerList[entryNumber]->getJavaUserData();
 
                 /*
                  * We need to delete the global references.  This will allow
@@ -109,17 +109,16 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
                 env->DeleteGlobalRef(javaUserData);
 
                 // Delete the entry for this vkDebugReportCallbackEXTHandle
-                g_vkDebugReportCallbackList.erase(g_vkDebugReportCallbackList.begin() + entryNumber);
+                g_vkCreateDebugUtilsMessengerList.erase(g_vkCreateDebugUtilsMessengerList.begin() + entryNumber);
                 break;
             }
         }
     }
 
-    DestroyDebugReportCallbackEXT(vkInstanceHandle, vkDebugReportCallbackEXTHandle, allocatorCallbacks);
+    DestroyDebugUtilsMessengerEXT(vkInstanceHandle, vkDebugUtilsMessengerEXTHandle, allocatorCallbacks);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error calling DestroyDebugReportCallbackEXT");
+    	LOGERROR(env, "%s", "Error while calling DestroyDebugUtilsMessengerEXT");
         return;
     }
 }
-

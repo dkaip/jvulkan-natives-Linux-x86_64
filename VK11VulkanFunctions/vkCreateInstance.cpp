@@ -20,7 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
-#include "slf4j.h"
+#include "../headers/slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
