@@ -29,7 +29,7 @@
 #ifndef HEADERS_SLF4J_H_
 #define HEADERS_SLF4J_H_
 
-#define FORMAT_BUFFER_SIZE 128
+#define FORMAT_BUFFER_SIZE 256
 #define TEXT_BUFFER_SIZE 4096
 
 // The following define (SOURCE_PATH_SIZE) comes from the CMakeLists.txt file.
