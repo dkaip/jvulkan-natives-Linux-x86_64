@@ -35,14 +35,17 @@ using namespace jvulkan;
 extern std::vector<jvulkan::DebugUtilsMessengerCallbackListEntry *>g_vkCreateDebugUtilsMessengerList;
 extern std::mutex g_vkCreateDebugUtilsMessengerListMutex;
 
-static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT handle, const VkAllocationCallbacks* pAllocator)
-{
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
-    if (func != nullptr)
-    {
-        func(instance, handle, pAllocator);
-    }
-}
+extern PFN_vkDestroyDebugUtilsMessengerEXT	vkDestroyDebugUtilsMessengerEXTFunc;
+
+
+//static void DestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT handle, const VkAllocationCallbacks* pAllocator)
+//{
+//    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+//    if (func != nullptr)
+//    {
+//        func(instance, handle, pAllocator);
+//    }
+//}
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -115,7 +118,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         }
     }
 
-    DestroyDebugUtilsMessengerEXT(vkInstanceHandle, vkDebugUtilsMessengerEXTHandle, allocatorCallbacks);
+    vkDestroyDebugUtilsMessengerEXTFunc(vkInstanceHandle, vkDebugUtilsMessengerEXTHandle, allocatorCallbacks);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error while calling DestroyDebugUtilsMessengerEXT");

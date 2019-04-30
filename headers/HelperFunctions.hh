@@ -891,6 +891,13 @@ namespace jvulkan
 			VkDebugUtilsLabelEXT *vkDebugUtilsLabelEXT,
             std::vector<void *> *memoryToFree);
 
+    void getVkDebugUtilsLabelEXTCollection(
+            JNIEnv *env,
+            const jobject jVkDebugUtilsLabelEXTCollectionObject,
+			VkDebugUtilsLabelEXT **vkDebugUtilsLabels,
+            int *numberOfVkDebugUtilsLabels,
+            std::vector<void *> *memoryToFree);
+
 	void getVkDebugUtilsMessengerCreateInfoEXT(
         JNIEnv *env,
         const jobject jVkDebugUtilsMessengerCreateInfoEXTObject,
@@ -921,11 +928,26 @@ namespace jvulkan
 		VkDebugUtilsObjectNameInfoEXT *vkDebugUtilsObjectNameInfoEXT,
         std::vector<void *> *memoryToFree);
 
-	void getVkDebugUtilsObjectTagInfoEXT(
+    void getVkDebugUtilsObjectNameInfoEXTCollection(
+            JNIEnv *env,
+            const jobject jVkDebugUtilsObjectNameInfoEXTCollectionObject,
+			VkDebugUtilsObjectNameInfoEXT **objects,
+            int *numberOfObjectss,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDebugUtilsObjectTagInfoEXT(
         JNIEnv *env,
         const jobject jVkDebugUtilsObjectTagInfoEXTObject,
 		VkDebugUtilsObjectTagInfoEXT *vkDebugUtilsObjectTagInfoEXT,
         std::vector<void *> *memoryToFree);
+
+	void getvkDebugUtilsMessengerCallbackDataEXT(
+        JNIEnv *env,
+        const jobject jVkDebugUtilsMessengerCallbackDataEXTObject,
+		VkDebugUtilsMessengerCallbackDataEXT *vkDebugUtilsMessengerCallbackDataEXT,
+        std::vector<void *> *memoryToFree);
+
+	void logClassName(JNIEnv *env, const jobject theObject);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

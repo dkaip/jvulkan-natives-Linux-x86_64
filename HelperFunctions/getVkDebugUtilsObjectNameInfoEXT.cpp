@@ -20,8 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-#include "../headers/slf4j.hh"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -31,7 +31,7 @@ namespace jvulkan
 		VkDebugUtilsObjectNameInfoEXT *vkDebugUtilsObjectNameInfoEXT,
         std::vector<void *> *memoryToFree)
     {
-        jclass vkDebugUtilsObjectNameInfoEXTClass = env->GetObjectClass(jVkDebugUtilsObjectNameInfoEXTObject);
+		jclass vkDebugUtilsObjectNameInfoEXTClass = env->GetObjectClass(jVkDebugUtilsObjectNameInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to GetObjectClass for jVkDebugUtilsObjectNameInfoEXTObject");

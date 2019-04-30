@@ -30,7 +30,7 @@
 
 namespace jvulkan
 {
-    jobject createVkDebugUtilsLabelEXT(JNIEnv *env, VkDebugUtilsLabelEXT *labelData)
+    jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData)
     {
         // Locate the VkDebugUtilsMessengerCallbackDataEXT class
         jclass vkDebugUtilsLabelEXTclass = env->FindClass(
@@ -67,7 +67,7 @@ namespace jvulkan
 
         env->SetFloatArrayRegion(jColorArray, 0, sizeof(labelData->color), labelData->color);
 
-        methodId = env->GetMethodID(vkDebugUtilsLabelEXTclass, "setColor", "(L[F;)V");
+        methodId = env->GetMethodID(vkDebugUtilsLabelEXTclass, "setColor", "([F)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying to get methodId of setColor");

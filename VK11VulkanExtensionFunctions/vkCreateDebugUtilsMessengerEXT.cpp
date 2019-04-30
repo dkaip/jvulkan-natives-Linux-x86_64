@@ -41,11 +41,21 @@ std::mutex g_vkCreateDebugUtilsMessengerListMutex;
 extern JavaVM *l_JavaVM;
 extern std::mutex l_JavaVM_Mutex;
 
+bool functionPointersInitialized = false;
+
 PFN_vkCmdBeginDebugUtilsLabelEXT 	vkCmdBeginDebugUtilsLabelEXTFunc;
 PFN_vkCmdEndDebugUtilsLabelEXT 		vkCmdEndDebugUtilsLabelEXTFunc;
 PFN_vkCmdInsertDebugUtilsLabelEXT 	vkCmdInsertDebugUtilsLabelEXTFunc;
 PFN_vkSetDebugUtilsObjectNameEXT 	vkSetDebugUtilsObjectNameEXTFunc;
 PFN_vkSetDebugUtilsObjectTagEXT 	vkSetDebugUtilsObjectTagEXTFunc;
+
+PFN_vkSubmitDebugUtilsMessageEXT	vkSubmitDebugUtilsMessageEXTFunc;
+PFN_vkQueueBeginDebugUtilsLabelEXT	vkQueueBeginDebugUtilsLabelEXTFunc;
+PFN_vkQueueEndDebugUtilsLabelEXT	vkQueueEndDebugUtilsLabelEXTFunc;
+PFN_vkQueueInsertDebugUtilsLabelEXT	vkQueueInsertDebugUtilsLabelEXTFunc;
+
+static PFN_vkCreateDebugUtilsMessengerEXT	vkCreateDebugUtilsMessengerEXTFunc;
+PFN_vkDestroyDebugUtilsMessengerEXT	vkDestroyDebugUtilsMessengerEXTFunc;
 
 static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
 	    VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
@@ -133,6 +143,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
 			localEnv,
 			pCallbackData);
 
+
     jmethodID methodId = localEnv->GetMethodID(javaClass, "invoke",
     		"(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;Ljava/util/EnumSet;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsMessengerCallbackDataEXT;Ljava/lang/Object;)Z");
     if (localEnv->ExceptionOccurred())
@@ -157,11 +168,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
     return (VkBool32)result;
 }
 
-static VkResult CreateDebugUtilsMessengerEXT(
-        VkInstance instance,
-        const VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo,
-        const VkAllocationCallbacks* pAllocator,
-		VkDebugUtilsMessengerEXT* pMessenger)
+static void initFunctionPointers(VkInstance instance)
 {
 	/*
 	 * Oh, this is ugliness of the first order...
@@ -184,15 +191,27 @@ static VkResult CreateDebugUtilsMessengerEXT(
 	vkSetDebugUtilsObjectTagEXTFunc  =
 			(PFN_vkSetDebugUtilsObjectTagEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
 
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
-    if (func != nullptr)
-    {
-        return func(instance, pCreateInfo, pAllocator, pMessenger);
-    }
-    else
-    {
-        return VK_ERROR_EXTENSION_NOT_PRESENT;
-    }
+	vkSubmitDebugUtilsMessageEXTFunc =
+			(PFN_vkSubmitDebugUtilsMessageEXT)vkGetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
+	vkQueueBeginDebugUtilsLabelEXTFunc =
+			(PFN_vkQueueBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
+	vkQueueEndDebugUtilsLabelEXTFunc =
+			(PFN_vkQueueEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueEndDebugUtilsLabelEXT");
+	vkQueueInsertDebugUtilsLabelEXTFunc =
+			(PFN_vkQueueInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
+
+	vkCreateDebugUtilsMessengerEXTFunc =
+			(PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+	vkDestroyDebugUtilsMessengerEXTFunc =
+			(PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+//	if (func != nullptr)
+//    {
+//        return func(instance, pCreateInfo, pAllocator, pMessenger);
+//    }
+//    else
+//    {
+//        return VK_ERROR_EXTENSION_NOT_PRESENT;
+//    }
 }
 
 /*
@@ -326,10 +345,16 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 		g_vkCreateDebugUtilsMessengerList.push_back(callbackListEntry);
     }
 
+	if (functionPointersInitialized == false)
+	{
+		initFunctionPointers(vkInstanceHandle);
+		functionPointersInitialized = true;
+	}
+
 
     VkDebugUtilsMessengerEXT vkDebugUtilsMessengerEXT = nullptr;
 
-    VkResult result = CreateDebugUtilsMessengerEXT(
+    VkResult result = vkCreateDebugUtilsMessengerEXTFunc(
             vkInstanceHandle,
             &vkDebugUtilsMessengerCreateInfoEXT,
             allocatorCallbacks,
