@@ -24,6 +24,8 @@
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
+extern PFN_vkSetDebugUtilsObjectTagEXT vkSetDebugUtilsObjectTagEXTFunc;
+
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkSetDebugUtilsObjectTagEXT
@@ -49,7 +51,9 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return nullptr;
     }
 
-    VkResult result = vkSetDebugUtilsObjectTagEXT(vkDeviceHandle, &vkDebugUtilsObjectTagInfoEXT);
+//    LOGINFO(env, "%s", "CCCCCC");
+    VkResult result = vkSetDebugUtilsObjectTagEXTFunc(vkDeviceHandle, &vkDebugUtilsObjectTagInfoEXT);
+//    LOGINFO(env, "%s", "DDDDDD");
 
     jvulkan::freeMemory(&memoryToFree);
 

@@ -20,12 +20,12 @@
  *      Author: Douglas Kaip
  */
 
-#include "../headers/slf4j.hh"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
-    jobject createVkDebugUtilsObjectNameInfoEXTCollection(JNIEnv *env, int objectCount, const VkDebugUtilsObjectNameInfoEXT objects[])
+	jobject createVkDebugUtilsObjectNameInfoEXTCollection(JNIEnv *env, int objectCount, const VkDebugUtilsObjectNameInfoEXT objects[])
     {
     	jclass linkedListClass = env->FindClass("java/util/LinkedList");
         if (env->ExceptionOccurred())
@@ -55,10 +55,10 @@ namespace jvulkan
             return nullptr;
         }
 
-    	for(int i = 0; i < objectCount; i++)
+        for(int i = 0; i < objectCount; i++)
     	{
     		jobject vkDebugUtilsObjectNameInfoEXT =
-    				createVkDebugUtilsObjectNameInfoEXT(env, &objects[i]);
+					createVkDebugUtilsObjectNameInfoEXT(env, &objects[i]);
 
     		env->CallVoidMethod(jLinkedList, addMethodId, vkDebugUtilsObjectNameInfoEXT);
             if (env->ExceptionOccurred())

@@ -25,6 +25,7 @@
 #include <stdlib.h>
 
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -120,19 +121,6 @@ namespace jvulkan
             if (addResult == false)
             {
                 std::cout << "ERROR: could not add VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT to EnumSet" << std::endl;
-                return nullptr;
-            }
-        }
-
-        if (messageTypes & VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                std::cout << "ERROR: could not add VK_DEBUG_UTILS_MESSAGE_TYPE_FLAG_BITS_MAX_ENUM_EXT to EnumSet" << std::endl;
                 return nullptr;
             }
         }

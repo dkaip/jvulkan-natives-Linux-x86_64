@@ -38,21 +38,15 @@ namespace jvulkan
             jobject                     javaUserData;
 
         public:
-            DebugUtilsMessengerCallbackListEntry(unsigned long long the1stKey, jobject objectReference, jobject userData)
-			{
-				this->the1stKey = the1stKey;
-				this->the2ndKey = nullptr;
-				this->objectReference = objectReference;
-				this->javaUserData = userData;
-			}
-            virtual ~DebugUtilsMessengerCallbackListEntry();
+            DebugUtilsMessengerCallbackListEntry(unsigned long long the1stKey, jobject objectReference, jobject userData);
+            virtual ~DebugUtilsMessengerCallbackListEntry() {}
 
             unsigned long long getThe1stKey() {return the1stKey;}
             VkDebugUtilsMessengerEXT getThe2ndKey() {return the2ndKey;}
             jobject   getObjectReference() {return objectReference;}
             jobject   getJavaUserData() {return javaUserData;}
 
-            void      setgetThe2ndKey(VkDebugUtilsMessengerEXT the2ndKey) {this->the2ndKey = the2ndKey;}
+            void      setThe2ndKey(VkDebugUtilsMessengerEXT the2ndKey) {this->the2ndKey = the2ndKey;}
 
     };
 } /* namespace jvulkan */

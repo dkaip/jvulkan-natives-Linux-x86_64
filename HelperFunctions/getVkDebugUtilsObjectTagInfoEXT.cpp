@@ -115,17 +115,17 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getTagName", "()J;");
+        methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getTagName", "()J");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error trying to get getObjectName methodId");
+        	LOGERROR(env, "%s", "Error trying to get getTagName methodId");
             return;
         }
 
         uint64_t tagName = (uint64_t)env->CallLongMethod(jVkDebugUtilsObjectTagInfoEXTObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallObjectMethod for objectName");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod for tagName");
             return;
         }
 

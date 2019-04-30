@@ -193,26 +193,6 @@ namespace jvulkan
             return nullptr;
         }
 
-
-
-//		////////////////////////////////////////////////////////////////////////
-//        jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagBitsEXT");
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagBitsEXT\"");
-//            return nullptr;
-//        }
-//
-//        methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagBitsEXT;");
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could not find static method fromValue");
-//            return nullptr;
-//        }
-//
-//        jobject theObject =  env->CallStaticObjectMethod(theClass, methodId, 0);
-
-
         return vkDebugUtilsMessengerCallbackDataEXTObject;
     }
 }

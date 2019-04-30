@@ -20,102 +20,97 @@
  *      Author: Douglas Kaip
  */
 
-
-//#include <cstring>
-//#include <iostream>
-//#include <stdlib.h>
-
-#include "../headers/slf4j.hh"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
-    jobject createVkDebugUtilsObjectNameInfoEXT(JNIEnv *env, VkDebugUtilsObjectNameInfoEXT *objectNameInfo)
-    {
-        // Locate the VkDebugUtilsMessengerCallbackDataEXT class
-        jclass vkDebugUtilsObjectNameInfoEXTclass = env->FindClass(
-        		"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT");
+	jobject createVkDebugUtilsObjectNameInfoEXT(JNIEnv *env, const VkDebugUtilsObjectNameInfoEXT *objectNameInfo)
+	{
+		// Locate the VkDebugUtilsMessengerCallbackDataEXT class
+		jclass vkDebugUtilsObjectNameInfoEXTclass = env->FindClass(
+				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT");
 
-        // Locate the constructor
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "<init>", "()V");
+		// Locate the constructor
+		jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "<init>", "()V");
 
-        // Create the Java vkDebugUtilsObjectNameInfoEXTObject object
-        jobject vkDebugUtilsObjectNameInfoEXTObject =
-        		env->NewObject(vkDebugUtilsObjectNameInfoEXTclass, methodId);
+		// Create the Java vkDebugUtilsObjectNameInfoEXTObject object
+		jobject vkDebugUtilsObjectNameInfoEXTObject =
+				env->NewObject(vkDebugUtilsObjectNameInfoEXTclass, methodId);
 
 		////////////////////////////////////////////////////////////////////////
-        jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType\"");
-            return nullptr;
-        }
+		jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType\"");
+			return nullptr;
+		}
 
-        methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method fromValue");
-            return nullptr;
-        }
+		methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Could not find static method fromValue");
+			return nullptr;
+		}
 
-        jobject theObject =  env->CallStaticObjectMethod(theClass, methodId, 0);
+		jobject theObject =  env->CallStaticObjectMethod(theClass, methodId, objectNameInfo->objectType);
 
-        methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;)V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying to get methodId of setObjectType");
-            return nullptr;
-        }
+		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;)V");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectType");
+			return nullptr;
+		}
 
-        env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, theObject);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying execute methodId of setObjectType");
-            return nullptr;
-        }
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, theObject);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying execute methodId of setObjectType");
+			return nullptr;
+		}
 
-        ////////////////////////////////////////////////////////////////////////
-        jobject jObjectHandle = createVulkanHandle(
-        		env,
+		////////////////////////////////////////////////////////////////////////
+		jobject jObjectHandle = createVulkanHandle(
+				env,
 				"com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle",
 				(void *)objectNameInfo->objectHandle);
 
-        methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectHandle", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;)V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying to get methodId of setObjectHandle");
-            return nullptr;
-        }
+		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectHandle", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;)V");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectHandle");
+			return nullptr;
+		}
 
-        env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, jObjectHandle);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying execute methodId of setObjectHandle");
-            return nullptr;
-        }
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, jObjectHandle);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying execute methodId of setObjectHandle");
+			return nullptr;
+		}
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectName", "(Ljava/lang/String;)V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying to get methodId of setObjectName");
-            return nullptr;
-        }
+		////////////////////////////////////////////////////////////////////////
+		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectName", "(Ljava/lang/String;)V");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectName");
+			return nullptr;
+		}
 
-        jstring objectNameString = env->NewStringUTF(objectNameInfo->pObjectName);
+		jstring objectNameString = env->NewStringUTF(objectNameInfo->pObjectName);
 
-        env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, objectNameString);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Failed trying execute to get methodId of setObjectName");
-            return nullptr;
-        }
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, objectNameString);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying execute to get methodId of setObjectName");
+			return nullptr;
+		}
 
-        env->DeleteLocalRef(objectNameString);
+		env->DeleteLocalRef(objectNameString);
 
 
-        return vkDebugUtilsObjectNameInfoEXTObject;
-    }
+		return vkDebugUtilsObjectNameInfoEXTObject;
+	}
 }
 
 

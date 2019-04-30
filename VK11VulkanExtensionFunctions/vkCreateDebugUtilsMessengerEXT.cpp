@@ -20,16 +20,17 @@
  *      Author: Douglas Kaip
  */
 
-#include <iostream>
 #include <atomic>
 #include <vector>
 #include <mutex>
+#include <stdbool.h>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 #include "DebugUtilsMessengerCallbackListEntry.h"
+#include "slf4j.hh"
 
 using namespace jvulkan;
 
@@ -39,6 +40,12 @@ std::mutex g_vkCreateDebugUtilsMessengerListMutex;
 
 extern JavaVM *l_JavaVM;
 extern std::mutex l_JavaVM_Mutex;
+
+PFN_vkCmdBeginDebugUtilsLabelEXT 	vkCmdBeginDebugUtilsLabelEXTFunc;
+PFN_vkCmdEndDebugUtilsLabelEXT 		vkCmdEndDebugUtilsLabelEXTFunc;
+PFN_vkCmdInsertDebugUtilsLabelEXT 	vkCmdInsertDebugUtilsLabelEXTFunc;
+PFN_vkSetDebugUtilsObjectNameEXT 	vkSetDebugUtilsObjectNameEXTFunc;
+PFN_vkSetDebugUtilsObjectTagEXT 	vkSetDebugUtilsObjectTagEXTFunc;
 
 static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
 	    VkDebugUtilsMessageSeverityFlagBitsEXT           messageSeverity,
@@ -53,6 +60,26 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
     unsigned long int entryNumber = 0;
     bool foundIt = false;
 
+    JNIEnv *localEnv;
+    int envStatus = l_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
+    if (envStatus == JNI_EDETACHED)
+    {
+        if (l_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
+        {
+            cout << "Failed to attach" << endl;
+        }
+    }
+    else if (envStatus == JNI_OK)
+    {
+        ;
+    }
+    else if (envStatus == JNI_EVERSION)
+    {
+        cout << "JNI_VERSION_1_6 not supported." << endl;
+        return (VkBool32)false;
+    }
+
+    LOGWARN(localEnv, "%s", "A debug utils messenger callback has been triggered");
     /*
      * Lock the debugCallbackList vector so that we may
      * work with it.
@@ -74,31 +101,13 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
 
     if (foundIt == false)
     {
+        LOGERROR(localEnv, "We were not able to find the stored callback information on the g_vkCreateDebugUtilsMessengerList for key:%lld", the1stKey);
         //TODO
         /*
          * We have a problem here...We cannot find the callback information
          * we need.
          */
         throw 99999;
-    }
-
-    JNIEnv *localEnv;
-    int envStatus = l_JavaVM->GetEnv((void **)&localEnv, JNI_VERSION_1_6);
-    if (envStatus == JNI_EDETACHED)
-    {
-        if (l_JavaVM->AttachCurrentThread((void **)&localEnv, nullptr) != 0)
-        {
-            cout << "Failed to attach" << endl;
-        }
-    }
-    else if (envStatus == JNI_OK)
-    {
-        ;
-    }
-    else if (envStatus == JNI_EVERSION)
-    {
-        cout << "JNI_VERSION_1_6 not supported." << endl;
-        return (VkBool32)false;
     }
 
     /*
@@ -128,7 +137,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
     		"(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;Ljava/util/EnumSet;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsMessengerCallbackDataEXT;Ljava/lang/Object;)Z");
     if (localEnv->ExceptionOccurred())
     {
-        cout << "oops" << endl;
+    	LOGERROR(localEnv, "%s", "unable to find the invoke callback");
         return false;
     }
 
@@ -154,10 +163,34 @@ static VkResult CreateDebugUtilsMessengerEXT(
         const VkAllocationCallbacks* pAllocator,
 		VkDebugUtilsMessengerEXT* pMessenger)
 {
-    auto func = (PFN_vkCreateDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
-    if (func != nullptr) {
+	/*
+	 * Oh, this is ugliness of the first order...
+	 *
+	 * Basically, not all of the Vulkan function are statically available.
+	 * The following two, functions should not be used
+	 * unless a DebugUtilsMessenger is set up first...so we are getting
+	 * their addresses here (since we have a VkInstance) so they will be
+	 * available later when they may be needed.
+	 */
+	// TODO this may need some rework in the case where there are multiple VkInstances
+	vkCmdBeginDebugUtilsLabelEXTFunc =
+			(PFN_vkCmdBeginDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdBeginDebugUtilsLabelEXT");
+	vkCmdEndDebugUtilsLabelEXTFunc  =
+			(PFN_vkCmdEndDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
+	vkCmdInsertDebugUtilsLabelEXTFunc  =
+			(PFN_vkCmdInsertDebugUtilsLabelEXT)vkGetInstanceProcAddr(instance, "vkCmdInsertDebugUtilsLabelEXT");
+	vkSetDebugUtilsObjectNameEXTFunc =
+			(PFN_vkSetDebugUtilsObjectNameEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
+	vkSetDebugUtilsObjectTagEXTFunc  =
+			(PFN_vkSetDebugUtilsObjectTagEXT)vkGetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
+
+    auto func = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+    if (func != nullptr)
+    {
         return func(instance, pCreateInfo, pAllocator, pMessenger);
-    } else {
+    }
+    else
+    {
         return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 }
@@ -182,9 +215,9 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 			jint returnValue = env->GetJavaVM(&l_JavaVM);
 			if (returnValue < 0)
 			{
-				cout << "ERROR: Could not get a pointer to the JVM." << endl;
+				LOGERROR(env, "%s", "Could not get pointer to the JVM");
 				// TODO need to throw an exception here.
-				jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+				return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 			}
 		}
     }
@@ -192,7 +225,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
     {
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Failed trying to get the value of jVkInstance");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
@@ -208,22 +242,30 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jvulkan::getVkDebugUtilsMessengerCreateInfoEXT(env, jVkDebugUtilsMessengerCreateInfoEXT, &vkDebugUtilsMessengerCreateInfoEXT, &memoryToFree);
     if (env->ExceptionOccurred())
     {
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Failed on call to getVkDebugUtilsMessengerCreateInfoEXT");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jclass vkDebugUtilsMessengerCreateInfoEXTClass = env->GetObjectClass(jVkDebugUtilsMessengerCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Failed trying to get the object class for jVkDebugUtilsMessengerCreateInfoEXT");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID methodId = env->GetMethodID(vkDebugUtilsMessengerCreateInfoEXTClass, "getCallbackObject", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/VkDebugUtilsMessengerCallbackEXT;");
     if (env->ExceptionOccurred())
     {
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Failed trying to get the methodId for getCallbackObject");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject localCallbackObject = env->CallObjectMethod(jVkDebugUtilsMessengerCreateInfoEXT, methodId);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying CallObjectMethod for callback object");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
     // Need to get a global ref because this will be used later in a callback.
     jobject globalCallbackObject = reinterpret_cast<jobject>(env->NewGlobalRef(localCallbackObject));
@@ -231,10 +273,16 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     methodId = env->GetMethodID(vkDebugUtilsMessengerCreateInfoEXTClass, "getUserData", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
     {
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Failed trying to get the methodId for getUserData");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject localUserData = env->CallObjectMethod(jVkDebugUtilsMessengerCreateInfoEXT, methodId);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying CallObjectMethod for userData object");
+    	return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
     // Need to get a global ref because this will be used later in a callback.
     jobject globalUserData = reinterpret_cast<jobject>(env->NewGlobalRef(localUserData));
@@ -256,9 +304,30 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
      */
     vkDebugUtilsMessengerCreateInfoEXT.pfnUserCallback = messengerCallback;
 
+    {
+    	/*
+    	 * Okay, this one is a little different that the other debug stuff.  In
+    	 * this case, once the call is made to CreateDebugUtilsMessengerEXT
+    	 * below one or more callbacks may immediately be triggered even before
+    	 * the call completes.  If we don't have an entry on the g_vkCreateDebugUtilsMessengerList
+    	 * we will have issues.  So, what are we going to do?
+    	 *
+    	 * We are going to add the entry now, even though we do not have the
+    	 * assigned value for vkDebugUtilsMessengerEXT yet.  Since the value of
+    	 * vkDebugUtilsMessengerEXT is only used by the vkDestroyDebugUtilsMessengerEXT
+    	 * function we will replace the list entry with a corrected on once the
+    	 * call to CreateDebugUtilsMessengerEXT returns successfully.
+    	 */
+		jvulkan::DebugUtilsMessengerCallbackListEntry *callbackListEntry =
+			new jvulkan::DebugUtilsMessengerCallbackListEntry(key, globalCallbackObject, globalUserData);
 
-    VkDebugUtilsMessengerEXT vkDebugUtilsMessengerEXT;
+		std::lock_guard<std::mutex> lock(g_vkCreateDebugUtilsMessengerListMutex);
 
+		g_vkCreateDebugUtilsMessengerList.push_back(callbackListEntry);
+    }
+
+
+    VkDebugUtilsMessengerEXT vkDebugUtilsMessengerEXT = nullptr;
 
     VkResult result = CreateDebugUtilsMessengerEXT(
             vkInstanceHandle,
@@ -270,22 +339,39 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     {
     	/*
     	 * We are using a unique number as the first key and the value of the
-    	 * returned vkDebugReportCallbackEXT handle as the second search key.
-    	 * This is because we do not have the value of vkDebugReportCallbackEXT
-    	 * until after the call to CreateDebugReportCallbackEXT.
+    	 * returned VkDebugUtilsMessengerEXT handle as the second search key.
+    	 * This is because we do not have the value of vkDebugUtilsMessengerEXT
+    	 * until after the call to CreateDebugUtilsMessengerEXT.
     	 *
     	 * When a callback occurs we will look up the unique number that was
     	 * saved in the userData field in order to get information needed to
     	 * execute the callback.
     	 */
-
-    	// FIXME This is probably only okay if the pointers are 64-bit
-        jvulkan::DebugUtilsMessengerCallbackListEntry *callbackListEntry =
-            new jvulkan::DebugUtilsMessengerCallbackListEntry(key, vkDebugUtilsMessengerEXT, globalCallbackObject, globalUserData);
-
         std::lock_guard<std::mutex> lock(g_vkCreateDebugUtilsMessengerListMutex);
 
-        g_vkCreateDebugUtilsMessengerList.push_back(callbackListEntry);
+        bool foundIt = false;
+        for (int entryNumber = 0; entryNumber < g_vkCreateDebugUtilsMessengerList.size(); entryNumber++)
+        {
+        	if (key == g_vkCreateDebugUtilsMessengerList[entryNumber]->getThe1stKey())
+            {
+        		/*
+        		 * We found the entry we are looking for so we need to update
+        		 * its 2ndKey value with the proper information.
+        		 */
+        		g_vkCreateDebugUtilsMessengerList[entryNumber]->setThe2ndKey(vkDebugUtilsMessengerEXT);
+        		foundIt = true;
+        		break;
+            }
+        }
+
+        if (foundIt == false)
+        {
+        	LOGERROR(env, "We did not find the entry for key %lld on the g_vkCreateDebugUtilsMessengerList", key);
+        }
+    }
+    else
+    {
+    	LOGERROR(env, "Failed calling CreateDebugUtilsMessengerEXT code is:%d", result);
     }
 
     /*

@@ -27,6 +27,7 @@ using namespace std;
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
 
+extern PFN_vkCmdInsertDebugUtilsLabelEXT 	vkCmdInsertDebugUtilsLabelEXTFunc;
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdInsertDebugUtilsLabelEXT
@@ -50,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         return;
     }
 
-    vkCmdInsertDebugUtilsLabelEXT(vkCommandBufferHandle, &vkDebugUtilsLabelEXT);
+    vkCmdInsertDebugUtilsLabelEXTFunc(vkCommandBufferHandle, &vkDebugUtilsLabelEXT);
 
     jvulkan::freeMemory(&memoryToFree);
 

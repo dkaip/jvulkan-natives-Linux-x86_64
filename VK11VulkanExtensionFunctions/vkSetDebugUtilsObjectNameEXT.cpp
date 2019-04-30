@@ -20,9 +20,11 @@
  *      Author: Douglas Kaip
  */
 
-#include "../headers/slf4j.hh"
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
+
+extern PFN_vkSetDebugUtilsObjectNameEXT vkSetDebugUtilsObjectNameEXTFunc;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -49,7 +51,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return nullptr;
     }
 
-    VkResult result = vkSetDebugUtilsObjectNameEXT(vkDeviceHandle, &vkDebugUtilsObjectNameInfoEXT);
+//    LOGINFO(env, "%lx:%d:%lx:%s", vkDeviceHandle, vkDebugUtilsObjectNameInfoEXT.objectType, vkDebugUtilsObjectNameInfoEXT.objectHandle, vkDebugUtilsObjectNameInfoEXT.pObjectName);
+//    LOGINFO(env, "%s", "AAAAAA");
+    VkResult result = vkSetDebugUtilsObjectNameEXTFunc(vkDeviceHandle, &vkDebugUtilsObjectNameInfoEXT);
+//    LOGINFO(env, "%s", "BBBBBB");
 
     jvulkan::freeMemory(&memoryToFree);
 

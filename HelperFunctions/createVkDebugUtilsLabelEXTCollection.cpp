@@ -20,12 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
-#include "../headers/slf4j.hh"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
