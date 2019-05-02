@@ -51,9 +51,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return nullptr;
     }
 
-//    LOGINFO(env, "%s", "CCCCCC");
     VkResult result = vkSetDebugUtilsObjectTagEXTFunc(vkDeviceHandle, &vkDebugUtilsObjectTagInfoEXT);
-//    LOGINFO(env, "%s", "DDDDDD");
 
     jvulkan::freeMemory(&memoryToFree);
 
