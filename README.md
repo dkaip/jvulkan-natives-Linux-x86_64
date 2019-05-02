@@ -16,7 +16,7 @@ Additionally you may just be able to download it from [freedesktop.org](https://
 ## Get the code
 Use the <code>git clone</code> command to get the code. 
 
-<code>git https://github.com/dkaip/jvulkan-natives-Linux-x86_64 jvulkan-natives-Linux-x86_64</code> 
+<code>git clone https://github.com/dkaip/jvulkan-natives-Linux-x86_64 jvulkan-natives-Linux-x86_64</code> 
 
 This will create a <code>jvulkan-natives-Linux-x86_64</code> directory in your current directory
 
