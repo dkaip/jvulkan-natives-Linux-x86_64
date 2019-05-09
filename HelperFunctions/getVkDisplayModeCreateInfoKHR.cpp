@@ -1,0 +1,109 @@
+/*
+ * Copyright 2019 Douglas Kaip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*
+ * getVkDisplayModeCreateInfoKHR.cpp
+ *
+ *  Created on: May 8, 2019
+ *      Author: Douglas Kaip
+ */
+
+#include "HelperFunctions.hh"
+#include "slf4j.hh"
+
+namespace jvulkan
+{
+    void getVkDisplayModeCreateInfoKHR(
+            JNIEnv *env,
+            jobject jVkDisplayModeCreateInfoKHRObject,
+			VkDisplayModeCreateInfoKHR *vkDisplayModeCreateInfoKHR,
+            std::vector<void *> *memoryToFree)
+    {
+        jclass vkDisplayModeCreateInfoKHRClass = env->GetObjectClass(jVkDisplayModeCreateInfoKHRObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get the class for jVkDisplayModeCreateInfoKHRObject");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        int sTypeValue = getSTypeAsInt(env, jVkDisplayModeCreateInfoKHRObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "getSTypeAsInt failed");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        jmethodID methodId = env->GetMethodID(vkDisplayModeCreateInfoKHRClass, "getpNext", "()J");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get method id for getpNext");
+            return;
+        }
+
+        jlong pNext = env->CallLongMethod(jVkDisplayModeCreateInfoKHRObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "CallLongMethod failed for getpNext");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkDisplayModeCreateInfoKHRClass, "getFlags", "()Ljava/util/EnumSet;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get method id for getFlags");
+            return;
+        }
+
+        jobject flagsObject = env->CallObjectMethod(jVkDisplayModeCreateInfoKHRObject, methodId);
+        VkDisplayModeCreateFlagsKHR flags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulka/VulkanExtensions/VK11/Enums/VkDisplayModeCreateFlagBitsKHR");
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkDisplayModeCreateInfoKHRClass, "getParameters", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get method id for getParameters");
+            return;
+        }
+
+        jobject jVkDisplayModeParametersKHR = env->CallObjectMethod(jVkDisplayModeCreateInfoKHRObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "CallObjectMethod failed for getParameters");
+            return;
+        }
+
+        VkDisplayModeParametersKHR *vkDisplayModeParametersKHR = (VkDisplayModeParametersKHR *)calloc(1, sizeof(VkDisplayModeParametersKHR));
+        memoryToFree->push_back(*vkDisplayModeParametersKHR);
+
+        jvulkan::getVkDisplayModeParametersKHR(env, jVkDisplayModeParametersKHR, &vkDisplayModeCreateInfoKHR, &memoryToFree);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "getVkDisplayModeParametersKHR failed for jVkDisplayModeParametersKHR");
+            return;
+        }
+
+
+        vkDisplayModeCreateInfoKHR->sType = (VkStructureType)sTypeValue;
+        vkDisplayModeCreateInfoKHR->pNext = (void *)pNext;
+        vkDisplayModeCreateInfoKHR->flags = flags;
+        vkDisplayModeCreateInfoKHR->parameters = vkDisplayModeParametersKHR;
+    }
+}
