@@ -980,6 +980,11 @@ namespace jvulkan
 			VkDisplayModeParametersKHR *vkDisplayModeParametersKHR,
             std::vector<void *> *memoryToFree);
 
+    void getVkDisplaySurfaceCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkDisplaySurfaceCreateInfoKHRObject,
+			VkDisplaySurfaceCreateInfoKHR *vkDisplaySurfaceCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

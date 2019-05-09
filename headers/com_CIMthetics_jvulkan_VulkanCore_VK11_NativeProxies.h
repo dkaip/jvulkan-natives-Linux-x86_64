@@ -521,6 +521,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkCreateDisplayPlaneSurfaceKHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/CreateInfos/VkDisplaySurfaceCreateInfoKHR;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateDisplayPlaneSurfaceKHR
+  (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateFence
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkFenceCreateInfo;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
