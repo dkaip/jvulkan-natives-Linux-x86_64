@@ -20,13 +20,8 @@
  *      Author: dkaip
  */
 
-
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "HelperFunctions.hh"
-
+#include "slf4j.hh"
 
 using namespace std;
 
@@ -40,51 +35,56 @@ namespace jvulkan
 		jclass setClass = env->FindClass("java/util/Set");
 		if (env->ExceptionOccurred())
 		{
-			cout << "Error finding EnumSet class ... returning" << endl;
+			LOGERROR(env, "Error looking up class:%s", "java/util/Set");
 			return -1;
 		}
 
 		jmethodID iteratorMethodId = env->GetMethodID(setClass, "iterator", "()Ljava/util/Iterator;");
 		if (env->ExceptionOccurred())
 		{
+			LOGERROR(env, "%s", "Could not find method id for iterator");
 			return -1;
 		}
 
 		jobject iteratorObject = env->CallObjectMethod(enumSetObject, iteratorMethodId);
 		if (env->ExceptionOccurred())
 		{
+			LOGERROR(env, "%s", "CallObjectMethod to get the iterator");
 			return -1;
 		}
 
 		jclass iteratorClass = env->GetObjectClass(iteratorObject);
 		if (env->ExceptionOccurred())
 		{
+			LOGERROR(env, "%s", "Failed trying to get the class for the iterator object");
 			return -1;
 		}
 
 		jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
 		if (env->ExceptionOccurred())
 		{
+			LOGERROR(env, "%s", "Could not find method id for hasNext");
 			return -1;
 		}
 
 		jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
 		if (env->ExceptionOccurred())
 		{
+			LOGERROR(env, "%s", "Could not find method id for next");
 			return -1;
 		}
 
 		jclass enumClass = env->FindClass(enumClassName);
 		if (env->ExceptionOccurred())
 		{
-			cout << "Error finding Enum class name " << enumClassName << " ... returning" << endl;
+			LOGERROR(env, "Error looking up class:%s", enumClassName);
 			return -1;
 		}
 
 		jmethodID valueOfMethod = env->GetMethodID(enumClass, "valueOf", "()I");
 		if (env->ExceptionOccurred())
 		{
-			cout << "ERROR finding valueOf method with signature " << "()I" << endl;
+			LOGERROR(env, "%s", "Could not find method id for valueOf");
 			return -1;
 		}
 
@@ -94,6 +94,7 @@ namespace jvulkan
 			jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
 			if (env->ExceptionOccurred())
 			{
+				LOGERROR(env, "%s", "CallBooleanMethod method failed");
 				result = -1;
 				break;
 			}
@@ -106,6 +107,7 @@ namespace jvulkan
 			jobject enumObject = env->CallObjectMethod(iteratorObject, nextMethod);
 			if (env->ExceptionOccurred())
 			{
+				LOGERROR(env, "%s", "CallObjectMethod method failed");
 				result = -1;
 				break;
 			}
@@ -113,6 +115,7 @@ namespace jvulkan
 			jint value = env->CallIntMethod(enumObject, valueOfMethod);
 			if (env->ExceptionOccurred())
 			{
+				LOGERROR(env, "%s", "CallIntMethod method failed");
 				result = -1;
 				break;
 			}
