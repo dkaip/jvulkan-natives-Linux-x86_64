@@ -27,7 +27,7 @@ namespace jvulkan
 {
 void getVkDisplayModeParametersKHR(
         JNIEnv *env,
-        jobject jVkDisplayModeParametersKHRObject,
+        const jobject jVkDisplayModeParametersKHRObject,
 		VkDisplayModeParametersKHR *vkDisplayModeParametersKHR,
         std::vector<void *> *memoryToFree)
     {
@@ -61,14 +61,14 @@ void getVkDisplayModeParametersKHR(
                 memoryToFree);
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkFramebufferCreateInfoClass, "getRefreshRate", "()I");
+        methodId = env->GetMethodID(vkDisplayModeParametersKHRClass, "getRefreshRate", "()I");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getRefreshRate");
             return;
         }
 
-        jint refreshRate = env->CallIntMethod(jVkFramebufferCreateInfoObject, methodId);
+        jint refreshRate = env->CallIntMethod(jVkDisplayModeParametersKHRObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "CallIntMethod failed for getRefreshRate");

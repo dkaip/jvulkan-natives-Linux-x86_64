@@ -117,5 +117,3 @@ namespace jvulkan
         } while(true);
     }
 }
-
-

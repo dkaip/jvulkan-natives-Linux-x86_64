@@ -948,6 +948,38 @@ namespace jvulkan
         std::vector<void *> *memoryToFree);
 
 	void logClassName(JNIEnv *env, const jobject theObject);
+
+    void getVkDescriptorUpdateTemplateCreateInfo(
+            JNIEnv *env,
+            jobject jVkDescriptorUpdateTemplateCreateInfoObject,
+			VkDescriptorUpdateTemplateCreateInfo *vkDescriptorUpdateTemplateCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+	void getVkDescriptorUpdateTemplateEntry(
+        JNIEnv *env,
+        const jobject jVkDescriptorUpdateTemplateEntryObject,
+		VkDescriptorUpdateTemplateEntry *vkDescriptorUpdateTemplateEntry,
+        std::vector<void *> *memoryToFree);
+
+    void getVkDescriptorUpdateTemplateEntryCollection(
+            JNIEnv *env,
+            const jobject jVkDescriptorUpdateTemplateEntryCollectionObject,
+			VkDescriptorUpdateTemplateEntry **vkDescriptorUpdateTemplateEntries,
+            int *numberOfVkDescriptorUpdateTemplateEntries,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDisplayModeCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkDisplayModeCreateInfoKHRObject,
+			VkDisplayModeCreateInfoKHR *vkDisplayModeCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDisplayModeParametersKHR(
+            JNIEnv *env,
+            const jobject jVkDisplayModeParametersKHRObject,
+			VkDisplayModeParametersKHR *vkDisplayModeParametersKHR,
+            std::vector<void *> *memoryToFree);
+
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

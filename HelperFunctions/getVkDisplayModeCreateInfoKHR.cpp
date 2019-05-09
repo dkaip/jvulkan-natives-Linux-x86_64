@@ -23,11 +23,13 @@
 #include "HelperFunctions.hh"
 #include "slf4j.hh"
 
+using namespace std;
+
 namespace jvulkan
 {
     void getVkDisplayModeCreateInfoKHR(
             JNIEnv *env,
-            jobject jVkDisplayModeCreateInfoKHRObject,
+            const jobject jVkDisplayModeCreateInfoKHRObject,
 			VkDisplayModeCreateInfoKHR *vkDisplayModeCreateInfoKHR,
             std::vector<void *> *memoryToFree)
     {
@@ -91,9 +93,9 @@ namespace jvulkan
         }
 
         VkDisplayModeParametersKHR *vkDisplayModeParametersKHR = (VkDisplayModeParametersKHR *)calloc(1, sizeof(VkDisplayModeParametersKHR));
-        memoryToFree->push_back(*vkDisplayModeParametersKHR);
+        memoryToFree->push_back(vkDisplayModeParametersKHR);
 
-        jvulkan::getVkDisplayModeParametersKHR(env, jVkDisplayModeParametersKHR, &vkDisplayModeCreateInfoKHR, &memoryToFree);
+        jvulkan::getVkDisplayModeParametersKHR(env, jVkDisplayModeParametersKHR, vkDisplayModeParametersKHR, memoryToFree);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "getVkDisplayModeParametersKHR failed for jVkDisplayModeParametersKHR");
@@ -104,6 +106,8 @@ namespace jvulkan
         vkDisplayModeCreateInfoKHR->sType = (VkStructureType)sTypeValue;
         vkDisplayModeCreateInfoKHR->pNext = (void *)pNext;
         vkDisplayModeCreateInfoKHR->flags = flags;
-        vkDisplayModeCreateInfoKHR->parameters = vkDisplayModeParametersKHR;
+        vkDisplayModeCreateInfoKHR->parameters.visibleRegion.height = vkDisplayModeParametersKHR->visibleRegion.height;
+        vkDisplayModeCreateInfoKHR->parameters.visibleRegion.width = vkDisplayModeParametersKHR->visibleRegion.width;
+        vkDisplayModeCreateInfoKHR->parameters.refreshRate = vkDisplayModeParametersKHR->refreshRate;
     }
 }
