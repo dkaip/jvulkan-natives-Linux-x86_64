@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -41,20 +38,24 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getpNext", "()J");
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkGraphicsPipelineCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkGraphicsPipelineCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
             return;

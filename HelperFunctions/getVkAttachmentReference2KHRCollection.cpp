@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
 
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -41,20 +39,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkAttachmentReference2KHRObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkAttachmentReference2KHRObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getAttachment", "()I");
+        jmethodID methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getAttachment", "()I");
         if (env->ExceptionOccurred())
         {
             return;

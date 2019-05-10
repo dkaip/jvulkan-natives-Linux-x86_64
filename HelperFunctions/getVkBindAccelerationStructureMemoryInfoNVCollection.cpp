@@ -20,11 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -48,20 +45,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkBindAccelerationStructureMemoryInfoNVObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkBindAccelerationStructureMemoryInfoNVObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getAccelerationStructure", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNV;");
+        jmethodID methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getAccelerationStructure", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNV;");
         if (env->ExceptionOccurred())
         {
             return;

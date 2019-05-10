@@ -31,13 +31,13 @@
 
 namespace jvulkan
 {
-    void getVkInstanceCreateInfo(
-            JNIEnv *env,
-            const jobject jInstanceCreateInfo,
-            VkInstanceCreateInfo *instanceCreateInfo,
-            VkApplicationInfo *applicationInfo,
-            std::vector<void *> *memoryToFree);
-
+//    void getVkInstanceCreateInfo(
+//            JNIEnv *env,
+//            const jobject jInstanceCreateInfo,
+//            VkInstanceCreateInfo *instanceCreateInfo,
+//            VkApplicationInfo *applicationInfo,
+//            std::vector<void *> *memoryToFree);
+//
     void getAllocatorCallbacks(
             JNIEnv *env,
             const jobject jAlternateAllocator,
@@ -984,6 +984,29 @@ namespace jvulkan
             JNIEnv *env,
             const jobject jVkDisplaySurfaceCreateInfoKHRObject,
 			VkDisplaySurfaceCreateInfoKHR *vkDisplaySurfaceCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+	void getVkInstanceCreateInfo(
+        JNIEnv *env,
+        const jobject jVkInstanceCreateInfoObject,
+		VkInstanceCreateInfo *vkInstanceCreateInfo,
+        std::vector<void *> *memoryToFree);
+
+	void getVkApplicationInfo(
+        JNIEnv *env,
+        const jobject jVkApplicationInfoObject,
+		VkApplicationInfo *vkApplicationInfo,
+        std::vector<void *> *memoryToFree);
+
+	jobject getpNext(
+        JNIEnv *env,
+        const jobject jVulkanCreateInfoStructureObject);
+
+    void getStringCollection(
+            JNIEnv *env,
+            jobject jCollectionOfStrings,
+            char ***stringArrayResult,
+            int *numberOfStrings,
             std::vector<void *> *memoryToFree);
 }
 

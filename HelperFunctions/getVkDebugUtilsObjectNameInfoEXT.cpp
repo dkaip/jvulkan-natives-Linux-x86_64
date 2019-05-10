@@ -47,22 +47,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkDebugUtilsObjectNameInfoEXTObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error trying to get getpNext methodId");
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkDebugUtilsObjectNameInfoEXTObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
-        	LOGERROR(env, "%s", "Error calling CallLongMethod for pNext");
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
+        jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getObjectType methodId");

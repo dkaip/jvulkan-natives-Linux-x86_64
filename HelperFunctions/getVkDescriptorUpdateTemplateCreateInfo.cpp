@@ -45,22 +45,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkDescriptorUpdateTemplateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error trying to get getpNext methodId");
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkDescriptorUpdateTemplateCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
-        	LOGERROR(env, "%s", "Error calling CallLongMethod for getpNext");
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getFlags methodId");

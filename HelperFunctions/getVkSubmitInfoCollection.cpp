@@ -41,21 +41,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkSubmitInfoClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find methodId for getpNext");
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkSubmitInfoObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSubmitInfoClass, "getWaitSemaphores", "()Ljava/util/Collection;");
+        jmethodID methodId = env->GetMethodID(vkSubmitInfoClass, "getWaitSemaphores", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find methodId for getWaitSemaphores");

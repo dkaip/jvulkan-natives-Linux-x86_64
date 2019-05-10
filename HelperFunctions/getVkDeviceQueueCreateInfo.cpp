@@ -104,13 +104,13 @@ namespace jvulkan
 					break;
 				}
 
-				getpNextMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getpNext", "()J");
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Could not get methodId for getpNext");
-					break;
-				}
-
+//				getpNextMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getpNext", "()J");
+//				if (env->ExceptionOccurred())
+//				{
+//					LOGERROR(env, "%s", "Could not get methodId for getpNext");
+//					break;
+//				}
+//
 				getFlagsMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
 				if (env->ExceptionOccurred())
 				{
@@ -147,13 +147,28 @@ namespace jvulkan
 				return;
 			}
 
-			jlong pNext = env->CallLongMethod(vkDeviceQueueCreateInfoObject, getpNextMethodId);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallLongMethod for pNext");
-				break;
-			}
+	        jobject pNextObject = getpNext(env, vkDeviceQueueCreateInfoObject);
+	        if (env->ExceptionOccurred())
+	        {
+	        	LOGERROR(env, "%s", "Call to getpNext failed.");
+	            return;
+	        }
 
+	        if (pNextObject != nullptr)
+	        {
+	        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+	            return;
+	        }
+
+	        void *pNext = nullptr;
+
+//			jlong pNext = env->CallLongMethod(vkDeviceQueueCreateInfoObject, getpNextMethodId);
+//			if (env->ExceptionOccurred())
+//			{
+//				LOGERROR(env, "%s", "Failed on CallLongMethod for pNext");
+//				break;
+//			}
+//
 			jobject flagsObject = env->CallObjectMethod(vkDeviceQueueCreateInfoObject, getFlagsMethodId);
 			int32_t flags = getEnumSetValue(
 					env,

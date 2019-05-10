@@ -48,22 +48,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkDebugUtilsMessengerCallbackDataEXTObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error trying to get getpNext methodId");
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkDebugUtilsMessengerCallbackDataEXTObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
-        	LOGERROR(env, "%s", "Error calling CallLongMethod for pNext");
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getFlags methodId");

@@ -20,7 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
-#include "../headers/slf4j.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -28,17 +28,22 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkInstanceCreateInfo;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateInstance
-  (JNIEnv *env, jobject, jobject jInstanceCreateInfo, jobject jAlternateAllocator, jobject jVkInstance)
+  (JNIEnv *env, jobject, jobject jVkInstanceCreateInfoObject, jobject jAlternateAllocator, jobject jVkInstance)
 {
-    VkApplicationInfo applicationInfo = {};
-    VkInstanceCreateInfo instanceCreateInfo = {};
+	LOGTRACE(env, "%s", "vkCreateInstance called"); // This line is mainly here so that the logging stuff gets initialized before any errors.
+
+    VkInstanceCreateInfo vkInstanceCreateInfo = {};
 
     std::vector<void *> memoryToFree(30);
 
-    jvulkan::getVkInstanceCreateInfo(env, jInstanceCreateInfo, &instanceCreateInfo, &applicationInfo, &memoryToFree);
+	jvulkan::getVkInstanceCreateInfo(
+        env,
+        jVkInstanceCreateInfoObject,
+		&vkInstanceCreateInfo,
+        &memoryToFree);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Failed on call to getInstanceCreateInfo");
+    	LOGERROR(env, "%s", "Failed on call to getVkInstanceCreateInfo");
 
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
@@ -50,9 +55,9 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    VkInstance instance;
+    VkInstance instance = nullptr;
 
-    VkResult result = vkCreateInstance(&instanceCreateInfo, allocatorCallbacks, &instance);
+    VkResult result = vkCreateInstance(&vkInstanceCreateInfo, allocatorCallbacks, &instance);
 
     // Free up the allocator callback structure if created.
     delete allocatorCallbacks;

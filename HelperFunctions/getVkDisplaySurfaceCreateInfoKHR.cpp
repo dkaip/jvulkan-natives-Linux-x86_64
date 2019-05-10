@@ -49,22 +49,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkDisplaySurfaceCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not get method id for getpNext");
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkDisplaySurfaceCreateInfoKHRObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
-        	LOGERROR(env, "%s", "CallLongMethod failed for getpNext");
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getFlags");

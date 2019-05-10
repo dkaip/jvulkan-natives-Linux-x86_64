@@ -19,11 +19,9 @@
  *  Created on: Mar 22, 2019
  *      Author: Douglas Kaip
  */
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
 
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -47,20 +45,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkBindImageMemoryInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkBindImageMemoryInfoObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;");
+        jmethodID methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;");
         if (env->ExceptionOccurred())
         {
             return;

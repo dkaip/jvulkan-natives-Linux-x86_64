@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -49,15 +49,23 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    jmethodID methodId = env->GetMethodID(javaClass, "getpNext", "()J");
+    ////////////////////////////////////////////////////////////////////////
+    jobject pNextObject = jvulkan::getpNext(env, jVkWaylandSurfaceCreateInfoKHR);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to getpNext failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    void *pNext = (void *)env->CallLongMethod(jVkWaylandSurfaceCreateInfoKHR, methodId);
+    if (pNextObject != nullptr)
+    {
+    	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-    methodId = env->GetMethodID(javaClass, "getFlags", "()Ljava/util/EnumSet;");
+    void *pNext = nullptr;
+
+    jmethodID methodId = env->GetMethodID(javaClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);

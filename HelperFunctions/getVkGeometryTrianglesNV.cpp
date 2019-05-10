@@ -21,11 +21,8 @@
  *      Author: Douglas Kaip
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -49,20 +46,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getpNext", "()J");
+        jobject pNextObject = getpNext(env, jVkGeometryTrianglesNVObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkGeometryTrianglesNVObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;

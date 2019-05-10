@@ -46,22 +46,24 @@ namespace jvulkan
 			return;
 		}
 
-		jmethodID methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getpNext", "()J");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not get methodId for getpNext");
-			return;
-		}
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkShaderModuleCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
+            return;
+        }
 
-		jlong pNext = env->CallLongMethod(jVkShaderModuleCreateInfoObject, methodId);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Failed on CallLongMethod for getpNext");
-			return;
-		}
+        if (pNextObject != nullptr)
+        {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+            return;
+        }
 
-		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        void *pNext = nullptr;
+
+        ////////////////////////////////////////////////////////////////////////
+        jmethodID methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not get methodId for getFlags");

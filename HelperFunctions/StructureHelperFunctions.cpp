@@ -13,13 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-#include <cstring>
 #include <iostream>
-#include <stdlib.h>
 
 #include "HelperFunctions.hh"
-
+#include "slf4j.hh"
 
 using namespace std;
 
@@ -27,203 +24,251 @@ void jobjectToVkPhysicalDeviceFeatures(JNIEnv *env, jobject jPhysicalDeviceFeatu
 
 namespace jvulkan
 {
-    void collectionOfStringsToAOPTC(
-            JNIEnv *env,
-            jobject jCollectionOfStrings,
-            char ***stringArrayResult,
-            int *numberOfStrings,
-            std::vector<void *> *memoryToFree);
-
-	void getVkInstanceCreateInfo(
-	        JNIEnv *env,
-	        const jobject jInstanceCreateInfo,
-	        VkInstanceCreateInfo *instanceCreateInfo,
-	        VkApplicationInfo *applicationInfo,
-	        std::vector<void *> *memoryToFree)
-	{
-        jclass instanceCreateInfoClass = env->GetObjectClass(jInstanceCreateInfo);
-
-        int sTypeValue = getSTypeAsInt(env, jInstanceCreateInfo);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        cout << "Got getSTypeAsInt" << endl;
-
-        jmethodID methodId = env->GetMethodID(instanceCreateInfoClass, "getpNext", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        void *pNext = (void *)env->CallLongMethod(jInstanceCreateInfo, methodId);
-
-//        cout << "Got pNext" << endl;
-
-        methodId = env->GetMethodID(instanceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        jobject flagsObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
-        int32_t flags = getEnumSetValue(
-                env,
-                flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
-
-//        cout << "Got getFlagsAsInt" << endl;
-//        cout << "going for getEnabledLayerNamesAsStringArray" << endl;
-
-        methodId = env->GetMethodID(instanceCreateInfoClass, "getEnabledLayerNames", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject layerNamesObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        cout << "Finished to here" << endl;
-        char **arrayOfPointersToLayerNames = nullptr;
-        int numberOfLayerNames = 0;
-        if (layerNamesObject != nullptr)
-        {
-            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-        }
-
-        methodId = env->GetMethodID(instanceCreateInfoClass, "getEnabledExtensionNames", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject extensionNamesObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        char **arrayOfPointersToExtensionNames = nullptr;
-        int numberOfExtensionNames = 0;
-        if (extensionNamesObject != nullptr)
-        {
-            collectionOfStringsToAOPTC(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-        }
-
-
-        instanceCreateInfo->sType = (VkStructureType)sTypeValue;
-        instanceCreateInfo->pNext = pNext;
-        instanceCreateInfo->flags = flags;
-        instanceCreateInfo->pApplicationInfo = applicationInfo;
-        instanceCreateInfo->enabledLayerCount = numberOfLayerNames;
-        instanceCreateInfo->ppEnabledLayerNames = arrayOfPointersToLayerNames;
-        instanceCreateInfo->enabledExtensionCount = numberOfExtensionNames;
-        instanceCreateInfo->ppEnabledExtensionNames = arrayOfPointersToExtensionNames;
-        instanceCreateInfo->pApplicationInfo = applicationInfo;
-
-        methodId = env->GetMethodID(instanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkApplicationInfo;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-//        cout << "Found method ID for application Info it is " << methodId << endl;
-        jobject applicationInfoClassObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
-        jclass applicationInfoClass = env->GetObjectClass(applicationInfoClassObject);
-
-//        cout << "Got application class" << endl;
-
-        sTypeValue = getSTypeAsInt(env, applicationInfoClassObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        methodId = env->GetMethodID(applicationInfoClass, "getSTypeAsInt", "()I");
+//    void collectionOfStringsToAOPTC(
+//            JNIEnv *env,
+//            jobject jCollectionOfStrings,
+//            char ***stringArrayResult,
+//            int *numberOfStrings,
+//            std::vector<void *> *memoryToFree);
+//
+//	void getVkInstanceCreateInfo(
+//	        JNIEnv *env,
+//	        const jobject jInstanceCreateInfo,
+//	        VkInstanceCreateInfo *instanceCreateInfo,
+//	        VkApplicationInfo *applicationInfo,
+//	        std::vector<void *> *memoryToFree)
+//	{
+//        jclass instanceCreateInfoClass = env->GetObjectClass(jInstanceCreateInfo);
+//
+//        int sTypeValue = getSTypeAsInt(env, jInstanceCreateInfo);
 //        if (env->ExceptionOccurred())
 //        {
 //            return;
 //        }
-//        sTypeValue = env->CallIntMethod(applicationInfoClassObject, methodId);
-        applicationInfo->sType = (VkStructureType)sTypeValue;
-
+//
 //        cout << "Got getSTypeAsInt" << endl;
-
-        methodId = env->GetMethodID(applicationInfoClass, "getpNext", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        pNext = (void *)env->CallLongMethod(applicationInfoClassObject, methodId);
-        applicationInfo->pNext = pNext;
-
-//        cout << "Got pNext again" << endl;
-
-        methodId = env->GetMethodID(applicationInfoClass, "getApplicationName", "()Ljava/lang/String;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        jstring theJavaString = (jstring)env->CallObjectMethod(applicationInfoClassObject, methodId);
-        const char *theCString = env->GetStringUTFChars(theJavaString, nullptr);
-        char *tempString = (char *)calloc(strlen(theCString) + 1, sizeof( char));
-        strcpy(tempString, theCString);
-        applicationInfo->pApplicationName = tempString;
-        env->ReleaseStringUTFChars(theJavaString, theCString);
-        // The above string needs to be released
-
-        memoryToFree->push_back(tempString);
-        methodId = env->GetMethodID(applicationInfoClass, "getApplicationVersion", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        jint applicationVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
-        applicationInfo->applicationVersion = applicationVersion;
-
-        methodId = env->GetMethodID(applicationInfoClass, "getEngineName", "()Ljava/lang/String;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        theJavaString = (jstring)env->CallObjectMethod(applicationInfoClassObject, methodId);
-        theCString = env->GetStringUTFChars(theJavaString, nullptr);
-        tempString = (char *)calloc(strlen(theCString) + 1, sizeof( char));
-        strcpy(tempString, theCString);
-        applicationInfo->pEngineName = tempString;
-        env->ReleaseStringUTFChars(theJavaString, theCString);
-        // The above string needs to be released
-
-        memoryToFree->push_back(tempString);
-
-        methodId = env->GetMethodID(applicationInfoClass, "getEngineVersion", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        jint engineVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
-        applicationInfo->engineVersion = engineVersion;
-
-        methodId = env->GetMethodID(applicationInfoClass, "getApiVersion", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-        jint apiVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
-        applicationInfo->apiVersion = apiVersion;
-
-//        cout << "Got API Version " << apiVersion << endl;
-	}
+//        LOGINFO(env, "%s", "Yeah");
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        jclass vulkanCreateInfoStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getpNext.");
+//            return;
+//        }
+//
+//        LOGINFO(env, "%s", "YeahYeah");
+//        jmethodID methodId = env->GetMethodID(vulkanCreateInfoStructureClass, "getpNext", "()Ljava/lang/Object;");
+//        LOGINFO(env, "%s", "YeahYeahYeah");
+//        if (env->ExceptionOccurred())
+//        {
+//        	cout << "AAA" << endl;
+//        	LOGERROR(env, "%s", "Could not find method id getpNext.");
+//            return;
+//        }
+//
+//    	cout << "AAA1" << endl;
+//        jobject pNextObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
+//    	cout << "AAA2" << endl;
+//        if (env->ExceptionOccurred())
+//        {
+//        	cout << "BBB" << endl;
+//        	LOGERROR(env, "%s", "Error calling CallObjectMethod for getpNext.");
+//            return;
+//        }
+//
+//    	cout << "AAA3:" << pNextObject << endl;
+//        if (pNextObject != nullptr)
+//        {
+//        	cout << "CCC" << endl;
+//        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+//            return;
+//        }
+//
+//        void *pNext = nullptr;
+//
+////        jmethodID methodId = env->GetMethodID(instanceCreateInfoClass, "getpNext", "()J");
+////        if (env->ExceptionOccurred())
+////        {
+////            return;
+////        }
+////        void *pNext = (void *)env->CallLongMethod(jInstanceCreateInfo, methodId);
+////
+////        cout << "Got pNext" << endl;
+////
+//        methodId = env->GetMethodID(instanceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getFlags.");
+//            return;
+//        }
+//        jobject flagsObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
+//        int32_t flags = getEnumSetValue(
+//                env,
+//                flagsObject,
+//                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
+//
+////        cout << "Got getFlagsAsInt" << endl;
+////        cout << "going for getEnabledLayerNamesAsStringArray" << endl;
+//
+//        methodId = env->GetMethodID(instanceCreateInfoClass, "getEnabledLayerNames", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getEnabledLayerNames.");
+//            return;
+//        }
+//
+//        jobject layerNamesObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+////        cout << "Finished to here" << endl;
+//        char **arrayOfPointersToLayerNames = nullptr;
+//        int numberOfLayerNames = 0;
+//        if (layerNamesObject != nullptr)
+//        {
+//            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//        }
+//
+//        methodId = env->GetMethodID(instanceCreateInfoClass, "getEnabledExtensionNames", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getEnabledExtensionNames.");
+//            return;
+//        }
+//
+//        jobject extensionNamesObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        char **arrayOfPointersToExtensionNames = nullptr;
+//        int numberOfExtensionNames = 0;
+//        if (extensionNamesObject != nullptr)
+//        {
+//            collectionOfStringsToAOPTC(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//        }
+//
+//
+//        instanceCreateInfo->sType = (VkStructureType)sTypeValue;
+//        instanceCreateInfo->pNext = pNext;
+//        instanceCreateInfo->flags = flags;
+//        instanceCreateInfo->pApplicationInfo = applicationInfo;
+//        instanceCreateInfo->enabledLayerCount = numberOfLayerNames;
+//        instanceCreateInfo->ppEnabledLayerNames = arrayOfPointersToLayerNames;
+//        instanceCreateInfo->enabledExtensionCount = numberOfExtensionNames;
+//        instanceCreateInfo->ppEnabledExtensionNames = arrayOfPointersToExtensionNames;
+//        instanceCreateInfo->pApplicationInfo = applicationInfo;
+//
+//        methodId = env->GetMethodID(instanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkApplicationInfo;");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getApplicationInfo.");
+//            return;
+//        }
+////        cout << "Found method ID for application Info it is " << methodId << endl;
+//        jobject applicationInfoClassObject = env->CallObjectMethod(jInstanceCreateInfo, methodId);
+//        jclass applicationInfoClass = env->GetObjectClass(applicationInfoClassObject);
+//
+////        cout << "Got application class" << endl;
+//
+//        sTypeValue = getSTypeAsInt(env, applicationInfoClassObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+////        methodId = env->GetMethodID(applicationInfoClass, "getSTypeAsInt", "()I");
+////        if (env->ExceptionOccurred())
+////        {
+////            return;
+////        }
+////        sTypeValue = env->CallIntMethod(applicationInfoClassObject, methodId);
+//        applicationInfo->sType = (VkStructureType)sTypeValue;
+//
+////        cout << "Got getSTypeAsInt" << endl;
+//
+//        methodId = env->GetMethodID(applicationInfoClass, "getpNext", "()J");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getpNext.");
+//            return;
+//        }
+//        pNext = (void *)env->CallLongMethod(applicationInfoClassObject, methodId);
+//        applicationInfo->pNext = pNext;
+//
+////        cout << "Got pNext again" << endl;
+//
+//        methodId = env->GetMethodID(applicationInfoClass, "getApplicationName", "()Ljava/lang/String;");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getApplicationName.");
+//            return;
+//        }
+//        jstring theJavaString = (jstring)env->CallObjectMethod(applicationInfoClassObject, methodId);
+//        const char *theCString = env->GetStringUTFChars(theJavaString, nullptr);
+//        char *tempString = (char *)calloc(strlen(theCString) + 1, sizeof( char));
+//        strcpy(tempString, theCString);
+//        applicationInfo->pApplicationName = tempString;
+//        env->ReleaseStringUTFChars(theJavaString, theCString);
+//        // The above string needs to be released
+//
+//        memoryToFree->push_back(tempString);
+//        methodId = env->GetMethodID(applicationInfoClass, "getApplicationVersion", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getApplicationVersion.");
+//            return;
+//        }
+//        jint applicationVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
+//        applicationInfo->applicationVersion = applicationVersion;
+//
+//        methodId = env->GetMethodID(applicationInfoClass, "getEngineName", "()Ljava/lang/String;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//        theJavaString = (jstring)env->CallObjectMethod(applicationInfoClassObject, methodId);
+//        theCString = env->GetStringUTFChars(theJavaString, nullptr);
+//        tempString = (char *)calloc(strlen(theCString) + 1, sizeof( char));
+//        strcpy(tempString, theCString);
+//        applicationInfo->pEngineName = tempString;
+//        env->ReleaseStringUTFChars(theJavaString, theCString);
+//        // The above string needs to be released
+//
+//        memoryToFree->push_back(tempString);
+//
+//        methodId = env->GetMethodID(applicationInfoClass, "getEngineVersion", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getEngineVersion.");
+//            return;
+//        }
+//        jint engineVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
+//        applicationInfo->engineVersion = engineVersion;
+//
+//        methodId = env->GetMethodID(applicationInfoClass, "getApiVersion", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Could not find method id getApiVersion.");
+//            return;
+//        }
+//        jint apiVersion = env->CallLongMethod(applicationInfoClassObject, methodId);
+//        applicationInfo->apiVersion = apiVersion;
+//
+////        cout << "Got API Version " << apiVersion << endl;
+//	}
 
     void getVkDeviceCreateInfo(
             JNIEnv *env,
@@ -242,19 +287,24 @@ namespace jvulkan
         {
             return;
         }
-        jmethodID methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getpNext", "()J");
+
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkDeviceCreateInfo);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkDeviceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
 
-        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        void *pNext = nullptr;
+
+        jmethodID methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -281,11 +331,21 @@ namespace jvulkan
 //        cout << "Finished to here" << endl;
         char **arrayOfPointersToLayerNames = nullptr;
         int numberOfLayerNames = 0;
+//        if (layerNamesObject != nullptr)
+//        {
+//            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//        }
+
         if (layerNamesObject != nullptr)
         {
-            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+        	getStringCollection(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
             if (env->ExceptionOccurred())
             {
+				LOGERROR(env, "%s", "Error calling getStringCollection");
                 return;
             }
         }
@@ -306,7 +366,7 @@ namespace jvulkan
         int numberOfExtensionNames = 0;
         if (extensionNamesObject != nullptr)
         {
-            collectionOfStringsToAOPTC(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
+        	getStringCollection(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
             if (env->ExceptionOccurred())
             {
                 return;
@@ -349,111 +409,111 @@ namespace jvulkan
      * The memory allocated for stringArrayResult must be released when you are
      * finished with it.
      */
-    void collectionOfStringsToAOPTC(
-            JNIEnv *env,
-            jobject jCollectionOfStrings,
-            char ***stringArrayResult,
-            int *numberOfStrings,
-            std::vector<void *> *memoryToFree)
-    {
-        jclass collectionClass = env->FindClass("java/util/Collection");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jmethodID sizeMethod = env->GetMethodID(collectionClass, "size", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jint numStrings = env->CallIntMethod(jCollectionOfStrings, sizeMethod);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jclass iteratorClass = env->FindClass("java/util/Iterator");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jmethodID iteratorMethodId = env->GetMethodID(collectionClass, "iterator", "()Ljava/util/Iterator;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject iteratorObject = env->CallObjectMethod(jCollectionOfStrings, iteratorMethodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        cout << "aZZZ " << endl;
-        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        cout << "ZZZ" << endl;
-        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        /*
-         * Create an array of pointers to "c" strings;
-         */
-//        cout << "Number of Strings is " << numStrings << endl;
-
-        char **arrayOfPointersToStrings = new char *[numStrings];
-
-        int i = 0;
-        do
-        {
-            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            if (hasNext == false)
-            {
-                break;
-            }
-
-            jstring stringObject = (jstring)env->CallObjectMethod(iteratorObject, nextMethod);
-            if (env->ExceptionOccurred())
-            {
-                break;
-            }
-
-            const char* theCString = env->GetStringUTFChars(stringObject, nullptr);
-//            cout << "Got the next c strings " << theCString << endl;
-
-            char *aString = (char *)calloc(strlen(theCString) + 1, sizeof(char));
-            strcpy(aString, theCString);
-
-            arrayOfPointersToStrings[i] = aString;
-            memoryToFree->push_back((void *)aString);
-
-            env->ReleaseStringUTFChars(stringObject, theCString);
-
-            env->DeleteLocalRef(stringObject);
-
-            i++;
-        } while(true);
-
-        *numberOfStrings = numStrings;
-        *stringArrayResult = arrayOfPointersToStrings;
-        memoryToFree->push_back((void *)arrayOfPointersToStrings);
-    }
-
+//    void collectionOfStringsToAOPTC(
+//            JNIEnv *env,
+//            jobject jCollectionOfStrings,
+//            char ***stringArrayResult,
+//            int *numberOfStrings,
+//            std::vector<void *> *memoryToFree)
+//    {
+//        jclass collectionClass = env->FindClass("java/util/Collection");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jmethodID sizeMethod = env->GetMethodID(collectionClass, "size", "()I");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jint numStrings = env->CallIntMethod(jCollectionOfStrings, sizeMethod);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jclass iteratorClass = env->FindClass("java/util/Iterator");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jmethodID iteratorMethodId = env->GetMethodID(collectionClass, "iterator", "()Ljava/util/Iterator;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject iteratorObject = env->CallObjectMethod(jCollectionOfStrings, iteratorMethodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+////        cout << "aZZZ " << endl;
+//        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+////        cout << "ZZZ" << endl;
+//        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        /*
+//         * Create an array of pointers to "c" strings;
+//         */
+////        cout << "Number of Strings is " << numStrings << endl;
+//
+//        char **arrayOfPointersToStrings = new char *[numStrings];
+//
+//        int i = 0;
+//        do
+//        {
+//            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
+//            if (env->ExceptionOccurred())
+//            {
+//                break;
+//            }
+//
+//            if (hasNext == false)
+//            {
+//                break;
+//            }
+//
+//            jstring stringObject = (jstring)env->CallObjectMethod(iteratorObject, nextMethod);
+//            if (env->ExceptionOccurred())
+//            {
+//                break;
+//            }
+//
+//            const char* theCString = env->GetStringUTFChars(stringObject, nullptr);
+////            cout << "Got the next c strings " << theCString << endl;
+//
+//            char *aString = (char *)calloc(strlen(theCString) + 1, sizeof(char));
+//            strcpy(aString, theCString);
+//
+//            arrayOfPointersToStrings[i] = aString;
+//            memoryToFree->push_back((void *)aString);
+//
+//            env->ReleaseStringUTFChars(stringObject, theCString);
+//
+//            env->DeleteLocalRef(stringObject);
+//
+//            i++;
+//        } while(true);
+//
+//        *numberOfStrings = numStrings;
+//        *stringArrayResult = arrayOfPointersToStrings;
+//        memoryToFree->push_back((void *)arrayOfPointersToStrings);
+//    }
+//
     void freeMemory(std::vector<void *> *memoryToFree)
     {
         if (memoryToFree->size() == 0)
@@ -1659,20 +1719,24 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getpNext", "()J");
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkSwapchainCreateInfoKHR);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkSwapchainCreateInfoKHR, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -2069,20 +2133,24 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getpNext", "()J");
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkImageViewCreateInfo);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkImageViewCreateInfo, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkImageViewCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -3363,20 +3431,24 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getpNext", "()J");
+        ////////////////////////////////////////////////////////////////////////
+        jobject pNextObject = getpNext(env, jVkRenderPassCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        jlong pNext = env->CallLongMethod(jVkRenderPassCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
+        if (pNextObject != nullptr)
         {
+        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
             return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
             return;

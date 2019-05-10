@@ -334,16 +334,23 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getpNext", "()J");
+    ////////////////////////////////////////////////////////////////////////
+    jobject pNextObject = getpNext(env, jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
-        LOGERROR(env, "%s", "Could not find the methodId for getpNext");
+    	LOGERROR(env, "%s", "Call to getpNext failed.");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    void *pNext = (void *)env->CallLongMethod(jVkDebugReportCallbackCreateInfoEXT, methodId);
+    if (pNextObject != nullptr)
+    {
+    	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-    methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
+    void *pNext = nullptr;
+
+    jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
         LOGERROR(env, "%s", "Could not find the methodId for getFlags");
