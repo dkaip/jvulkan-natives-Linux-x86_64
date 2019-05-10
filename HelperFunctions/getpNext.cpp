@@ -37,7 +37,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        jmethodID methodId = env->GetMethodID(vulkanCreateInfoStructureClass, "getpNext", "()Ljava/lang/Object;");
+        jmethodID methodId = env->GetMethodID(vulkanCreateInfoStructureClass, "getpNext", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getpNext");
