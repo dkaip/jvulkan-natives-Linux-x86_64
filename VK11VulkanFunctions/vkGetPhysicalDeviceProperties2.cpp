@@ -71,8 +71,8 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkPhysicalDeviceProperties2 vkPhysicalDeviceProperties2 = {};
     /*
      * TODO
-     * Hmmm, I did not have to do this elsewhere...is there is bug or do I need
-     * to go and fix all of the other references like this?
+     * Hmmm, I did not have to do this elsewhere(then next two lines of code)...is
+     * there is bug or do I need to go and fix all of the other references like this?
      */
     vkPhysicalDeviceProperties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
     vkPhysicalDeviceProperties2.pNext = headOfpNextChain;
