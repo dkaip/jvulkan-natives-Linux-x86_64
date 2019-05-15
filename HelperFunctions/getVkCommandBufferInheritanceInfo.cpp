@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkCommandBufferInheritanceInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkCommandBufferInheritanceInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

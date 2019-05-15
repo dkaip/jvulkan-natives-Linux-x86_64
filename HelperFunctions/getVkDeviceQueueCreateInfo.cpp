@@ -147,7 +147,7 @@ namespace jvulkan
 				return;
 			}
 
-	        jobject pNextObject = getpNext(env, vkDeviceQueueCreateInfoObject);
+	        jobject pNextObject = getpNextObject(env, vkDeviceQueueCreateInfoObject);
 	        if (env->ExceptionOccurred())
 	        {
 	        	LOGERROR(env, "%s", "Call to getpNext failed.");

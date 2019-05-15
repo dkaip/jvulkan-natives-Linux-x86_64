@@ -335,20 +335,29 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     ////////////////////////////////////////////////////////////////////////
-    jobject pNextObject = getpNext(env, jVkDebugReportCallbackCreateInfoEXT);
+    jobject jpNextObject = getpNextObject(env, jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getpNext failed.");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    if (pNextObject != nullptr)
-    {
-    	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-        jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
+    std::vector<void *> memoryToFree(5);
 
     void *pNext = nullptr;
+    if (jpNextObject != nullptr)
+    {
+    	getpNextChain(
+    			env,
+				jpNextObject,
+    			&pNext,
+    			&memoryToFree);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+            jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+    }
 
     jmethodID methodId = env->GetMethodID(vkDebugReportCallbackCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
@@ -442,6 +451,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         g_vkDebugReportCallbackList.push_back(callbackListEntry);
 //        LOGDEBUG(env, "Put callback information on g_vkDebugReportCallbackList current size is %d, key is %ld", g_vkDebugReportCallbackList.size(), key);
     }
+
+    jvulkan::freeMemory(&memoryToFree);
 
     /*
      * Now transfer the VkInstance data to Java

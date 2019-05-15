@@ -289,7 +289,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkDeviceCreateInfo);
+        jobject pNextObject = getpNextObject(env, jVkDeviceCreateInfo);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -1720,7 +1720,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkSwapchainCreateInfoKHR);
+        jobject pNextObject = getpNextObject(env, jVkSwapchainCreateInfoKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -2134,7 +2134,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkImageViewCreateInfo);
+        jobject pNextObject = getpNextObject(env, jVkImageViewCreateInfo);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -3432,7 +3432,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkRenderPassCreateInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkRenderPassCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

@@ -45,7 +45,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkBindAccelerationStructureMemoryInfoNVObject);
+        jobject pNextObject = getpNextObject(env, jVkBindAccelerationStructureMemoryInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

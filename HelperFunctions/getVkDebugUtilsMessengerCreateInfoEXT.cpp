@@ -45,20 +45,27 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
+        jobject jpNextObject = getpNextObject(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
         void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return;
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkDebugUtilsMessengerCreateInfoEXTClass, "getFlags", "()Ljava/util/EnumSet;");

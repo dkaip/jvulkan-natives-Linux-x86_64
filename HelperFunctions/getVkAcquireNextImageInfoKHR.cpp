@@ -45,7 +45,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkAcquireNextImageInfoKHRObject);
+        jobject pNextObject = getpNextObject(env, jVkAcquireNextImageInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

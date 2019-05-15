@@ -112,5 +112,3 @@ namespace jvulkan
 		return vkDebugUtilsObjectNameInfoEXTObject;
 	}
 }
-
-

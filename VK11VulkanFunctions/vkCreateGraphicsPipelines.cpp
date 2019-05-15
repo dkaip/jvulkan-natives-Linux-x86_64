@@ -56,7 +56,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     int numberOfCreateInfos = 0;
     VkGraphicsPipelineCreateInfo *vkGraphicsPipelineCreateInfo = nullptr;
 
-    jvulkan::getCollectionOfVkGraphicsPipelineCreateInfo(
+    jvulkan::getVkGraphicsPipelineCreateInfoCollection(
             env,
             jVkGraphicsPipelineCreateInfoCollection,
             &vkGraphicsPipelineCreateInfo,

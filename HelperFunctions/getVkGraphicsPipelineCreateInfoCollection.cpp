@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkGraphicsPipelineCreateInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkGraphicsPipelineCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -475,7 +475,7 @@ namespace jvulkan
         vkGraphicsPipelineCreateInfo->basePipelineIndex = basePipelineIndex;
     }
 
-    void getCollectionOfVkGraphicsPipelineCreateInfo(
+    void getVkGraphicsPipelineCreateInfoCollection(
             JNIEnv *env,
             const jobject jVkGraphicsPipelineCreateInfoCollectionObject,
             VkGraphicsPipelineCreateInfo **graphicsPipelineCreateInfos,

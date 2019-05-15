@@ -55,7 +55,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     ////////////////////////////////////////////////////////////////////////
-    jobject pNextObject = jvulkan::getpNext(env, jVkSemaphoreCreateInfoObject);
+    jobject pNextObject = jvulkan::getpNextObject(env, jVkSemaphoreCreateInfoObject);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getpNext failed.");

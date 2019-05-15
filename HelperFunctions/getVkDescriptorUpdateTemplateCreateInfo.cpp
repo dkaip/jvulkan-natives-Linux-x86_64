@@ -45,7 +45,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkDescriptorUpdateTemplateCreateInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkDescriptorUpdateTemplateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

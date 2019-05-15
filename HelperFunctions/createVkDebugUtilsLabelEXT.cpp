@@ -33,18 +33,18 @@ namespace jvulkan
     jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData)
     {
         // Locate the VkDebugUtilsMessengerCallbackDataEXT class
-        jclass vkDebugUtilsLabelEXTclass = env->FindClass(
+        jclass vkDebugUtilsLabelEXTClass = env->FindClass(
         		"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsLabelEXT");
 
         // Locate the constructor
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsLabelEXTclass, "<init>", "()V");
+        jmethodID methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "<init>", "()V");
 
         // Create the Java VkDebugUtilsLabelEXT object
         jobject vkDebugUtilsLabelEXTObject =
-        		env->NewObject(vkDebugUtilsLabelEXTclass, methodId);
+        		env->NewObject(vkDebugUtilsLabelEXTClass, methodId);
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsLabelEXTclass, "setLabelName", "(Ljava/lang/String;)V");
+        methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "setLabelName", "(Ljava/lang/String;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying to get methodId of setLabelName");
@@ -67,7 +67,7 @@ namespace jvulkan
 
         env->SetFloatArrayRegion(jColorArray, 0, sizeof(labelData->color), labelData->color);
 
-        methodId = env->GetMethodID(vkDebugUtilsLabelEXTclass, "setColor", "([F)V");
+        methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "setColor", "([F)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying to get methodId of setColor");

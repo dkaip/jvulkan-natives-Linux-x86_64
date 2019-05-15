@@ -68,39 +68,45 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.maxImageCount);
 
     ////////////////////////////////////////////////////////////////////////////
-
-    jclass extent2DClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
-    jmethodID extent2DConstructor = env->GetMethodID(extent2DClass, "<init>", "(II)V");
-
-    jobject extent2DObject = env->NewObject(
-            extent2DClass,
-            extent2DConstructor,
-            surfaceCapabilities.currentExtent.width,
-            surfaceCapabilities.currentExtent.height);
+//
+//    jclass extent2DClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
+//    jmethodID extent2DConstructor = env->GetMethodID(extent2DClass, "<init>", "(II)V");
+//
+//    jobject extent2DObject = env->NewObject(
+//            extent2DClass,
+//            extent2DConstructor,
+//            surfaceCapabilities.currentExtent.width,
+//            surfaceCapabilities.currentExtent.height);
+//
+    jobject extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.currentExtent);
 
     methodId = env->GetMethodID(surfaceCapabilitiesClass, "setCurrentImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
 
     env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
 
     ////////////////////////////////////////////////////////////////////////////
-
-    extent2DObject = env->NewObject(
-            extent2DClass,
-            extent2DConstructor,
-            surfaceCapabilities.minImageExtent.width,
-            surfaceCapabilities.minImageExtent.height);
+//
+//    extent2DObject = env->NewObject(
+//            extent2DClass,
+//            extent2DConstructor,
+//            surfaceCapabilities.minImageExtent.width,
+//            surfaceCapabilities.minImageExtent.height);
+//
+    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.minImageExtent);
 
     methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMinImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
 
     env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
 
     ////////////////////////////////////////////////////////////////////////////
-
-    extent2DObject = env->NewObject(
-            extent2DClass,
-            extent2DConstructor,
-            surfaceCapabilities.maxImageExtent.width,
-            surfaceCapabilities.maxImageExtent.height);
+//
+//    extent2DObject = env->NewObject(
+//            extent2DClass,
+//            extent2DConstructor,
+//            surfaceCapabilities.maxImageExtent.width,
+//            surfaceCapabilities.maxImageExtent.height);
+//
+    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.maxImageExtent);
 
     methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
 
@@ -220,4 +226,3 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     return jvulkan::createVkResult(env, result);
 }
-

@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-	jobject getpNext(
+	jobject getpNextObject(
         JNIEnv *env,
         const jobject jVulkanCreateInfoStructureObject)
     {

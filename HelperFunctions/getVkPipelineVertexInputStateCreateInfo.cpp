@@ -379,7 +379,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkPipelineVertexInputStateCreateInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkPipelineVertexInputStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

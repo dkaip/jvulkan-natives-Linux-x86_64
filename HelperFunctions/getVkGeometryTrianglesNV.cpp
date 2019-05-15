@@ -46,7 +46,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkGeometryTrianglesNVObject);
+        jobject pNextObject = getpNextObject(env, jVkGeometryTrianglesNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkDebugUtilsObjectTagInfoEXTObject);
+        jobject pNextObject = getpNextObject(env, jVkDebugUtilsObjectTagInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkRenderPassCreateInfo2KHRObject);
+        jobject pNextObject = getpNextObject(env, jVkRenderPassCreateInfo2KHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

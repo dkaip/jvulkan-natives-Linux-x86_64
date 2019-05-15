@@ -47,7 +47,7 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkShaderModuleCreateInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkShaderModuleCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");

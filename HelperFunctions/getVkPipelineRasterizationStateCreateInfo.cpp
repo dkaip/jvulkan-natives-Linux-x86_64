@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNext(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
+        jobject pNextObject = getpNextObject(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
