@@ -658,6 +658,34 @@ namespace jvulkan
 	            *headOfpNextChain = vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO");
+
+	        	VkDeviceGroupDeviceCreateInfo *vkDeviceGroupDeviceCreateInfo = (VkDeviceGroupDeviceCreateInfo *)calloc(1, sizeof(VkDeviceGroupDeviceCreateInfo));
+	        	memoryToFree->push_back(vkDeviceGroupDeviceCreateInfo);
+
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
+	                return;
+	            }
+
+	            getVkDeviceGroupDeviceCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+	        			vkDeviceGroupDeviceCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupDeviceCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupDeviceCreateInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

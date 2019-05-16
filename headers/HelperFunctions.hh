@@ -77,6 +77,19 @@ namespace jvulkan
 
     jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags);
 
+    void getVkDeviceQueueCreateInfo(
+            JNIEnv *env,
+            const jobject jVkQueueCreateInfoCollection,
+            VkDeviceQueueCreateInfo queueCreateInfo[],
+            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceQueueCreateInfoCollection(
+            JNIEnv *env,
+            const jobject jVkDeviceQueueCreateInfoCollectionObject,
+			VkDeviceQueueCreateInfo **vkDeviceQueueCreateInfos,
+            int *numberOfVkDeviceQueueCreateInfos,
+            std::vector<void *> *memoryToFree);
+
     void getVkPhysicalDeviceFeatures(
             JNIEnv *env,
             const jobject jgetVkPhysicalDeviceFeaturesObject,
@@ -1244,17 +1257,17 @@ namespace jvulkan
 
     jobject getVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags);
 
-    void getVkDeviceQueueCreateInfo(
+    void getVkPhysicalDeviceCollection(
             JNIEnv *env,
-            const jobject jVkQueueCreateInfoCollection,
-            VkDeviceQueueCreateInfo queueCreateInfo[],
+            const jobject jVkPhysicalDeviceCollectionObject,
+			VkPhysicalDevice **vkPhysicalDevices,
+            int *numberOfVkPhysicalDevices,
             std::vector<void *> *memoryToFree);
 
-    void getVkDeviceQueueCreateInfoCollection(
+    void getVkDeviceGroupDeviceCreateInfo(
             JNIEnv *env,
-            const jobject jVkDeviceQueueCreateInfoCollectionObject,
-			VkDeviceQueueCreateInfo **vkDeviceQueueCreateInfos,
-            int *numberOfVkDeviceQueueCreateInfos,
+            jobject jVkDeviceGroupDeviceCreateInfoObject,
+			VkDeviceGroupDeviceCreateInfo *vkDeviceGroupDeviceCreateInfo,
             std::vector<void *> *memoryToFree);
 }
 

@@ -82,7 +82,10 @@ namespace jvulkan
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
-    	LOGERROR(env, "%s", "Failed calling getEnumSetValue.");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Failed calling getEnumSetValue.");
+        }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueFamilyIndex", "()I");

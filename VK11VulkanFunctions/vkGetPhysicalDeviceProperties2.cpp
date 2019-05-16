@@ -85,8 +85,8 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * We have the data now we have some other work to do.
      *
      * First we need to crawl the pNext chain again and
-     * create the Java Object equivalents that may be
-     * on it.
+     * populate the Java Object equivalents that may be
+     * on it.  In this case the pNext chain data is out bound.
      */
 
     jvulkan::populatepNextChain(

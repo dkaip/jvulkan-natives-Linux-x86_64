@@ -55,6 +55,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 			&memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkDeviceCreateInfo");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
