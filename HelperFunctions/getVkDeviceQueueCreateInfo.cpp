@@ -27,198 +27,131 @@ namespace jvulkan
 {
 	void getVkDeviceQueueCreateInfo(
 			JNIEnv *env,
-			const jclass jVkQueueCreateInfoCollectionClass,
-			const jobject jVkQueueCreateInfoCollection,
-			VkDeviceQueueCreateInfo queueCreateInfo[],
+			const jobject jVkDeviceQueueCreateInfoObject,
+			VkDeviceQueueCreateInfo *vkDeviceQueueCreateInfo,
 			std::vector<void *> *memoryToFree)
 	{
-		jmethodID iteratorMethodId = env->GetMethodID(jVkQueueCreateInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not get methodId for iterator");
-			return;
-		}
+        jclass vkDeviceQueueCreateInfoClass = env->GetObjectClass(jVkDeviceQueueCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error trying to GetObjectClass for jVkDeviceQueueCreateInfoObject");
+            return;
+        }
 
-		jobject iteratorObject = env->CallObjectMethod(jVkQueueCreateInfoCollection, iteratorMethodId);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Failed on CallObjectMethod for iterator");
-			return;
-		}
+        ////////////////////////////////////////////////////////////////////////
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDeviceQueueCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
+            return;
+        }
 
-		jclass iteratorClass = env->GetObjectClass(iteratorObject);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not get object class for iterator");
-			return;
-		}
+        ////////////////////////////////////////////////////////////////////////
+        jobject jpNextObject = getpNextObject(env, jVkDeviceQueueCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
+            return;
+        }
 
-		jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not get methodId for hasNext");
-			return;
-		}
+        void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return;
+            }
+        }
 
-		jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not get methodId for next");
-			return;
-		}
+        ////////////////////////////////////////////////////////////////////////
+        jmethodID methodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id getFlags.");
+            return;
+        }
 
-		jclass vkDeviceQueueCreateInfoClass = nullptr;
-		jmethodID getpNextMethodId = nullptr;
-		jmethodID getFlagsMethodId = nullptr;
-		jmethodID getQueueFamilyIndexMethodId = nullptr;
-		jmethodID getQueueCountMethodId = nullptr;
-		jmethodID getQueuePrioritiesMethodId = nullptr;
-		int i = 0;
-		do
-		{
-			jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallBooleanMethod for iterator");
-				break;
-			}
+        jobject flagsObject = env->CallObjectMethod(jVkDeviceQueueCreateInfoObject, methodId);
+        VkDeviceQueueCreateFlags flags = (VkDeviceQueueCreateFlags)getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
+    	LOGERROR(env, "%s", "Failed calling getEnumSetValue.");
 
-			if (hasNext == false)
-			{
-				break;
-			}
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueFamilyIndex", "()I");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id getQueueFamilyIndex.");
+            return;
+        }
 
-			jobject vkDeviceQueueCreateInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallObjectMethod for iterator");
-				break;
-			}
+        jint queueFamilyIndex = env->CallIntMethod(jVkDeviceQueueCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to CallIntMethod failed.");
+            return;
+        }
 
-			if(i == 0)
-			{
-				vkDeviceQueueCreateInfoClass = env->GetObjectClass(vkDeviceQueueCreateInfoObject);
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Failed on GetObjectClass for vkDeviceQueueCreateInfoObject");
-					break;
-				}
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueCount", "()I");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id getQueueCount.");
+            return;
+        }
 
-//				getpNextMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getpNext", "()J");
-//				if (env->ExceptionOccurred())
-//				{
-//					LOGERROR(env, "%s", "Could not get methodId for getpNext");
-//					break;
-//				}
-//
-				getFlagsMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Could not get methodId for getFlags");
-					break;
-				}
+        jint queueCount = env->CallLongMethod(jVkDeviceQueueCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to CallIntMethod failed.");
+            return;
+        }
 
-				getQueueFamilyIndexMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueFamilyIndex", "()I");
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Could not get methodId for getQueueFamilyIndex");
-					break;
-				}
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueuePriorities", "()[F");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id getQueuePriorities.");
+            return;
+        }
 
-				getQueueCountMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueueCount", "()I");
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Could not get methodId for getQueueCount");
-					break;
-				}
+        jfloatArray jQueuePriorities = (jfloatArray)env->CallObjectMethod(jVkDeviceQueueCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
+            return;
+        }
 
-				getQueuePrioritiesMethodId = env->GetMethodID(vkDeviceQueueCreateInfoClass, "getQueuePriorities", "()[F");
-				if (env->ExceptionOccurred())
-				{
-					LOGERROR(env, "%s", "Could not get methodId for getQueuePriorities");
-					break;
-				}
-			}
+        float *queuePrioritiesArray = nullptr;
+        jsize arrayLength = 0;
+        if (jQueuePriorities != nullptr)
+        {
+            arrayLength = env->GetArrayLength(jQueuePriorities);
 
-			int sTypeValue = getSTypeAsInt(env, vkDeviceQueueCreateInfoObject);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on getSTypeAsInt for vkDeviceQueueCreateInfoObject");
-				return;
-			}
+            queuePrioritiesArray = (float *)calloc(arrayLength, sizeof(float));
+            memoryToFree->push_back(queuePrioritiesArray);
 
-	        jobject pNextObject = getpNextObject(env, vkDeviceQueueCreateInfoObject);
-	        if (env->ExceptionOccurred())
-	        {
-	        	LOGERROR(env, "%s", "Call to getpNext failed.");
-	            return;
-	        }
+            env->GetFloatArrayRegion(jQueuePriorities, 0, arrayLength, queuePrioritiesArray);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to GetFloatArrayRegion failed.");
+                return;
+            }
+        }
 
-	        if (pNextObject != nullptr)
-	        {
-	        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-	            return;
-	        }
 
-	        void *pNext = nullptr;
-
-//			jlong pNext = env->CallLongMethod(vkDeviceQueueCreateInfoObject, getpNextMethodId);
-//			if (env->ExceptionOccurred())
-//			{
-//				LOGERROR(env, "%s", "Failed on CallLongMethod for pNext");
-//				break;
-//			}
-//
-			jobject flagsObject = env->CallObjectMethod(vkDeviceQueueCreateInfoObject, getFlagsMethodId);
-			int32_t flags = getEnumSetValue(
-					env,
-					flagsObject,
-					"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
-
-			jint queueFamilyIndex = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueFamilyIndexMethodId);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallIntMethod for queueFamilyIndex");
-				break;
-			}
-
-			jint queueCount = env->CallIntMethod(vkDeviceQueueCreateInfoObject, getQueueCountMethodId);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallIntMethod for queueCount");
-				break;
-			}
-
-			jfloatArray queuePrioritiesArray = (jfloatArray)env->CallObjectMethod(vkDeviceQueueCreateInfoObject, getQueuePrioritiesMethodId);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "%s", "Failed on CallObjectMethod for queuePriorities");
-				break;
-			}
-
-			jsize sizeOfQueuePriorities = env->GetArrayLength(queuePrioritiesArray);
-			if (sizeOfQueuePriorities != queueCount)
-			{
-				LOGERROR(env, "%s", "Failed on GetArrayLength for queuePrioritiesArray");
-			}
-
-			float *data = env->GetFloatArrayElements(queuePrioritiesArray, 0);
-			float *heapQueuePriorities = (float *)calloc((size_t)sizeOfQueuePriorities, sizeof(float));
-			memoryToFree->push_back(heapQueuePriorities);
-			if (data != nullptr)
-			{
-				memcpy(heapQueuePriorities, data, sizeOfQueuePriorities * sizeof(float));
-				env->ReleaseFloatArrayElements(queuePrioritiesArray, data, JNI_ABORT);
-			}
-
-			queueCreateInfo[i].sType = (VkStructureType)sTypeValue;
-			queueCreateInfo[i].pNext = (const void *)pNext;
-			queueCreateInfo[i].flags = flags;
-			queueCreateInfo[i].queueFamilyIndex = queueFamilyIndex;
-			queueCreateInfo[i].queueCount = queueCount;
-			queueCreateInfo[i].pQueuePriorities = heapQueuePriorities;
-
-			i++;
-		} while(true);
+        vkDeviceQueueCreateInfo->sType   = sTypeValue;
+        vkDeviceQueueCreateInfo->pNext   = pNext;
+        vkDeviceQueueCreateInfo->flags   = flags;
+        vkDeviceQueueCreateInfo->queueFamilyIndex = queueFamilyIndex;
+        vkDeviceQueueCreateInfo->queueCount = queueCount;
+        vkDeviceQueueCreateInfo->pQueuePriorities = queuePrioritiesArray;
 	}
 }

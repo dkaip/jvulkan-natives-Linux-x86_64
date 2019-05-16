@@ -20,8 +20,8 @@
 
 using namespace std;
 
-void jobjectToVkPhysicalDeviceFeatures(JNIEnv *env, jobject jPhysicalDeviceFeatures, VkPhysicalDeviceFeatures *vkPDF);
-
+//void jobjectToVkPhysicalDeviceFeatures(JNIEnv *env, jobject jPhysicalDeviceFeatures, VkPhysicalDeviceFeatures *vkPDF);
+//
 namespace jvulkan
 {
 //    void collectionOfStringsToAOPTC(
@@ -270,136 +270,136 @@ namespace jvulkan
 ////        cout << "Got API Version " << apiVersion << endl;
 //	}
 
-    void getVkDeviceCreateInfo(
-            JNIEnv *env,
-            const jobject jVkDeviceCreateInfo,
-            VkDeviceCreateInfo *deviceCreateInfo,
-            std::vector<void *> *memoryToFree)
-    {
-        jclass vkDeviceCreateInfoClass = env->GetObjectClass(jVkDeviceCreateInfo);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        int sTypeValue = getSTypeAsInt(env, jVkDeviceCreateInfo);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkDeviceCreateInfo);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Call to getpNext failed.");
-            return;
-        }
-
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
-        void *pNext = nullptr;
-
-        jmethodID methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject flagsObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
-        int32_t flags = getEnumSetValue(
-                env,
-                flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceCreateFlagBits");
-
-        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledLayerNames", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject layerNamesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-//        cout << "Finished to here" << endl;
-        char **arrayOfPointersToLayerNames = nullptr;
-        int numberOfLayerNames = 0;
+//    void getVkDeviceCreateInfo(
+//            JNIEnv *env,
+//            const jobject jVkDeviceCreateInfo,
+//            VkDeviceCreateInfo *deviceCreateInfo,
+//            std::vector<void *> *memoryToFree)
+//    {
+//        jclass vkDeviceCreateInfoClass = env->GetObjectClass(jVkDeviceCreateInfo);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        int sTypeValue = getSTypeAsInt(env, jVkDeviceCreateInfo);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        jobject pNextObject = getpNextObject(env, jVkDeviceCreateInfo);
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Call to getpNext failed.");
+//            return;
+//        }
+//
+//        if (pNextObject != nullptr)
+//        {
+//        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+//            return;
+//        }
+//
+//        void *pNext = nullptr;
+//
+//        jmethodID methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject flagsObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
+//        int32_t flags = getEnumSetValue(
+//                env,
+//                flagsObject,
+//                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceCreateFlagBits");
+//
+//        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledLayerNames", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject layerNamesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+////        cout << "Finished to here" << endl;
+//        char **arrayOfPointersToLayerNames = nullptr;
+//        int numberOfLayerNames = 0;
+////        if (layerNamesObject != nullptr)
+////        {
+////            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+////            if (env->ExceptionOccurred())
+////            {
+////                return;
+////            }
+////        }
+//
 //        if (layerNamesObject != nullptr)
 //        {
-//            collectionOfStringsToAOPTC(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+//        	getStringCollection(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
+//            if (env->ExceptionOccurred())
+//            {
+//				LOGERROR(env, "%s", "Error calling getStringCollection");
+//                return;
+//            }
+//        }
+//
+//        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledExtensionNames", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject extensionNamesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        char **arrayOfPointersToExtensionNames = nullptr;
+//        int numberOfExtensionNames = 0;
+//        if (extensionNamesObject != nullptr)
+//        {
+//        	getStringCollection(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
 //            if (env->ExceptionOccurred())
 //            {
 //                return;
 //            }
 //        }
-
-        if (layerNamesObject != nullptr)
-        {
-        	getStringCollection(env, layerNamesObject, &arrayOfPointersToLayerNames, &numberOfLayerNames, memoryToFree);
-            if (env->ExceptionOccurred())
-            {
-				LOGERROR(env, "%s", "Error calling getStringCollection");
-                return;
-            }
-        }
-
-        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledExtensionNames", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject extensionNamesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        char **arrayOfPointersToExtensionNames = nullptr;
-        int numberOfExtensionNames = 0;
-        if (extensionNamesObject != nullptr)
-        {
-        	getStringCollection(env, extensionNamesObject, &arrayOfPointersToExtensionNames, &numberOfExtensionNames, memoryToFree);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-        }
-
-        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject physicalDeviceFeaturesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        VkPhysicalDeviceFeatures *physicalDeviceFeatures = (VkPhysicalDeviceFeatures *)calloc(1, sizeof(VkPhysicalDeviceFeatures));
-        memoryToFree->push_back(physicalDeviceFeatures);
-
-        jobjectToVkPhysicalDeviceFeatures(env, physicalDeviceFeaturesObject, physicalDeviceFeatures);
-
-        deviceCreateInfo->sType = (VkStructureType)sTypeValue;
-        deviceCreateInfo->pNext = (void *)pNext;
-        deviceCreateInfo->flags = flags;
-        deviceCreateInfo->enabledLayerCount = numberOfLayerNames;
-        deviceCreateInfo->ppEnabledLayerNames = arrayOfPointersToLayerNames;
-        deviceCreateInfo->enabledExtensionCount = numberOfExtensionNames;
-        deviceCreateInfo->ppEnabledExtensionNames = arrayOfPointersToExtensionNames;
-        deviceCreateInfo->pEnabledFeatures = physicalDeviceFeatures;
-    }
-
+//
+//        methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject physicalDeviceFeaturesObject = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        VkPhysicalDeviceFeatures *physicalDeviceFeatures = (VkPhysicalDeviceFeatures *)calloc(1, sizeof(VkPhysicalDeviceFeatures));
+//        memoryToFree->push_back(physicalDeviceFeatures);
+//
+//        jobjectToVkPhysicalDeviceFeatures(env, physicalDeviceFeaturesObject, physicalDeviceFeatures);
+//
+//        deviceCreateInfo->sType = (VkStructureType)sTypeValue;
+//        deviceCreateInfo->pNext = (void *)pNext;
+//        deviceCreateInfo->flags = flags;
+//        deviceCreateInfo->enabledLayerCount = numberOfLayerNames;
+//        deviceCreateInfo->ppEnabledLayerNames = arrayOfPointersToLayerNames;
+//        deviceCreateInfo->enabledExtensionCount = numberOfExtensionNames;
+//        deviceCreateInfo->ppEnabledExtensionNames = arrayOfPointersToExtensionNames;
+//        deviceCreateInfo->pEnabledFeatures = physicalDeviceFeatures;
+//    }
+//
     /*
      * Accept a Java Collection of Strings and return a pointer to an array of
      * pointers to "c" string AND the number of "strings" in the array.

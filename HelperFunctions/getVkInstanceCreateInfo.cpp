@@ -54,7 +54,6 @@ namespace jvulkan
             return;
         }
 
-        LOGINFO(env, "pNext is:", jpNextObject);
         void *pNext = nullptr;
         if (jpNextObject != nullptr)
         {
@@ -74,6 +73,7 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkInstanceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id getFlags.");
             return;
         }
 
@@ -82,6 +82,11 @@ namespace jvulkan
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue");
+            return;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         VkApplicationInfo *vkApplicationInfo = (VkApplicationInfo *)calloc(1, sizeof(VkApplicationInfo));

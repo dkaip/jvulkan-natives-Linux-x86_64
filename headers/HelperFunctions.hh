@@ -43,13 +43,6 @@ namespace jvulkan
             const jobject jAlternateAllocator,
             VkAllocationCallbacks *allocatorCallbacks);
 
-    void getVkDeviceQueueCreateInfo(
-            JNIEnv *env,
-            const jclass jVkQueueCreateInfoCollectionClass,
-            const jobject jVkQueueCreateInfoCollection,
-            VkDeviceQueueCreateInfo queueCreateInfo[],
-            std::vector<void *> *memoryToFree);
-
     void getVkDeviceCreateInfo(
             JNIEnv *env,
             const jobject jVkDeviceCreateInfo,
@@ -83,6 +76,12 @@ namespace jvulkan
     jobject getVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags);
 
     jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags);
+
+    void getVkPhysicalDeviceFeatures(
+            JNIEnv *env,
+            const jobject jgetVkPhysicalDeviceFeaturesObject,
+			VkPhysicalDeviceFeatures *vkPhysicalDeviceFeatures,
+            std::vector<void *> *memoryToFree);
 
     void getSwapchainCreateInfoKHR(
             JNIEnv *env,
@@ -1227,7 +1226,13 @@ namespace jvulkan
 			const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT,
 			std::vector<void *> *memoryToFree);
 
-    jobject getVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags);
+	void populateVkPhysicalDeviceFeatures(
+		JNIEnv *env,
+		jobject jVkPhysicalDeviceFeaturesObject,
+		const VkPhysicalDeviceFeatures *vkPhysicalDeviceFeatures,
+		std::vector<void *> *memoryToFree);
+
+	jobject getVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags);
 
     jobject getVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR);
 
@@ -1238,6 +1243,19 @@ namespace jvulkan
     jobject getVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
 
     jobject getVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags);
+
+    void getVkDeviceQueueCreateInfo(
+            JNIEnv *env,
+            const jobject jVkQueueCreateInfoCollection,
+            VkDeviceQueueCreateInfo queueCreateInfo[],
+            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceQueueCreateInfoCollection(
+            JNIEnv *env,
+            const jobject jVkDeviceQueueCreateInfoCollectionObject,
+			VkDeviceQueueCreateInfo **vkDeviceQueueCreateInfos,
+            int *numberOfVkDeviceQueueCreateInfos,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

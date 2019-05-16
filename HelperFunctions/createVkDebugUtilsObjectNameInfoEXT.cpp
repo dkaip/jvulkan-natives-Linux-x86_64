@@ -30,13 +30,28 @@ namespace jvulkan
 		// Locate the VkDebugUtilsMessengerCallbackDataEXT class
 		jclass vkDebugUtilsObjectNameInfoEXTclass = env->FindClass(
 				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT\"");
+			return nullptr;
+		}
 
 		// Locate the constructor
 		jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "<init>", "()V");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying to get methodId of <init>");
+			return nullptr;
+		}
 
 		// Create the Java vkDebugUtilsObjectNameInfoEXTObject object
 		jobject vkDebugUtilsObjectNameInfoEXTObject =
 				env->NewObject(vkDebugUtilsObjectNameInfoEXTclass, methodId);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Failed trying create new vkDebugUtilsObjectNameInfoEXTObject");
+			return nullptr;
+		}
 
 		////////////////////////////////////////////////////////////////////////
 		jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType");

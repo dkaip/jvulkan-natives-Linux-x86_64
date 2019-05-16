@@ -22,6 +22,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -34,6 +35,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get physicalDeviceHandle");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -44,66 +46,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    jclass vkDeviceCreateInfoClass = env->GetObjectClass(jVkDeviceCreateInfo);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jmethodID methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getQueueCreateInfos", "()Ljava/util/Collection;");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jobject jVkDeviceQueueCreateInfoObjects = env->CallObjectMethod(jVkDeviceCreateInfo, methodId);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jclass collectionClass = env->FindClass("java/util/Collection");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    methodId = env->GetMethodID(collectionClass, "size", "()I");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jint deviceQueueCreateInfoObjectsSize = env->CallIntMethod(jVkDeviceQueueCreateInfoObjects, methodId);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    VkDeviceQueueCreateInfo queueCreateInfos[deviceQueueCreateInfoObjectsSize] = {};
-
     std::vector<void *> memoryToFree(30);
-
-    jvulkan::getVkDeviceQueueCreateInfo(env,
-            collectionClass,
-            jVkDeviceQueueCreateInfoObjects,
-            queueCreateInfos,
-            &memoryToFree);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
     VkDeviceCreateInfo deviceCreateInfo = {};
-
-    jvulkan::getVkDeviceCreateInfo(env, jVkDeviceCreateInfo, &deviceCreateInfo, &memoryToFree);
+    jvulkan::getVkDeviceCreateInfo(
+    		env,
+			jVkDeviceCreateInfo,
+			&deviceCreateInfo,
+			&memoryToFree);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
-
-    deviceCreateInfo.pQueueCreateInfos = queueCreateInfos;
-    deviceCreateInfo.queueCreateInfoCount = deviceQueueCreateInfoObjectsSize;
 
     VkDevice vkDevice;
     VkResult result = vkCreateDevice(physicalDeviceHandle, &deviceCreateInfo, allocatorCallbacks, &vkDevice);
