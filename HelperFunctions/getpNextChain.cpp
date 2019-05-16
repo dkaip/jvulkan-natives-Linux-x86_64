@@ -25,6 +25,42 @@
 
 namespace jvulkan
 {
+	void getpNextChain(
+		JNIEnv *env,
+		jobject jVulkanCreateInfoStructureObject,
+		void  **headOfpNextChain,
+		std::vector<void *> *memoryToFree);
+
+	static void *getpNext(
+			JNIEnv *env,
+			jobject jVulkanCreateInfoStructureObject,
+			std::vector<void *> *memoryToFree)
+	{
+        jobject jpNextObject = getpNextObject(env, jVulkanCreateInfoStructureObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNextObject failed.");
+            return nullptr;
+        }
+
+        void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return nullptr;
+            }
+        }
+
+        return pNext;
+	}
+
 	/*
 	 * The purpose of this function is to "run" the pNext chain of Java
 	 * VulkanCreateInfoStructure objects and return a "chain" of LunarG SDK
@@ -96,19 +132,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT = (VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT);
-	        	vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(
-	                env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT,
-	                memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT;
 			}
 			break;
@@ -118,19 +151,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceConservativeRasterizationPropertiesEXT *vkPhysicalDeviceConservativeRasterizationPropertiesEXT = (VkPhysicalDeviceConservativeRasterizationPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceConservativeRasterizationPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceConservativeRasterizationPropertiesEXT);
-	        	vkPhysicalDeviceConservativeRasterizationPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceConservativeRasterizationPropertiesEXT(
-	                env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceConservativeRasterizationPropertiesEXT,
-	                memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceConservativeRasterizationPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceConservativeRasterizationPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceConservativeRasterizationPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceConservativeRasterizationPropertiesEXT;
 			}
 			break;
@@ -140,19 +170,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceShaderCorePropertiesAMD *vkPhysicalDeviceShaderCorePropertiesAMD = (VkPhysicalDeviceShaderCorePropertiesAMD *)calloc(1, sizeof(VkPhysicalDeviceShaderCorePropertiesAMD));
 	        	memoryToFree->push_back(vkPhysicalDeviceShaderCorePropertiesAMD);
-	        	vkPhysicalDeviceShaderCorePropertiesAMD->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
 
-	        	getVkPhysicalDeviceShaderCorePropertiesAMD(
-	                env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceShaderCorePropertiesAMD,
-	                memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceShaderCorePropertiesAMD");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceShaderCorePropertiesAMD->sType	= sTypeValue;
+	            vkPhysicalDeviceShaderCorePropertiesAMD->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceShaderCorePropertiesAMD;
 			}
 			break;
@@ -162,19 +189,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceMultiviewProperties *vkPhysicalDeviceMultiviewProperties = (VkPhysicalDeviceMultiviewProperties *)calloc(1, sizeof(VkPhysicalDeviceMultiviewProperties));
 	        	memoryToFree->push_back(vkPhysicalDeviceMultiviewProperties);
-	        	vkPhysicalDeviceMultiviewProperties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES;
 
-	        	getVkPhysicalDeviceMultiviewProperties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-	        		vkPhysicalDeviceMultiviewProperties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMultiviewProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceMultiviewProperties->sType	= sTypeValue;
+	            vkPhysicalDeviceMultiviewProperties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceMultiviewProperties;
 			}
 			break;
@@ -184,19 +208,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceCooperativeMatrixPropertiesNV *vkPhysicalDeviceCooperativeMatrixPropertiesNV = (VkPhysicalDeviceCooperativeMatrixPropertiesNV *)calloc(1, sizeof(VkPhysicalDeviceCooperativeMatrixPropertiesNV));
 	        	memoryToFree->push_back(vkPhysicalDeviceCooperativeMatrixPropertiesNV);
-	        	vkPhysicalDeviceCooperativeMatrixPropertiesNV->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV;
 
-	        	getVkPhysicalDeviceCooperativeMatrixPropertiesNV(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceCooperativeMatrixPropertiesNV,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMultiviewProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceCooperativeMatrixPropertiesNV->sType	= sTypeValue;
+	            vkPhysicalDeviceCooperativeMatrixPropertiesNV->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceCooperativeMatrixPropertiesNV;
 			}
 			break;
@@ -206,19 +227,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceDepthStencilResolvePropertiesKHR *vkPhysicalDeviceDepthStencilResolvePropertiesKHR = (VkPhysicalDeviceDepthStencilResolvePropertiesKHR *)calloc(1, sizeof(VkPhysicalDeviceDepthStencilResolvePropertiesKHR));
 	        	memoryToFree->push_back(vkPhysicalDeviceDepthStencilResolvePropertiesKHR);
-	        	vkPhysicalDeviceDepthStencilResolvePropertiesKHR->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR;
 
-	        	getVkPhysicalDeviceDepthStencilResolvePropertiesKHR(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceDepthStencilResolvePropertiesKHR,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMultiviewProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceDepthStencilResolvePropertiesKHR->sType	= sTypeValue;
+	            vkPhysicalDeviceDepthStencilResolvePropertiesKHR->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceDepthStencilResolvePropertiesKHR;
 			}
 			break;
@@ -228,19 +246,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceDescriptorIndexingPropertiesEXT *vkPhysicalDeviceDescriptorIndexingPropertiesEXT = (VkPhysicalDeviceDescriptorIndexingPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceDescriptorIndexingPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceDescriptorIndexingPropertiesEXT);
-	        	vkPhysicalDeviceDescriptorIndexingPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceDescriptorIndexingPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceDescriptorIndexingPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMultiviewProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceDescriptorIndexingPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceDescriptorIndexingPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceDescriptorIndexingPropertiesEXT;
 			}
 			break;
@@ -250,19 +265,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceDiscardRectanglePropertiesEXT *vkPhysicalDeviceDiscardRectanglePropertiesEXT = (VkPhysicalDeviceDiscardRectanglePropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceDiscardRectanglePropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceDiscardRectanglePropertiesEXT);
-	        	vkPhysicalDeviceDiscardRectanglePropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceDiscardRectanglePropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceDiscardRectanglePropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceDiscardRectanglePropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceDiscardRectanglePropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceDiscardRectanglePropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceDiscardRectanglePropertiesEXT;
 			}
 			break;
@@ -272,19 +284,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceDriverPropertiesKHR *vkPhysicalDeviceDriverPropertiesKHR = (VkPhysicalDeviceDriverPropertiesKHR *)calloc(1, sizeof(VkPhysicalDeviceDriverPropertiesKHR));
 	        	memoryToFree->push_back(vkPhysicalDeviceDriverPropertiesKHR);
-	        	vkPhysicalDeviceDriverPropertiesKHR->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR;
 
-	        	getVkPhysicalDeviceDriverPropertiesKHR(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceDriverPropertiesKHR,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceDriverPropertiesKHR");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceDriverPropertiesKHR->sType	= sTypeValue;
+	            vkPhysicalDeviceDriverPropertiesKHR->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceDriverPropertiesKHR;
 			}
 			break;
@@ -294,19 +303,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceExternalMemoryHostPropertiesEXT *vkPhysicalDeviceExternalMemoryHostPropertiesEXT = (VkPhysicalDeviceExternalMemoryHostPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceExternalMemoryHostPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceExternalMemoryHostPropertiesEXT);
-	        	vkPhysicalDeviceExternalMemoryHostPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceExternalMemoryHostPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceExternalMemoryHostPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceExternalMemoryHostPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceExternalMemoryHostPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceExternalMemoryHostPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceExternalMemoryHostPropertiesEXT;
 			}
 			break;
@@ -316,19 +322,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceFloatControlsPropertiesKHR *vkPhysicalDeviceFloatControlsPropertiesKHR = (VkPhysicalDeviceFloatControlsPropertiesKHR *)calloc(1, sizeof(VkPhysicalDeviceFloatControlsPropertiesKHR));
 	        	memoryToFree->push_back(vkPhysicalDeviceFloatControlsPropertiesKHR);
-	        	vkPhysicalDeviceFloatControlsPropertiesKHR->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR;
 
-	        	getVkPhysicalDeviceFloatControlsPropertiesKHR(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceFloatControlsPropertiesKHR,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceFloatControlsPropertiesKHR");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceFloatControlsPropertiesKHR->sType	= sTypeValue;
+	            vkPhysicalDeviceFloatControlsPropertiesKHR->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceFloatControlsPropertiesKHR;
 			}
 			break;
@@ -338,19 +341,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceFragmentDensityMapPropertiesEXT *vkPhysicalDeviceFragmentDensityMapPropertiesEXT = (VkPhysicalDeviceFragmentDensityMapPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceFragmentDensityMapPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceFragmentDensityMapPropertiesEXT);
-	        	vkPhysicalDeviceFragmentDensityMapPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceFragmentDensityMapPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceFragmentDensityMapPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceFragmentDensityMapPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceFragmentDensityMapPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceFragmentDensityMapPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceFragmentDensityMapPropertiesEXT;
 			}
 			break;
@@ -360,19 +360,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceIDProperties *vkPhysicalDeviceIDProperties = (VkPhysicalDeviceIDProperties *)calloc(1, sizeof(VkPhysicalDeviceIDProperties));
 	        	memoryToFree->push_back(vkPhysicalDeviceIDProperties);
-	        	vkPhysicalDeviceIDProperties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
 
-	        	getVkPhysicalDeviceIDProperties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceIDProperties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceIDProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceIDProperties->sType	= sTypeValue;
+	            vkPhysicalDeviceIDProperties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceIDProperties;
 			}
 			break;
@@ -382,19 +379,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceInlineUniformBlockPropertiesEXT *vkPhysicalDeviceInlineUniformBlockPropertiesEXT = (VkPhysicalDeviceInlineUniformBlockPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceInlineUniformBlockPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceInlineUniformBlockPropertiesEXT);
-	        	vkPhysicalDeviceInlineUniformBlockPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceInlineUniformBlockPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceInlineUniformBlockPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceInlineUniformBlockPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceInlineUniformBlockPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceInlineUniformBlockPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceInlineUniformBlockPropertiesEXT;
 			}
 			break;
@@ -404,19 +398,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceMaintenance3Properties *vkPhysicalDeviceMaintenance3Properties = (VkPhysicalDeviceMaintenance3Properties *)calloc(1, sizeof(VkPhysicalDeviceMaintenance3Properties));
 	        	memoryToFree->push_back(vkPhysicalDeviceMaintenance3Properties);
-	        	vkPhysicalDeviceMaintenance3Properties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
 
-	        	getVkPhysicalDeviceMaintenance3Properties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceMaintenance3Properties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMaintenance3Properties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceMaintenance3Properties->sType	= sTypeValue;
+	            vkPhysicalDeviceMaintenance3Properties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceMaintenance3Properties;
 			}
 			break;
@@ -426,19 +417,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceMeshShaderPropertiesNV *vkPhysicalDeviceMeshShaderPropertiesNV = (VkPhysicalDeviceMeshShaderPropertiesNV *)calloc(1, sizeof(VkPhysicalDeviceMeshShaderPropertiesNV));
 	        	memoryToFree->push_back(vkPhysicalDeviceMeshShaderPropertiesNV);
-	        	vkPhysicalDeviceMeshShaderPropertiesNV->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV;
 
-	        	getVkPhysicalDeviceMeshShaderPropertiesNV(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceMeshShaderPropertiesNV,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMeshShaderPropertiesNV");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceMeshShaderPropertiesNV->sType	= sTypeValue;
+	            vkPhysicalDeviceMeshShaderPropertiesNV->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceMeshShaderPropertiesNV;
 			}
 			break;
@@ -448,19 +436,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX *vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX = (VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX *)calloc(1, sizeof(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX));
 	        	memoryToFree->push_back(vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX);
-	        	vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX;
 
-	        	getVkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX->sType	= sTypeValue;
+	            vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;
 			}
 			break;
@@ -470,19 +455,16 @@ namespace jvulkan
 
 	        	VkPhysicalDevicePCIBusInfoPropertiesEXT *vkPhysicalDevicePCIBusInfoPropertiesEXT = (VkPhysicalDevicePCIBusInfoPropertiesEXT *)calloc(1, sizeof(VkPhysicalDevicePCIBusInfoPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDevicePCIBusInfoPropertiesEXT);
-	        	vkPhysicalDevicePCIBusInfoPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT;
 
-	        	getVkPhysicalDevicePCIBusInfoPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDevicePCIBusInfoPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDevicePCIBusInfoPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDevicePCIBusInfoPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDevicePCIBusInfoPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDevicePCIBusInfoPropertiesEXT;
 			}
 			break;
@@ -492,19 +474,16 @@ namespace jvulkan
 
 	        	VkPhysicalDevicePointClippingProperties *vkPhysicalDevicePointClippingProperties = (VkPhysicalDevicePointClippingProperties *)calloc(1, sizeof(VkPhysicalDevicePointClippingProperties));
 	        	memoryToFree->push_back(vkPhysicalDevicePointClippingProperties);
-	        	vkPhysicalDevicePointClippingProperties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
 
-	        	getVkPhysicalDevicePointClippingProperties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDevicePointClippingProperties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDevicePointClippingProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDevicePointClippingProperties->sType	= sTypeValue;
+	            vkPhysicalDevicePointClippingProperties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDevicePointClippingProperties;
 			}
 			break;
@@ -514,19 +493,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceProtectedMemoryProperties *vkPhysicalDeviceProtectedMemoryProperties = (VkPhysicalDeviceProtectedMemoryProperties *)calloc(1, sizeof(VkPhysicalDeviceProtectedMemoryProperties));
 	        	memoryToFree->push_back(vkPhysicalDeviceProtectedMemoryProperties);
-	        	vkPhysicalDeviceProtectedMemoryProperties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
 
-	        	getVkPhysicalDeviceProtectedMemoryProperties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceProtectedMemoryProperties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceProtectedMemoryProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceProtectedMemoryProperties->sType	= sTypeValue;
+	            vkPhysicalDeviceProtectedMemoryProperties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceProtectedMemoryProperties;
 			}
 			break;
@@ -536,19 +512,16 @@ namespace jvulkan
 
 	        	VkPhysicalDevicePushDescriptorPropertiesKHR *vkPhysicalDevicePushDescriptorPropertiesKHR = (VkPhysicalDevicePushDescriptorPropertiesKHR *)calloc(1, sizeof(VkPhysicalDevicePushDescriptorPropertiesKHR));
 	        	memoryToFree->push_back(vkPhysicalDevicePushDescriptorPropertiesKHR);
-	        	vkPhysicalDevicePushDescriptorPropertiesKHR->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
 
-	        	getVkPhysicalDevicePushDescriptorPropertiesKHR(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDevicePushDescriptorPropertiesKHR,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDevicePushDescriptorPropertiesKHR");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDevicePushDescriptorPropertiesKHR->sType	= sTypeValue;
+	            vkPhysicalDevicePushDescriptorPropertiesKHR->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDevicePushDescriptorPropertiesKHR;
 			}
 			break;
@@ -558,19 +531,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceRayTracingPropertiesNV *vkPhysicalDeviceRayTracingPropertiesNV = (VkPhysicalDeviceRayTracingPropertiesNV *)calloc(1, sizeof(VkPhysicalDeviceRayTracingPropertiesNV));
 	        	memoryToFree->push_back(vkPhysicalDeviceRayTracingPropertiesNV);
-	        	vkPhysicalDeviceRayTracingPropertiesNV->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV;
 
-	        	getVkPhysicalDeviceRayTracingPropertiesNV(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceRayTracingPropertiesNV,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceRayTracingPropertiesNV");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceRayTracingPropertiesNV->sType	= sTypeValue;
+	            vkPhysicalDeviceRayTracingPropertiesNV->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceRayTracingPropertiesNV;
 			}
 			break;
@@ -580,19 +550,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceSampleLocationsPropertiesEXT *vkPhysicalDeviceSampleLocationsPropertiesEXT = (VkPhysicalDeviceSampleLocationsPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceSampleLocationsPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceSampleLocationsPropertiesEXT);
-	        	vkPhysicalDeviceSampleLocationsPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceSampleLocationsPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceSampleLocationsPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceSampleLocationsPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceSampleLocationsPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceSampleLocationsPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceSampleLocationsPropertiesEXT;
 			}
 			break;
@@ -602,19 +569,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT *vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT = (VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT);
-	        	vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT;
 			}
 			break;
@@ -624,19 +588,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceShadingRateImagePropertiesNV *vkPhysicalDeviceShadingRateImagePropertiesNV = (VkPhysicalDeviceShadingRateImagePropertiesNV *)calloc(1, sizeof(VkPhysicalDeviceShadingRateImagePropertiesNV));
 	        	memoryToFree->push_back(vkPhysicalDeviceShadingRateImagePropertiesNV);
-	        	vkPhysicalDeviceShadingRateImagePropertiesNV->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV;
 
-	        	getVkPhysicalDeviceShadingRateImagePropertiesNV(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceShadingRateImagePropertiesNV,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceShadingRateImagePropertiesNV");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceShadingRateImagePropertiesNV->sType	= sTypeValue;
+	            vkPhysicalDeviceShadingRateImagePropertiesNV->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceShadingRateImagePropertiesNV;
 			}
 			break;
@@ -646,19 +607,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceSubgroupProperties *vkPhysicalDeviceSubgroupProperties = (VkPhysicalDeviceSubgroupProperties *)calloc(1, sizeof(VkPhysicalDeviceSubgroupProperties));
 	        	memoryToFree->push_back(vkPhysicalDeviceSubgroupProperties);
-	        	vkPhysicalDeviceSubgroupProperties->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES;
 
-	        	getVkPhysicalDeviceSubgroupProperties(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceSubgroupProperties,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceSubgroupProperties");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceSubgroupProperties->sType	= sTypeValue;
+	            vkPhysicalDeviceSubgroupProperties->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceSubgroupProperties;
 			}
 			break;
@@ -668,19 +626,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceTransformFeedbackPropertiesEXT *vkPhysicalDeviceTransformFeedbackPropertiesEXT = (VkPhysicalDeviceTransformFeedbackPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceTransformFeedbackPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceTransformFeedbackPropertiesEXT);
-	        	vkPhysicalDeviceTransformFeedbackPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceTransformFeedbackPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceTransformFeedbackPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceTransformFeedbackPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceTransformFeedbackPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceTransformFeedbackPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceTransformFeedbackPropertiesEXT;
 			}
 			break;
@@ -690,19 +645,16 @@ namespace jvulkan
 
 	        	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT = (VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT));
 	        	memoryToFree->push_back(vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT);
-	        	vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT->sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT;
 
-	        	getVkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
-	        		env,
-					jVulkanCreateInfoStructureObject,
-					vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT,
-	        		memoryToFree);
+	            void *pNext = getpNext(env, jVulkanCreateInfoStructureObject, memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Failed on call to getVkPhysicalDeviceVertexAttributeDivisorPropertiesEXT");
+	            	LOGERROR(env, "%s", "Call to getpNext failed.");
 	                return;
 	            }
 
+	            vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT->sType	= sTypeValue;
+	            vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT->pNext	= pNext;
 	            *headOfpNextChain = vkPhysicalDeviceVertexAttributeDivisorPropertiesEXT;
 			}
 			break;
