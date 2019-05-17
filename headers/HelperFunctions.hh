@@ -1269,6 +1269,138 @@ namespace jvulkan
             jobject jVkDeviceGroupDeviceCreateInfoObject,
 			VkDeviceGroupDeviceCreateInfo *vkDeviceGroupDeviceCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkDeviceMemoryOverallocationCreateInfoAMD(
+            JNIEnv *env,
+            jobject jVkDeviceMemoryOverallocationCreateInfoAMDObject,
+			VkDeviceMemoryOverallocationCreateInfoAMD *vkDeviceMemoryOverallocationCreateInfoAMD,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevice16BitStorageFeatures(
+            JNIEnv *env,
+            const jobject jVkPhysicalDevice16BitStorageFeaturesObject,
+			VkPhysicalDevice16BitStorageFeatures *vkPhysicalDevice16BitStorageFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevice8BitStorageFeaturesKHR(
+            JNIEnv *env,
+            const jobject jVkPhysicalDevice8BitStorageFeaturesKHRObject,
+			VkPhysicalDevice8BitStorageFeaturesKHR *vkPhysicalDevice8BitStorageFeaturesKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceASTCDecodeFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceASTCDecodeFeaturesEXTObject,
+			VkPhysicalDeviceASTCDecodeFeaturesEXT *vkPhysicalDeviceASTCDecodeFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceBlendOperationAdvancedFeaturesEXTObject,
+			VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *vkPhysicalDeviceBlendOperationAdvancedFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceBufferDeviceAddressFeaturesEXTObject,
+			VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *vkPhysicalDeviceBufferDeviceAddressFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceComputeShaderDerivativesFeaturesNVObject,
+			VkPhysicalDeviceComputeShaderDerivativesFeaturesNV *vkPhysicalDeviceComputeShaderDerivativesFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceConditionalRenderingFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceConditionalRenderingFeaturesEXTObject,
+			VkPhysicalDeviceConditionalRenderingFeaturesEXT *vkPhysicalDeviceConditionalRenderingFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceCooperativeMatrixFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceCooperativeMatrixFeaturesNVObject,
+			VkPhysicalDeviceCooperativeMatrixFeaturesNV *vkPhysicalDeviceCooperativeMatrixFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
+			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVObject,
+			VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV *vkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceDepthClipEnableFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceDepthClipEnableFeaturesEXTObject,
+			VkPhysicalDeviceDepthClipEnableFeaturesEXT *vkPhysicalDeviceDepthClipEnableFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceDescriptorIndexingFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceDescriptorIndexingFeaturesEXTObject,
+			VkPhysicalDeviceDescriptorIndexingFeaturesEXT *vkPhysicalDeviceDescriptorIndexingFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceExclusiveScissorFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceExclusiveScissorFeaturesNVObject,
+			VkPhysicalDeviceExclusiveScissorFeaturesNV *vkPhysicalDeviceExclusiveScissorFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFeatures2(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceFeatures2Object,
+			VkPhysicalDeviceFeatures2 *vkPhysicalDeviceFeatures2,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFloat16Int8FeaturesKHR(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceFloat16Int8FeaturesKHRObject,
+			VkPhysicalDeviceFloat16Int8FeaturesKHR *vkPhysicalDeviceFloat16Int8FeaturesKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFragmentDensityMapFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceFragmentDensityMapFeaturesEXTObject,
+			VkPhysicalDeviceFragmentDensityMapFeaturesEXT *vkPhysicalDeviceFragmentDensityMapFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceFragmentShaderBarycentricFeaturesNVObject,
+			VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV *vkPhysicalDeviceFragmentShaderBarycentricFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceHostQueryResetFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceHostQueryResetFeaturesEXTObject,
+			VkPhysicalDeviceHostQueryResetFeaturesEXT *vkPhysicalDeviceHostQueryResetFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceInlineUniformBlockFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceInlineUniformBlockFeaturesEXTObject,
+			VkPhysicalDeviceInlineUniformBlockFeaturesEXT *vkPhysicalDeviceInlineUniformBlockFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceMemoryPriorityFeaturesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceMemoryPriorityFeaturesEXTObject,
+			VkPhysicalDeviceMemoryPriorityFeaturesEXT *vkPhysicalDeviceMemoryPriorityFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
+			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

@@ -191,18 +191,27 @@ namespace jvulkan
 			return;
 		}
 
-		VkPhysicalDeviceFeatures *physicalDeviceFeatures = (VkPhysicalDeviceFeatures *)calloc(1, sizeof(VkPhysicalDeviceFeatures));
-		memoryToFree->push_back(physicalDeviceFeatures);
-
-		getVkPhysicalDeviceFeatures(
-			env,
-			physicalDeviceFeaturesObject,
-			physicalDeviceFeatures,
-			memoryToFree);
-		if (env->ExceptionOccurred())
+		/*
+		 * It is okay if physicalDeviceFeaturesObject is nullptr.  If it is, it
+		 * is most likely because there is a VkPhysicalDeviceFeatures2 buried
+		 * in the pNext chain somewhere.
+		 */
+		VkPhysicalDeviceFeatures *physicalDeviceFeatures = nullptr;
+		if (physicalDeviceFeaturesObject != nullptr)
 		{
-        	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceFeatures");
-			return;
+			physicalDeviceFeatures = (VkPhysicalDeviceFeatures *)calloc(1, sizeof(VkPhysicalDeviceFeatures));
+			memoryToFree->push_back(physicalDeviceFeatures);
+
+			getVkPhysicalDeviceFeatures(
+				env,
+				physicalDeviceFeaturesObject,
+				physicalDeviceFeatures,
+				memoryToFree);
+			if (env->ExceptionOccurred())
+			{
+				LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceFeatures");
+				return;
+			}
 		}
 
 		deviceCreateInfo->sType = (VkStructureType)sTypeValue;
