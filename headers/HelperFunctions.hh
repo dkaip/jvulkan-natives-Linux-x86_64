@@ -49,7 +49,7 @@ namespace jvulkan
             VkDeviceCreateInfo *deviceCreateInfo,
             std::vector<void *> *memoryToFree);
 
-    int getSTypeAsInt(
+    VkStructureType getSTypeAsInt(
             JNIEnv *env,
             const jobject vulkanStructureObject);
 

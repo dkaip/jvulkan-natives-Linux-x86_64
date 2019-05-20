@@ -27,7 +27,7 @@ using namespace std;
 
 namespace jvulkan
 {
-    int getSTypeAsInt(
+	VkStructureType getSTypeAsInt(
             JNIEnv *env,
             const jobject vulkanStructureObject)
     {
@@ -35,44 +35,44 @@ namespace jvulkan
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
         jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getSType in class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
         jobject sTypeObject = env->CallObjectMethod(vulkanStructureObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
         jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
         methodId = env->GetMethodID(enumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id valueOf in class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkStructureType");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
         jint result = env->CallIntMethod(sTypeObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod for valueOf");
-            return -1;
+            return (VkStructureType)0x7FFFFFFF;
         }
 
-        return result;
+        return (VkStructureType)result;
     }
 }
