@@ -1509,6 +1509,12 @@ namespace jvulkan
             const jobject jVkExportFenceCreateInfoObject,
 			VkExportFenceCreateInfo *vkExportFenceCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkExportSemaphoreCreateInfo(
+            JNIEnv *env,
+            const jobject jVkExportSemaphoreCreateInfoObject,
+			VkExportSemaphoreCreateInfo *vkExportSemaphoreCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

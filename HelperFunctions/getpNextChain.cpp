@@ -1519,6 +1519,27 @@ namespace jvulkan
 	            *headOfpNextChain = vkExportFenceCreateInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO");
+
+	        	VkExportSemaphoreCreateInfo *vkExportSemaphoreCreateInfo = (VkExportSemaphoreCreateInfo *)calloc(1, sizeof(VkExportSemaphoreCreateInfo));
+	        	memoryToFree->push_back(vkExportSemaphoreCreateInfo);
+
+	            getVkExportSemaphoreCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExportSemaphoreCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExportSemaphoreCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExportSemaphoreCreateInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
