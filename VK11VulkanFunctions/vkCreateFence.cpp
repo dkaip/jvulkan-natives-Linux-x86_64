@@ -55,20 +55,28 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     ////////////////////////////////////////////////////////////////////////
-    jobject pNextObject = jvulkan::getpNextObject(env, jVkFenceCreateInfoObject);
+    jobject jpNextObject = jvulkan::getpNextObject(env, jVkFenceCreateInfoObject);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getpNext failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    if (pNextObject != nullptr)
-    {
-    	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
+    std::vector<void *> memoryToFree(5);
     void *pNext = nullptr;
+    if (jpNextObject != nullptr)
+    {
+    	jvulkan::getpNextChain(
+    			env,
+				jpNextObject,
+    			&pNext,
+    			&memoryToFree);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);;
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////
     jmethodID methodId = env->GetMethodID(vkFenceCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
@@ -90,6 +98,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     VkFence_T *fenceHandle = nullptr;
     int result = vkCreateFence(logicalDeviceHandle, &vkFenceCreateInfo, allocatorCallbacks, &fenceHandle);
+
+    jvulkan::freeMemory(&memoryToFree);
 
     // Free up the allocator callback structure if created.
     delete allocatorCallbacks;

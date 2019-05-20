@@ -1435,6 +1435,90 @@ namespace jvulkan
 	            *headOfpNextChain = vkPhysicalDeviceYcbcrImageArraysFeaturesEXT;
 			}
 			break;
+//			case VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR:
+//			{
+//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR");
+//
+//	        	VkD3D12FenceSubmitInfoKHR *vkD3D12FenceSubmitInfoKHR = (VkD3D12FenceSubmitInfoKHR *)calloc(1, sizeof(VkD3D12FenceSubmitInfoKHR));
+//	        	memoryToFree->push_back(vkD3D12FenceSubmitInfoKHR);
+//
+//	            getVkD3D12FenceSubmitInfoKHR(
+//	                    env,
+//						jVulkanCreateInfoStructureObject,
+//						vkD3D12FenceSubmitInfoKHR,
+//	                    memoryToFree);
+//	            if (env->ExceptionOccurred())
+//	            {
+//	            	LOGERROR(env, "%s", "Call to getVkD3D12FenceSubmitInfoKHR failed.");
+//	                return;
+//	            }
+//
+//	            *headOfpNextChain = vkD3D12FenceSubmitInfoKHR;
+//			}
+//			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO");
+
+	        	VkDeviceGroupSubmitInfo *vkDeviceGroupSubmitInfo = (VkDeviceGroupSubmitInfo *)calloc(1, sizeof(VkDeviceGroupSubmitInfo));
+	        	memoryToFree->push_back(vkDeviceGroupSubmitInfo);
+
+	            getVkDeviceGroupSubmitInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceGroupSubmitInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupSubmitInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupSubmitInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO");
+
+	        	VkProtectedSubmitInfo *vkProtectedSubmitInfo = (VkProtectedSubmitInfo *)calloc(1, sizeof(VkProtectedSubmitInfo));
+	        	memoryToFree->push_back(vkProtectedSubmitInfo);
+
+	            getVkProtectedSubmitInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkProtectedSubmitInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkProtectedSubmitInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkProtectedSubmitInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO");
+
+	        	VkExportFenceCreateInfo *vkExportFenceCreateInfo = (VkExportFenceCreateInfo *)calloc(1, sizeof(VkExportFenceCreateInfo));
+	        	memoryToFree->push_back(vkExportFenceCreateInfo);
+
+	            getVkExportFenceCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExportFenceCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExportFenceCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExportFenceCreateInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

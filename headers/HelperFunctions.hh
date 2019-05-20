@@ -1485,6 +1485,30 @@ namespace jvulkan
             const jobject jVkPhysicalDeviceYcbcrImageArraysFeaturesEXTObject,
 			VkPhysicalDeviceYcbcrImageArraysFeaturesEXT *vkPhysicalDeviceYcbcrImageArraysFeaturesEXT,
             std::vector<void *> *memoryToFree);
+
+//    void getVkD3D12FenceSubmitInfoKHR(
+//            JNIEnv *env,
+//            const jobject jVkD3D12FenceSubmitInfoKHRObject,
+//			VkD3D12FenceSubmitInfoKHR *vkD3D12FenceSubmitInfoKHR,
+//            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceGroupSubmitInfo(
+            JNIEnv *env,
+            const jobject jVkDeviceGroupSubmitInfoObject,
+			VkDeviceGroupSubmitInfo *vkDeviceGroupSubmitInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkProtectedSubmitInfo(
+            JNIEnv *env,
+            const jobject jVkProtectedSubmitInfoObject,
+			VkProtectedSubmitInfo *vkProtectedSubmitInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExportFenceCreateInfo(
+            JNIEnv *env,
+            const jobject jVkExportFenceCreateInfoObject,
+			VkExportFenceCreateInfo *vkExportFenceCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
