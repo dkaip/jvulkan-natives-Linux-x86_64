@@ -1515,6 +1515,43 @@ namespace jvulkan
             const jobject jVkExportSemaphoreCreateInfoObject,
 			VkExportSemaphoreCreateInfo *vkExportSemaphoreCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkAttachmentReference(
+            JNIEnv *env,
+            const jobject jVkAttachmentReferenceObject,
+			VkAttachmentReference *vkAttachmentReference,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassFragmentDensityMapCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkRenderPassFragmentDensityMapCreateInfoEXTObject,
+			VkRenderPassFragmentDensityMapCreateInfoEXT *vkRenderPassFragmentDensityMapCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkInputAttachmentAspectReference(
+            JNIEnv *env,
+            const jobject jVkInputAttachmentAspectReferenceObject,
+			VkInputAttachmentAspectReference *vkInputAttachmentAspectReference,
+            std::vector<void *> *memoryToFree);
+
+    void getVkInputAttachmentAspectReferenceCollection(
+            JNIEnv *env,
+            const jobject jVkInputAttachmentAspectReferenceCollectionObject,
+			VkInputAttachmentAspectReference **vkInputAttachmentAspectReferences,
+            int *numberOfVkInputAttachmentAspectReferences,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassInputAttachmentAspectCreateInfo(
+            JNIEnv *env,
+            const jobject jVkRenderPassInputAttachmentAspectCreateInfoObject,
+			VkRenderPassInputAttachmentAspectCreateInfo *vkRenderPassInputAttachmentAspectCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassMultiviewCreateInfo(
+            JNIEnv *env,
+            const jobject jVkRenderPassMultiviewCreateInfoObject,
+			VkRenderPassMultiviewCreateInfo *vkRenderPassMultiviewCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

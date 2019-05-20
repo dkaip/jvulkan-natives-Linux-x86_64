@@ -3412,144 +3412,151 @@ namespace jvulkan
         } while(true);
     }
 
-    void getRenderPassCreateInfo(
-        JNIEnv *env,
-        const jobject jVkRenderPassCreateInfoObject,
-        VkRenderPassCreateInfo *renderPassCreateInfo,
-        std::vector<void *> *memoryToFree)
-    {
-        jclass vkRenderPassCreateInfoClass = env->GetObjectClass(jVkRenderPassCreateInfoObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkRenderPassCreateInfoObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkRenderPassCreateInfoObject);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Call to getpNext failed.");
-            return;
-        }
-
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
-        void *pNext = nullptr;
-
-        ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject flagsObject = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
-        int32_t flags = getEnumSetValue(
-                env,
-                flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getAttachments", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject jAttachmentDescriptionCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        int numberOfAttachmentDescriptions = 0;
-        VkAttachmentDescription *vkAttachmentDescriptions = nullptr;
-
-        getVkAttachmentDescriptions(
-                env,
-                jAttachmentDescriptionCollection,
-                &vkAttachmentDescriptions,
-                &numberOfAttachmentDescriptions,
-                memoryToFree);
-        if (env->ExceptionOccurred())
-        {
-
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getSubpasses", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject subpassDescriptionCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        int numberOfSubpassDescriptions = 0;
-        VkSubpassDescription *vkSubpassDescription = nullptr;
-
-        getVkSubpassDescriptions(
-                env,
-                subpassDescriptionCollection,
-                &vkSubpassDescription,
-                &numberOfSubpassDescriptions,
-                memoryToFree);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getDependencies", "()Ljava/util/Collection;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject subpassDependencCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        int numberOfSubpassDependencies = 0;
-        VkSubpassDependency *vkSubpassDependency = nullptr;
-
-        getCollectionOfVkSubpassDependency(
-                env,
-                subpassDependencCollection,
-                &vkSubpassDependency,
-                &numberOfSubpassDependencies,
-                memoryToFree);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        renderPassCreateInfo->sType = (VkStructureType)sTypeValue;
-        renderPassCreateInfo->pNext = (void *)pNext;
-        renderPassCreateInfo->flags = flags;
-        renderPassCreateInfo->attachmentCount = numberOfAttachmentDescriptions;
-        renderPassCreateInfo->pAttachments = vkAttachmentDescriptions;
-        renderPassCreateInfo->subpassCount = (uint32_t)numberOfSubpassDescriptions;
-        renderPassCreateInfo->pSubpasses = vkSubpassDescription;
-        renderPassCreateInfo->dependencyCount = (uint32_t)numberOfSubpassDependencies;
-        renderPassCreateInfo->pDependencies = vkSubpassDependency;
-    }
+//    void getRenderPassCreateInfo(
+//        JNIEnv *env,
+//        const jobject jVkRenderPassCreateInfoObject,
+//        VkRenderPassCreateInfo *renderPassCreateInfo,
+//        std::vector<void *> *memoryToFree)
+//    {
+//        jclass vkRenderPassCreateInfoClass = env->GetObjectClass(jVkRenderPassCreateInfoObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        int sTypeValue = getSTypeAsInt(env, jVkRenderPassCreateInfoObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        jobject jpNextObject = getpNextObject(env, jVkRenderPassCreateInfoObject);
+//        if (env->ExceptionOccurred())
+//        {
+//        	LOGERROR(env, "%s", "Call to getpNext failed.");
+//            return;
+//        }
+//
+//        void *pNext = nullptr;
+//        if (jpNextObject != nullptr)
+//        {
+//        	getpNextChain(
+//        			env,
+//					jpNextObject,
+//        			&pNext,
+//        			memoryToFree);
+//            if (env->ExceptionOccurred())
+//            {
+//            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+//                return;
+//            }
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        jmethodID methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject flagsObject = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
+//        int32_t flags = getEnumSetValue(
+//                env,
+//                flagsObject,
+//                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getAttachments", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject jAttachmentDescriptionCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        int numberOfAttachmentDescriptions = 0;
+//        VkAttachmentDescription *vkAttachmentDescriptions = nullptr;
+//
+//        getVkAttachmentDescriptions(
+//                env,
+//                jAttachmentDescriptionCollection,
+//                &vkAttachmentDescriptions,
+//                &numberOfAttachmentDescriptions,
+//                memoryToFree);
+//        if (env->ExceptionOccurred())
+//        {
+//
+//            return;
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getSubpasses", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject subpassDescriptionCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        int numberOfSubpassDescriptions = 0;
+//        VkSubpassDescription *vkSubpassDescription = nullptr;
+//
+//        getVkSubpassDescriptions(
+//                env,
+//                subpassDescriptionCollection,
+//                &vkSubpassDescription,
+//                &numberOfSubpassDescriptions,
+//                memoryToFree);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        ////////////////////////////////////////////////////////////////////////
+//        methodId = env->GetMethodID(vkRenderPassCreateInfoClass, "getDependencies", "()Ljava/util/Collection;");
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject subpassDependencCollection = env->CallObjectMethod(jVkRenderPassCreateInfoObject, methodId);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        int numberOfSubpassDependencies = 0;
+//        VkSubpassDependency *vkSubpassDependency = nullptr;
+//
+//        getCollectionOfVkSubpassDependency(
+//                env,
+//                subpassDependencCollection,
+//                &vkSubpassDependency,
+//                &numberOfSubpassDependencies,
+//                memoryToFree);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        renderPassCreateInfo->sType = (VkStructureType)sTypeValue;
+//        renderPassCreateInfo->pNext = (void *)pNext;
+//        renderPassCreateInfo->flags = flags;
+//        renderPassCreateInfo->attachmentCount = numberOfAttachmentDescriptions;
+//        renderPassCreateInfo->pAttachments = vkAttachmentDescriptions;
+//        renderPassCreateInfo->subpassCount = (uint32_t)numberOfSubpassDescriptions;
+//        renderPassCreateInfo->pSubpasses = vkSubpassDescription;
+//        renderPassCreateInfo->dependencyCount = (uint32_t)numberOfSubpassDependencies;
+//        renderPassCreateInfo->pDependencies = vkSubpassDependency;
+//    }
 }

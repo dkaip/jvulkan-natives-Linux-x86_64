@@ -1540,6 +1540,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkExportSemaphoreCreateInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT");
+
+	        	VkRenderPassFragmentDensityMapCreateInfoEXT *vkRenderPassFragmentDensityMapCreateInfoEXT = (VkRenderPassFragmentDensityMapCreateInfoEXT *)calloc(1, sizeof(VkRenderPassFragmentDensityMapCreateInfoEXT));
+	        	memoryToFree->push_back(vkRenderPassFragmentDensityMapCreateInfoEXT);
+
+	            getVkRenderPassFragmentDensityMapCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassFragmentDensityMapCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassFragmentDensityMapCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassFragmentDensityMapCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO");
+
+	        	VkRenderPassInputAttachmentAspectCreateInfo *vkRenderPassInputAttachmentAspectCreateInfo = (VkRenderPassInputAttachmentAspectCreateInfo *)calloc(1, sizeof(VkRenderPassInputAttachmentAspectCreateInfo));
+	        	memoryToFree->push_back(vkRenderPassInputAttachmentAspectCreateInfo);
+
+	            getVkRenderPassInputAttachmentAspectCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassInputAttachmentAspectCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassInputAttachmentAspectCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassInputAttachmentAspectCreateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO");
+
+	        	VkRenderPassMultiviewCreateInfo *vkRenderPassMultiviewCreateInfo = (VkRenderPassMultiviewCreateInfo *)calloc(1, sizeof(VkRenderPassMultiviewCreateInfo));
+	        	memoryToFree->push_back(vkRenderPassMultiviewCreateInfo);
+
+	            getVkRenderPassMultiviewCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassMultiviewCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassMultiviewCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassMultiviewCreateInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
