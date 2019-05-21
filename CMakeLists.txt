@@ -36,7 +36,7 @@ target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ./headers)
 target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${JNIHeaders1})
 target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${JNIHeaders2})
 
-# Headers for Vulkan SDK, currently 1.1.101.0
+# Headers for Vulkan SDK, currently 1.1.106.0
 target_include_directories(jvulkan-natives-Linux-x86_64 PRIVATE ${VulkanSDKHeaders})
 
 # Headers for Wayland stuff
