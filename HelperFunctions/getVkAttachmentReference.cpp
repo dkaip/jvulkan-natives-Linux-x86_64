@@ -75,6 +75,7 @@ namespace jvulkan
         jmethodID valueOfMethodId = env->GetMethodID(vkImageLayoutTypeObjectEnumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for valueOf");
             return;
         }
 

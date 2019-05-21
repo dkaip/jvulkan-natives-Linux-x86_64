@@ -38,21 +38,28 @@ namespace jvulkan
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkRenderPassBeginInfoObject);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Call to getpNext failed.");
-            return;
-        }
+		////////////////////////////////////////////////////////////////////////
+		jobject jpNextObject = getpNextObject(env, jVkRenderPassBeginInfoObject);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Call to getpNext failed.");
+			return;
+		}
 
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
-        void *pNext = nullptr;
+		void *pNext = nullptr;
+		if (jpNextObject != nullptr)
+		{
+			getpNextChain(
+					env,
+					jpNextObject,
+					&pNext,
+					memoryToFree);
+			if (env->ExceptionOccurred())
+			{
+				LOGERROR(env, "%s", "Call to getpNextChain failed.");
+				return;
+			}
+		}
 
         ////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");

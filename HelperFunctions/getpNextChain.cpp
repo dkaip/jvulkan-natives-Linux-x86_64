@@ -1603,6 +1603,48 @@ namespace jvulkan
 	            *headOfpNextChain = vkRenderPassMultiviewCreateInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO");
+
+	        	VkDeviceGroupRenderPassBeginInfo *vkDeviceGroupRenderPassBeginInfo = (VkDeviceGroupRenderPassBeginInfo *)calloc(1, sizeof(VkDeviceGroupRenderPassBeginInfo));
+	        	memoryToFree->push_back(vkDeviceGroupRenderPassBeginInfo);
+
+	            getVkDeviceGroupRenderPassBeginInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceGroupRenderPassBeginInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupRenderPassBeginInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupRenderPassBeginInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT");
+
+	        	VkRenderPassSampleLocationsBeginInfoEXT *vkRenderPassSampleLocationsBeginInfoEXT = (VkRenderPassSampleLocationsBeginInfoEXT *)calloc(1, sizeof(VkRenderPassSampleLocationsBeginInfoEXT));
+	        	memoryToFree->push_back(vkRenderPassSampleLocationsBeginInfoEXT);
+
+	            getVkRenderPassSampleLocationsBeginInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassSampleLocationsBeginInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassSampleLocationsBeginInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassSampleLocationsBeginInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

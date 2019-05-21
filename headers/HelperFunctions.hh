@@ -1552,6 +1552,70 @@ namespace jvulkan
             const jobject jVkRenderPassMultiviewCreateInfoObject,
 			VkRenderPassMultiviewCreateInfo *vkRenderPassMultiviewCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkDeviceGroupRenderPassBeginInfo(
+            JNIEnv *env,
+            const jobject jVkDeviceGroupRenderPassBeginInfoObject,
+			VkDeviceGroupRenderPassBeginInfo *vkDeviceGroupRenderPassBeginInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassSampleLocationsBeginInfoEXT(
+            JNIEnv *env,
+            const jobject jVkRenderPassSampleLocationsBeginInfoEXTObject,
+			VkRenderPassSampleLocationsBeginInfoEXT *vkRenderPassSampleLocationsBeginInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getgetVkAttachmentSampleLocationsEXTCollection(
+            JNIEnv *env,
+            const jobject jVkAttachmentSampleLocationsEXTCollectionObject,
+			VkAttachmentSampleLocationsEXT **vkAttachmentSampleLocationsEXT,
+            int *numberOfVkAttachmentSampleLocationsEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkAttachmentSampleLocationsEXT(
+            JNIEnv *env,
+            const jobject jVkAttachmentSampleLocationsEXTObject,
+			VkAttachmentSampleLocationsEXT *vkAttachmentSampleLocationsEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSampleLocationsInfoEXT(
+            JNIEnv *env,
+            const jobject jVkSampleLocationsInfoEXTObject,
+			VkSampleLocationsInfoEXT *vkSampleLocationsInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSampleLocationEXTCollection(
+            JNIEnv *env,
+            const jobject jVkSampleLocationEXT,
+			VkSampleLocationEXT **vkSampleLocationEXTs,
+            int *numberOfVkSampleLocationEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSampleLocationEXT(
+            JNIEnv *env,
+            const jobject jVkSampleLocationEXTObject,
+			VkSampleLocationEXT *vkSampleLocationEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkAttachmentSampleLocationsEXTCollection(
+            JNIEnv *env,
+            const jobject jVkAttachmentSampleLocationsEXTCollectionObject,
+			VkAttachmentSampleLocationsEXT **vkAttachmentSampleLocationsEXT,
+            int *numberOfVkAttachmentSampleLocationsEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSubpassSampleLocationsEXT(
+            JNIEnv *env,
+            const jobject jVkSubpassSampleLocationsEXTObject,
+			VkSubpassSampleLocationsEXT *vkSubpassSampleLocationsEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSubpassSampleLocationsEXTCollection(
+            JNIEnv *env,
+            const jobject jVkSubpassSampleLocationsEXTCollectionObject,
+			VkSubpassSampleLocationsEXT **vkSubpassSampleLocationsEXTs,
+            int *numberOfVkSubpassSampleLocationsEXTs,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
