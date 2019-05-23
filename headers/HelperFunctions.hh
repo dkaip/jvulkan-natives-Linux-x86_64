@@ -1679,6 +1679,54 @@ namespace jvulkan
             const jobject jVkPipelineRepresentativeFragmentTestStateCreateInfoNVObject,
 			VkPipelineRepresentativeFragmentTestStateCreateInfoNV *vkPipelineRepresentativeFragmentTestStateCreateInfoNV,
             std::vector<void *> *memoryToFree);
+
+    void getVkDedicatedAllocationMemoryAllocateInfoNV(
+            JNIEnv *env,
+            const jobject jVkDedicatedAllocationMemoryAllocateInfoNVObject,
+			VkDedicatedAllocationMemoryAllocateInfoNV *vkDedicatedAllocationMemoryAllocateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExportMemoryAllocateInfo(
+            JNIEnv *env,
+            const jobject jVkExportMemoryAllocateInfoObject,
+			VkExportMemoryAllocateInfo *vkExportMemoryAllocateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExportMemoryAllocateInfoNV(
+            JNIEnv *env,
+            const jobject jVkExportMemoryAllocateInfoNVObject,
+			VkExportMemoryAllocateInfoNV *vkExportMemoryAllocateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImportMemoryFdInfoKHR(
+            JNIEnv *env,
+            const jobject jVkImportMemoryFdInfoKHRObject,
+			VkImportMemoryFdInfoKHR *vkImportMemoryFdInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImportMemoryHostPointerInfoEXT(
+            JNIEnv *env,
+            const jobject jVkImportMemoryHostPointerInfoEXTObject,
+			VkImportMemoryHostPointerInfoEXT *vkImportMemoryHostPointerInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkMemoryAllocateFlagsInfo(
+            JNIEnv *env,
+            const jobject jVkMemoryAllocateFlagsInfoObject,
+			VkMemoryAllocateFlagsInfo *vkMemoryAllocateFlagsInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkMemoryDedicatedAllocateInfo(
+            JNIEnv *env,
+            const jobject jVkMemoryDedicatedAllocateInfoObject,
+			VkMemoryDedicatedAllocateInfo *vkMemoryDedicatedAllocateInfo,
+            std::vector<void *> *memoryToFree);
+
+	void getVkMemoryPriorityAllocateInfoEXT(
+        JNIEnv *env,
+        const jobject jVkMemoryPriorityAllocateInfoEXTObject,
+		VkMemoryPriorityAllocateInfoEXT *vkMemoryPriorityAllocateInfoEXT,
+        std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

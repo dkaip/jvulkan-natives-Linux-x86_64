@@ -1708,6 +1708,174 @@ namespace jvulkan
 	            *headOfpNextChain = vkPipelineRepresentativeFragmentTestStateCreateInfoNV;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV");
+
+	        	VkDedicatedAllocationMemoryAllocateInfoNV *vkDedicatedAllocationMemoryAllocateInfoNV = (VkDedicatedAllocationMemoryAllocateInfoNV *)calloc(1, sizeof(VkDedicatedAllocationMemoryAllocateInfoNV));
+	        	memoryToFree->push_back(vkDedicatedAllocationMemoryAllocateInfoNV);
+
+	            getVkDedicatedAllocationMemoryAllocateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDedicatedAllocationMemoryAllocateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDedicatedAllocationMemoryAllocateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDedicatedAllocationMemoryAllocateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO");
+
+	        	VkExportMemoryAllocateInfo *vkExportMemoryAllocateInfo = (VkExportMemoryAllocateInfo *)calloc(1, sizeof(VkExportMemoryAllocateInfo));
+	        	memoryToFree->push_back(vkExportMemoryAllocateInfo);
+
+	            getVkExportMemoryAllocateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExportMemoryAllocateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExportMemoryAllocateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExportMemoryAllocateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV");
+
+	        	VkExportMemoryAllocateInfoNV *vkExportMemoryAllocateInfoNV = (VkExportMemoryAllocateInfoNV *)calloc(1, sizeof(VkExportMemoryAllocateInfoNV));
+	        	memoryToFree->push_back(vkExportMemoryAllocateInfoNV);
+
+	            getVkExportMemoryAllocateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExportMemoryAllocateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExportMemoryAllocateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExportMemoryAllocateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR");
+
+	        	VkImportMemoryFdInfoKHR *vkImportMemoryFdInfoKHR = (VkImportMemoryFdInfoKHR *)calloc(1, sizeof(VkImportMemoryFdInfoKHR));
+	        	memoryToFree->push_back(vkImportMemoryFdInfoKHR);
+
+	            getVkImportMemoryFdInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImportMemoryFdInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImportMemoryFdInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImportMemoryFdInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT");
+
+	        	VkImportMemoryHostPointerInfoEXT *vkImportMemoryHostPointerInfoEXT = (VkImportMemoryHostPointerInfoEXT *)calloc(1, sizeof(VkImportMemoryHostPointerInfoEXT));
+	        	memoryToFree->push_back(vkImportMemoryHostPointerInfoEXT);
+
+	            getVkImportMemoryHostPointerInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImportMemoryHostPointerInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImportMemoryHostPointerInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImportMemoryHostPointerInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO");
+
+	        	VkMemoryAllocateFlagsInfo *vkMemoryAllocateFlagsInfo = (VkMemoryAllocateFlagsInfo *)calloc(1, sizeof(VkMemoryAllocateFlagsInfo));
+	        	memoryToFree->push_back(vkMemoryAllocateFlagsInfo);
+
+	            getVkMemoryAllocateFlagsInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkMemoryAllocateFlagsInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkMemoryAllocateFlagsInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkMemoryAllocateFlagsInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO");
+
+	        	VkMemoryDedicatedAllocateInfo *vkMemoryDedicatedAllocateInfo = (VkMemoryDedicatedAllocateInfo *)calloc(1, sizeof(VkMemoryDedicatedAllocateInfo));
+	        	memoryToFree->push_back(vkMemoryDedicatedAllocateInfo);
+
+	            getVkMemoryDedicatedAllocateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkMemoryDedicatedAllocateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkMemoryDedicatedAllocateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkMemoryDedicatedAllocateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT");
+
+	        	VkMemoryPriorityAllocateInfoEXT *vkMemoryPriorityAllocateInfoEXT = (VkMemoryPriorityAllocateInfoEXT *)calloc(1, sizeof(VkMemoryPriorityAllocateInfoEXT));
+	        	memoryToFree->push_back(vkMemoryPriorityAllocateInfoEXT);
+
+	            getVkMemoryPriorityAllocateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkMemoryPriorityAllocateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkMemoryPriorityAllocateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkMemoryPriorityAllocateInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
