@@ -25,12 +25,6 @@
 
 namespace jvulkan
 {
-	struct InfoStructure
-	{
-		VkStructureType  sType;
-		void			*pNext;
-	};
-
 	/*
 	 * This function is kind of the inverse of the getpNextChain function in that
 	 * this will take objects that are on the pNext chain in the LunarG world
@@ -413,6 +407,19 @@ namespace jvulkan
 				if (env->ExceptionOccurred())
 				{
 					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceVertexAttributeDivisorPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT");
+				populateVkPipelineCreationFeedbackCreateInfoEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPipelineCreationFeedbackCreateInfoEXT *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPipelineCreationFeedbackCreateInfoEXT.");
 					return;
 				}
 				break;

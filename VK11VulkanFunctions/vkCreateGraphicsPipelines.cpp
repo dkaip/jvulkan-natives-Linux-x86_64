@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -76,6 +77,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             vkGraphicsPipelineCreateInfo,
             allocatorCallbacks,
             pipelines);
+
+    jvulkan::populatepNextChainCollection(
+            env,
+			jVkGraphicsPipelineCreateInfoCollection,
+			(jvulkan::InfoStructure *)vkGraphicsPipelineCreateInfo,
+			&memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);;
+    }
 
     // Free up the allocator callback structure if created.
     delete allocatorCallbacks;

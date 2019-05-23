@@ -31,7 +31,13 @@
 
 namespace jvulkan
 {
-//    void getVkInstanceCreateInfo(
+	struct InfoStructure
+	{
+		VkStructureType  sType;
+		void			*pNext;
+	};
+
+	//    void getVkInstanceCreateInfo(
 //            JNIEnv *env,
 //            const jobject jInstanceCreateInfo,
 //            VkInstanceCreateInfo *instanceCreateInfo,
@@ -1615,6 +1621,63 @@ namespace jvulkan
             const jobject jVkSubpassSampleLocationsEXTCollectionObject,
 			VkSubpassSampleLocationsEXT **vkSubpassSampleLocationsEXTs,
             int *numberOfVkSubpassSampleLocationsEXTs,
+            std::vector<void *> *memoryToFree);
+
+    jobject getVkPipelineCreationFeedbackFlagsEXTAsEnumSet(JNIEnv *env, VkPipelineCreationFeedbackFlagsEXT vkPipelineCreationFeedbackFlagsEXT);
+
+	void populateVkPipelineCreationFeedbackEXT(
+			JNIEnv *env,
+			jobject jVkPipelineCreationFeedbackEXTObject,
+			const VkPipelineCreationFeedbackEXT *vkPipelineCreationFeedbackEXT,
+			std::vector<void *> *memoryToFree);
+
+    void populateVkPipelineCreationFeedbackEXTCollection(
+            JNIEnv *env,
+            const jobject jCollectionObject,
+			const VkPipelineCreationFeedbackEXT *vkPipelineCreationFeedbackEXTs,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPipelineCreationFeedbackCreateInfoEXT(
+			JNIEnv *env,
+			jobject jVkPipelineCreationFeedbackCreateInfoEXTObject,
+			const VkPipelineCreationFeedbackCreateInfoEXT *vkPipelineCreationFeedbackCreateInfoEXT,
+			std::vector<void *> *memoryToFree);
+
+    void populatepNextChainCollection(
+            JNIEnv *env,
+            const jobject jCollectionObject,
+			InfoStructure *collectionObjects,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCreationFeedbackCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineCreationFeedbackCreateInfoEXTObject,
+			VkPipelineCreationFeedbackCreateInfoEXT *vkPipelineCreationFeedbackCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCreationFeedbackEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineCreationFeedbackEXTObject,
+			VkPipelineCreationFeedbackEXT *vkPipelineCreationFeedbackEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCreationFeedbackEXTCollection(
+            JNIEnv *env,
+            const jobject jVkPipelineCreationFeedbackEXTCollectionObject,
+			VkPipelineCreationFeedbackEXT **vkPipelineCreationFeedbackEXT,
+            int *numberOfVkPipelineCreationFeedbackEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineDiscardRectangleStateCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineDiscardRectangleStateCreateInfoEXTObject,
+			VkPipelineDiscardRectangleStateCreateInfoEXT *vkPipelineDiscardRectangleStateCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRepresentativeFragmentTestStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineRepresentativeFragmentTestStateCreateInfoNVObject,
+			VkPipelineRepresentativeFragmentTestStateCreateInfoNV *vkPipelineRepresentativeFragmentTestStateCreateInfoNV,
             std::vector<void *> *memoryToFree);
 }
 

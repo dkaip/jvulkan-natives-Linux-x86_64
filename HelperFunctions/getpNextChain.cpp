@@ -1645,6 +1645,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkRenderPassSampleLocationsBeginInfoEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT");
+
+	        	VkPipelineCreationFeedbackCreateInfoEXT *vkPipelineCreationFeedbackCreateInfoEXT = (VkPipelineCreationFeedbackCreateInfoEXT *)calloc(1, sizeof(VkPipelineCreationFeedbackCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineCreationFeedbackCreateInfoEXT);
+
+	            getVkPipelineCreationFeedbackCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineCreationFeedbackCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineCreationFeedbackCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineCreationFeedbackCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT");
+
+	        	VkPipelineDiscardRectangleStateCreateInfoEXT *vkPipelineDiscardRectangleStateCreateInfoEXT = (VkPipelineDiscardRectangleStateCreateInfoEXT *)calloc(1, sizeof(VkPipelineDiscardRectangleStateCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineDiscardRectangleStateCreateInfoEXT);
+
+	            getVkPipelineDiscardRectangleStateCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineDiscardRectangleStateCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineDiscardRectangleStateCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineDiscardRectangleStateCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineRepresentativeFragmentTestStateCreateInfoNV *vkPipelineRepresentativeFragmentTestStateCreateInfoNV = (VkPipelineRepresentativeFragmentTestStateCreateInfoNV *)calloc(1, sizeof(VkPipelineRepresentativeFragmentTestStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineRepresentativeFragmentTestStateCreateInfoNV);
+
+	            getVkPipelineRepresentativeFragmentTestStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRepresentativeFragmentTestStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRepresentativeFragmentTestStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRepresentativeFragmentTestStateCreateInfoNV;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
