@@ -1876,6 +1876,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkMemoryPriorityAllocateInfoEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT");
+
+	        	VkBufferDeviceAddressCreateInfoEXT *vkBufferDeviceAddressCreateInfoEXT = (VkBufferDeviceAddressCreateInfoEXT *)calloc(1, sizeof(VkBufferDeviceAddressCreateInfoEXT));
+	        	memoryToFree->push_back(vkBufferDeviceAddressCreateInfoEXT);
+
+	            getVkBufferDeviceAddressCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkBufferDeviceAddressCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkBufferDeviceAddressCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkBufferDeviceAddressCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV");
+
+	        	VkDedicatedAllocationBufferCreateInfoNV *vkDedicatedAllocationBufferCreateInfoNV = (VkDedicatedAllocationBufferCreateInfoNV *)calloc(1, sizeof(VkDedicatedAllocationBufferCreateInfoNV));
+	        	memoryToFree->push_back(vkDedicatedAllocationBufferCreateInfoNV);
+
+	            getVkDedicatedAllocationBufferCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDedicatedAllocationBufferCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDedicatedAllocationBufferCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDedicatedAllocationBufferCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO");
+
+	        	VkExternalMemoryBufferCreateInfo *vkExternalMemoryBufferCreateInfo = (VkExternalMemoryBufferCreateInfo *)calloc(1, sizeof(VkExternalMemoryBufferCreateInfo));
+	        	memoryToFree->push_back(vkExternalMemoryBufferCreateInfo);
+
+	            getVkExternalMemoryBufferCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExternalMemoryBufferCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExternalMemoryBufferCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExternalMemoryBufferCreateInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

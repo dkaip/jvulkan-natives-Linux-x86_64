@@ -13,33 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * getVkExternalMemoryBufferCreateInfo.cpp
+ *
+ *  Created on: May 23, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "HelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkMemoryAllocateInfo(
+    void getVkExternalMemoryBufferCreateInfo(
             JNIEnv *env,
-            jobject jVkMemoryAllocateInfoObject,
-            VkMemoryAllocateInfo *vkMemoryAllocateInfo,
+            const jobject jVkExternalMemoryBufferCreateInfoObject,
+			VkExternalMemoryBufferCreateInfo *vkExternalMemoryBufferCreateInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkMemoryAllocateInfoClass = env->GetObjectClass(jVkMemoryAllocateInfoObject);
+        jclass theClass = env->GetObjectClass(jVkExternalMemoryBufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for jVkExternalMemoryBufferCreateInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkMemoryAllocateInfoObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkExternalMemoryBufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkMemoryAllocateInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkExternalMemoryBufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -62,34 +70,33 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getAllocationSize", "()J");
+        jmethodID methodId = env->GetMethodID(theClass, "getHandleTypes", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get getHandleTypes method Id");
             return;
         }
 
-        jlong jAllocationSize = env->CallLongMethod(jVkMemoryAllocateInfoObject, methodId);
+        jobject flagsObject = env->CallObjectMethod(jVkExternalMemoryBufferCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getMemoryTypeIndex", "()I");
+        VkExternalMemoryHandleTypeFlags handleTypes = getEnumSetValue(
+                env,
+				flagsObject,
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue");
             return;
         }
 
-        jint jMemoryTypeIndex = env->CallIntMethod(jVkMemoryAllocateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
 
-        vkMemoryAllocateInfo->sType = (VkStructureType)sTypeValue;
-        vkMemoryAllocateInfo->pNext = (void *)pNext;
-        vkMemoryAllocateInfo->allocationSize = jAllocationSize;
-        vkMemoryAllocateInfo->memoryTypeIndex = jMemoryTypeIndex;
+        vkExternalMemoryBufferCreateInfo->sType = sTypeValue;
+        vkExternalMemoryBufferCreateInfo->pNext = pNext;
+        vkExternalMemoryBufferCreateInfo->handleTypes = handleTypes;
     }
 }

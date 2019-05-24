@@ -13,33 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * getVkBufferDeviceAddressCreateInfoEXT.cpp
+ *
+ *  Created on: May 23, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "HelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkMemoryAllocateInfo(
+    void getVkBufferDeviceAddressCreateInfoEXT(
             JNIEnv *env,
-            jobject jVkMemoryAllocateInfoObject,
-            VkMemoryAllocateInfo *vkMemoryAllocateInfo,
+            const jobject jVkBufferDeviceAddressCreateInfoEXTObject,
+			VkBufferDeviceAddressCreateInfoEXT *vkBufferDeviceAddressCreateInfoEXT,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkMemoryAllocateInfoClass = env->GetObjectClass(jVkMemoryAllocateInfoObject);
+        jclass theClass = env->GetObjectClass(jVkBufferDeviceAddressCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for jVkBufferDeviceAddressCreateInfoEXTObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkMemoryAllocateInfoObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkBufferDeviceAddressCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkMemoryAllocateInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkBufferDeviceAddressCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -62,34 +70,29 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getAllocationSize", "()J");
+        jmethodID methodId = env->GetMethodID(theClass, "getDeviceAddress", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDeviceAddress;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error trying to get getDeviceAddress method Id");
+            return;
+        }
+
+        jobject jVkDeviceAddressObject = env->CallObjectMethod(jVkBufferDeviceAddressCreateInfoEXTObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod for getDeviceAddress");
+            return;
+        }
+
+        VkDeviceAddress *deviceAddressHandle = (VkDeviceAddress *)jvulkan::getHandleValue(env, jVkDeviceAddressObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jlong jAllocationSize = env->CallLongMethod(jVkMemoryAllocateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getMemoryTypeIndex", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jint jMemoryTypeIndex = env->CallIntMethod(jVkMemoryAllocateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        vkMemoryAllocateInfo->sType = (VkStructureType)sTypeValue;
-        vkMemoryAllocateInfo->pNext = (void *)pNext;
-        vkMemoryAllocateInfo->allocationSize = jAllocationSize;
-        vkMemoryAllocateInfo->memoryTypeIndex = jMemoryTypeIndex;
+        vkBufferDeviceAddressCreateInfoEXT->sType = sTypeValue;
+        vkBufferDeviceAddressCreateInfoEXT->pNext = pNext;
+        vkBufferDeviceAddressCreateInfoEXT->deviceAddress = (VkDeviceSize)deviceAddressHandle; // hmmm
     }
 }

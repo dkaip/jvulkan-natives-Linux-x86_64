@@ -1727,6 +1727,24 @@ namespace jvulkan
         const jobject jVkMemoryPriorityAllocateInfoEXTObject,
 		VkMemoryPriorityAllocateInfoEXT *vkMemoryPriorityAllocateInfoEXT,
         std::vector<void *> *memoryToFree);
+
+    void getVkBufferDeviceAddressCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkBufferDeviceAddressCreateInfoEXTObject,
+			VkBufferDeviceAddressCreateInfoEXT *vkBufferDeviceAddressCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDedicatedAllocationBufferCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkDedicatedAllocationBufferCreateInfoNVObject,
+			VkDedicatedAllocationBufferCreateInfoNV *vkDedicatedAllocationBufferCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExternalMemoryBufferCreateInfo(
+            JNIEnv *env,
+            const jobject jVkExternalMemoryBufferCreateInfoObject,
+			VkExternalMemoryBufferCreateInfo *vkExternalMemoryBufferCreateInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

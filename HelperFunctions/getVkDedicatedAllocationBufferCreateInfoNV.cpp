@@ -13,33 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * getVkDedicatedAllocationBufferCreateInfoNV.cpp
+ *
+ *  Created on: May 23, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "HelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkMemoryAllocateInfo(
+    void getVkDedicatedAllocationBufferCreateInfoNV(
             JNIEnv *env,
-            jobject jVkMemoryAllocateInfoObject,
-            VkMemoryAllocateInfo *vkMemoryAllocateInfo,
+            const jobject jVkDedicatedAllocationBufferCreateInfoNVObject,
+			VkDedicatedAllocationBufferCreateInfoNV *vkDedicatedAllocationBufferCreateInfoNV,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkMemoryAllocateInfoClass = env->GetObjectClass(jVkMemoryAllocateInfoObject);
+        jclass theClass = env->GetObjectClass(jVkDedicatedAllocationBufferCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for jVkDedicatedAllocationBufferCreateInfoNVObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkMemoryAllocateInfoObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDedicatedAllocationBufferCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkMemoryAllocateInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkDedicatedAllocationBufferCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -62,34 +70,23 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getAllocationSize", "()J");
+        jmethodID methodId = env->GetMethodID(theClass, "isStorageBuffer8BitAccess", "()Z");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for isStorageBuffer8BitAccess");
             return;
         }
 
-        jlong jAllocationSize = env->CallLongMethod(jVkMemoryAllocateInfoObject, methodId);
+        jboolean dedicatedAllocation = env->CallBooleanMethod(jVkDedicatedAllocationBufferCreateInfoNVObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkMemoryAllocateInfoClass, "getMemoryTypeIndex", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
 
-        jint jMemoryTypeIndex = env->CallIntMethod(jVkMemoryAllocateInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        vkMemoryAllocateInfo->sType = (VkStructureType)sTypeValue;
-        vkMemoryAllocateInfo->pNext = (void *)pNext;
-        vkMemoryAllocateInfo->allocationSize = jAllocationSize;
-        vkMemoryAllocateInfo->memoryTypeIndex = jMemoryTypeIndex;
+        vkDedicatedAllocationBufferCreateInfoNV->sType = sTypeValue;
+        vkDedicatedAllocationBufferCreateInfoNV->pNext = pNext;
+        vkDedicatedAllocationBufferCreateInfoNV->dedicatedAllocation = dedicatedAllocation;
     }
 }
