@@ -127,7 +127,7 @@ namespace jvulkan
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkSubresourceLayout");
+            	LOGERROR(env, "%s", "Error calling method getVkFormat");
                 break;
             }
 

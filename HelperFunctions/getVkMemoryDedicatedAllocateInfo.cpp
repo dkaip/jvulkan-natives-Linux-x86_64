@@ -84,9 +84,10 @@ namespace jvulkan
             return;
         }
 
-        VkImage_T *vkImageHandle = (VkImage_T *)jvulkan::getHandleValue(env, jVkImageObject);
+        VkImage_T *vkImageHandle = (VkImage_T *)getHandleValue(env, jVkImageObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue");
             return;
         }
 
@@ -105,9 +106,10 @@ namespace jvulkan
             return;
         }
 
-        VkBuffer_T *vkBufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferObject);
+        VkBuffer_T *vkBufferHandle = (VkBuffer_T *)getHandleValue(env, jVkBufferObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue");
             return;
         }
 

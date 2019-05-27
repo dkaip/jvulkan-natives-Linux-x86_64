@@ -1825,6 +1825,24 @@ namespace jvulkan
             const jobject jVkImageSwapchainCreateInfoKHRObject,
 			VkImageSwapchainCreateInfoKHR *vkImageSwapchainCreateInfoKHR,
             std::vector<void *> *memoryToFree);
+
+    void getVkImageViewASTCDecodeModeEXT(
+            JNIEnv *env,
+            const jobject jVkImageViewASTCDecodeModeEXTObject,
+			VkImageViewASTCDecodeModeEXT *vkImageViewASTCDecodeModeEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageViewUsageCreateInfo(
+            JNIEnv *env,
+            const jobject jVkImageViewUsageCreateInfoObject,
+			VkImageViewUsageCreateInfo *vkImageViewUsageCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSamplerYcbcrConversionInfo(
+            JNIEnv *env,
+            const jobject jVkSamplerYcbcrConversionInfoObject,
+			VkSamplerYcbcrConversionInfo *vkSamplerYcbcrConversionInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

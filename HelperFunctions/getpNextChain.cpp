@@ -2107,6 +2107,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkImageSwapchainCreateInfoKHR;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT");
+
+	        	VkImageViewASTCDecodeModeEXT *vkImageViewASTCDecodeModeEXT = (VkImageViewASTCDecodeModeEXT *)calloc(1, sizeof(VkImageViewASTCDecodeModeEXT));
+	        	memoryToFree->push_back(vkImageViewASTCDecodeModeEXT);
+
+	            getVkImageViewASTCDecodeModeEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageViewASTCDecodeModeEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageViewASTCDecodeModeEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageViewASTCDecodeModeEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO");
+
+	        	VkImageViewUsageCreateInfo *vkImageViewUsageCreateInfo = (VkImageViewUsageCreateInfo *)calloc(1, sizeof(VkImageViewUsageCreateInfo));
+	        	memoryToFree->push_back(vkImageViewUsageCreateInfo);
+
+	            getVkImageViewUsageCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageViewUsageCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageViewUsageCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageViewUsageCreateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO");
+
+	        	VkSamplerYcbcrConversionInfo *vkSamplerYcbcrConversionInfo = (VkSamplerYcbcrConversionInfo *)calloc(1, sizeof(VkSamplerYcbcrConversionInfo));
+	        	memoryToFree->push_back(vkSamplerYcbcrConversionInfo);
+
+	            getVkSamplerYcbcrConversionInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSamplerYcbcrConversionInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSamplerYcbcrConversionInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSamplerYcbcrConversionInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
