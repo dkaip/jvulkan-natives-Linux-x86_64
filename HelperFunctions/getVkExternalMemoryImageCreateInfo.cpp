@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceCornerSampledImageFeaturesNV.cpp
+ * getVkExternalMemoryImageCreateInfo.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+    void getVkExternalMemoryImageCreateInfo(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
-			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            const jobject jVkExternalMemoryImageCreateInfoObject,
+			VkExternalMemoryImageCreateInfo *vkExternalMemoryImageCreateInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkExternalMemoryImageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceCornerSampledImageFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkExternalMemoryImageCreateInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkExternalMemoryImageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkExternalMemoryImageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,23 +70,33 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isCornerSampledImage", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getHandleTypes", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isCornerSampledImage");
             return;
         }
 
-        jboolean cornerSampledImage = env->CallBooleanMethod(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject, methodId);
+        jobject handleTypesObject = env->CallObjectMethod(jVkExternalMemoryImageCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
+            return;
+        }
+
+        VkExternalMemoryHandleTypeFlags handleTypes = getEnumSetValue(
+                env,
+				handleTypesObject,
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
             return;
         }
 
 
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->cornerSampledImage = cornerSampledImage;
+
+        vkExternalMemoryImageCreateInfo->sType = sTypeValue;
+        vkExternalMemoryImageCreateInfo->pNext = pNext;
+        vkExternalMemoryImageCreateInfo->handleTypes = handleTypes;
     }
 }

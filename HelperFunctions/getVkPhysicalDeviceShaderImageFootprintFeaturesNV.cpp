@@ -17,7 +17,7 @@
  * getVkPhysicalDeviceShaderImageFootprintFeaturesNV.cpp
  *
  *  Created on: May 19, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "HelperFunctions.hh"

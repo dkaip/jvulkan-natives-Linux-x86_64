@@ -1745,6 +1745,86 @@ namespace jvulkan
             const jobject jVkExternalMemoryBufferCreateInfoObject,
 			VkExternalMemoryBufferCreateInfo *vkExternalMemoryBufferCreateInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkDedicatedAllocationImageCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkDedicatedAllocationImageCreateInfoNVObject,
+			VkDedicatedAllocationImageCreateInfoNV *vkDedicatedAllocationImageCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExternalMemoryImageCreateInfo(
+            JNIEnv *env,
+            const jobject jVkExternalMemoryImageCreateInfoObject,
+			VkExternalMemoryImageCreateInfo *vkExternalMemoryImageCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExternalMemoryImageCreateInfo(
+            JNIEnv *env,
+            const jobject jVkExternalMemoryImageCreateInfoObject,
+			VkExternalMemoryImageCreateInfo *vkExternalMemoryImageCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkExternalMemoryImageCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkExternalMemoryImageCreateInfoNVObject,
+			VkExternalMemoryImageCreateInfoNV *vkExternalMemoryImageCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageDrmFormatModifierExplicitCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkImageDrmFormatModifierExplicitCreateInfoEXTObject,
+			VkImageDrmFormatModifierExplicitCreateInfoEXT *vkImageDrmFormatModifierExplicitCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSubresourceLayout(
+            JNIEnv *env,
+            const jobject jVkSubresourceLayoutObject,
+			VkSubresourceLayout *vkSubresourceLayout,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSubresourceLayoutCollection(
+            JNIEnv *env,
+            const jobject jVkSubresourceLayoutCollectionObject,
+			VkSubresourceLayout **vkSubresourceLayouts,
+            int *numberOfVkSubresourceLayouts,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageDrmFormatModifierListCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkImageDrmFormatModifierListCreateInfoEXTObject,
+			VkImageDrmFormatModifierListCreateInfoEXT *vkImageDrmFormatModifierListCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkFormat(
+            JNIEnv *env,
+            const jobject jVkFormatObject,
+			VkFormat *vkFormat,
+            std::vector<void *> *memoryToFree);
+
+    void getVkFormatCollection(
+            JNIEnv *env,
+            const jobject jVkFormatObject,
+			VkFormat **vkFormats,
+            int *numberOfVkFormats,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageFormatListCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkImageFormatListCreateInfoKHRObject,
+			VkImageFormatListCreateInfoKHR *vkImageFormatListCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageStencilUsageCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkImageStencilUsageCreateInfoEXTObject,
+			VkImageStencilUsageCreateInfoEXT *vkImageStencilUsageCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageSwapchainCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkImageSwapchainCreateInfoKHRObject,
+			VkImageSwapchainCreateInfoKHR *vkImageSwapchainCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

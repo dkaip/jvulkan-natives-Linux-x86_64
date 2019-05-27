@@ -1939,6 +1939,174 @@ namespace jvulkan
 	            *headOfpNextChain = vkExternalMemoryBufferCreateInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV");
+
+	        	VkDedicatedAllocationImageCreateInfoNV *vkDedicatedAllocationImageCreateInfoNV = (VkDedicatedAllocationImageCreateInfoNV *)calloc(1, sizeof(VkDedicatedAllocationImageCreateInfoNV));
+	        	memoryToFree->push_back(vkDedicatedAllocationImageCreateInfoNV);
+
+	            getVkDedicatedAllocationImageCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDedicatedAllocationImageCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDedicatedAllocationImageCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDedicatedAllocationImageCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO");
+
+	        	VkExternalMemoryImageCreateInfo *vkExternalMemoryImageCreateInfo = (VkExternalMemoryImageCreateInfo *)calloc(1, sizeof(VkExternalMemoryImageCreateInfo));
+	        	memoryToFree->push_back(vkExternalMemoryImageCreateInfo);
+
+	            getVkExternalMemoryImageCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExternalMemoryImageCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExternalMemoryImageCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExternalMemoryImageCreateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV");
+
+	        	VkExternalMemoryImageCreateInfoNV *vkExternalMemoryImageCreateInfoNV = (VkExternalMemoryImageCreateInfoNV *)calloc(1, sizeof(VkExternalMemoryImageCreateInfoNV));
+	        	memoryToFree->push_back(vkExternalMemoryImageCreateInfoNV);
+
+	            getVkExternalMemoryImageCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExternalMemoryImageCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExternalMemoryImageCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExternalMemoryImageCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT");
+
+	        	VkImageDrmFormatModifierExplicitCreateInfoEXT *vkImageDrmFormatModifierExplicitCreateInfoEXT = (VkImageDrmFormatModifierExplicitCreateInfoEXT *)calloc(1, sizeof(VkImageDrmFormatModifierExplicitCreateInfoEXT));
+	        	memoryToFree->push_back(vkImageDrmFormatModifierExplicitCreateInfoEXT);
+
+	            getVkImageDrmFormatModifierExplicitCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageDrmFormatModifierExplicitCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageDrmFormatModifierExplicitCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageDrmFormatModifierExplicitCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT");
+
+	        	VkImageDrmFormatModifierListCreateInfoEXT *vkImageDrmFormatModifierListCreateInfoEXT = (VkImageDrmFormatModifierListCreateInfoEXT *)calloc(1, sizeof(VkImageDrmFormatModifierListCreateInfoEXT));
+	        	memoryToFree->push_back(vkImageDrmFormatModifierListCreateInfoEXT);
+
+	            getVkImageDrmFormatModifierListCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageDrmFormatModifierListCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageDrmFormatModifierListCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageDrmFormatModifierListCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR");
+
+	        	VkImageFormatListCreateInfoKHR *vkImageFormatListCreateInfoKHR = (VkImageFormatListCreateInfoKHR *)calloc(1, sizeof(VkImageFormatListCreateInfoKHR));
+	        	memoryToFree->push_back(vkImageFormatListCreateInfoKHR);
+
+	            getVkImageFormatListCreateInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageFormatListCreateInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageFormatListCreateInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageFormatListCreateInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT");
+
+	        	VkImageStencilUsageCreateInfoEXT *vkImageStencilUsageCreateInfoEXT = (VkImageStencilUsageCreateInfoEXT *)calloc(1, sizeof(VkImageStencilUsageCreateInfoEXT));
+	        	memoryToFree->push_back(vkImageStencilUsageCreateInfoEXT);
+
+	            getVkImageStencilUsageCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageStencilUsageCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageStencilUsageCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageStencilUsageCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR");
+
+	        	VkImageSwapchainCreateInfoKHR *vkImageSwapchainCreateInfoKHR = (VkImageSwapchainCreateInfoKHR *)calloc(1, sizeof(VkImageSwapchainCreateInfoKHR));
+	        	memoryToFree->push_back(vkImageSwapchainCreateInfoKHR);
+
+	            getVkImageSwapchainCreateInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkImageSwapchainCreateInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkImageSwapchainCreateInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkImageSwapchainCreateInfoKHR;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

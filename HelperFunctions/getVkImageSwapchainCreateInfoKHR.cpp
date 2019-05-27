@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceCornerSampledImageFeaturesNV.cpp
+ * getVkImageSwapchainCreateInfoKHR.cpp
  *
- *  Created on: May 17, 2019
- *      Author: Douglas Kaip
+ *  Created on: May 27, 2019
+ *      Author: dkaip
  */
 
 #include "HelperFunctions.hh"
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+    void getVkImageSwapchainCreateInfoKHR(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
-			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            const jobject jVkImageSwapchainCreateInfoKHRObject,
+			VkImageSwapchainCreateInfoKHR *vkImageSwapchainCreateInfoKHR,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkImageSwapchainCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceCornerSampledImageFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageSwapchainCreateInfoKHRObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkImageSwapchainCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkImageSwapchainCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,23 +70,30 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isCornerSampledImage", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isCornerSampledImage");
+        	LOGERROR(env, "%s", "Could not find method id for getSwapchain");
             return;
         }
 
-        jboolean cornerSampledImage = env->CallBooleanMethod(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject, methodId);
+        jobject jVkSwapchainKHRHandleObject = env->CallObjectMethod(jVkImageSwapchainCreateInfoKHRObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
+        VkSwapchainKHR_T *vkSwapchainKHRHandle = (VkSwapchainKHR_T *)jvulkan::getHandleValue(env, jVkSwapchainKHRHandleObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getHandleValue");
             return;
         }
 
 
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->cornerSampledImage = cornerSampledImage;
+        vkImageSwapchainCreateInfoKHR->sType = sTypeValue;
+        vkImageSwapchainCreateInfoKHR->pNext = pNext;
+        vkImageSwapchainCreateInfoKHR->swapchain = vkSwapchainKHRHandle;
     }
 }

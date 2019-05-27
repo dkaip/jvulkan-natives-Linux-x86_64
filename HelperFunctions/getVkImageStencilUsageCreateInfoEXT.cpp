@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceCornerSampledImageFeaturesNV.cpp
+ * getVkImageStencilUsageCreateInfoEXT.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+    void getVkImageStencilUsageCreateInfoEXT(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
-			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            const jobject jVkImageStencilUsageCreateInfoEXTObject,
+			VkImageStencilUsageCreateInfoEXT *vkImageStencilUsageCreateInfoEXT,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkImageStencilUsageCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceCornerSampledImageFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageStencilUsageCreateInfoEXTObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkImageStencilUsageCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkImageStencilUsageCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,23 +70,33 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isCornerSampledImage", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getStencilUsage", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isCornerSampledImage");
+        	LOGERROR(env, "%s", "Could not find method id for getStencilUsage.");
             return;
         }
 
-        jboolean cornerSampledImage = env->CallBooleanMethod(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject, methodId);
+        jobject flagsObject = env->CallObjectMethod(jVkImageStencilUsageCreateInfoEXTObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
+            return;
+        }
+
+        VkImageUsageFlags stencilUsageFlags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getEnumSetValue failed for VkImageUsageFlagBits.");
             return;
         }
 
 
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->cornerSampledImage = cornerSampledImage;
+        vkImageStencilUsageCreateInfoEXT->sType = sTypeValue;
+        vkImageStencilUsageCreateInfoEXT->pNext = pNext;
+        vkImageStencilUsageCreateInfoEXT->stencilUsage = stencilUsageFlags;
     }
 }

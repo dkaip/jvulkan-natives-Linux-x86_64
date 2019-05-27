@@ -18,7 +18,7 @@
  * getVkComputePipelineCreateInfoCollection.cpp
  *
  *  Created on: Apr 1, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 

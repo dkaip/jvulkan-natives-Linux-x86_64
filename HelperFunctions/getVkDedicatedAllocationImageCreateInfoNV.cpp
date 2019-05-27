@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceCornerSampledImageFeaturesNV.cpp
+ * getVkDedicatedAllocationImageCreateInfoNV.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+    void getVkDedicatedAllocationImageCreateInfoNV(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
-			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            const jobject jVkDedicatedAllocationImageCreateInfoNVObject,
+			VkDedicatedAllocationImageCreateInfoNV *vkDedicatedAllocationImageCreateInfoNV,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkDedicatedAllocationImageCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceCornerSampledImageFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkDedicatedAllocationImageCreateInfoNVObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDedicatedAllocationImageCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkDedicatedAllocationImageCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,14 +70,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isCornerSampledImage", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "isDedicatedAllocation", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isCornerSampledImage");
+        	LOGERROR(env, "%s", "Could not find method id for isDedicatedAllocation");
             return;
         }
 
-        jboolean cornerSampledImage = env->CallBooleanMethod(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject, methodId);
+        jboolean dedicatedAllocation = env->CallBooleanMethod(jVkDedicatedAllocationImageCreateInfoNVObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -85,8 +85,8 @@ namespace jvulkan
         }
 
 
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->cornerSampledImage = cornerSampledImage;
+        vkDedicatedAllocationImageCreateInfoNV->sType = sTypeValue;
+        vkDedicatedAllocationImageCreateInfoNV->pNext = pNext;
+        vkDedicatedAllocationImageCreateInfoNV->dedicatedAllocation = dedicatedAllocation;
     }
 }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceCornerSampledImageFeaturesNV.cpp
+ * getVkImageFormatListCreateInfoKHR.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceCornerSampledImageFeaturesNV(
+    void getVkImageFormatListCreateInfoKHR(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceCornerSampledImageFeaturesNVObject,
-			VkPhysicalDeviceCornerSampledImageFeaturesNV *vkPhysicalDeviceCornerSampledImageFeaturesNV,
+            const jobject jVkImageFormatListCreateInfoKHRObject,
+			VkImageFormatListCreateInfoKHR *vkImageFormatListCreateInfoKHR,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkImageFormatListCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceCornerSampledImageFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageFormatListCreateInfoKHRObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkImageFormatListCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceCornerSampledImageFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkImageFormatListCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -69,24 +69,40 @@ namespace jvulkan
             }
         }
 
+
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isCornerSampledImage", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getViewFormats", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isCornerSampledImage");
+        	LOGERROR(env, "%s", "Could not find method id for getViewFormats");
             return;
         }
 
-        jboolean cornerSampledImage = env->CallBooleanMethod(jVkPhysicalDeviceCornerSampledImageFeaturesNVObject, methodId);
+        jobject jViewFormats = env->CallObjectMethod(jVkImageFormatListCreateInfoKHRObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
+        int viewFormatCount = 0;
+        VkFormat *vkFormats = nullptr;
+        getVkFormatCollection(
+                env,
+				jViewFormats,
+                &vkFormats,
+                &viewFormatCount,
+                memoryToFree);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getVkSubresourceLayoutCollection");
             return;
         }
 
 
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceCornerSampledImageFeaturesNV->cornerSampledImage = cornerSampledImage;
+        vkImageFormatListCreateInfoKHR->sType = sTypeValue;
+        vkImageFormatListCreateInfoKHR->pNext = pNext;
+        vkImageFormatListCreateInfoKHR->viewFormatCount = viewFormatCount;
+        vkImageFormatListCreateInfoKHR->pViewFormats = vkFormats;
     }
 }
