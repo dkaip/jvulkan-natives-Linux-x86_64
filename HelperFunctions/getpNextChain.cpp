@@ -2170,6 +2170,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkSamplerYcbcrConversionInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO");
+
+	        	VkBindImageMemoryDeviceGroupInfo *vkBindImageMemoryDeviceGroupInfo = (VkBindImageMemoryDeviceGroupInfo *)calloc(1, sizeof(VkBindImageMemoryDeviceGroupInfo));
+	        	memoryToFree->push_back(vkBindImageMemoryDeviceGroupInfo);
+
+	            getVkBindImageMemoryDeviceGroupInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkBindImageMemoryDeviceGroupInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkBindImageMemoryDeviceGroupInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkBindImageMemoryDeviceGroupInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR");
+
+	        	VkBindImageMemorySwapchainInfoKHR *vkBindImageMemorySwapchainInfoKHR = (VkBindImageMemorySwapchainInfoKHR *)calloc(1, sizeof(VkBindImageMemorySwapchainInfoKHR));
+	        	memoryToFree->push_back(vkBindImageMemorySwapchainInfoKHR);
+
+	            getVkBindImageMemorySwapchainInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkBindImageMemorySwapchainInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkBindImageMemorySwapchainInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkBindImageMemorySwapchainInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO");
+
+	        	VkBindImagePlaneMemoryInfo *vkBindImagePlaneMemoryInfo = (VkBindImagePlaneMemoryInfo *)calloc(1, sizeof(VkBindImagePlaneMemoryInfo));
+	        	memoryToFree->push_back(vkBindImagePlaneMemoryInfo);
+
+	            getVkBindImagePlaneMemoryInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkBindImagePlaneMemoryInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkBindImagePlaneMemoryInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkBindImagePlaneMemoryInfo;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

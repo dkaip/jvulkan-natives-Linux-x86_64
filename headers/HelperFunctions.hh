@@ -1843,6 +1843,24 @@ namespace jvulkan
             const jobject jVkSamplerYcbcrConversionInfoObject,
 			VkSamplerYcbcrConversionInfo *vkSamplerYcbcrConversionInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkBindImageMemoryDeviceGroupInfo(
+            JNIEnv *env,
+            const jobject jVkBindImageMemoryDeviceGroupInfoObject,
+			VkBindImageMemoryDeviceGroupInfo *vkBindImageMemoryDeviceGroupInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkBindImageMemorySwapchainInfoKHR(
+            JNIEnv *env,
+            const jobject jVkBindImageMemorySwapchainInfoKHRObject,
+			VkBindImageMemorySwapchainInfoKHR *vkBindImageMemorySwapchainInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkBindImagePlaneMemoryInfo(
+            JNIEnv *env,
+            const jobject jVkBindImagePlaneMemoryInfoObject,
+			VkBindImagePlaneMemoryInfo *vkBindImagePlaneMemoryInfo,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

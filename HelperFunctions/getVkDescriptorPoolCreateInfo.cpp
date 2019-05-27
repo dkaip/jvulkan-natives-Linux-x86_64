@@ -110,6 +110,7 @@ namespace jvulkan
             }
         }
 
+
         vkDescriptorPoolCreateInfo->sType = (VkStructureType)sTypeValue;
         vkDescriptorPoolCreateInfo->pNext = (void *)pNext;
         vkDescriptorPoolCreateInfo->flags = flags;
