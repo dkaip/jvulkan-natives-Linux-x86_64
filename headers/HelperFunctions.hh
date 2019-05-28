@@ -2018,6 +2018,24 @@ namespace jvulkan
             const jobject jVkPipelineRasterizationStateStreamCreateInfoEXTObject,
 			VkPipelineRasterizationStateStreamCreateInfoEXT *vkPipelineRasterizationStateStreamCreateInfoEXT,
             std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCoverageModulationStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineCoverageModulationStateCreateInfoNVObject,
+			VkPipelineCoverageModulationStateCreateInfoNV *vkPipelineCoverageModulationStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCoverageToColorStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineCoverageToColorStateCreateInfoNVObject,
+			VkPipelineCoverageToColorStateCreateInfoNV *vkPipelineCoverageToColorStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineSampleLocationsStateCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineSampleLocationsStateCreateInfoEXTObject,
+			VkPipelineSampleLocationsStateCreateInfoEXT *vkPipelineSampleLocationsStateCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

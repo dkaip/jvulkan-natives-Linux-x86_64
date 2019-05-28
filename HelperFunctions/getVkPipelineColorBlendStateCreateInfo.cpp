@@ -165,6 +165,7 @@ namespace jvulkan
             }
         }
 
+
         vkPipelineColorBlendStateCreateInfo->sType = (VkStructureType)sTypeValue;
         vkPipelineColorBlendStateCreateInfo->pNext = (void *)pNext;
         vkPipelineColorBlendStateCreateInfo->flags = (VkPipelineColorBlendStateCreateFlags)flags;

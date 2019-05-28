@@ -2485,6 +2485,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkPipelineRasterizationStateStreamCreateInfoEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineCoverageModulationStateCreateInfoNV *vkPipelineCoverageModulationStateCreateInfoNV = (VkPipelineCoverageModulationStateCreateInfoNV *)calloc(1, sizeof(VkPipelineCoverageModulationStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineCoverageModulationStateCreateInfoNV);
+
+	            getVkPipelineCoverageModulationStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineCoverageModulationStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineCoverageModulationStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineCoverageModulationStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineCoverageToColorStateCreateInfoNV *vkPipelineCoverageToColorStateCreateInfoNV = (VkPipelineCoverageToColorStateCreateInfoNV *)calloc(1, sizeof(VkPipelineCoverageToColorStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineCoverageToColorStateCreateInfoNV);
+
+	            getVkPipelineCoverageToColorStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineCoverageToColorStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineCoverageToColorStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineCoverageToColorStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT");
+
+	        	VkPipelineSampleLocationsStateCreateInfoEXT *vkPipelineSampleLocationsStateCreateInfoEXT = (VkPipelineSampleLocationsStateCreateInfoEXT *)calloc(1, sizeof(VkPipelineSampleLocationsStateCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineSampleLocationsStateCreateInfoEXT);
+
+	            getVkPipelineSampleLocationsStateCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineSampleLocationsStateCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineSampleLocationsStateCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineSampleLocationsStateCreateInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
