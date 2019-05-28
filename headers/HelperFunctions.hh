@@ -1886,6 +1886,114 @@ namespace jvulkan
             const jobject jVkWriteDescriptorSetInlineUniformBlockEXTObject,
 			VkWriteDescriptorSetInlineUniformBlockEXT *vkWriteDescriptorSetInlineUniformBlockEXT,
             std::vector<void *> *memoryToFree);
+
+    void getVkCoarseSampleOrderCustomNVCollection(
+            JNIEnv *env,
+            const jobject jVkCoarseSampleOrderCustomNVCollectionObject,
+			VkCoarseSampleOrderCustomNV **vkCoarseSampleOrderCustomNVs,
+            int *numberOfVkCoarseSampleOrderCustomNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineViewportCoarseSampleOrderStateCreateInfoNVObject,
+			VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *vkPipelineViewportCoarseSampleOrderStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCoarseSampleOrderCustomNV(
+            JNIEnv *env,
+            const jobject jVkCoarseSampleOrderCustomNVObject,
+			VkCoarseSampleOrderCustomNV *vkCoarseSampleOrderCustomNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCoarseSampleLocationNVCollection(
+            JNIEnv *env,
+            const jobject jVkCoarseSampleLocationNVCollectionObject,
+			VkCoarseSampleLocationNV **vkCoarseSampleLocationNV,
+            int *numberOfVkCoarseSampleLocationNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCoarseSampleLocationNV(
+            JNIEnv *env,
+            const jobject jVkCoarseSampleLocationNVObject,
+			VkCoarseSampleLocationNV *vkCoarseSampleLocationNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineViewportExclusiveScissorStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineViewportExclusiveScissorStateCreateInfoNVObject,
+			VkPipelineViewportExclusiveScissorStateCreateInfoNV *vkPipelineViewportExclusiveScissorStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineViewportShadingRateImageStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineViewportShadingRateImageStateCreateInfoNVObject,
+			VkPipelineViewportShadingRateImageStateCreateInfoNV *vkPipelineViewportShadingRateImageStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkShadingRatePaletteNVCollection(
+            JNIEnv *env,
+            const jobject jVkShadingRatePaletteNVCollectionObject,
+			VkShadingRatePaletteNV **vkShadingRatePaletteNVs,
+            int *numberOfVkShadingRatePaletteNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkShadingRatePaletteNV(
+            JNIEnv *env,
+            const jobject jVkShadingRatePaletteNVObject,
+			VkShadingRatePaletteNV *vkShadingRatePaletteNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkShadingRatePaletteEntryNVCollection(
+            JNIEnv *env,
+            const jobject jVkShadingRatePaletteEntryNVCollectionObject,
+			VkShadingRatePaletteEntryNV **vkShadingRatePaletteEntryNVs,
+            int *numberOfVkShadingRatePaletteEntryNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkShadingRatePaletteEntryNV(
+            JNIEnv *env,
+            const jobject jVkShadingRatePaletteEntryNVObject,
+			VkShadingRatePaletteEntryNV *vkShadingRatePaletteEntryNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineViewportSwizzleStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineViewportSwizzleStateCreateInfoNVObject,
+			VkPipelineViewportSwizzleStateCreateInfoNV *vkPipelineViewportSwizzleStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewportSwizzleNVCollection(
+            JNIEnv *env,
+            const jobject jVkViewportSwizzleNVCollectionObject,
+			VkViewportSwizzleNV **vkViewportSwizzleNVs,
+            int *numberOfVkViewportSwizzleNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewportSwizzleNV(
+            JNIEnv *env,
+            const jobject jVkViewportSwizzleNVObject,
+			VkViewportSwizzleNV *vkViewportSwizzleNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineViewportWScalingStateCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkPipelineViewportWScalingStateCreateInfoNVObject,
+			VkPipelineViewportWScalingStateCreateInfoNV *vkPipelineViewportWScalingStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewportWScalingNVCollection(
+            JNIEnv *env,
+            const jobject jVkViewportWScalingNVCollectionObject,
+			VkViewportWScalingNV **vkViewportWScalingNVs,
+            int *numberOfVkViewportWScalingNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewportWScalingNV(
+            JNIEnv *env,
+            const jobject jVkViewportWScalingNVObject,
+			VkViewportWScalingNV *vkViewportWScalingNV,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

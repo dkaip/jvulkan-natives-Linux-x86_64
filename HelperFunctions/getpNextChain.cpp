@@ -2296,6 +2296,111 @@ namespace jvulkan
 	            *headOfpNextChain = vkWriteDescriptorSetInlineUniformBlockEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *vkPipelineViewportCoarseSampleOrderStateCreateInfoNV = (VkPipelineViewportCoarseSampleOrderStateCreateInfoNV *)calloc(1, sizeof(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineViewportCoarseSampleOrderStateCreateInfoNV);
+
+	            getVkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineViewportCoarseSampleOrderStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineViewportCoarseSampleOrderStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineViewportCoarseSampleOrderStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineViewportExclusiveScissorStateCreateInfoNV *vkPipelineViewportExclusiveScissorStateCreateInfoNV = (VkPipelineViewportExclusiveScissorStateCreateInfoNV *)calloc(1, sizeof(VkPipelineViewportExclusiveScissorStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineViewportExclusiveScissorStateCreateInfoNV);
+
+	            getVkPipelineViewportExclusiveScissorStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineViewportExclusiveScissorStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineViewportExclusiveScissorStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineViewportExclusiveScissorStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineViewportShadingRateImageStateCreateInfoNV *vkPipelineViewportShadingRateImageStateCreateInfoNV = (VkPipelineViewportShadingRateImageStateCreateInfoNV *)calloc(1, sizeof(VkPipelineViewportShadingRateImageStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineViewportShadingRateImageStateCreateInfoNV);
+
+	            getVkPipelineViewportShadingRateImageStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineViewportShadingRateImageStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineViewportShadingRateImageStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineViewportShadingRateImageStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineViewportSwizzleStateCreateInfoNV *vkPipelineViewportSwizzleStateCreateInfoNV = (VkPipelineViewportSwizzleStateCreateInfoNV *)calloc(1, sizeof(VkPipelineViewportSwizzleStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineViewportSwizzleStateCreateInfoNV);
+
+	            getVkPipelineViewportSwizzleStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineViewportSwizzleStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineViewportSwizzleStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineViewportSwizzleStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineViewportWScalingStateCreateInfoNV *vkPipelineViewportWScalingStateCreateInfoNV = (VkPipelineViewportWScalingStateCreateInfoNV *)calloc(1, sizeof(VkPipelineViewportWScalingStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineViewportWScalingStateCreateInfoNV);
+
+	            getVkPipelineViewportWScalingStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineViewportWScalingStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineViewportWScalingStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineViewportWScalingStateCreateInfoNV;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
