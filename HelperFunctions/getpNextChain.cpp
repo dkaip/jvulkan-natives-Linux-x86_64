@@ -2401,6 +2401,90 @@ namespace jvulkan
 	            *headOfpNextChain = vkPipelineViewportWScalingStateCreateInfoNV;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT");
+
+	        	VkPipelineRasterizationConservativeStateCreateInfoEXT *vkPipelineRasterizationConservativeStateCreateInfoEXT = (VkPipelineRasterizationConservativeStateCreateInfoEXT *)calloc(1, sizeof(VkPipelineRasterizationConservativeStateCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineRasterizationConservativeStateCreateInfoEXT);
+
+	            getVkPipelineRasterizationConservativeStateCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRasterizationConservativeStateCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRasterizationConservativeStateCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRasterizationConservativeStateCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT");
+
+	        	VkPipelineRasterizationDepthClipStateCreateInfoEXT *vkPipelineRasterizationDepthClipStateCreateInfoEXT = (VkPipelineRasterizationDepthClipStateCreateInfoEXT *)calloc(1, sizeof(VkPipelineRasterizationDepthClipStateCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineRasterizationDepthClipStateCreateInfoEXT);
+
+	            getVkPipelineRasterizationDepthClipStateCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRasterizationDepthClipStateCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRasterizationDepthClipStateCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRasterizationDepthClipStateCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD");
+
+	        	VkPipelineRasterizationStateRasterizationOrderAMD *vkPipelineRasterizationStateRasterizationOrderAMD = (VkPipelineRasterizationStateRasterizationOrderAMD *)calloc(1, sizeof(VkPipelineRasterizationStateRasterizationOrderAMD));
+	        	memoryToFree->push_back(vkPipelineRasterizationStateRasterizationOrderAMD);
+
+	            getVkPipelineRasterizationStateRasterizationOrderAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRasterizationStateRasterizationOrderAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRasterizationStateRasterizationOrderAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRasterizationStateRasterizationOrderAMD;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT");
+
+	        	VkPipelineRasterizationStateStreamCreateInfoEXT *vkPipelineRasterizationStateStreamCreateInfoEXT = (VkPipelineRasterizationStateStreamCreateInfoEXT *)calloc(1, sizeof(VkPipelineRasterizationStateStreamCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineRasterizationStateStreamCreateInfoEXT);
+
+	            getVkPipelineRasterizationStateStreamCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRasterizationStateStreamCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRasterizationStateStreamCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRasterizationStateStreamCreateInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

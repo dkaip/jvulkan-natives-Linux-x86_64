@@ -1994,6 +1994,30 @@ namespace jvulkan
             const jobject jVkViewportWScalingNVObject,
 			VkViewportWScalingNV *vkViewportWScalingNV,
             std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRasterizationConservativeStateCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineRasterizationConservativeStateCreateInfoEXTObject,
+			VkPipelineRasterizationConservativeStateCreateInfoEXT *vkPipelineRasterizationConservativeStateCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRasterizationDepthClipStateCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineRasterizationDepthClipStateCreateInfoEXTObject,
+			VkPipelineRasterizationDepthClipStateCreateInfoEXT *vkPipelineRasterizationDepthClipStateCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRasterizationStateRasterizationOrderAMD(
+            JNIEnv *env,
+            const jobject jVkPipelineRasterizationStateRasterizationOrderAMDObject,
+			VkPipelineRasterizationStateRasterizationOrderAMD *vkPipelineRasterizationStateRasterizationOrderAMD,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRasterizationStateStreamCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPipelineRasterizationStateStreamCreateInfoEXTObject,
+			VkPipelineRasterizationStateStreamCreateInfoEXT *vkPipelineRasterizationStateStreamCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
