@@ -1861,6 +1861,12 @@ namespace jvulkan
             const jobject jVkBindImagePlaneMemoryInfoObject,
 			VkBindImagePlaneMemoryInfo *vkBindImagePlaneMemoryInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkSamplerReductionModeCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkSamplerReductionModeCreateInfoEXTObject,
+			VkSamplerReductionModeCreateInfoEXT *vkSamplerReductionModeCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

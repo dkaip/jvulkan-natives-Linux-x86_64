@@ -2233,6 +2233,27 @@ namespace jvulkan
 	            *headOfpNextChain = vkBindImagePlaneMemoryInfo;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT");
+
+	        	VkSamplerReductionModeCreateInfoEXT *vkSamplerReductionModeCreateInfoEXT = (VkSamplerReductionModeCreateInfoEXT *)calloc(1, sizeof(VkSamplerReductionModeCreateInfoEXT));
+	        	memoryToFree->push_back(vkSamplerReductionModeCreateInfoEXT);
+
+	            getVkSamplerReductionModeCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSamplerReductionModeCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSamplerReductionModeCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSamplerReductionModeCreateInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
