@@ -2254,6 +2254,48 @@ namespace jvulkan
 	            *headOfpNextChain = vkSamplerReductionModeCreateInfoEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV");
+
+	        	VkWriteDescriptorSetAccelerationStructureNV *vkWriteDescriptorSetAccelerationStructureNV = (VkWriteDescriptorSetAccelerationStructureNV *)calloc(1, sizeof(VkWriteDescriptorSetAccelerationStructureNV));
+	        	memoryToFree->push_back(vkWriteDescriptorSetAccelerationStructureNV);
+
+	            getVkWriteDescriptorSetAccelerationStructureNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkWriteDescriptorSetAccelerationStructureNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkWriteDescriptorSetAccelerationStructureNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkWriteDescriptorSetAccelerationStructureNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT");
+
+	        	VkWriteDescriptorSetInlineUniformBlockEXT *vkWriteDescriptorSetInlineUniformBlockEXT = (VkWriteDescriptorSetInlineUniformBlockEXT *)calloc(1, sizeof(VkWriteDescriptorSetInlineUniformBlockEXT));
+	        	memoryToFree->push_back(vkWriteDescriptorSetInlineUniformBlockEXT);
+
+	            getVkWriteDescriptorSetInlineUniformBlockEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkWriteDescriptorSetInlineUniformBlockEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkWriteDescriptorSetInlineUniformBlockEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkWriteDescriptorSetInlineUniformBlockEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

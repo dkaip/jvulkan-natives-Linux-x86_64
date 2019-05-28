@@ -1867,6 +1867,25 @@ namespace jvulkan
             const jobject jVkSamplerReductionModeCreateInfoEXTObject,
 			VkSamplerReductionModeCreateInfoEXT *vkSamplerReductionModeCreateInfoEXT,
             std::vector<void *> *memoryToFree);
+
+    void getVkAccelerationStructureNVCollection(
+            JNIEnv *env,
+            const jobject jVkAccelerationStructureNVCollectionObject,
+			VkAccelerationStructureNV **vkAccelerationStructureNVs,
+            int *numberOfVkAccelerationStructureNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkWriteDescriptorSetAccelerationStructureNV(
+            JNIEnv *env,
+            const jobject jVkWriteDescriptorSetAccelerationStructureNVObject,
+			VkWriteDescriptorSetAccelerationStructureNV *vkWriteDescriptorSetAccelerationStructureNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkWriteDescriptorSetInlineUniformBlockEXT(
+            JNIEnv *env,
+            const jobject jVkWriteDescriptorSetInlineUniformBlockEXTObject,
+			VkWriteDescriptorSetInlineUniformBlockEXT *vkWriteDescriptorSetInlineUniformBlockEXT,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
