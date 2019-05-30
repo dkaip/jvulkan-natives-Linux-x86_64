@@ -102,7 +102,7 @@ namespace jvulkan
 			VkPhysicalDeviceFeatures *vkPhysicalDeviceFeatures,
             std::vector<void *> *memoryToFree);
 
-    void getSwapchainCreateInfoKHR(
+    void getVkSwapchainCreateInfoKHR(
             JNIEnv *env,
             const jobject jVkSwapchainCreateInfoKHR,
             VkSwapchainCreateInfoKHR *swapchainCreateInfo,

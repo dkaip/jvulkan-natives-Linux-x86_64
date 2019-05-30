@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-	void getSwapchainCreateInfoKHR(
+	void getVkSwapchainCreateInfoKHR(
 			JNIEnv *env,
 			const jobject jVkSwapchainCreateInfoKHR,
 			VkSwapchainCreateInfoKHR *swapchainCreateInfo,

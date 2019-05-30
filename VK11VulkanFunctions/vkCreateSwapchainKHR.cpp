@@ -45,7 +45,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkSwapchainCreateInfoKHR vkSwapchainCreateInfoKHR = {};
     std::vector<void *> memoryToFree(5);
 
-    jvulkan::getSwapchainCreateInfoKHR(env, jVkSwapchainCreateInfoKHR, &vkSwapchainCreateInfoKHR, &memoryToFree);
+    jvulkan::getVkSwapchainCreateInfoKHR(env, jVkSwapchainCreateInfoKHR, &vkSwapchainCreateInfoKHR, &memoryToFree);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
