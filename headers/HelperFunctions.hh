@@ -127,19 +127,19 @@ namespace jvulkan
             int *numberOfAttachments,
             std::vector<void *> *memoryToFree);
 
-    void getVkSubpassDescriptions(
+    void getVkSubpassDescriptionCollection(
             JNIEnv *env,
             const jobject jVkSubpassDescriptionCollectionObject,
             VkSubpassDescription **subpassDescriptions,
             int *numberOfDescriptions,
             std::vector<void *> *memoryToFree);
 
-    void getVkAttachmentReference(
-            JNIEnv *env,
-            const jobject jVkAttachmentReferenceObject,
-            VkAttachmentReference *attachmentReference);
-
-    void getCollectionOfVkSubpassDependency(
+//    void getVkAttachmentReference(
+//            JNIEnv *env,
+//            const jobject jVkAttachmentReferenceObject,
+//            VkAttachmentReference *attachmentReference);
+//
+    void getVkSubpassDependencyCollection(
             JNIEnv *env,
             const jobject jVkSubpassDependencyCollectionObject,
             VkSubpassDependency **subpassDependencies,
@@ -149,7 +149,8 @@ namespace jvulkan
     void getVkSubpassDependency(
             JNIEnv *env,
             const jobject jVkSubpassDependencyObject,
-            VkSubpassDependency *subpassDependency);
+            VkSubpassDependency *subpassDependency,
+			std::vector<void *> *memoryToFree);
 
     void getVkShaderModuleCreateInfo(
         JNIEnv *env,
@@ -1528,7 +1529,14 @@ namespace jvulkan
 			VkAttachmentReference *vkAttachmentReference,
             std::vector<void *> *memoryToFree);
 
-    void getVkRenderPassFragmentDensityMapCreateInfoEXT(
+	void getVkAttachmentReferenceCollection(
+			JNIEnv *env,
+			const jobject jVkAttachmentReferenceCollectionObject,
+			VkAttachmentReference **attachmentReferences,
+			int *numberOfAttachmentReferences,
+			std::vector<void *> *memoryToFree);
+
+	void getVkRenderPassFragmentDensityMapCreateInfoEXT(
             JNIEnv *env,
             const jobject jVkRenderPassFragmentDensityMapCreateInfoEXTObject,
 			VkRenderPassFragmentDensityMapCreateInfoEXT *vkRenderPassFragmentDensityMapCreateInfoEXT,
