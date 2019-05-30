@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-	void getVkAttachmentDescriptions(
+	void getVkAttachmentDescriptionCollection(
 			JNIEnv *env,
 			const jobject jVkAttachmentDescriptionCollectionObject,
 			VkAttachmentDescription **attachmentDescriptions,

@@ -112,7 +112,7 @@ namespace jvulkan
 		int numberOfAttachmentDescriptions = 0;
 		VkAttachmentDescription *vkAttachmentDescriptions = nullptr;
 
-		getVkAttachmentDescriptions(
+		getVkAttachmentDescriptionCollection(
 				env,
 				jAttachmentDescriptionCollection,
 				&vkAttachmentDescriptions,

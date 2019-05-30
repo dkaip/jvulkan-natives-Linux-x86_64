@@ -120,7 +120,7 @@ namespace jvulkan
         VkRenderPassCreateInfo *renderPassCreateInfo,
         std::vector<void *> *memoryToFree);
 
-    void getVkAttachmentDescriptions(
+    void getVkAttachmentDescriptionCollection(
             JNIEnv *env,
             const jobject jVkAttachmentDescriptionCollectionObject,
             VkAttachmentDescription **renderPassCreateInfo,
@@ -2127,6 +2127,50 @@ namespace jvulkan
             JNIEnv *env,
             const jobject jVkSwapchainDisplayNativeHdrCreateInfoAMDObject,
 			VkSwapchainDisplayNativeHdrCreateInfoAMD *vkSwapchainDisplayNativeHdrCreateInfoAMD,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceGroupPresentInfoKHR(
+            JNIEnv *env,
+            const jobject jVVkDeviceGroupPresentInfoKHRObject,
+			VkDeviceGroupPresentInfoKHR *vkDeviceGroupPresentInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDisplayPresentInfoKHR(
+            JNIEnv *env,
+            const jobject jVkDisplayPresentInfoKHRObject,
+			VkDisplayPresentInfoKHR *vkDisplayPresentInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPresentRegionsKHR(
+            JNIEnv *env,
+            const jobject jVkPresentRegionsKHRObject,
+			VkPresentRegionsKHR *vkPresentRegionsKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPresentRegionKHRCollection(
+            JNIEnv *env,
+            const jobject jVkPresentRegionKHRCollectionObject,
+			VkPresentRegionKHR **vkPresentRegionKHRs,
+            int *numberOfVkPresentRegionKHRs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPresentRegionKHR(
+            JNIEnv *env,
+            const jobject jVkPresentRegionKHRObject,
+			VkPresentRegionKHR *vkPresentRegionKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRectLayerKHRCollection(
+            JNIEnv *env,
+            const jobject jVkRectLayerKHRCollectionObject,
+			VkRectLayerKHR **vkRectLayerKHRs,
+            int *numberOfVkRectLayerKHRs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRectLayerKHR(
+            JNIEnv *env,
+            const jobject jVkRectLayerKHRObject,
+			VkRectLayerKHR *vkRectLayerKHR,
             std::vector<void *> *memoryToFree);
 }
 

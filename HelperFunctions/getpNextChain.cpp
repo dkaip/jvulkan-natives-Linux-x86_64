@@ -2716,6 +2716,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkSwapchainDisplayNativeHdrCreateInfoAMD;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR");
+
+	        	VkDeviceGroupPresentInfoKHR *vkDeviceGroupPresentInfoKHR = (VkDeviceGroupPresentInfoKHR *)calloc(1, sizeof(VkDeviceGroupPresentInfoKHR));
+	        	memoryToFree->push_back(vkDeviceGroupPresentInfoKHR);
+
+	            getVkDeviceGroupPresentInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceGroupPresentInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupPresentInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupPresentInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR");
+
+	        	VkDisplayPresentInfoKHR *vkDisplayPresentInfoKHR = (VkDisplayPresentInfoKHR *)calloc(1, sizeof(VkDisplayPresentInfoKHR));
+	        	memoryToFree->push_back(vkDisplayPresentInfoKHR);
+
+	            getVkDisplayPresentInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDisplayPresentInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDisplayPresentInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDisplayPresentInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR");
+
+	        	VkPresentRegionsKHR *vkPresentRegionsKHR = (VkPresentRegionsKHR *)calloc(1, sizeof(VkPresentRegionsKHR));
+	        	memoryToFree->push_back(vkPresentRegionsKHR);
+
+	            getVkPresentRegionsKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPresentRegionsKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPresentRegionsKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPresentRegionsKHR;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
