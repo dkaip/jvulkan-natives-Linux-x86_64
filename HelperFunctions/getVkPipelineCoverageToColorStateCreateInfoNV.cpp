@@ -102,7 +102,7 @@ namespace jvulkan
             return;
         }
 
-        jboolean  coverageToColorEnable = env->CallBooleanMethod(jVkPipelineCoverageToColorStateCreateInfoNVObject, methodId);
+        jboolean coverageToColorEnable = env->CallBooleanMethod(jVkPipelineCoverageToColorStateCreateInfoNVObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");

@@ -27,7 +27,6 @@ namespace jvulkan
 {
 	jobject createVkExtent2D(JNIEnv *env, const VkExtent2D *vkExtent2D)
 	{
-		// Locate the VkConformanceVersionKHR class
 		jclass vkExtent2DClass = env->FindClass(
 				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
         if (env->ExceptionOccurred())
@@ -44,7 +43,6 @@ namespace jvulkan
             return nullptr;
         }
 
-		// Create the Java vkDebugUtilsObjectNameInfoEXTObject object
 		jobject jVkExtent2DObject =
 				env->NewObject(vkExtent2DClass, methodId, vkExtent2D->width, vkExtent2D->height);
         if (env->ExceptionOccurred())

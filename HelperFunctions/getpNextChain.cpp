@@ -2548,6 +2548,111 @@ namespace jvulkan
 	            *headOfpNextChain = vkPipelineSampleLocationsStateCreateInfoEXT;
 			}
 			break;
+//			case VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT:
+//			{
+//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT");
+//
+//	        	VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT = (VkSurfaceFullScreenExclusiveInfoEXT *)calloc(1, sizeof(VkSurfaceFullScreenExclusiveInfoEXT));
+//	        	memoryToFree->push_back(vkSurfaceFullScreenExclusiveInfoEXT);
+//
+//	            getVkSurfaceFullScreenExclusiveInfoEXT(
+//	                    env,
+//						jVulkanCreateInfoStructureObject,
+//						vkSurfaceFullScreenExclusiveInfoEXT,
+//	                    memoryToFree);
+//	            if (env->ExceptionOccurred())
+//	            {
+//	            	LOGERROR(env, "%s", "Call to getVkSurfaceFullScreenExclusiveInfoEXT failed.");
+//	                return;
+//	            }
+//
+//	            *headOfpNextChain = vkSurfaceFullScreenExclusiveInfoEXT;
+//			}
+//			break;
+			case VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD");
+
+	        	VkDisplayNativeHdrSurfaceCapabilitiesAMD *vkDisplayNativeHdrSurfaceCapabilitiesAMD = (VkDisplayNativeHdrSurfaceCapabilitiesAMD *)calloc(1, sizeof(VkDisplayNativeHdrSurfaceCapabilitiesAMD));
+	        	memoryToFree->push_back(vkDisplayNativeHdrSurfaceCapabilitiesAMD);
+
+	            getVkDisplayNativeHdrSurfaceCapabilitiesAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDisplayNativeHdrSurfaceCapabilitiesAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDisplayNativeHdrSurfaceCapabilitiesAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDisplayNativeHdrSurfaceCapabilitiesAMD;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR");
+
+	        	VkSharedPresentSurfaceCapabilitiesKHR *vkSharedPresentSurfaceCapabilitiesKHR = (VkSharedPresentSurfaceCapabilitiesKHR *)calloc(1, sizeof(VkSharedPresentSurfaceCapabilitiesKHR));
+	        	memoryToFree->push_back(vkSharedPresentSurfaceCapabilitiesKHR);
+
+	            getVkSharedPresentSurfaceCapabilitiesKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSharedPresentSurfaceCapabilitiesKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSharedPresentSurfaceCapabilitiesKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSharedPresentSurfaceCapabilitiesKHR;
+			}
+			break;
+//			case VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT:
+//			{
+//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT");
+//
+//	        	VkSurfaceCapabilitiesFullScreenExclusiveEXT *vkSurfaceCapabilitiesFullScreenExclusiveEXT = (VkSurfaceCapabilitiesFullScreenExclusiveEXT *)calloc(1, sizeof(VkSurfaceCapabilitiesFullScreenExclusiveEXT));
+//	        	memoryToFree->push_back(vkSurfaceCapabilitiesFullScreenExclusiveEXT);
+//
+//	            getVkSurfaceCapabilitiesFullScreenExclusiveEXT(
+//	                    env,
+//						jVulkanCreateInfoStructureObject,
+//						vkSurfaceCapabilitiesFullScreenExclusiveEXT,
+//	                    memoryToFree);
+//	            if (env->ExceptionOccurred())
+//	            {
+//	            	LOGERROR(env, "%s", "Call to getVkSurfaceCapabilitiesFullScreenExclusiveEXT failed.");
+//	                return;
+//	            }
+//
+//	            *headOfpNextChain = vkSurfaceCapabilitiesFullScreenExclusiveEXT;
+//			}
+//			break;
+			case VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR");
+
+	        	VkSurfaceProtectedCapabilitiesKHR *vkSurfaceProtectedCapabilitiesKHR = (VkSurfaceProtectedCapabilitiesKHR *)calloc(1, sizeof(VkSurfaceProtectedCapabilitiesKHR));
+	        	memoryToFree->push_back(vkSurfaceProtectedCapabilitiesKHR);
+
+	            getVkSurfaceProtectedCapabilitiesKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSurfaceProtectedCapabilitiesKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSurfaceProtectedCapabilitiesKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSurfaceProtectedCapabilitiesKHR;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

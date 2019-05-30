@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * createVkPhysicalDeviceProperties.cpp
+ * populateVkPhysicalDeviceProperties.cpp
  *
  *  Created on: May 12, 2019
  *      Author: Douglas Kaip
@@ -31,38 +31,19 @@ namespace jvulkan
 	static jobject getVkSampleCountFlagBits(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
 	static jobject getSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties);
 
-    void createVkPhysicalDeviceProperties(
+    void populateVkPhysicalDeviceProperties(
     		JNIEnv *env,
 			jobject jVkPhysicalDevicePropertiesObject,
 			const VkPhysicalDeviceProperties *vkPhysicalDeviceProperties)
     {
         // Locate the VkPhysicalDeviceProperties class
         jclass vkPhysicalDevicePropertiesClass = env->GetObjectClass(jVkPhysicalDevicePropertiesObject);
-//        jclass vkPhysicalDevicePropertiesClass = env->FindClass(
-//        		"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
             return;
         }
 
-//        // Locate the constructor
-//        jmethodID methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "<init>", "()V");
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
-//            return nullptr;
-//        }
-//
-//        // Create the Java vkPhysicalDeviceProperties object
-//        jobject jVkPhysicalDevicePropertiesObject =
-//        		env->NewObject(vkPhysicalDevicePropertiesClass, methodId);
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
-//            return nullptr;
-//        }
-//
         ///////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setApiVersion", "(I)V");
         if (env->ExceptionOccurred())
@@ -94,7 +75,6 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-
         methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setVendorID", "(I)V");
         if (env->ExceptionOccurred())
         {

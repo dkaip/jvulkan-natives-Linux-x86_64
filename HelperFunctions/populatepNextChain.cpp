@@ -423,6 +423,58 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD");
+				populateVkDisplayNativeHdrSurfaceCapabilitiesAMD(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkDisplayNativeHdrSurfaceCapabilitiesAMD *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkDisplayNativeHdrSurfaceCapabilitiesAMD.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR");
+				populateVkSharedPresentSurfaceCapabilitiesKHR(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkSharedPresentSurfaceCapabilitiesKHR *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkSharedPresentSurfaceCapabilitiesKHR.");
+					return;
+				}
+				break;
+//			case VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT:
+//				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT");
+//				populateVkSurfaceCapabilitiesFullScreenExclusiveEXT(
+//						env,
+//						jVulkanCreateInfoStructureObject,
+//						(VkSurfaceCapabilitiesFullScreenExclusiveEXT *)headOfpNextChain,
+//						memoryToFree);
+//				if (env->ExceptionOccurred())
+//				{
+//					LOGERROR(env, "%s", "Error calling populateVkSurfaceCapabilitiesFullScreenExclusiveEXT.");
+//					return;
+//				}
+//				break;
+			case VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR");
+				populateVkSurfaceProtectedCapabilitiesKHR(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkSurfaceProtectedCapabilitiesKHR *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkSurfaceProtectedCapabilitiesKHR.");
+					return;
+				}
+				break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sType);
 				break;

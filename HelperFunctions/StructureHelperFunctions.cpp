@@ -781,188 +781,188 @@ namespace jvulkan
         return enumSetObject;
     }
 
-    jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags)
-    {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;";
-        /*
-         * Create the EnumSet for the flags.
-         */
-        jclass enumSetClass = env->FindClass("java/util/EnumSet");
-        if (env->ExceptionOccurred())
-        {
-            cout << "Error finding EnumSet class ... returning" << endl;
-            return nullptr;
-        }
-    //    cout << "Found EnumSet class" << endl;
-
-        jmethodID enumSetNoneOfMethod = env->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred() != 0)
-        {
-            cout << "Error getting noneOf ... returning" << endl;
-            return nullptr;
-        }
-
-    //    cout << "Got noneOfMethod" << endl;
-
-        jclass enumClass = env->FindClass(enumClassString);
-
-        jobject enumSetObject = env->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
-        if (env->ExceptionOccurred())
-        {
-            cout << "Error CallStaticObjectMethod on enumset object class ... returning" << endl;
-            return nullptr;
-        }
-
-    //    cout << "Made the empty EnumSet flags is " << vkSampleCountFlags << endl;
-
-        jclass setClass = env->FindClass("java/util/Set");
-        jmethodID setAddMethod = env->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
-        if (env->ExceptionOccurred())
-        {
-            cout << "Error getting add method on EnumSet ... returning" << endl;
-            return nullptr;
-        }
-
-        /*
-         * Make sure that flags does not have an unexpected value.  This would
-         * indicate that this code is out of sync with the LunarG Vulkan SDK.
-         */
-        if ((transformFlags &
-             !(VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR |
-               VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR |
-               VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR |
-               VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR |
-               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR |
-               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR |
-               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR |
-               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR |
-               VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR)) != 0)
-        {
-            cout << "ERROR: Unhandled case for transformFlags...value is " << transformFlags << endl;
-            return nullptr;
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        if (transformFlags & VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR to EnumSet" << endl;
-                return nullptr;
-            }
-        }
-
-        return enumSetObject;
-    }
-
+//    jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags)
+//    {
+//        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR";
+//        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;";
+//        /*
+//         * Create the EnumSet for the flags.
+//         */
+//        jclass enumSetClass = env->FindClass("java/util/EnumSet");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "Error finding EnumSet class ... returning" << endl;
+//            return nullptr;
+//        }
+//    //    cout << "Found EnumSet class" << endl;
+//
+//        jmethodID enumSetNoneOfMethod = env->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
+//        if (env->ExceptionOccurred() != 0)
+//        {
+//            cout << "Error getting noneOf ... returning" << endl;
+//            return nullptr;
+//        }
+//
+//    //    cout << "Got noneOfMethod" << endl;
+//
+//        jclass enumClass = env->FindClass(enumClassString);
+//
+//        jobject enumSetObject = env->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "Error CallStaticObjectMethod on enumset object class ... returning" << endl;
+//            return nullptr;
+//        }
+//
+//    //    cout << "Made the empty EnumSet flags is " << vkSampleCountFlags << endl;
+//
+//        jclass setClass = env->FindClass("java/util/Set");
+//        jmethodID setAddMethod = env->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
+//        if (env->ExceptionOccurred())
+//        {
+//            cout << "Error getting add method on EnumSet ... returning" << endl;
+//            return nullptr;
+//        }
+//
+//        /*
+//         * Make sure that flags does not have an unexpected value.  This would
+//         * indicate that this code is out of sync with the LunarG Vulkan SDK.
+//         */
+//        if ((transformFlags &
+//             !(VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR |
+//               VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR)) != 0)
+//        {
+//            cout << "ERROR: Unhandled case for transformFlags...value is " << transformFlags << endl;
+//            return nullptr;
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        if (transformFlags & VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR)
+//        {
+//            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR", enumObjectString);
+//            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+//
+//            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+//            if (addResult == false)
+//            {
+//                cout << "ERROR: could not add VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR to EnumSet" << endl;
+//                return nullptr;
+//            }
+//        }
+//
+//        return enumSetObject;
+//    }
+//
 	void getAllocatorCallbacks(
 	        JNIEnv *env,
 	        const jobject jAlternateAllocator,
