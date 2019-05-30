@@ -19,6 +19,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -54,175 +55,161 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return jvulkan::createVkResult(env, result);
     }
 
-    jclass surfaceCapabilitiesClass = env->GetObjectClass(jVkSurfaceCapabilitiesKHR);
-    ////////////////////////////////////////////////////////////////////////////
+    std::vector<void *> memoryToFree(5);
 
-    jmethodID methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMinImageCount", "(I)V");
+	jvulkan::populateVkSurfaceCapabilitiesKHR(
+			env,
+			jVkSurfaceCapabilitiesKHR,
+			&surfaceCapabilities,
+			&memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling populateVkSurfaceCapabilitiesKHR");
+        jvulkan::freeMemory(&memoryToFree);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.minImageCount);
 
-    ////////////////////////////////////////////////////////////////////////////
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageCount", "(I)V");
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.maxImageCount);
-
-    ////////////////////////////////////////////////////////////////////////////
+//    jclass surfaceCapabilitiesClass = env->GetObjectClass(jVkSurfaceCapabilitiesKHR);
+//    ////////////////////////////////////////////////////////////////////////////
+//    jmethodID methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMinImageCount", "(I)V");
 //
-//    jclass extent2DClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
-//    jmethodID extent2DConstructor = env->GetMethodID(extent2DClass, "<init>", "(II)V");
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.minImageCount);
 //
-//    jobject extent2DObject = env->NewObject(
-//            extent2DClass,
-//            extent2DConstructor,
-//            surfaceCapabilities.currentExtent.width,
-//            surfaceCapabilities.currentExtent.height);
+//    ////////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageCount", "(I)V");
 //
-    jobject extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.currentExtent);
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setCurrentImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
-
-    ////////////////////////////////////////////////////////////////////////////
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.maxImageCount);
 //
-//    extent2DObject = env->NewObject(
-//            extent2DClass,
-//            extent2DConstructor,
-//            surfaceCapabilities.minImageExtent.width,
-//            surfaceCapabilities.minImageExtent.height);
+//    ////////////////////////////////////////////////////////////////////////////
+//    jobject extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.currentExtent);
 //
-    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.minImageExtent);
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMinImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
-
-    ////////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setCurrentImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
 //
-//    extent2DObject = env->NewObject(
-//            extent2DClass,
-//            extent2DConstructor,
-//            surfaceCapabilities.maxImageExtent.width,
-//            surfaceCapabilities.maxImageExtent.height);
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
 //
-    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.maxImageExtent);
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
-
-    ////////////////////////////////////////////////////////////////////////////
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageArrayLayers", "(I)V");
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.maxImageArrayLayers);
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedTransforms", "(Ljava/util/EnumSet;)V");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jobject supportedTransformsEnumSet = jvulkan::getVkSurfaceTransformFlagsKHRAsEnumSet(env, surfaceCapabilities.supportedTransforms);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    if (supportedTransformsEnumSet == nullptr)
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedTransformsEnumSet);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    jclass vkSurfaceTransformFlagBitsKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR");
-    if (env->ExceptionOccurred())
-    {
-        cout << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR" << endl;
-        return nullptr;
-    }
-
-    methodId = env->GetStaticMethodID(vkSurfaceTransformFlagBitsKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
-    if (env->ExceptionOccurred())
-    {
-        cout << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;" << endl;
-        return nullptr;
-    }
-
-    jobject jCurrentTransformEnum = env->CallStaticObjectMethod(vkSurfaceTransformFlagBitsKHRClass, methodId, surfaceCapabilities.currentTransform);
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setCurrentTransform", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;)V");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, jCurrentTransformEnum);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedCompositeAlpha", "(Ljava/util/EnumSet;)V");
-    if (env->ExceptionOccurred())
-    {
-        return nullptr;
-    }
-
-    jobject supportedCompositeAlphaEnumSet = jvulkan::getVkCompositeAlphaFlagsKHRAsEnumSet(env, surfaceCapabilities.supportedCompositeAlpha);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    if (supportedCompositeAlphaEnumSet == nullptr)
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedCompositeAlphaEnumSet);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedUsageFlags", "(Ljava/util/EnumSet;)V");
-    if (env->ExceptionOccurred())
-    {
-        return nullptr;
-    }
-
-    jobject supportedImageUsageFlagsEnumSet = jvulkan::getVkImageUsageFlagsAsEnumSet(env, surfaceCapabilities.supportedUsageFlags);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    if (supportedImageUsageFlagsEnumSet == nullptr)
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedImageUsageFlagsEnumSet);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
+//    ////////////////////////////////////////////////////////////////////////////
+//    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.minImageExtent);
+//
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMinImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
+//
+//    ////////////////////////////////////////////////////////////////////////////
+//    extent2DObject = jvulkan::createVkExtent2D(env, &surfaceCapabilities.maxImageExtent);
+//
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, extent2DObject);
+//
+//    ////////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setMaxImageArrayLayers", "(I)V");
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, surfaceCapabilities.maxImageArrayLayers);
+//
+//    ///////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedTransforms", "(Ljava/util/EnumSet;)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    jobject supportedTransformsEnumSet = jvulkan::getVkSurfaceTransformFlagsKHRAsEnumSet(env, surfaceCapabilities.supportedTransforms);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    if (supportedTransformsEnumSet == nullptr)
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedTransformsEnumSet);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    ///////////////////////////////////////////////////////////////////////////
+//    jclass vkSurfaceTransformFlagBitsKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR");
+//    if (env->ExceptionOccurred())
+//    {
+//        cout << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR" << endl;
+//        return nullptr;
+//    }
+//
+//    methodId = env->GetStaticMethodID(vkSurfaceTransformFlagBitsKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
+//    if (env->ExceptionOccurred())
+//    {
+//        cout << "vkGetPhysicalDeviceSurfaceCapabilitiesKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;" << endl;
+//        return nullptr;
+//    }
+//
+//    jobject jCurrentTransformEnum = env->CallStaticObjectMethod(vkSurfaceTransformFlagBitsKHRClass, methodId, surfaceCapabilities.currentTransform);
+//
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setCurrentTransform", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, jCurrentTransformEnum);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    ///////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedCompositeAlpha", "(Ljava/util/EnumSet;)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return nullptr;
+//    }
+//
+//    jobject supportedCompositeAlphaEnumSet = jvulkan::getVkCompositeAlphaFlagsKHRAsEnumSet(env, surfaceCapabilities.supportedCompositeAlpha);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    if (supportedCompositeAlphaEnumSet == nullptr)
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedCompositeAlphaEnumSet);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    ///////////////////////////////////////////////////////////////////////////
+//    methodId = env->GetMethodID(surfaceCapabilitiesClass, "setSupportedUsageFlags", "(Ljava/util/EnumSet;)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return nullptr;
+//    }
+//
+//    jobject supportedImageUsageFlagsEnumSet = jvulkan::getVkImageUsageFlagsAsEnumSet(env, surfaceCapabilities.supportedUsageFlags);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    if (supportedImageUsageFlagsEnumSet == nullptr)
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+//    env->CallVoidMethod(jVkSurfaceCapabilitiesKHR, methodId, supportedImageUsageFlagsEnumSet);
+//    if (env->ExceptionOccurred())
+//    {
+//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    }
+//
+    jvulkan::freeMemory(&memoryToFree);
 
     return jvulkan::createVkResult(env, result);
 }

@@ -33,6 +33,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling jvulkan::getHandleValue");
         return;
     }
 
@@ -40,10 +41,11 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     vkGetPhysicalDeviceProperties(vkPhysicalDeviceHandle, &vkPhysicalDeviceProperties);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling vkGetPhysicalDeviceProperties");
         return;
     }
 
-    jvulkan::createVkPhysicalDeviceProperties(
+    jvulkan::populateVkPhysicalDeviceProperties(
     		env,
 			jVkPhysicalDevicePropertiesObject,
 			&vkPhysicalDeviceProperties);

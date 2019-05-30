@@ -1017,6 +1017,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkGetPhysicalDeviceSurfaceCapabilities2KHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceSurfaceInfo2KHR;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceCapabilities2KHR;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceSurfaceCapabilities2KHR
+  (JNIEnv *, jobject, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceSurfaceFormatsKHR
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */

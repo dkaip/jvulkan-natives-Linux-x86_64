@@ -54,25 +54,29 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         return;
     }
 
-    /*
-     * Crawl the pNext chain and identify / create any needed elements.
-     */
-	jvulkan::getpNextChain(
-			env,
-			jpNextObject,
-			&headOfpNextChain,
-			&memoryToFree);
-    if (env->ExceptionOccurred())
+    if (jpNextObject != nullptr)
     {
-    	LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
-        return;
+		/*
+		 * Crawl the pNext chain and identify / create any needed elements.
+		 */
+		jvulkan::getpNextChain(
+				env,
+				jpNextObject,
+				&headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
     }
 
     VkPhysicalDeviceProperties2 vkPhysicalDeviceProperties2 = {};
     /*
-     * TODO
-     * Hmmm, I did not have to do this elsewhere(then next two lines of code)...is
-     * there is bug or do I need to go and fix all of the other references like this?
+     * This needs to be done because the above line does not
+     * properly init the object.  In other cases a "get"
+     * helper function is called which does the job or it is
+     * taken care of in getpNextChain
      */
     vkPhysicalDeviceProperties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
     vkPhysicalDeviceProperties2.pNext = headOfpNextChain;
@@ -89,15 +93,18 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * on it.  In this case the pNext chain data is out bound.
      */
 
-    jvulkan::populatepNextChain(
-    		env,
-			jpNextObject,
-			headOfpNextChain,
-			&memoryToFree);
-    if (env->ExceptionOccurred())
+    if (jpNextObject != nullptr)
     {
-    	LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
-        return;
+		jvulkan::populatepNextChain(
+				env,
+				jpNextObject,
+				headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
     }
 
     /*
@@ -129,7 +136,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 		return;
 	}
 
-    jvulkan::createVkPhysicalDeviceProperties(
+    jvulkan::populateVkPhysicalDeviceProperties(
     		env,
 			jVkPhysicalDevicePropertiesObject,
 			&vkPhysicalDeviceProperties2.properties);

@@ -1066,7 +1066,7 @@ namespace jvulkan
             int *numberOfVkValidationCheckEXTs,
             std::vector<void *> *memoryToFree);
 
-	void createVkPhysicalDeviceProperties(
+	void populateVkPhysicalDeviceProperties(
     		JNIEnv *env,
 			jobject jVkPhysicalDevicePropertiesObject,
 			const VkPhysicalDeviceProperties *vkPhysicalDeviceProperties);
@@ -2036,6 +2036,72 @@ namespace jvulkan
             const jobject jVkPipelineSampleLocationsStateCreateInfoEXTObject,
 			VkPipelineSampleLocationsStateCreateInfoEXT *vkPipelineSampleLocationsStateCreateInfoEXT,
             std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceSurfaceInfo2KHR(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceSurfaceInfo2KHRObject,
+			VkPhysicalDeviceSurfaceInfo2KHR *vkPhysicalDeviceSurfaceInfo2KHR,
+            std::vector<void *> *memoryToFree);
+
+//    void getVkSurfaceFullScreenExclusiveInfoEXT(
+//            JNIEnv *env,
+//            const jobject jVkSurfaceFullScreenExclusiveInfoEXTObject,
+//			VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT,
+//            std::vector<void *> *memoryToFree);
+
+	void populateVkSurfaceCapabilitiesKHR(
+			JNIEnv *env,
+			jobject jVkSurfaceCapabilitiesKHRObject,
+			const VkSurfaceCapabilitiesKHR *vkSurfaceCapabilitiesKHR,
+			std::vector<void *> *memoryToFree);
+
+    void getVkDisplayNativeHdrSurfaceCapabilitiesAMD(
+            JNIEnv *env,
+            const jobject jVkDisplayNativeHdrSurfaceCapabilitiesAMDObject,
+			VkDisplayNativeHdrSurfaceCapabilitiesAMD *vkDisplayNativeHdrSurfaceCapabilitiesAMD,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkDisplayNativeHdrSurfaceCapabilitiesAMD(
+			JNIEnv *env,
+			jobject jVkDisplayNativeHdrSurfaceCapabilitiesAMDObject,
+			const VkDisplayNativeHdrSurfaceCapabilitiesAMD* vkDisplayNativeHdrSurfaceCapabilitiesAMD,
+			std::vector<void *> *memoryToFree);
+
+    void getVkSharedPresentSurfaceCapabilitiesKHR(
+            JNIEnv *env,
+            const jobject jVkSharedPresentSurfaceCapabilitiesKHRObject,
+			VkSharedPresentSurfaceCapabilitiesKHR *vkSharedPresentSurfaceCapabilitiesKHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSharedPresentSurfaceCapabilitiesKHR(
+			JNIEnv *env,
+			jobject jVkSharedPresentSurfaceCapabilitiesKHRObject,
+			const VkSharedPresentSurfaceCapabilitiesKHR *vkSharedPresentSurfaceCapabilitiesKHR,
+			std::vector<void *> *memoryToFree);
+
+//    void getVkSurfaceCapabilitiesFullScreenExclusiveEXT(
+//            JNIEnv *env,
+//            const jobject jVkSurfaceCapabilitiesFullScreenExclusiveEXTObject,
+//			VkSurfaceCapabilitiesFullScreenExclusiveEXT *vkSurfaceCapabilitiesFullScreenExclusiveEXT,
+//            std::vector<void *> *memoryToFree);
+//
+//	void populateVkSurfaceCapabilitiesFullScreenExclusiveEXT(
+//			JNIEnv *env,
+//			jobject jVkSurfaceCapabilitiesFullScreenExclusiveEXTObject,
+//			const VkSurfaceCapabilitiesFullScreenExclusiveEXT* vkSurfaceCapabilitiesFullScreenExclusiveEXT,
+//			std::vector<void *> *memoryToFree);
+
+    void getVkSurfaceProtectedCapabilitiesKHR(
+            JNIEnv *env,
+            const jobject jVVkSurfaceProtectedCapabilitiesKHRObject,
+			VkSurfaceProtectedCapabilitiesKHR *vkSurfaceProtectedCapabilitiesKHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSurfaceProtectedCapabilitiesKHR(
+			JNIEnv *env,
+			jobject jVkSurfaceProtectedCapabilitiesKHRObject,
+			const VkSurfaceProtectedCapabilitiesKHR* vkSurfaceProtectedCapabilitiesKHR,
+			std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
