@@ -2110,6 +2110,24 @@ namespace jvulkan
 			jobject jVkSurfaceProtectedCapabilitiesKHRObject,
 			const VkSurfaceProtectedCapabilitiesKHR* vkSurfaceProtectedCapabilitiesKHR,
 			std::vector<void *> *memoryToFree);
+
+    void getVkDeviceGroupSwapchainCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkDeviceGroupSwapchainCreateInfoKHRObject,
+			VkDeviceGroupSwapchainCreateInfoKHR *vkDeviceGroupSwapchainCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSwapchainCounterCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkSwapchainCounterCreateInfoEXTObject,
+			VkSwapchainCounterCreateInfoEXT *vkSwapchainCounterCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSwapchainDisplayNativeHdrCreateInfoAMD(
+            JNIEnv *env,
+            const jobject jVkSwapchainDisplayNativeHdrCreateInfoAMDObject,
+			VkSwapchainDisplayNativeHdrCreateInfoAMD *vkSwapchainDisplayNativeHdrCreateInfoAMD,
+            std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

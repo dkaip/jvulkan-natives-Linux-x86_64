@@ -2653,6 +2653,69 @@ namespace jvulkan
 	            *headOfpNextChain = vkSurfaceProtectedCapabilitiesKHR;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR");
+
+	        	VkDeviceGroupSwapchainCreateInfoKHR *vkDeviceGroupSwapchainCreateInfoKHR = (VkDeviceGroupSwapchainCreateInfoKHR *)calloc(1, sizeof(VkDeviceGroupSwapchainCreateInfoKHR));
+	        	memoryToFree->push_back(vkDeviceGroupSwapchainCreateInfoKHR);
+
+	            getVkDeviceGroupSwapchainCreateInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceGroupSwapchainCreateInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupSwapchainCreateInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupSwapchainCreateInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT");
+
+	        	VkSwapchainCounterCreateInfoEXT *vkSwapchainCounterCreateInfoEXT = (VkSwapchainCounterCreateInfoEXT *)calloc(1, sizeof(VkSwapchainCounterCreateInfoEXT));
+	        	memoryToFree->push_back(vkSwapchainCounterCreateInfoEXT);
+
+	            getVkSwapchainCounterCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSwapchainCounterCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSwapchainCounterCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSwapchainCounterCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD");
+
+	        	VkSwapchainDisplayNativeHdrCreateInfoAMD *vkSwapchainDisplayNativeHdrCreateInfoAMD = (VkSwapchainDisplayNativeHdrCreateInfoAMD *)calloc(1, sizeof(VkSwapchainDisplayNativeHdrCreateInfoAMD));
+	        	memoryToFree->push_back(vkSwapchainDisplayNativeHdrCreateInfoAMD);
+
+	            getVkSwapchainDisplayNativeHdrCreateInfoAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSwapchainDisplayNativeHdrCreateInfoAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSwapchainDisplayNativeHdrCreateInfoAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSwapchainDisplayNativeHdrCreateInfoAMD;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;
