@@ -142,7 +142,7 @@ namespace jvulkan
 		int numberOfSubpassDescriptions = 0;
 		VkSubpassDescription *vkSubpassDescription = nullptr;
 
-		getVkSubpassDescriptions(
+		getVkSubpassDescriptionCollection(
 				env,
 				subpassDescriptionCollection,
 				&vkSubpassDescription,
@@ -150,7 +150,7 @@ namespace jvulkan
 				memoryToFree);
 		if (env->ExceptionOccurred())
 		{
-        	LOGERROR(env, "%s", "Error calling getVkSubpassDescriptions");
+        	LOGERROR(env, "%s", "Error calling getVkSubpassDescriptionCollection");
 			return;
 		}
 
@@ -172,7 +172,7 @@ namespace jvulkan
 		int numberOfSubpassDependencies = 0;
 		VkSubpassDependency *vkSubpassDependency = nullptr;
 
-		getCollectionOfVkSubpassDependency(
+		getVkSubpassDependencyCollection(
 				env,
 				subpassDependencCollection,
 				&vkSubpassDependency,
