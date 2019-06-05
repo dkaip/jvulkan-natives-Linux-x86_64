@@ -62,6 +62,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     delete allocatorCallbacks;
     allocatorCallbacks = nullptr;
 
+    jvulkan::freeMemory(&memoryToFree);
+
     /*
      * Now transfer the VkDevice data to Java
      */

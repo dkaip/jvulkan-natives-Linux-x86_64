@@ -18,6 +18,7 @@
 #include <stdlib.h>
 
 #include "HelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -27,9 +28,24 @@ namespace jvulkan
             VkExtent3D *vkExtent3D,
             std::vector<void *> *memoryToFree)
     {
+    	if (jVkExtent3DObject == nullptr)
+    	{
+    		LOGERROR(env, "%s", "jVkExtent3DObject == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "jVkExtent3DObject == nullptr");
+    		return;
+    	}
+
+    	if (vkExtent3D == nullptr)
+    	{
+    		LOGERROR(env, "%s", "vkExtent3D == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "vkExtent3D == nullptr");
+    		return;
+    	}
+
         jclass vkExtent3DClass = env->GetObjectClass(jVkExtent3DObject);
         if (env->ExceptionOccurred())
         {
+      		LOGERROR(env, "%d:%d:%d", vkExtent3D->width, vkExtent3D->height, vkExtent3D->depth);
             return;
         }
 
@@ -37,12 +53,14 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkExtent3DClass, "getWidth", "()I");
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Could not find method id getWidth.");
             return;
         }
 
         jint width = env->CallIntMethod(jVkExtent3DObject, methodId);
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
@@ -50,12 +68,14 @@ namespace jvulkan
         methodId = env->GetMethodID(vkExtent3DClass, "getHeight", "()I");
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Could not find method id getHeight.");
             return;
         }
 
         jint height = env->CallIntMethod(jVkExtent3DObject, methodId);
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
@@ -63,14 +83,17 @@ namespace jvulkan
         methodId = env->GetMethodID(vkExtent3DClass, "getDepth", "()I");
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Could not find method id getDepth.");
             return;
         }
 
         jint depth = env->CallIntMethod(jVkExtent3DObject, methodId);
         if (env->ExceptionOccurred())
         {
+    		LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
+
 
         vkExtent3D->width  = width;
         vkExtent3D->height = height;

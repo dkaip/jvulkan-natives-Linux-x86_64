@@ -33,6 +33,20 @@ namespace jvulkan
 			const VkPhysicalDeviceMaintenance3Properties *vkPhysicalDeviceMaintenance3Properties,
 			std::vector<void *> *memoryToFree)
 	{
+		if (jVkPhysicalDeviceMaintenance3PropertiesObject == nullptr)
+		{
+			LOGERROR(env, "%s", "jVkPhysicalDeviceMaintenance3PropertiesObject == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "jVkPhysicalDeviceMaintenance3PropertiesObject == nullptr");
+			return;
+		}
+
+		if (vkPhysicalDeviceMaintenance3Properties == nullptr)
+		{
+			LOGERROR(env, "%s", "vkPhysicalDeviceMaintenance3Properties == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "vkPhysicalDeviceMaintenance3Properties == nullptr");
+			return;
+		}
+
 		jboolean handlingException = env->ExceptionCheck();
 		if (handlingException == true)
 		{

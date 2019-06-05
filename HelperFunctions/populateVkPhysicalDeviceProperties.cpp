@@ -28,7 +28,6 @@ extern const char *voidMethodErrorText;
 namespace jvulkan
 {
 	static jobject getdeviceLimits(JNIEnv *env, const VkPhysicalDeviceLimits *deviceLimits);
-	static jobject getVkSampleCountFlagBits(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
 	static jobject getSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties);
 
     void populateVkPhysicalDeviceProperties(
@@ -1638,7 +1637,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        jobject vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->sampledImageColorSampleCounts);
+        jobject vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->sampledImageColorSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1663,7 +1662,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->framebufferDepthSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->framebufferDepthSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1689,7 +1688,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->framebufferStencilSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->framebufferStencilSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1716,7 +1715,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->framebufferNoAttachmentsSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->framebufferNoAttachmentsSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1757,7 +1756,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->sampledImageColorSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->sampledImageColorSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1783,7 +1782,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->sampledImageIntegerSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->sampledImageIntegerSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1809,7 +1808,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->sampledImageDepthSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->sampledImageDepthSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1835,7 +1834,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->sampledImageStencilSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->sampledImageStencilSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -1861,7 +1860,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        vkSampleCountFlagBitsEnumSet = getVkSampleCountFlagBits(env, deviceLimits->storageImageSampleCounts);
+        vkSampleCountFlagBitsEnumSet = createVkSampleCountFlagBitsAsEnumSet(env, deviceLimits->storageImageSampleCounts);
         if (env->ExceptionOccurred())
         {
             return nullptr;
@@ -2148,165 +2147,5 @@ namespace jvulkan
         }
 
         return deviceLimitsObject;
-    }
-
-    static jobject getVkSampleCountFlagBits(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags)
-    {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;";
-        /*
-         * Create the EnumSet for the flags.
-         */
-        jclass enumSetClass = env->FindClass("java/util/EnumSet");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find class java/util/EnumSet");
-            return nullptr;
-        }
-
-        jmethodID enumSetNoneOfMethod = env->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
-        if (env->ExceptionOccurred() != 0)
-        {
-        	LOGERROR(env, "%s", "Could not find static method noneOf");
-            return nullptr;
-        }
-
-        jclass enumClass = env->FindClass(enumClassString);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "Could not find class %s", enumClassString);
-            return nullptr;
-        }
-
-        jobject enumSetObject = env->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod on static method noneOf");
-            return nullptr;
-        }
-
-        jclass setClass = env->FindClass("java/util/Set");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "Could not find class %s", "java/util/Set");
-            return nullptr;
-        }
-
-        jmethodID setAddMethod = env->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id add");
-            return nullptr;
-        }
-
-        /*
-         * Make sure that flags does not have an unexpected value.  This would
-         * indicate that this code is out of sync with the LunarG Vulkan SDK.
-         */
-        if ((vkSampleCountFlags &
-             !(VK_SAMPLE_COUNT_1_BIT |
-               VK_SAMPLE_COUNT_2_BIT |
-               VK_SAMPLE_COUNT_4_BIT |
-               VK_SAMPLE_COUNT_8_BIT |
-               VK_SAMPLE_COUNT_16_BIT |
-               VK_SAMPLE_COUNT_32_BIT |
-               VK_SAMPLE_COUNT_64_BIT)) != 0)
-        {
-        	LOGERROR(env, "ERROR: Unhandled case for vkSampleCountFlags...value is %d", vkSampleCountFlags);
-            return nullptr;
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_1_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_1_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_1_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_2_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_2_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_2_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_4_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_4_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_4_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_8_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_8_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_8_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_16_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_16_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_16_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_32_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_32_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_32_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags & VK_SAMPLE_COUNT_64_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_64_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_64_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        return enumSetObject;
     }
 }

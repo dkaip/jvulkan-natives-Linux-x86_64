@@ -2172,6 +2172,90 @@ namespace jvulkan
             const jobject jVkRectLayerKHRObject,
 			VkRectLayerKHR *vkRectLayerKHR,
             std::vector<void *> *memoryToFree);
+
+    void getVkImageFormatProperties(
+            JNIEnv *env,
+            const jobject jVkImageFormatPropertiesObject,
+			VkImageFormatProperties *vkImageFormatProperties,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageFormatProperties2(
+            JNIEnv *env,
+            const jobject jVkImageFormatProperties2Object,
+			VkImageFormatProperties2 *vkImageFormatProperties2,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceImageFormatInfo2(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceImageFormatInfo2Object,
+			VkPhysicalDeviceImageFormatInfo2 *vkPhysicalDeviceImageFormatInfo2,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkImageFormatProperties(
+			JNIEnv *env,
+			jobject jVkImageFormatPropertiesObject,
+			const VkImageFormatProperties *vkImageFormatProperties,
+			std::vector<void *> *memoryToFree);
+
+	void populateVkImageFormatProperties2(
+			JNIEnv *env,
+			jobject jVkImageFormatProperties2Object,
+			const VkImageFormatProperties2 *vkImageFormatProperties2,
+			std::vector<void *> *memoryToFree);
+
+	jobject createVkExtent3D(JNIEnv *env, const VkExtent3D *vkExtent3D);
+
+	jobject createVkSampleCountFlagBitsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
+
+	jobject createVkImageFormatProperties(JNIEnv *env, const VkImageFormatProperties *vkImageFormatProperties);
+
+    void getVkPhysicalDeviceExternalImageFormatInfo(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceExternalImageFormatInfoObject,
+			VkPhysicalDeviceExternalImageFormatInfo *vkPhysicalDeviceExternalImageFormatInfo,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceExternalImageFormatInfo(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceExternalImageFormatInfoObject,
+			const VkPhysicalDeviceExternalImageFormatInfo *vkPhysicalDeviceExternalImageFormatInfo,
+			std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceImageDrmFormatModifierInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceImageDrmFormatModifierInfoEXTObject,
+			VkPhysicalDeviceImageDrmFormatModifierInfoEXT *vkPhysicalDeviceImageDrmFormatModifierInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceImageDrmFormatModifierInfoEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceImageDrmFormatModifierInfoEXTObject,
+			const VkPhysicalDeviceImageDrmFormatModifierInfoEXT *vkPhysicalDeviceImageDrmFormatModifierInfoEXT,
+			std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceImageViewImageFormatInfoEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceImageViewImageFormatInfoEXTObject,
+			VkPhysicalDeviceImageViewImageFormatInfoEXT *vkPhysicalDeviceImageViewImageFormatInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceImageViewImageFormatInfoEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceImageViewImageFormatInfoEXTObject,
+			const VkPhysicalDeviceImageViewImageFormatInfoEXT *vkPhysicalDeviceImageViewImageFormatInfoEXT,
+			std::vector<void *> *memoryToFree);
+
+    void getVkFilterCubicImageViewImageFormatPropertiesEXT(
+            JNIEnv *env,
+            const jobject jVkFilterCubicImageViewImageFormatPropertiesEXTObject,
+			VkFilterCubicImageViewImageFormatPropertiesEXT *vkFilterCubicImageViewImageFormatPropertiesEXT,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkFilterCubicImageViewImageFormatPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkFilterCubicImageViewImageFormatPropertiesEXTObject,
+			const VkFilterCubicImageViewImageFormatPropertiesEXT* vkFilterCubicImageViewImageFormatPropertiesEXT,
+			std::vector<void *> *memoryToFree);
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */

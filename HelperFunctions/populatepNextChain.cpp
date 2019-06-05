@@ -475,6 +475,58 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO");
+				populateVkPhysicalDeviceExternalImageFormatInfo(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceExternalImageFormatInfo *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceExternalImageFormatInfo.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT");
+				populateVkPhysicalDeviceImageDrmFormatModifierInfoEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceImageDrmFormatModifierInfoEXT *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceImageDrmFormatModifierInfoEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT");
+				populateVkPhysicalDeviceImageViewImageFormatInfoEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceImageViewImageFormatInfoEXT *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceImageViewImageFormatInfoEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT");
+				populateVkFilterCubicImageViewImageFormatPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkFilterCubicImageViewImageFormatPropertiesEXT *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkFilterCubicImageViewImageFormatPropertiesEXT.");
+					return;
+				}
+				break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sType);
 				break;

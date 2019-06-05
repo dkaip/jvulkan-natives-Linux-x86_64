@@ -32,6 +32,20 @@ namespace jvulkan
 			const jobject enumSetObject,
 			const char *enumClassName)
 	{
+		if (enumSetObject == nullptr)
+		{
+			LOGERROR(env, "%s", "enumSetObject == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "enumSetObject == nullptr");
+			return -1;
+		}
+
+		if (enumClassName == nullptr)
+		{
+			LOGERROR(env, "%s", "enumClassName == nullptr");
+			env->ThrowNew(env->FindClass("java/lang/Exception"), "enumClassName == nullptr");
+			return -1;
+		}
+
 		jclass setClass = env->FindClass("java/util/Set");
 		if (env->ExceptionOccurred())
 		{
@@ -49,7 +63,7 @@ namespace jvulkan
 		jobject iteratorObject = env->CallObjectMethod(enumSetObject, iteratorMethodId);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "CallObjectMethod to get the iterator");
+			LOGERROR(env, "%s", "Error calling CallObjectMethod to get the iterator");
 			return -1;
 		}
 

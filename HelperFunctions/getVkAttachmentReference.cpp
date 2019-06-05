@@ -86,6 +86,7 @@ namespace jvulkan
         	return;
         }
 
+
         vkAttachmentReference->attachment = attachment;
         vkAttachmentReference->layout = layoutEnumValue;
     }

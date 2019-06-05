@@ -48,37 +48,6 @@ namespace jvulkan
 			return;
 		}
 
-//		jclass vkPhysicalDeviceBlendOperationAdvancedPropertiesEXTClass = env->FindClass(
-//				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
-//		if (env->ExceptionOccurred())
-//		{
-//			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
-//			return nullptr;
-//		}
-
-//		// Locate the constructor
-//		jmethodID methodId = env->GetMethodID(vkPhysicalDeviceBlendOperationAdvancedPropertiesEXTClass, "<init>", "()V");
-//		if (env->ExceptionOccurred())
-//		{
-//		   	LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
-//		    return;
-//		}
-
-//		// Create the Java vkPhysicalDeviceProperties object
-//		jobject jVkPhysicalDeviceBlendOperationAdvancedPropertiesEXTObject =
-//		  		env->NewObject(vkPhysicalDeviceBlendOperationAdvancedPropertiesEXTClass, methodId);
-//		if (env->ExceptionOccurred())
-//		{
-//		   	LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
-//		    return nullptr;
-//		}
-//
-//		LOGINFO(env, "advancedBlendMaxColorAttachments:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendMaxColorAttachments);
-//		LOGINFO(env, "advancedBlendIndependentBlend:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendIndependentBlend);
-//		LOGINFO(env, "advancedBlendNonPremultipliedSrcColor:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendNonPremultipliedSrcColor);
-//		LOGINFO(env, "advancedBlendNonPremultipliedDstColor:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendNonPremultipliedDstColor);
-//		LOGINFO(env, "advancedBlendCorrelatedOverlap:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendCorrelatedOverlap);
-//		LOGINFO(env, "advancedBlendAllOperations:%d", vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->advancedBlendAllOperations);
         ///////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkPhysicalDeviceBlendOperationAdvancedPropertiesEXTClass, "setAdvancedBlendMaxColorAttachments", "(I)V");
         if (env->ExceptionOccurred())
@@ -168,33 +137,5 @@ namespace jvulkan
         	LOGERROR(env, "%s", voidMethodErrorText);
             return;
         }
-
-//        ///////////////////////////////////////////////////////////////////////////
-//    	jobject pNextObject = populatepNextChain(
-//    			env,
-//				vkPhysicalDeviceBlendOperationAdvancedPropertiesEXT->pNext,
-//    			memoryToFree);
-//
-//        jclass vulkanStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
-//            return;
-//        }
-//
-//
-//        methodId = env->GetMethodID(vulkanStructureClass, "setpNext", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure;)V");
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", "Could not find method id setpNext");
-//            return;
-//        }
-//
-//        env->CallVoidMethod(jVkPhysicalDeviceBlendOperationAdvancedPropertiesEXTObject, methodId, pNextObject);
-//        if (env->ExceptionOccurred())
-//        {
-//        	LOGERROR(env, "%s", voidMethodErrorText);
-//            return;
-//        }
 	}
 }

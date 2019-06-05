@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * createVkExtent2D.cpp
+ * createVkExtent3D.cpp
  *
- *  Created on: May 14, 2019
+ *  Created on: Jun 3, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,38 +25,32 @@
 
 namespace jvulkan
 {
-	jobject createVkExtent2D(JNIEnv *env, const VkExtent2D *vkExtent2D)
+	jobject createVkExtent3D(JNIEnv *env, const VkExtent3D *vkExtent3D)
 	{
-		if (vkExtent2D == nullptr)
-		{
-			LOGERROR(env, "%s", "vkExtent2D == nullptr");
-			return nullptr;
-		}
-
-		jclass vkExtent2DClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
+		jclass vkExtent3DClass = env->FindClass(
+				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D");
             return nullptr;
         }
 
 		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkExtent2DClass, "<init>", "(II)V");
+		jmethodID methodId = env->GetMethodID(vkExtent3DClass, "<init>", "(III)V");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id <init> (II)V");
+        	LOGERROR(env, "%s", "Could not find method id <init> (III)V");
             return nullptr;
         }
 
-		jobject jVkExtent2DObject =
-				env->NewObject(vkExtent2DClass, methodId, vkExtent2D->width, vkExtent2D->height);
+		jobject jVkExtent3DObject =
+				env->NewObject(vkExtent3DClass, methodId, vkExtent3D->width, vkExtent3D->height, vkExtent3D->depth);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling <init>(III)V(the constructor)");
             return nullptr;
         }
 
-		return jVkExtent2DObject;
+		return jVkExtent3DObject;
 	}
 }
