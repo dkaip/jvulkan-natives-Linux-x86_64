@@ -166,7 +166,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jsupportedTransforms = getVkSurfaceTransformFlagsKHRAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedTransforms);
+        jobject jsupportedTransforms = createVkSurfaceTransformFlagsKHRAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedTransforms);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkSurfaceTransformFlagsKHRAsEnumSet");
@@ -224,7 +224,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jsupportedCompositeAlpha = getVkCompositeAlphaFlagsKHRAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedCompositeAlpha);
+        jobject jsupportedCompositeAlpha = createVkCompositeAlphaFlagsKHRAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedCompositeAlpha);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkSurfaceTransformFlagsKHRAsEnumSet");
@@ -246,7 +246,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jsupportedUsageFlags = getVkImageUsageFlagsAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedUsageFlags);
+        jobject jsupportedUsageFlags = createVkImageUsageFlagsAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedUsageFlags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkSurfaceTransformFlagsKHRAsEnumSet");

@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-	jobject getVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags)
+	jobject createVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags)
 	{
 		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR";
 		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;";

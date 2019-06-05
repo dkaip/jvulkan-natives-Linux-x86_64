@@ -71,7 +71,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jsupportedStages = getVkShaderStageFlagsAsEnumSet(env, vkPhysicalDeviceSubgroupProperties->supportedStages);
+        jobject jsupportedStages = createVkShaderStageFlagsAsEnumSet(env, vkPhysicalDeviceSubgroupProperties->supportedStages);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkShaderStageFlagsAsEnumSet");
@@ -93,7 +93,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jsupportedOperations = getVkSubgroupFeatureFlagsAsEnumSet(env, vkPhysicalDeviceSubgroupProperties->supportedOperations);
+        jobject jsupportedOperations = createVkSubgroupFeatureFlagsAsEnumSet(env, vkPhysicalDeviceSubgroupProperties->supportedOperations);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkSubgroupFeatureFlagsAsEnumSet");

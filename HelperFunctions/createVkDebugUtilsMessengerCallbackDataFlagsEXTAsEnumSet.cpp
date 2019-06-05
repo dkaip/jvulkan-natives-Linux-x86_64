@@ -21,16 +21,12 @@
  */
 
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "../headers/slf4j.hh"
 #include "HelperFunctions.hh"
 
 namespace jvulkan
 {
-    jobject getVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags)
+    jobject createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags)
     {
         char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT";
         char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT;";

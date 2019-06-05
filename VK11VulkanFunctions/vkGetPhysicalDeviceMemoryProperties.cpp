@@ -115,7 +115,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
     for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryTypeCount; i++)
     {
-        jobject jEnumSetObject = jvulkan::getVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
+        jobject jEnumSetObject = jvulkan::createVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
         if (env->ExceptionOccurred())
         {
             return;
@@ -146,7 +146,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
     for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryHeapCount; i++)
     {
-        jobject jEnumSetObject = jvulkan::getVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
+        jobject jEnumSetObject = jvulkan::createVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
         if (env->ExceptionOccurred())
         {
             return;

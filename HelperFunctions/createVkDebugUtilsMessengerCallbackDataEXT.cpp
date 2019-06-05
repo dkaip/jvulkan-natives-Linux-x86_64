@@ -66,7 +66,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jFlags = getVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(
+        jobject jFlags = createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(
         		env,
 				pCallbackData->flags);
 

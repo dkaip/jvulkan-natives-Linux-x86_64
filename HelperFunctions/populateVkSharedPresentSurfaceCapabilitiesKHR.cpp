@@ -55,7 +55,7 @@ namespace jvulkan
             return;
         }
 
-        jobject sharedPresentSupportedUsageFlags = getVkImageUsageFlagsAsEnumSet(env, vkSharedPresentSurfaceCapabilitiesKHR->sharedPresentSupportedUsageFlags);
+        jobject sharedPresentSupportedUsageFlags = createVkImageUsageFlagsAsEnumSet(env, vkSharedPresentSurfaceCapabilitiesKHR->sharedPresentSupportedUsageFlags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkImageUsageFlagsAsEnumSet");

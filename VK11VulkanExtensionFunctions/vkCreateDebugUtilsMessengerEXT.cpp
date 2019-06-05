@@ -135,7 +135,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
     		localEnv,
 			messageSeverity);
 
-    jobject jMessageTypesEnumSet = getVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(
+    jobject jMessageTypesEnumSet = createVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(
     		localEnv,
 			messageTypes);
 

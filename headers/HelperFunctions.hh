@@ -77,11 +77,11 @@ namespace jvulkan
 
     jobject createVkResult(JNIEnv *env, jint value);
 
-    jobject getVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags);
+    jobject createVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags);
 
-    jobject getVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags);
+    jobject createVkCompositeAlphaFlagsKHRAsEnumSet(JNIEnv *env, VkCompositeAlphaFlagsKHR alphaFlags);
 
-    jobject getVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags);
+    jobject createVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags);
 
     void getVkDeviceQueueCreateInfo(
             JNIEnv *env,
@@ -493,9 +493,9 @@ namespace jvulkan
             VkBufferCreateInfo *vkBufferCreateInfo,
             std::vector<void *> *memoryToFree);
 
-    jobject getVkMemoryPropertyFlagsAsEnumSet(JNIEnv *env, VkMemoryPropertyFlags alphaFlags);
+    jobject createVkMemoryPropertyFlagsAsEnumSet(JNIEnv *env, VkMemoryPropertyFlags alphaFlags);
 
-    jobject getVkMemoryHeapFlagsAsEnumSet(JNIEnv *env, VkMemoryHeapFlags memoryHeapFlags);
+    jobject createVkMemoryHeapFlagsAsEnumSet(JNIEnv *env, VkMemoryHeapFlags memoryHeapFlags);
 
     void getVkMemoryAllocateInfo(
             JNIEnv *env,
@@ -923,9 +923,9 @@ namespace jvulkan
 		VkDebugUtilsMessengerCreateInfoEXT *vkDebugUtilsMessengerCreateInfoEXT,
         std::vector<void *> *memoryToFree);
 
-    jobject getVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessageTypeFlagsEXT messageTypes);
+    jobject createVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessageTypeFlagsEXT messageTypes);
 
-    jobject getVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags);
+    jobject createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags);
 
     jobject createVkDebugUtilsMessageSeverityFlagBitsEXT(JNIEnv *env, jint value);
 
@@ -1252,17 +1252,17 @@ namespace jvulkan
 		const VkPhysicalDeviceFeatures *vkPhysicalDeviceFeatures,
 		std::vector<void *> *memoryToFree);
 
-	jobject getVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags);
+	jobject createVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags);
 
-    jobject getVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR);
+    jobject createVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR);
 
 	jobject createVkConformanceVersionKHR(JNIEnv *env, const VkConformanceVersionKHR *vkConformanceVersionKHR);
 
 	jobject createVkExtent2D(JNIEnv *env, const VkExtent2D *vkExtent2D);
 
-    jobject getVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
+    jobject createVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
 
-    jobject getVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags);
+    jobject createVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags);
 
     void getVkPhysicalDeviceCollection(
             JNIEnv *env,
@@ -1631,7 +1631,7 @@ namespace jvulkan
             int *numberOfVkSubpassSampleLocationsEXTs,
             std::vector<void *> *memoryToFree);
 
-    jobject getVkPipelineCreationFeedbackFlagsEXTAsEnumSet(JNIEnv *env, VkPipelineCreationFeedbackFlagsEXT vkPipelineCreationFeedbackFlagsEXT);
+    jobject createVkPipelineCreationFeedbackFlagsEXTAsEnumSet(JNIEnv *env, VkPipelineCreationFeedbackFlagsEXT vkPipelineCreationFeedbackFlagsEXT);
 
 	void populateVkPipelineCreationFeedbackEXT(
 			JNIEnv *env,

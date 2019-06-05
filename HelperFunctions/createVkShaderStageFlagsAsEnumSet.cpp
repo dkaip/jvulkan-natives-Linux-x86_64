@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-    jobject getVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags)
+    jobject createVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags)
     {
         char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits";
         char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits;";

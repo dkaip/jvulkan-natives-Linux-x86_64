@@ -56,7 +56,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jSupportedDepthResolveModes = getVkResolveModeFlagsKHRAsEnumSet(env, vkPhysicalDeviceDepthStencilResolvePropertiesKHR->supportedDepthResolveModes);
+        jobject jSupportedDepthResolveModes = createVkResolveModeFlagsKHRAsEnumSet(env, vkPhysicalDeviceDepthStencilResolvePropertiesKHR->supportedDepthResolveModes);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkResolveModeFlagsKHRAsEnumSet");
@@ -78,7 +78,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jSupportedStencilResolveMode = getVkResolveModeFlagsKHRAsEnumSet(env, vkPhysicalDeviceDepthStencilResolvePropertiesKHR->supportedStencilResolveModes);
+        jobject jSupportedStencilResolveMode = createVkResolveModeFlagsKHRAsEnumSet(env, vkPhysicalDeviceDepthStencilResolvePropertiesKHR->supportedStencilResolveModes);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkResolveModeFlagsKHRAsEnumSet");

@@ -25,7 +25,7 @@
 
 namespace jvulkan
 {
-    jobject getVkPipelineCreationFeedbackFlagsEXTAsEnumSet(JNIEnv *env, VkPipelineCreationFeedbackFlagsEXT vkPipelineCreationFeedbackFlagsEXT)
+    jobject createVkPipelineCreationFeedbackFlagsEXTAsEnumSet(JNIEnv *env, VkPipelineCreationFeedbackFlagsEXT vkPipelineCreationFeedbackFlagsEXT)
     {
         char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineCreationFeedbackFlagBitsEXT";
         char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineCreationFeedbackFlagBitsEXT;";

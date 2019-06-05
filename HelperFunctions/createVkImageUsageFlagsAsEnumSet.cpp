@@ -27,7 +27,7 @@
 
 namespace jvulkan
 {
-	jobject getVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags)
+	jobject createVkImageUsageFlagsAsEnumSet(JNIEnv *env, VkImageUsageFlags usageFlags)
 	{
 		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits";
 		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits;";

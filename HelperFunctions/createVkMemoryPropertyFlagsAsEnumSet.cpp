@@ -13,60 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/*
- * getVkSampleCountFlagsAsEnumSet.cpp
- *
- *  Created on: May 15, 2019
- *      Author: Douglas Kaip
- */
+#include <cstring>
+#include <iostream>
+#include <stdlib.h>
 
 #include "HelperFunctions.hh"
-#include "slf4j.hh"
 
 namespace jvulkan
 {
-    jobject getVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags)
+    jobject createVkMemoryPropertyFlagsAsEnumSet(JNIEnv *env, VkMemoryPropertyFlags memoryPropertyFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;";
-
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */
         jclass enumSetClass = env->FindClass("java/util/EnumSet");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class java/util/EnumSet");
+            std::cout << "Error finding EnumSet class ... returning" << std::endl;
             return nullptr;
         }
+    //    cout << "Found EnumSet class" << endl;
 
         jmethodID enumSetNoneOfMethod = env->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
         if (env->ExceptionOccurred() != 0)
         {
-        	LOGERROR(env, "%s", "Could not find method id of noneOf in class java/util/EnumSet");
+            std::cout << "Error getting noneOf ... returning" << std::endl;
             return nullptr;
         }
+
+    //    cout << "Got noneOfMethod" << endl;
 
         jclass enumClass = env->FindClass(enumClassString);
 
         jobject enumSetObject = env->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod for method id of noneOf in class java/util/EnumSet");
+            std::cout << "Error CallStaticObjectMethod on enumset object class ... returning" << std::endl;
             return nullptr;
         }
+
+    //    cout << "Made the empty EnumSet flags is " << vkSampleCountFlags << endl;
 
         jclass setClass = env->FindClass("java/util/Set");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find class java/util/Set");
-            return nullptr;
-        }
-
         jmethodID setAddMethod = env->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id of add in class java/util/Set");
+            std::cout << "Error getting add method on EnumSet ... returning" << std::endl;
             return nullptr;
         }
 
@@ -74,106 +68,92 @@ namespace jvulkan
          * Make sure that flags does not have an unexpected value.  This would
          * indicate that this code is out of sync with the LunarG Vulkan SDK.
          */
-        if ((vkSampleCountFlags &
-             !(VK_SAMPLE_COUNT_1_BIT |
-			   VK_SAMPLE_COUNT_2_BIT |
-			   VK_SAMPLE_COUNT_4_BIT |
-			   VK_SAMPLE_COUNT_8_BIT |
-			   VK_SAMPLE_COUNT_16_BIT |
-			   VK_SAMPLE_COUNT_32_BIT |
-			   VK_SAMPLE_COUNT_64_BIT)) != 0)
+        if ((memoryPropertyFlags &
+             !(VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT |
+               VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT |
+               VK_MEMORY_PROPERTY_HOST_COHERENT_BIT |
+               VK_MEMORY_PROPERTY_HOST_CACHED_BIT |
+               VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT |
+               VK_MEMORY_PROPERTY_PROTECTED_BIT)) != 0)
         {
-        	LOGERROR(env, "Unhandled case for vkSampleCountFlags...value is %x", vkSampleCountFlags);
+            std::cout << "ERROR: Unhandled case for memoryPropertyFlags...value is " << memoryPropertyFlags << std::endl;
             return nullptr;
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_1_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_1_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_1_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_2_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_2_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_2_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_4_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_4_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_HOST_COHERENT_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_4_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_HOST_COHERENT_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_8_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_8_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_HOST_CACHED_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_8_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_HOST_CACHED_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_16_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_16_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_16_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
 
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_32_BIT)
+        if (memoryPropertyFlags & VK_MEMORY_PROPERTY_PROTECTED_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_32_BIT", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_MEMORY_PROPERTY_PROTECTED_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_32_BIT to EnumSet");
-                return nullptr;
-            }
-        }
-
-        if (vkSampleCountFlags == VK_SAMPLE_COUNT_64_BIT)
-        {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_SAMPLE_COUNT_64_BIT", enumObjectString);
-            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
-
-            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
-            if (addResult == false)
-            {
-            	LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_64_BIT to EnumSet");
+                std::cout << "ERROR: could not add VK_MEMORY_PROPERTY_PROTECTED_BIT to EnumSet" << std::endl;
                 return nullptr;
             }
         }
