@@ -87,6 +87,30 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 		}
     }
 
+    /*
+     * Both jVkPhysicalDeviceImageFormatInfo2Object and jVkImageFormatProperties2Object
+     * can have pNext chain elements.
+     */
+    jvulkan::populatepNextChain(
+			env,
+			jVkPhysicalDeviceImageFormatInfo2Object,
+			&vkPhysicalDeviceImageFormatInfo2,
+			&memoryToFree);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+	}
+
+	jvulkan::populatepNextChain(
+			env,
+			jVkImageFormatProperties2Object,
+			&vkImageFormatProperties2,
+			&memoryToFree);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+	}
+
     jvulkan::freeMemory(&memoryToFree);
 
 

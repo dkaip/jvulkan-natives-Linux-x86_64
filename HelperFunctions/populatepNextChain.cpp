@@ -527,6 +527,20 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2:
+				/*
+				 *  This should not be in the pNext chain except for the first
+				 *  position.  There is not processing for this other than
+				 *  looking for other pNext chain elements.
+				 */
+				break;
+			case VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2:
+				/*
+				 *  This should not be in the pNext chain except for the first
+				 *  position.  There is not processing for this other than
+				 *  looking for other pNext chain elements.
+				 */
+				break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sType);
 				break;
