@@ -55,7 +55,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jflags = getVkPipelineCreationFeedbackFlagsEXTAsEnumSet(env, vkPipelineCreationFeedbackEXT->flags);
+        jobject jflags = createVkPipelineCreationFeedbackFlagsEXTAsEnumSet(env, vkPipelineCreationFeedbackEXT->flags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkPipelineCreationFeedbackFlagsEXTAsEnumSet");

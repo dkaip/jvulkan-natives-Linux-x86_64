@@ -56,7 +56,7 @@ namespace jvulkan
             return;
         }
 
-        jobject jCooperativeMatrixSupportedStages = getVkShaderStageFlagsAsEnumSet(env, vkPhysicalDeviceCooperativeMatrixPropertiesNV->cooperativeMatrixSupportedStages);
+        jobject jCooperativeMatrixSupportedStages = createVkShaderStageFlagsAsEnumSet(env, vkPhysicalDeviceCooperativeMatrixPropertiesNV->cooperativeMatrixSupportedStages);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getVkShaderStageFlagsAsEnumSet");
