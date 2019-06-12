@@ -31,7 +31,6 @@ namespace jvulkan
 		VkValidationFeaturesEXT *vkValidationFeaturesEXT,
 		std::vector<void *> *memoryToFree)
 	{
-    	LOGINFO(env, "%s", "getVkValidationFeaturesEXT");
         jclass vkValidationFeaturesEXTClass = env->GetObjectClass(jVkValidationFeaturesEXTObject);
         if (env->ExceptionOccurred())
         {
