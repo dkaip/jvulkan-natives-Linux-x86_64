@@ -47,7 +47,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jobject returnHandle = nullptr;
     if (shellSurface != nullptr)
     {
-        returnHandle = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlShellSurface", shellSurface);
+        returnHandle = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle", shellSurface);
         if (env->ExceptionOccurred())
         {
             return nullptr;

@@ -19,8 +19,124 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "../headers/HelperFunctions.hh"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
+#include "slf4j.hh"
+
+extern JavaVM *l_JavaVM;
+
+extern jobject globalWaylandEventQueueObject;
+
+static void handleGlobalAnnounce(void *data, struct wl_registry *wl_registry, uint32_t objectName, const char *interfaceName, uint32_t interfaceVersion)
+{
+//	cerr << "handleGlobalAnnounce" << endl;
+    JNIEnv *env = jvulkan::getJNIEnv();
+//	LOGTRACE(env, "%s", "handleGlobalAnnounce");
+    if (env == nullptr)
+    {
+    	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
+    	return;
+    }
+
+    jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Objects/WlRegistryEvents");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find class com/CIMthetics/jvulkan/Wayland/Objects/WlRegistryEvents.");
+       return;
+    }
+
+    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle;ILjava/lang/String;I)V");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find constructor.");
+       return;
+    }
+
+    jobject jWlRegistry = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle", wl_registry);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+       return;
+    }
+
+    jstring interfaceNameString = env->NewStringUTF(interfaceName);
+
+    jobject jwaylandEventObject = env->NewObject(javaClass, methodId, jWlRegistry, objectName, interfaceNameString, interfaceVersion);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to create error event.");
+       return;
+    }
+
+    env->DeleteLocalRef(interfaceNameString);
+
+//    LOGERROR(env, "LBQ:%lx:%lx", globalWaylandEventQueueObject, jwaylandEventObject);
+	jvulkan::putOnLinkedBlockingQueue(env, globalWaylandEventQueueObject, jwaylandEventObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling putOnLinkedBlockingQueue.");
+       return;
+    }
+
+	// This is important, don't forget to do it.
+    l_JavaVM->DetachCurrentThread();
+}
+
+static void handleGlobalRemove(void *data, struct wl_registry *wl_registry, uint32_t interfaceName)
+{
+    JNIEnv *env = jvulkan::getJNIEnv();
+	LOGTRACE(env, "%s", "handleGlobalRemove");
+    if (env == nullptr)
+    {
+    	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
+    	return;
+    }
+
+    jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Objects/WlRegistryEvents");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find class com/CIMthetics/jvulkan/Wayland/Objects/WlRegistryEvents.");
+       return;
+    }
+
+    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle;I)V");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find constructor.");
+       return;
+    }
+
+    jobject jWlDisplay = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle", wl_registry);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+       return;
+    }
+
+    jobject jwaylandEventObject = env->NewObject(javaClass, methodId, jWlDisplay, interfaceName);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to create delete id event.");
+       return;
+    }
+
+	jvulkan::putOnLinkedBlockingQueue(env, globalWaylandEventQueueObject, jwaylandEventObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling putOnLinkedBlockingQueue.");
+       return;
+    }
+
+	// This is important, don't forget to do it.
+    l_JavaVM->DetachCurrentThread();
+
+}
+
+static const wl_registry_listener registry_listener
+{
+	handleGlobalAnnounce,
+	handleGlobalRemove
+};
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -33,6 +149,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getHandleValue.");
         return nullptr;
     }
 
@@ -41,8 +158,31 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     /*
      * Now transfer the WlDisplay data to Java
      */
-    jobject jWlRegistry = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistry", registry);
+    jobject jWlRegistry = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle", registry);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+        return nullptr;
+    }
 
+//    (void)wl_registry_add_listener(registry, &registry_listener, nullptr);
+
+//    int count = wl_display_flush(waylandDisplayHandle);
+//    LOGDEBUG(env, "A%d", count);
+//    count = wl_display_dispatch(waylandDisplayHandle);
+//    LOGDEBUG(env, "B%d", count);
+//    count = wl_display_roundtrip(waylandDisplayHandle);
+//    LOGDEBUG(env, "C%d", count);
+
+    (void)wl_registry_add_listener(registry, &registry_listener, nullptr);
+
+//	int count = wl_display_flush(waylandDisplayHandle);
+//	LOGDEBUG(env, "D%d", count);
+//	count = wl_display_dispatch(waylandDisplayHandle);
+//	LOGDEBUG(env, "E%d", count);
+//	count = wl_display_roundtrip(waylandDisplayHandle);
+//	LOGDEBUG(env, "F%d", count);
+//
     return jWlRegistry;
 }
 

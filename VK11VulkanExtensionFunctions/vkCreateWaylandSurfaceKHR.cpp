@@ -31,6 +31,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkInstance_T *vkInstanceHandle = (VkInstance_T *)jvulkan::getHandleValue(env, jVkInstance);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to getHandleValue failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -39,13 +40,24 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     {
         allocatorCallbacks = new VkAllocationCallbacks();
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getAllocatorCallbacks failed.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
     }
 
     jclass javaClass = env->GetObjectClass(jVkWaylandSurfaceCreateInfoKHR);
-
-    int sTypeValue = jvulkan::getSTypeAsInt(env, jVkWaylandSurfaceCreateInfoKHR);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to GetObjectClass failed.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkStructureType sTypeValue = jvulkan::getSTypeAsInt(env, jVkWaylandSurfaceCreateInfoKHR);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -68,48 +80,66 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jmethodID methodId = env->GetMethodID(javaClass, "getFlags", "()Ljava/util/EnumSet;");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not find method id for getFlags.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject flagsObject = env->CallObjectMethod(jVkWaylandSurfaceCreateInfoKHR, methodId);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
     int32_t flags = jvulkan::getEnumSetValue(
             env,
             flagsObject,
             "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkWaylandSurfaceCreateFlagsKHR");
-
-    methodId = env->GetMethodID(javaClass, "getWlDisplay", "()Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    methodId = env->GetMethodID(javaClass, "getWlDisplay", "()Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not find method id for getWlDisplay.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject wlDisplayObject = env->CallObjectMethod(jVkWaylandSurfaceCreateInfoKHR, methodId);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     struct wl_display *wlDisplay = (struct wl_display *)jvulkan::getHandleValue(env, wlDisplayObject);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to getHandleValue failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    methodId = env->GetMethodID(javaClass, "getWlSurface", "()Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurface;");
+    methodId = env->GetMethodID(javaClass, "getWlSurface", "()Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not find method id for getWlSurface.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject wlSurfaceObject = env->CallObjectMethod(jVkWaylandSurfaceCreateInfoKHR, methodId);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     struct wl_surface *wlSurface = (struct wl_surface *)jvulkan::getHandleValue(env, wlSurfaceObject);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Call to getHandleValue failed.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -129,6 +159,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jvulkan::setHandleValue(env, jVkSurfaceKHR, surface);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to setHandleValue failed.");
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }

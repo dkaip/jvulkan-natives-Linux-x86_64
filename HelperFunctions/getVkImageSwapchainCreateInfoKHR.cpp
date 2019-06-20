@@ -17,7 +17,7 @@
  * getVkImageSwapchainCreateInfoKHR.cpp
  *
  *  Created on: May 27, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "HelperFunctions.hh"

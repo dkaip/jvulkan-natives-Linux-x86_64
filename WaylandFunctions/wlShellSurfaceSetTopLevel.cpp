@@ -19,15 +19,15 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "../headers/HelperFunctions.hh"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlShellSetTopLevel
+ * Method:    wlShellSurfaceSetTopLevel
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlShellSurface;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSetTopLevel
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetTopLevel
   (JNIEnv *env, jobject, jobject jWlShellSurface)
 {
     wl_shell_surface *shellSurfaceHandle = (wl_shell_surface *)jvulkan::getHandleValue(env, jWlShellSurface);

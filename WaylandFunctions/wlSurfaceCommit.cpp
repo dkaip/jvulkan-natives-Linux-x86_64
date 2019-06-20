@@ -13,30 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
+/*
+ * wlSurfaceCommit.cpp
+ *
+ *  Created on: Jun 19, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include <wayland-client.h>
 
-using namespace std;
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
+#include "slf4j.hh"
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "../headers/HelperFunctions.hh"
+using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlDisplayDispatch
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;)V
+ * Method:    wlSurfaceCommit
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayDispatch
-  (JNIEnv *env, jobject, jobject jWlDisplay)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlSurfaceCommit
+  (JNIEnv *env, jobject, jobject jWlSurface)
 {
-    wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);
+    struct wl_surface *waylandSurfaceHandle = (struct wl_surface *)jvulkan::getHandleValue(env, jWlSurface);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getHandleValue.");
         return;
     }
 
-    cerr << "DisplayHandle" << waylandDisplayHandle << endl;
-    wl_display_dispatch(waylandDisplayHandle);
+    wl_surface_commit(waylandSurfaceHandle);
 }
-

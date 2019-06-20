@@ -1066,7 +1066,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceWaylandPresentationSupportKHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;)Z
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)Z
  */
 JNIEXPORT jboolean JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceWaylandPresentationSupportKHR
   (JNIEnv *, jobject, jobject, jint, jobject);
@@ -1241,24 +1241,48 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlConnectDisplay
- * Signature: (Ljava/lang/String;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;
+ * Method:    wlCompositorCreateRegion
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlCompositorHandle;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegionHandle;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlConnectDisplay
-  (JNIEnv *, jobject, jstring);
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlCompositorCreateRegion
+  (JNIEnv *, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlDisconnectDisplay
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;)V
+ * Method:    wlCompositorCreateSurface
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlCompositorHandle;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisconnectDisplay
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlCompositorCreateSurface
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlDisplayConnect
+ * Signature: (Ljava/lang/String;Ljava/util/concurrent/LinkedBlockingQueue;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayConnect
+  (JNIEnv *, jobject, jstring, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlDisplayDisconnect
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayDisconnect
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlDisplaySync
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplaySync
   (JNIEnv *, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlDisplayGetRegistry
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistry;
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayGetRegistry
   (JNIEnv *, jobject, jobject);
@@ -1266,7 +1290,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlRegistryAddListener
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistry;Lcom/CIMthetics/jvulkan/Wayland/WlRegistryListener;Ljava/lang/Object;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle;Lcom/CIMthetics/jvulkan/Wayland/WlRegistryListener;Ljava/lang/Object;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRegistryAddListener
   (JNIEnv *, jobject, jobject, jobject, jobject);
@@ -1274,7 +1298,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlDisplayDispatch
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayDispatch
   (JNIEnv *, jobject, jobject);
@@ -1282,7 +1306,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlRoundTrip
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplay;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRoundTrip
   (JNIEnv *, jobject, jobject);
@@ -1290,34 +1314,114 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlRegistryBind
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistry;ILjava/lang/String;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlRegistryHandle;ILjava/lang/String;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRegistryBind
   (JNIEnv *, jobject, jobject, jint, jstring, jint);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlCompositorCreateSurface
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlCompositor;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurface;
- */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlCompositorCreateSurface
-  (JNIEnv *, jobject, jobject);
-
-/*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlShellGetShellSurface
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShell;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurface;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurface;
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellHandle;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellGetShellSurface
   (JNIEnv *, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlShellSetTopLevel
- * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurface;)V
+ * Method:    wlShellSurfaceMove
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Objects/WlSeatHandle;I)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSetTopLevel
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceMove
+  (JNIEnv *, jobject, jobject, jobject, jint);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfacePong
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;I)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfacePong
+  (JNIEnv *, jobject, jobject, jint);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceResize
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Objects/WlSeatHandle;ILcom/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceResize
+  (JNIEnv *, jobject, jobject, jobject, jint, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetClass
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Ljava/lang/String;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetClass
+  (JNIEnv *, jobject, jobject, jstring);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetFullscreen
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceFullscreenMethod;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlOutputHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetFullscreen
+  (JNIEnv *, jobject, jobject, jobject, jint, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetMaximized
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlOutputHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetMaximized
+  (JNIEnv *, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetPopup
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Objects/WlSeatHandle;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;IILjava/util/EnumSet;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetPopup
+  (JNIEnv *, jobject, jobject, jobject, jint, jobject, jint, jint, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetTitle
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;[B)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetTitle
+  (JNIEnv *, jobject, jobject, jbyteArray);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetTopLevel
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetTopLevel
   (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlShellSurfaceSetTransient
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;IILjava/util/EnumSet;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetTransient
+  (JNIEnv *, jobject, jobject, jobject, jint, jint, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlSurfaceCommit
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlSurfaceCommit
+  (JNIEnv *, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    wlSurfaceDamage
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;IIII)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlSurfaceDamage
+  (JNIEnv *, jobject, jobject, jint, jint, jint, jint);
 
 #ifdef __cplusplus
 }

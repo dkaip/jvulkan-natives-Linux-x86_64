@@ -32,7 +32,6 @@ namespace slf4j
 {
 	Logger *Logger::instance = nullptr;
 	std::mutex Logger::creation_Mutex;
-	jclass Logger::loggerClass = nullptr;
 	jmethodID Logger::infoMethodId = nullptr;
 	jmethodID Logger::debugMethodId = nullptr;
 	jmethodID Logger::traceMethodId = nullptr;
@@ -42,6 +41,8 @@ namespace slf4j
 
 	Logger::Logger(JNIEnv *env)
 	{
+		jclass loggerClass = nullptr;
+
 		loggerClass = env->FindClass("org/slf4j/Logger");
 		if (loggerClass == nullptr)
 		{

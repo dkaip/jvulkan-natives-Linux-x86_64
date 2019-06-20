@@ -2256,6 +2256,11 @@ namespace jvulkan
 			jobject jVkFilterCubicImageViewImageFormatPropertiesEXTObject,
 			const VkFilterCubicImageViewImageFormatPropertiesEXT* vkFilterCubicImageViewImageFormatPropertiesEXT,
 			std::vector<void *> *memoryToFree);
+
+	JNIEnv *getJNIEnv();
+
+	void putOnLinkedBlockingQueue(JNIEnv *env, jobject JQueue, jobject entry);
+
 }
 
 #endif /* STRUCTUREHELPERFUNCTIONS_HH_ */
