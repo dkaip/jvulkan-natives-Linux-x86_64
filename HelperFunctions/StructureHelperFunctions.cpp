@@ -33,54 +33,6 @@ namespace jvulkan
         }
     }
 
-    void *getHandleValue(JNIEnv *env, jobject jHandle)
-    {
-        if (jHandle == nullptr)
-        {
-            cout << __FILE__ << " " << __LINE__ << " Handle Object must not be null." << endl;
-            return nullptr;
-        }
-
-        jclass handleClass = env->GetObjectClass(jHandle);
-        if (env->ExceptionOccurred())
-        {
-            return nullptr;
-        }
-
-        jmethodID methodId = env->GetMethodID(handleClass, "getHandle", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return nullptr;
-        }
-
-        jlong handle = env->CallLongMethod(jHandle, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return nullptr;
-        }
-
-        return (void *)handle;
-    }
-
-    void setHandleValue(JNIEnv *env, jobject jHandle, void *value)
-    {
-        jclass handleClass = env->GetObjectClass(jHandle);
-        if (env->ExceptionOccurred())
-        {
-            cout << "setHandleValue: could not find class "<< endl;
-            return;
-        }
-
-        jmethodID methodId = env->GetMethodID(handleClass, "setHandle", "(J)V");
-        if (env->ExceptionOccurred())
-        {
-            cout << "setHandleValue: could not find method setHandle (J)V" << endl;
-            return;
-        }
-
-        env->CallVoidMethod(jHandle, methodId, (jlong)value);
-    }
-
     void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value)
     {
         jclass handleClass = env->GetObjectClass(jReturnValue);

@@ -24,10 +24,10 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlDisconnectDisplay
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;)V
+ * Method:    wlDisplayDisconnect
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisconnectDisplay
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayDisconnect
   (JNIEnv *env, jobject, jobject jWlDisplay)
 {
     struct wl_display *waylandDisplayHandle = (struct wl_display *)jvulkan::getHandleValue(env, jWlDisplay);
