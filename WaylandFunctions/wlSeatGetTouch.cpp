@@ -28,6 +28,48 @@ using namespace std;
 #include "HelperFunctions.hh"
 #include "slf4j.hh"
 
+extern JavaVM *l_JavaVM;
+
+extern jobject globalWaylandEventQueueObject;
+
+static void wltouchHandleDown(void *data, struct wl_touch *wl_touch, uint32_t serialNumber, uint32_t time, struct wl_surface *wl_surface, int32_t id, wl_fixed_t x, wl_fixed_t y)
+{
+}
+
+static void wltouchHandleUp(void *data, struct wl_touch *wl_touch, uint32_t serialNumber, uint32_t time, int32_t id)
+{
+}
+
+static void wltouchHandleMotion(void *data, struct wl_touch *wl_touch, uint32_t time, int32_t id, wl_fixed_t x, wl_fixed_t y)
+{
+}
+
+static void wltouchHandleFrame(void *data, struct wl_touch *wl_touch)
+{
+}
+
+static void wltouchHandleCancel(void *data, struct wl_touch *wl_touch)
+{
+}
+
+static void wltouchHandleShape(void *data, struct wl_touch *wl_touch, int32_t id, wl_fixed_t major, wl_fixed_t minor)
+{
+}
+
+static void wltouchHandleOrientation(void *data, struct wl_touch *wl_touch, int32_t id, wl_fixed_t orientation)
+{
+}
+
+static const wl_touch_listener touch_listener
+{
+	wltouchHandleDown,
+	wltouchHandleUp,
+	wltouchHandleMotion,
+	wltouchHandleFrame,
+	wltouchHandleCancel,
+	wltouchHandleShape,
+	wltouchHandleOrientation
+};
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    wlSeatGetTouch
@@ -44,6 +86,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
 
     struct wl_touch *touch = wl_seat_get_touch(waylandSeatHandle);
+    if (touch != nullptr)
+    {
+    	wl_touch_add_listener(touch, &touch_listener, nullptr);
+    }
 //    if (pointer == nullptr)
 //    {
 //    	LOGERROR(env, "%s", "Error calling wl_seat_get_pointer.");
@@ -56,7 +102,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
         return nullptr;
     }
-zzzzzzzzzzzzzzzzzzzzzzzzzzz
+
     return jInterfacePointer;
 }
 

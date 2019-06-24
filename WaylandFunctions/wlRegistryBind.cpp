@@ -31,6 +31,7 @@ extern jobject globalWaylandEventQueueObject;
 namespace jwayland
 {
 	jobject createWlOutputModeAsEnumSet(JNIEnv *env, int flags);
+	jobject createWlSeatCapabilityAsEnumSet(JNIEnv *env, int flags);
 }
 
 static void wloutputHandleGeometry(void *data, struct wl_output *wl_output, int32_t x, int32_t y, int32_t physicalWidth, int32_t physicalHeight,
@@ -314,6 +315,128 @@ static const wl_output_listener output_listener
 	wloutputHandleScale
 };
 
+static void wlseatHandleCapabilities(void *data, struct wl_seat *wl_seat, uint32_t capabilities)
+{
+    JNIEnv *env = jvulkan::getJNIEnv();
+	LOGTRACE(env, "%s", "wlseatHandleCapabilities");
+    if (env == nullptr)
+    {
+    	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
+    	return;
+    }
+
+    jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Objects/WlSeatEvents");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find class com/CIMthetics/jvulkan/Wayland/Objects/WlSeatEvents.");
+       return;
+    }
+
+    jobject capabilitiesEnumSetObject = jwayland::createWlSeatCapabilityAsEnumSet(env, (int)capabilities);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createWlOutputModeAsEnumSet.");
+       return;
+    }
+
+    jmethodID constructorMethodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSeatHandle;Ljava/util/EnumSet;)V");
+
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find constructor.");
+       return;
+    }
+
+    jobject jWlSeat = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSeatHandle", wl_seat);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+       return;
+    }
+
+    jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlSeat, capabilitiesEnumSetObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to create delete id event.");
+       return;
+    }
+
+    jvulkan::putOnLinkedBlockingQueue(env, globalWaylandEventQueueObject, jwaylandEventObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling putOnLinkedBlockingQueue.");
+       return;
+    }
+
+	// This is important, don't forget to do it.
+    l_JavaVM->DetachCurrentThread();
+}
+
+static void wlseatHandleName(void *data, struct wl_seat *wl_seat, const char *name)
+{
+    JNIEnv *env = jvulkan::getJNIEnv();
+	LOGTRACE(env, "%s", "wlseatHandleName");
+    if (env == nullptr)
+    {
+    	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
+    	return;
+    }
+
+    jclass javaClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Objects/WlSeatEvents");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find class com/CIMthetics/jvulkan/Wayland/Objects/WlSeatEvents.");
+       return;
+    }
+
+    jmethodID constructorMethodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSeatHandle;Ljava/lang/String;)V");
+
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to find constructor.");
+       return;
+    }
+
+    jobject jWlSeat = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSeatHandle", wl_seat);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+       return;
+    }
+
+    jstring seatName = env->NewStringUTF(name);
+	if (env->ExceptionOccurred())
+	{
+    	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+		return;
+	}
+
+    jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlSeat, seatName);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Failed trying to create delete id event.");
+       return;
+    }
+
+    env->DeleteLocalRef(seatName);
+
+    jvulkan::putOnLinkedBlockingQueue(env, globalWaylandEventQueueObject, jwaylandEventObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling putOnLinkedBlockingQueue.");
+       return;
+    }
+
+	// This is important, don't forget to do it.
+    l_JavaVM->DetachCurrentThread();
+}
+
+static const wl_seat_listener seat_listener
+{
+	wlseatHandleCapabilities,
+	wlseatHandleName
+};
+
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -401,15 +524,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
     else if (strcmp(interfaceName, "wl_pointer_interface") == 0)
     {
-        interfacePointer = &wl_pointer_interface;
+    	LOGERROR(env, "%s", "Pointers are created using the WlSeat interface.");
+    	return nullptr;
+//        interfacePointer = &wl_pointer_interface;
     }
     else if (strcmp(interfaceName, "wl_keyboard_interface") == 0)
     {
-        interfacePointer = &wl_keyboard_interface;
+    	LOGERROR(env, "%s", "Keyboards are created using the WlSeat interface.");
+    	return nullptr;
+//        interfacePointer = &wl_keyboard_interface;
     }
     else if (strcmp(interfaceName, "wl_touch_interface") == 0)
     {
-        interfacePointer = &wl_touch_interface;
+    	LOGERROR(env, "%s", "Touch interfaces are created using the WlSeat interface.");
+    	return nullptr;
+//        interfacePointer = &wl_touch_interface;
     }
     else if (strcmp(interfaceName, "wl_output_interface") == 0)
     {
@@ -499,6 +628,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     }
     else if (strcmp(interfaceName, "wl_seat_interface") == 0)
     {
+    	jInterfacePointer = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSeatHandle", result);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+           return nullptr;
+        }
+
+        wl_seat_add_listener((struct wl_seat *)result, &seat_listener, nullptr);
     }
     else if (strcmp(interfaceName, "wl_pointer_interface") == 0)
     {
@@ -519,7 +656,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         }
 
     	wl_output_add_listener((struct wl_output *)result, &output_listener, nullptr);
-        LOGERROR(env, "Attempting to add listener for interface %s. Pointer is %lx.", interfaceName, result);
+//        LOGERROR(env, "Attempting to add listener for interface %s. Pointer is %lx.", interfaceName, result);
 
     }
     else if (strcmp(interfaceName, "wl_region_interface") == 0)

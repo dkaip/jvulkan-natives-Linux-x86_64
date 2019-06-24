@@ -51,7 +51,7 @@ static void wlSurfaceEnter(void *data, struct wl_surface *wl_surface, struct wl_
        return;
     }
 
-    jobject jWlSurface = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle", wl_output);
+    jobject jWlSurface = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle", wl_surface);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
@@ -108,7 +108,7 @@ static void wlSurfaceLeave(void *data, struct wl_surface *wl_surface, struct wl_
        return;
     }
 
-    jobject jWlSurface = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle", wl_output);
+    jobject jWlSurface = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle", wl_surface);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error calling createVulkanHandle.");

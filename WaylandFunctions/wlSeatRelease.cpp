@@ -40,7 +40,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error calling getHandleValue.");
-        return nullptr;
+        return;
     }
 
     wl_seat_release(waylandSeatHandle);

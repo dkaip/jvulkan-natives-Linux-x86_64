@@ -19,15 +19,15 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "../headers/HelperFunctions.hh"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "HelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    wlRoundTrip
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;)V
+ * Method:    wlDisplayRoundTrip
+ * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRoundTrip
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayRoundTrip
   (JNIEnv *env, jobject, jobject jWlDisplay)
 {
     wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);

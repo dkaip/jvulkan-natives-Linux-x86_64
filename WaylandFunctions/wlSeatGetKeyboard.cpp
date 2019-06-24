@@ -20,6 +20,7 @@
  *      Author: Douglas Kaip
  */
 
+#include <unistd.h>
 #include <wayland-client.h>
 
 using namespace std;
@@ -49,7 +50,8 @@ static void wlkeyboardHandleKeymap(void *data, struct wl_keyboard *wl_keyboard, 
        return;
     }
 
-    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat;II)V");
+//    jmethodID constructorMethodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat;II)V");
+    jmethodID constructorMethodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat;[B)V");
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -84,12 +86,46 @@ static void wlkeyboardHandleKeymap(void *data, struct wl_keyboard *wl_keyboard, 
 		return;
 	}
 
-    jobject jwaylandEventObject = env->NewObject(javaClass, methodId, jWlKeyboard, keymapFormatEnumObject, fd, size);
+	char *keyMap = (char *)calloc(1, size);
+	if (keyMap == nullptr)
+	{
+		LOGERROR(env, "Error trying to allocate %d bytes for keyMap data.", size);
+		return;
+	}
+
+	ssize_t bytesRead = read(fd, keyMap, size);
+	if (bytesRead != size)
+	{
+		LOGERROR(env, "An incorrect number of bytes(%d) have been read, should have read %d bytes.", bytesRead, size);
+		close(fd);
+		return;
+	}
+
+	close(fd);
+
+    jbyteArray jKeyMap = env->NewByteArray(size);
+    if (jKeyMap == 0)
+    {
+    	LOGERROR(env, "%s", "ERROR: out of memory trying to allocate array for jKeyMap");
+        return;
+    }
+
+    env->SetByteArrayRegion(jKeyMap, 0, size, (const signed char *)keyMap);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling SetByteArrayRegion");
+        return;
+    }
+
+//    jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlKeyboard, keymapFormatEnumObject, fd, size);
+    jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlKeyboard, keymapFormatEnumObject, jKeyMap);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Failed trying to create KEYMAP event.");
        return;
     }
+
+    free(keyMap);
 
 	jvulkan::putOnLinkedBlockingQueue(env, globalWaylandEventQueueObject, jwaylandEventObject);
     if (env->ExceptionOccurred())
@@ -231,7 +267,7 @@ static void wlkeyboardHandleLeave(void *data, struct wl_keyboard *wl_keyboard, u
 static void wlkeyboardHandleKey(void *data, struct wl_keyboard *wl_keyboard, uint32_t serialNumber, uint32_t time, uint32_t key, uint32_t state)
 {
     JNIEnv *env = jvulkan::getJNIEnv();
-	LOGTRACE(env, "%s", "wlkeyboardHandleRepeatInfo");
+	LOGTRACE(env, "%s", "wlkeyboardHandleKey");
     if (env == nullptr)
     {
     	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
@@ -245,7 +281,7 @@ static void wlkeyboardHandleKey(void *data, struct wl_keyboard *wl_keyboard, uin
        return;
     }
 
-    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;IJILcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState;)V");
+    jmethodID constructorMethodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;IJILcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState;)V");
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -280,7 +316,7 @@ static void wlkeyboardHandleKey(void *data, struct wl_keyboard *wl_keyboard, uin
 		return;
 	}
 
-    jobject jwaylandEventObject = env->NewObject(javaClass, methodId, jWlKeyboard, serialNumber, (uint64_t)time, key, keyboardKeyStateEnumObject);
+    jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlKeyboard, serialNumber, (uint64_t)time, key, keyboardKeyStateEnumObject);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Failed trying to create KEY event.");
