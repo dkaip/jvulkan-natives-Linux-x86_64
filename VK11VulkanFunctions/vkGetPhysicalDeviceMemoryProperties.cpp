@@ -19,7 +19,8 @@
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -38,143 +39,154 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkPhysicalDeviceMemoryProperties vkPhysicalDeviceMemoryProperties = {};
     vkGetPhysicalDeviceMemoryProperties(physicalDeviceHandle, &vkPhysicalDeviceMemoryProperties);
 
-    jclass vkPhysicalDeviceMemoryPropertiesClass = env->GetObjectClass(jVkPhysicalDeviceMemoryPropertiesObject);
+    jvulkan::populateVkPhysicalDeviceMemoryProperties(
+            env,
+            jVkPhysicalDeviceMemoryPropertiesObject,
+            &vkPhysicalDeviceMemoryProperties);
     if (env->ExceptionOccurred())
     {
+        LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceMemoryProperties");
         return;
     }
 
-    jmethodID memoryTypesMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "getMemoryTypes", "()Ljava/util/Collection;");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
 
-    jobject jMemoryTypesCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryTypesMethodId);
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jmethodID memoryHeapsMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "getMemoryHeaps", "()Ljava/util/Collection;");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jobject jMemoryHeapsCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryHeapsMethodId);
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jclass memoryTypesCollectionClass = env->GetObjectClass(jMemoryTypesCollectionObject);
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jmethodID addMethodId = env->GetMethodID(memoryTypesCollectionClass, "add", "(Ljava/lang/Object;)Z");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryType;");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryHeap;");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jmethodID typesConstructorMethodId = env->GetMethodID(vkMemoryTypeClass, "<init>", "(Ljava/util/EnumSet;I)V");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-    jmethodID heapsConstructorMethodId = env->GetMethodID(vkMemoryHeapClass, "<init>", "(JLjava/util/EnumSet;)V");
-    if (env->ExceptionOccurred())
-    {
-        return;
-    }
-
-//    std::cerr << "Gack0" << std::endl;
-//    jmethodID constructorMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "<init>", "(Ljava/util/EnumSet;I)Z");
+//    jclass vkPhysicalDeviceMemoryPropertiesClass = env->GetObjectClass(jVkPhysicalDeviceMemoryPropertiesObject);
 //    if (env->ExceptionOccurred())
 //    {
-//        std::cerr << "Gack1" << std::endl;
 //        return;
 //    }
-//    std::cerr << "Gack2" << std::endl;
-
-    for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryTypeCount; i++)
-    {
-        jobject jEnumSetObject = jvulkan::createVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject jVkMemoryTypeObject = env->NewObject(
-                vkMemoryTypeClass,
-                typesConstructorMethodId,
-                jEnumSetObject,
-                vkPhysicalDeviceMemoryProperties.memoryTypes[i].heapIndex);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jboolean addResult = env->CallBooleanMethod(jMemoryTypesCollectionObject, addMethodId, jVkMemoryTypeObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        if (addResult == 0)
-        {
-            std::cerr << "Failed trying to add jMemoryTypesCollectionObject" << std::endl;
-        }
-
-    }
-
-    for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryHeapCount; i++)
-    {
-        jobject jEnumSetObject = jvulkan::createVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject jVkMemoryHeapObject = env->NewObject(
-                vkMemoryHeapClass,
-                heapsConstructorMethodId,
-                vkPhysicalDeviceMemoryProperties.memoryHeaps[i].size,
-                jEnumSetObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jboolean addResult = env->CallBooleanMethod(jMemoryHeapsCollectionObject, addMethodId, jVkMemoryHeapObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        if (addResult == 0)
-        {
-            std::cerr << "Failed trying to add jMemoryTypesCollectionObject" << std::endl;
-        }
-
-    }
 //
-//    std::cout << "memoryTypeCount=" << vkPhysicalDeviceMemoryProperties.memoryTypeCount << std::endl;
-//    std::cout << "memoryHeapCount=" << vkPhysicalDeviceMemoryProperties.memoryHeapCount << std::endl;
+//    jmethodID memoryTypesMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "getMemoryTypes", "()Ljava/util/Collection;");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jobject jMemoryTypesCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryTypesMethodId);
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jmethodID memoryHeapsMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "getMemoryHeaps", "()Ljava/util/Collection;");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jobject jMemoryHeapsCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryHeapsMethodId);
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jclass memoryTypesCollectionClass = env->GetObjectClass(jMemoryTypesCollectionObject);
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jmethodID addMethodId = env->GetMethodID(memoryTypesCollectionClass, "add", "(Ljava/lang/Object;)Z");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryType;");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryHeap;");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jmethodID typesConstructorMethodId = env->GetMethodID(vkMemoryTypeClass, "<init>", "(Ljava/util/EnumSet;I)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+//    jmethodID heapsConstructorMethodId = env->GetMethodID(vkMemoryHeapClass, "<init>", "(JLjava/util/EnumSet;)V");
+//    if (env->ExceptionOccurred())
+//    {
+//        return;
+//    }
+//
+////    std::cerr << "Gack0" << std::endl;
+////    jmethodID constructorMethodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "<init>", "(Ljava/util/EnumSet;I)Z");
+////    if (env->ExceptionOccurred())
+////    {
+////        std::cerr << "Gack1" << std::endl;
+////        return;
+////    }
+////    std::cerr << "Gack2" << std::endl;
+//
+//    for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryTypeCount; i++)
+//    {
+//        jobject jEnumSetObject = jvulkan::createVkMemoryPropertyFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryTypes[i].propertyFlags);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject jVkMemoryTypeObject = env->NewObject(
+//                vkMemoryTypeClass,
+//                typesConstructorMethodId,
+//                jEnumSetObject,
+//                vkPhysicalDeviceMemoryProperties.memoryTypes[i].heapIndex);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jboolean addResult = env->CallBooleanMethod(jMemoryTypesCollectionObject, addMethodId, jVkMemoryTypeObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        if (addResult == 0)
+//        {
+//            std::cerr << "Failed trying to add jMemoryTypesCollectionObject" << std::endl;
+//        }
+//
+//    }
+//
+//    for (uint32_t i = 0; i < vkPhysicalDeviceMemoryProperties.memoryHeapCount; i++)
+//    {
+//        jobject jEnumSetObject = jvulkan::createVkMemoryHeapFlagsAsEnumSet(env, vkPhysicalDeviceMemoryProperties.memoryHeaps[i].flags);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jobject jVkMemoryHeapObject = env->NewObject(
+//                vkMemoryHeapClass,
+//                heapsConstructorMethodId,
+//                vkPhysicalDeviceMemoryProperties.memoryHeaps[i].size,
+//                jEnumSetObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        jboolean addResult = env->CallBooleanMethod(jMemoryHeapsCollectionObject, addMethodId, jVkMemoryHeapObject);
+//        if (env->ExceptionOccurred())
+//        {
+//            return;
+//        }
+//
+//        if (addResult == 0)
+//        {
+//            std::cerr << "Failed trying to add jMemoryTypesCollectionObject" << std::endl;
+//        }
+//
+//    }
+////
+////    std::cout << "memoryTypeCount=" << vkPhysicalDeviceMemoryProperties.memoryTypeCount << std::endl;
+////    std::cout << "memoryHeapCount=" << vkPhysicalDeviceMemoryProperties.memoryHeapCount << std::endl;
 }
