@@ -16,7 +16,7 @@ namespace jvulkan
 			jobject jVkPhysicalDeviceMemoryPropertiesObject,
 			VkPhysicalDeviceMemoryProperties const *vkPhysicalDeviceMemoryProperties)
 	{
-        // Locate the VkPhysicalDeviceProperties class
+        // Locate the VkPhysicalDeviceMemoryProperties class
         jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMemoryPropertiesObject);
         if (env->ExceptionOccurred())
         {
@@ -160,8 +160,5 @@ namespace jvulkan
             }
 
         }
-
-//        std::cout << "memoryTypeCount=" << vkPhysicalDeviceMemoryProperties.memoryTypeCount << std::endl;
-//        std::cout << "memoryHeapCount=" << vkPhysicalDeviceMemoryProperties.memoryHeapCount << std::endl;
 	}
 }
