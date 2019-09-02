@@ -20,7 +20,7 @@
  *      Author: Douglas Kaip
  */
 
-#include "../headers/slf4j.hh"
+#include "slf4j.hh"
 
 #include <stdarg.h>
 #include <string.h>

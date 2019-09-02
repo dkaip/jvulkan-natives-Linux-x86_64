@@ -19,8 +19,8 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "../headers/HelperFunctions.hh"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "JVulkanHelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

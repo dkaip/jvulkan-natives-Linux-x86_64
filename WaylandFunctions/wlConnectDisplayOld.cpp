@@ -19,7 +19,7 @@
 
 using namespace std;
 
-#include "../headers/com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

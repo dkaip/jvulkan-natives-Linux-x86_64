@@ -21,7 +21,7 @@
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 extern JavaVM *l_JavaVM;
@@ -563,7 +563,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return nullptr;
     }
 
-    LOGERROR(env, "Attempting to bind interface %s.", interfaceName);
     void *result = wl_registry_bind(
             (wl_registry *)waylandRegistryHandle,
             interfaceId,

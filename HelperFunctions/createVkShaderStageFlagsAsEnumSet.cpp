@@ -20,7 +20,7 @@
  *      Author: Douglas KAip
  */
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan

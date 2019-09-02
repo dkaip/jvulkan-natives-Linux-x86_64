@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan

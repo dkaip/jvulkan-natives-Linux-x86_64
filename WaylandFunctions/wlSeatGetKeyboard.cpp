@@ -26,7 +26,7 @@
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 extern JavaVM *l_JavaVM;
@@ -155,7 +155,7 @@ static void wlkeyboardHandleEnter(void *data, struct wl_keyboard *wl_keyboard, u
        return;
     }
 
-    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;[B)V");
+    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;[I)V");
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -176,17 +176,17 @@ static void wlkeyboardHandleEnter(void *data, struct wl_keyboard *wl_keyboard, u
        return;
     }
 
-    jbyteArray keysPressed = env->NewByteArray(keys->size);
+    jintArray keysPressed = env->NewIntArray(keys->size);
     if (keysPressed == 0)
     {
     	LOGERROR(env, "%s", "ERROR: out of memory trying to allocate array for keysPressed");
         return;
     }
 
-    env->SetByteArrayRegion(keysPressed, 0, keys->size, (const jbyte *)keys->data);
+    env->SetIntArrayRegion(keysPressed, 0, keys->size, (const jint *)keys->data);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error calling SetByteArrayRegion");
+    	LOGERROR(env, "%s", "Error calling SetIntArrayRegion");
         return;
     }
 

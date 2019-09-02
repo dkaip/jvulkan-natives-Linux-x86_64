@@ -21,8 +21,8 @@
  */
 
 
-#include "../headers/slf4j.hh"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {

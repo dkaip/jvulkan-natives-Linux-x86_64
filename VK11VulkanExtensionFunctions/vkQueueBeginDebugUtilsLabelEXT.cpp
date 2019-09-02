@@ -20,9 +20,9 @@
  *      Author: Douglas Kaip
  */
 
-#include "../headers/slf4j.hh"
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

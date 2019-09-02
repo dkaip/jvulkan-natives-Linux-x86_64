@@ -15,7 +15,7 @@
  */
 #include <iostream>
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 using namespace std;

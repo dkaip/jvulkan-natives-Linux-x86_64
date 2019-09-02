@@ -24,7 +24,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 
 using namespace std;
 

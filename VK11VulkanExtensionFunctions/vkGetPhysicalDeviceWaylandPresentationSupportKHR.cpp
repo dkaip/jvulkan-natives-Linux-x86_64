@@ -22,7 +22,7 @@ using namespace std;
 //#include <vulkan/vulkan_wayland.h>
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

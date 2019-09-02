@@ -28,7 +28,7 @@
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "DebugUtilsMessengerCallbackListEntry.h"
 #include "slf4j.hh"
 

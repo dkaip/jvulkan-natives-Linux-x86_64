@@ -17,8 +17,8 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include "JVulkanHelperFunctions.hh"
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

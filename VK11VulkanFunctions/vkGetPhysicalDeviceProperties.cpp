@@ -19,7 +19,7 @@
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 /*
@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 			&vkPhysicalDeviceProperties);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error calling createVkPhysicalDeviceProperties");
+    	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceProperties");
         return;
     }
 }

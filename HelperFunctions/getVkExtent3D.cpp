@@ -17,7 +17,7 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan

@@ -22,7 +22,7 @@
 
 #include <iostream>
 
-#include "HelperFunctions.hh"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 extern JavaVM *l_JavaVM;
