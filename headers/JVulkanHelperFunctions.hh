@@ -2262,7 +2262,13 @@ namespace jvulkan
             jobject jVkPhysicalDeviceMemoryPropertiesObject,
 			const VkPhysicalDeviceMemoryProperties *vkPhysicalDeviceMemoryProperties);
 
-	JNIEnv *getJNIEnv();
+    void getVkMemoryRequirements(
+            JNIEnv *env,
+            jobject jVkMemoryRequirementsObject,
+			VkMemoryRequirements *vkMemoryRequirements,
+            std::vector<void *> *memoryToFree);
+
+    JNIEnv *getJNIEnv();
 
 	void putOnLinkedBlockingQueue(JNIEnv *env, jobject JQueue, jobject entry);
 
