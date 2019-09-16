@@ -90,7 +90,7 @@ namespace jvulkan
             return;
         }
 
-        jmethodID getMethodId = env->GetMethodID(bitSetClass, "get", "(I)Z;");
+        jmethodID getMethodId = env->GetMethodID(bitSetClass, "get", "(I)Z");
         if (env->ExceptionOccurred())
         {
             LOGERROR(env, "%s", "Could not find method id for get");
