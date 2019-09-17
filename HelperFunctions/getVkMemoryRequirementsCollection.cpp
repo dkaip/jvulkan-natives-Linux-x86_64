@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPipelineCreationFeedbackEXTCollection.cpp
+ * getVkMemoryRequirementsCollection.cpp
  *
- *  Created on: May 22, 2019
+ *  Created on: Sep 16, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,17 +25,17 @@
 
 namespace jvulkan
 {
-    void getVkPipelineCreationFeedbackEXTCollection(
+    void getVkMemoryRequirementsCollection(
             JNIEnv *env,
-            const jobject jVkPipelineCreationFeedbackEXTCollectionObject,
-			VkPipelineCreationFeedbackEXT **vkPipelineCreationFeedbackEXT,
-            int *numberOfVkPipelineCreationFeedbackEXTs,
+            const jobject jVkMemoryRequirementsCollectionObject,
+			VkMemoryRequirements **vkMemoryRequirements,
+            int *numberOfVkMemoryRequirements,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPipelineCreationFeedbackEXTCollectionObject);
+        jclass theClass = env->GetObjectClass(jVkMemoryRequirementsCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPipelineCreationFeedbackEXTCollectionObject.");
+        	LOGERROR(env, "%s", "Could not find class for jVkMemoryRequirementsCollectionObject.");
             return;
         }
 
@@ -46,22 +46,22 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkPipelineCreationFeedbackEXTCollectionObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkMemoryRequirementsCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkPipelineCreationFeedbackEXTs = numberOfElements;
-        *vkPipelineCreationFeedbackEXT = (VkPipelineCreationFeedbackEXT *)calloc(numberOfElements, sizeof(VkPipelineCreationFeedbackEXT));
-        if (*vkPipelineCreationFeedbackEXT == nullptr)
+        *numberOfVkMemoryRequirements = numberOfElements;
+        *vkMemoryRequirements = (VkMemoryRequirements *)calloc(numberOfElements, sizeof(VkMemoryRequirements));
+        if (*vkMemoryRequirements == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkPipelineCreationFeedbackEXT");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkMemoryRequirements");
             return;
         }
 
-        memoryToFree->push_back(*vkPipelineCreationFeedbackEXT);
+        memoryToFree->push_back(*vkMemoryRequirements);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,7 +70,7 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkPipelineCreationFeedbackEXTCollectionObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkMemoryRequirementsCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -113,21 +113,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jvkPipelineCreationFeedbackEXTObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkMemoryRequirementsObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkPipelineCreationFeedbackEXT(
+            getVkMemoryRequirements(
                     env,
-					jvkPipelineCreationFeedbackEXTObject,
-                    &((*vkPipelineCreationFeedbackEXT)[i]),
+					jVkMemoryRequirementsObject,
+                    &((*vkMemoryRequirements)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getvkPipelineCreationFeedbackEXT");
+            	LOGERROR(env, "%s", "Error calling method getVkMemoryRequirements");
                 break;
             }
 
