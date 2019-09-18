@@ -99,6 +99,7 @@ namespace jvulkan
 		}
 
 		int i = 0;
+		void **temp = (void **)*vulkanHandles;
 		do
 		{
 			jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
@@ -127,7 +128,7 @@ namespace jvulkan
 				return;
 			}
 
-			(*vulkanHandles)[i] = vulkanHandle;
+			temp[i] = vulkanHandle;
 
 			i++;
 		} while(true);
