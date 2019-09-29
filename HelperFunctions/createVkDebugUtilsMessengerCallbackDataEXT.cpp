@@ -196,6 +196,3 @@ namespace jvulkan
         return vkDebugUtilsMessengerCallbackDataEXTObject;
     }
 }
-
-
-
