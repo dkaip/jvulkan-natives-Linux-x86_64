@@ -34,7 +34,7 @@ namespace jvulkan
         jobject jMemoryTypesCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryTypesMethodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Wrror calling CallObjectMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
@@ -48,14 +48,14 @@ namespace jvulkan
         jobject jMemoryHeapsCollectionObject = env->CallObjectMethod(jVkPhysicalDeviceMemoryPropertiesObject, memoryHeapsMethodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Wrror calling CallObjectMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
         jclass memoryTypesCollectionClass = env->GetObjectClass(jMemoryTypesCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Wrror calling GetObjectClass");
+        	LOGERROR(env, "%s", "Error calling GetObjectClass");
             return;
         }
 
@@ -117,7 +117,7 @@ namespace jvulkan
             jboolean addResult = env->CallBooleanMethod(jMemoryTypesCollectionObject, addMethodId, jVkMemoryTypeObject);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Wrror calling CallBooleanMethod");
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
                 return;
             }
 
@@ -150,7 +150,7 @@ namespace jvulkan
             jboolean addResult = env->CallBooleanMethod(jMemoryHeapsCollectionObject, addMethodId, jVkMemoryHeapObject);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Wrror calling CallBooleanMethod");
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
                 return;
             }
 
