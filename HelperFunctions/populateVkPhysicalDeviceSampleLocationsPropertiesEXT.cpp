@@ -56,10 +56,10 @@ namespace jvulkan
             return;
         }
 
-        jobject jVkSampleCountFlags = createVkSampleCountFlagsAsEnumSet(env, vkPhysicalDeviceSampleLocationsPropertiesEXT->sampleLocationSampleCounts);
+        jobject jVkSampleCountFlags = createVkSampleCountFlagBitsAsEnumSet(env, vkPhysicalDeviceSampleLocationsPropertiesEXT->sampleLocationSampleCounts);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling getVkShaderStageFlagsAsEnumSet");
+        	LOGERROR(env, "%s", "Error calling createVkSampleCountFlagBitsAsEnumSet");
             return;
         }
 

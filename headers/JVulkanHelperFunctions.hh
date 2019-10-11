@@ -1260,7 +1260,7 @@ namespace jvulkan
 
 	jobject createVkExtent2D(JNIEnv *env, const VkExtent2D *vkExtent2D);
 
-    jobject createVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
+//    jobject createVkSampleCountFlagsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags);
 
     jobject createVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags);
 
@@ -2282,7 +2282,79 @@ namespace jvulkan
             int *numberOfVulkanHandles,
             std::vector<void *> *memoryToFree);
 
-    JNIEnv *getJNIEnv();
+    void getVkHeadlessSurfaceCreateInfoEXT(
+            JNIEnv *env,
+            const jobject jVkHeadlessSurfaceCreateInfoEXTObject,
+			VkHeadlessSurfaceCreateInfoEXT *vkHeadlessSurfaceCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	jobject createVkDeviceGroupPresentModeFlagsKHRAsEnumSet(JNIEnv *env, VkDeviceGroupPresentModeFlagsKHR modes);
+
+	void populateVkDeviceGroupPresentCapabilitiesKHR(
+			JNIEnv *env,
+			jobject jVkDeviceGroupPresentCapabilitiesKHRObject,
+			const VkDeviceGroupPresentCapabilitiesKHR* vkDeviceGroupPresentCapabilitiesKHR,
+			std::vector<void *> *memoryToFree);
+
+	void populateVkPipelineExecutableStatisticKHR(
+			JNIEnv *env,
+			jobject jVkPipelineExecutableStatisticKHRObject,
+			VkPipelineExecutableStatisticKHR const *vkPipelineExecutableStatisticKHR);
+
+	void populateVkPipelineExecutableStatisticKHRCollection(
+			JNIEnv *env,
+			jobject jVkPipelineExecutableStatisticKHRCollectionObject,
+			VkPipelineExecutableStatisticKHR const *vkPipelineExecutableStatisticKHR,
+			int numberOfVkPipelineExecutableStatisticKHR);
+
+    void getVkPipelineExecutableInfoKHR(
+            JNIEnv *env,
+            const jobject jVkPipelineExecutableInfoKHRObject,
+			VkPipelineExecutableInfoKHR *vkPipelineExecutableInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineInfoKHR(
+            JNIEnv *env,
+            const jobject jVkPipelineInfoKHRObject,
+			VkPipelineInfoKHR *vkPipelineInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPipelineExecutablePropertiesKHRCollection(
+			JNIEnv *env,
+			jobject jVkPipelineExecutablePropertiesKHRCollectionObject,
+			VkPipelineExecutablePropertiesKHR const *vkPipelineExecutablePropertiesKHR,
+			int numberOfVkPipelineExecutablePropertiesKHR);
+
+	void populateVkPipelineExecutablePropertiesKHR(
+			JNIEnv *env,
+			jobject jVkPipelineExecutablePropertiesKHRObject,
+			VkPipelineExecutablePropertiesKHR const *vkPipelineExecutablePropertiesKHR);
+
+	void populateVkFramebufferMixedSamplesCombinationNV(
+			JNIEnv *env,
+			jobject jVkFramebufferMixedSamplesCombinationNVObject,
+			VkFramebufferMixedSamplesCombinationNV const *vkFramebufferMixedSamplesCombinationNV);
+
+	void populateVkFramebufferMixedSamplesCombinationNVCollection(
+			JNIEnv *env,
+			jobject jVkFramebufferMixedSamplesCombinationNVCollectionObject,
+			VkFramebufferMixedSamplesCombinationNV const *vkFramebufferMixedSamplesCombinationNV,
+			int numberOfVkFramebufferMixedSamplesCombinationNV);
+
+	void populateVkPipelineExecutableInternalRepresentationKHR(
+			JNIEnv *env,
+			jobject jVkPipelineExecutableInternalRepresentationKHRObject,
+			VkPipelineExecutableInternalRepresentationKHR const *vkPipelineExecutableInternalRepresentationKHR);
+
+	void populateVkPipelineExecutableInternalRepresentationKHRCollection(
+			JNIEnv *env,
+			jobject jVkPipelineExecutableInternalRepresentationKHRCollectionObject,
+			VkPipelineExecutableInternalRepresentationKHR const *vkPipelineExecutableInternalRepresentationKHR,
+			int numberOfVkPipelineExecutableInternalRepresentationKHR);
+
+	jobject createEnumFromValue(JNIEnv *env, const char *enumClassString, jint value);
+
+	JNIEnv *getJNIEnv();
 
 	void putOnLinkedBlockingQueue(JNIEnv *env, jobject JQueue, jobject entry);
 

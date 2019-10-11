@@ -42,7 +42,7 @@ namespace jvulkan
 		jmethodID enumSetNoneOfMethod = env->GetStaticMethodID(enumSetClass, "noneOf", "(Ljava/lang/Class;)Ljava/util/EnumSet;");
 		if (env->ExceptionOccurred() != 0)
 		{
-			LOGERROR(env, "%s", "Could not find static method noneOf");
+        	LOGERROR(env, "%s", "Could not find method id of noneOf in class java/util/EnumSet");
 			return nullptr;
 		}
 
@@ -56,7 +56,7 @@ namespace jvulkan
 		jobject enumSetObject = env->CallStaticObjectMethod(enumSetClass, enumSetNoneOfMethod, enumClass);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Error calling CallStaticObjectMethod on static method noneOf");
+        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod for method id of noneOf in class java/util/EnumSet");
 			return nullptr;
 		}
 
@@ -70,7 +70,7 @@ namespace jvulkan
 		jmethodID setAddMethod = env->GetMethodID(setClass, "add", "(Ljava/lang/Object;)Z");
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find method id add");
+        	LOGERROR(env, "%s", "Could not find method id of add in class java/util/Set");
 			return nullptr;
 		}
 
@@ -87,7 +87,7 @@ namespace jvulkan
 			   VK_SAMPLE_COUNT_32_BIT |
 			   VK_SAMPLE_COUNT_64_BIT)) != 0)
 		{
-			LOGERROR(env, "ERROR: Unhandled case for vkSampleCountFlags...value is %d", vkSampleCountFlags);
+			LOGERROR(env, "Unhandled case for vkSampleCountFlags...value is %x", vkSampleCountFlags);
 			return nullptr;
 		}
 
@@ -99,7 +99,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_1_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_1_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -112,7 +112,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_2_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_2_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -125,7 +125,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_4_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_4_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -138,7 +138,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_8_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_8_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -151,7 +151,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_16_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_16_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -164,7 +164,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_32_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_32_BIT to EnumSet");
 				return nullptr;
 			}
 		}
@@ -177,7 +177,7 @@ namespace jvulkan
 			bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
 			if (addResult == false)
 			{
-				LOGERROR(env, "%s", "ERROR: could not add VK_SAMPLE_COUNT_64_BIT to EnumSet");
+				LOGERROR(env, "%s", "Could not add VK_SAMPLE_COUNT_64_BIT to EnumSet");
 				return nullptr;
 			}
 		}
