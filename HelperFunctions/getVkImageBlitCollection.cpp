@@ -14,28 +14,29 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkImageBlitCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 15, 2019
  *      Author: Douglas Kaip
  */
+
 
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkImageBlitCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkImageBlitObject,
+			VkImageBlit **vkImageBlits,
+            int *numberOfVkImageBlits,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
+        jclass theClass = env->GetObjectClass(jVkImageBlitObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageBlitObject.");
             return;
         }
 
@@ -46,22 +47,22 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkImageBlitObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        *numberOfVkImageBlits = numberOfElements;
+        *vkImageBlits = (VkImageBlit *)calloc(numberOfElements, sizeof(VkImageBlit));
+        if (*vkImageBlits == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkImageBlits");
             return;
         }
 
-        memoryToFree->push_back(*vkFormats);
+        memoryToFree->push_back(*vkImageBlits);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,7 +71,7 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkImageBlitObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -113,21 +114,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkImageBlitObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkFormat(
+            getVkImageBlit(
                     env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
+					jVkImageBlitObject,
+                    &((*vkImageBlits)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
+            	LOGERROR(env, "%s", "Error calling method getVkImageBlit");
                 break;
             }
 

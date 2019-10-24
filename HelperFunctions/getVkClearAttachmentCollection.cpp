@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkClearAttachmentCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 22, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,17 +25,17 @@
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkClearAttachmentCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkClearAttachmentCollectionObject,
+			VkClearAttachment **vkClearAttachments,
+            int *numberOfVkClearAttachments,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
+        jclass theClass = env->GetObjectClass(jVkClearAttachmentCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
+        	LOGERROR(env, "%s", "Could not find class for jVkClearAttachmentCollectionObject.");
             return;
         }
 
@@ -46,22 +46,22 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkClearAttachmentCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        *numberOfVkClearAttachments = numberOfElements;
+        *vkClearAttachments = (VkClearAttachment *)calloc(numberOfElements, sizeof(VkClearAttachment));
+        if (*vkClearAttachments == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkClearAttachments");
             return;
         }
 
-        memoryToFree->push_back(*vkFormats);
+        memoryToFree->push_back(*vkClearAttachments);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,7 +70,7 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkClearAttachmentCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -113,21 +113,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkClearAttachmentObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkFormat(
+            getVkClearAttachment(
                     env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
+					jVkClearAttachmentObject,
+                    &((*vkClearAttachments)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
+            	LOGERROR(env, "%s", "Error calling method getVkClearAttachment");
                 break;
             }
 

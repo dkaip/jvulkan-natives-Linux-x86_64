@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkViewportCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 24, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,76 +25,67 @@
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkViewportCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkViewportCollectionObject,
+            VkViewport **viewports,
+            int *numberOfViewports,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
-        if (env->ExceptionOccurred())
+        if (jVkViewportCollectionObject == nullptr)
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(theClass, "size", "()I");
+        jclass vkViewportCollectionClass = env->GetObjectClass(jVkViewportCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for size");
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jmethodID methodId = env->GetMethodID(vkViewportCollectionClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        jint numberOfElements = env->CallIntMethod(jVkViewportCollectionObject, methodId);
+        if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
             return;
         }
 
-        memoryToFree->push_back(*vkFormats);
+        *numberOfViewports = numberOfElements;
+        *viewports = (VkViewport *)calloc(numberOfElements, sizeof(VkViewport));
+        memoryToFree->push_back(*viewports);
 
-        jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
+        jmethodID iteratorMethodId = env->GetMethodID(vkViewportCollectionClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for iterator");
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkViewportCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for iteratorObject.");
             return;
         }
 
         jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for hasNext");
             return;
         }
 
         jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for next");
             return;
         }
 
@@ -104,7 +95,6 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
                 break;
             }
 
@@ -113,21 +103,19 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkViewportObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkFormat(
+            getVkViewport(
                     env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
+                    jVkViewportObject,
+                    &(*viewports)[i],
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
                 break;
             }
 

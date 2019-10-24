@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkImageCopyCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 23, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,17 +25,17 @@
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkImageCopyCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkImageCopyCollectionObject,
+			VkImageCopy **vkImageCopies,
+            int *numberOfVkImageCopies,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
+        jclass theClass = env->GetObjectClass(jVkImageCopyCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageCopyCollectionObject.");
             return;
         }
 
@@ -46,22 +46,22 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkImageCopyCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        *numberOfVkImageCopies = numberOfElements;
+        *vkImageCopies = (VkImageCopy *)calloc(numberOfElements, sizeof(VkImageCopy));
+        if (*vkImageCopies == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkImageCopies");
             return;
         }
 
-        memoryToFree->push_back(*vkFormats);
+        memoryToFree->push_back(*vkImageCopies);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,7 +70,7 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkImageCopyCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -113,21 +113,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkImageCopyObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkFormat(
+            getVkImageCopy(
                     env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
+					jVkImageCopyObject,
+                    &((*vkImageCopies)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
+            	LOGERROR(env, "%s", "Error calling method getVkImageCopy");
                 break;
             }
 

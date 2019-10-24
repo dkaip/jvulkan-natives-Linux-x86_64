@@ -22,11 +22,11 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkCmdBuildAccelerationStructureNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkAccelerationStructureTypeNVX;ILcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;JLjava/util/Collection;Ljava/util/EnumSet;ZLcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;J)V
+ * Method:    vkCmdWriteAccelerationStructurePropertiesNVX
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryType;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkQueryPool;I)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdBuildAccelerationStructureNVX
-  (JNIEnv *, jobject, jobject, jobject, jint, jobject, jlong, jobject, jobject, jboolean, jobject, jobject, jobject, jlong)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdWriteAccelerationStructurePropertiesNV
+  (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jint)
 {
     std::cerr << "Not implemented yet." << std::endl;
 }

@@ -2352,7 +2352,122 @@ namespace jvulkan
 			VkPipelineExecutableInternalRepresentationKHR const *vkPipelineExecutableInternalRepresentationKHR,
 			int numberOfVkPipelineExecutableInternalRepresentationKHR);
 
-	jobject createEnumFromValue(JNIEnv *env, const char *enumClassString, jint value);
+    void getVkBufferCollection(
+            JNIEnv *env,
+            const jobject jVkBufferCollectionObject,
+			VkBuffer **vkBuffers,
+            int *numberOfVkBuffers,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageBlit(
+            JNIEnv *env,
+            const jobject jVkImageBlitObject,
+			VkImageBlit *vkImageBlit,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageBlitCollection(
+            JNIEnv *env,
+            const jobject jVkImageBlitObject,
+			VkImageBlit **vkImageBlits,
+            int *numberOfVkImageBlits,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearRect(
+            JNIEnv *env,
+            const jobject jVkClearRectObject,
+			VkClearRect *vkClearRect,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearRectCollection(
+            JNIEnv *env,
+            const jobject jVkClearRectCollectionObject,
+			VkClearRect **vkClearRects,
+            int *numberOfVkClearRects,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearAttachment(
+            JNIEnv *env,
+            const jobject jVkClearAttachmentObject,
+			VkClearAttachment *vkClearAttachment,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearAttachmentCollection(
+            JNIEnv *env,
+            const jobject jVkClearAttachmentCollectionObject,
+			VkClearAttachment **vkClearAttachments,
+            int *numberOfVkClearAttachments,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageSubresourceRangeCollection(
+            JNIEnv *env,
+            const jobject jVkImageSubresourceRangeCollectionObject,
+			VkImageSubresourceRange **vkImageSubresourceRanges,
+            int *numberOfVkImageSubresourceRanges,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearColorValue(
+            JNIEnv *env,
+            jobject jVkClearColorValueObject,
+			VkClearColorValue *vkClearColorValue,
+            std::vector<void *> *memoryToFree);
+
+    void getVkClearDepthStencilValue(
+            JNIEnv *env,
+            jobject jVkClearDepthStencilValueObject,
+			VkClearDepthStencilValue *vkClearDepthStencilValue,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageCopy(
+            JNIEnv *env,
+            const jobject jVkImageCopyObject,
+			VkImageCopy *vkImageCopy,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageCopyCollection(
+            JNIEnv *env,
+            const jobject jVkImageCopyCollectionObject,
+			VkImageCopy **vkImageCopies,
+            int *numberOfVkImageCopies,
+            std::vector<void *> *memoryToFree);
+
+	void getVkDebugMarkerMarkerInfoEXT(
+        JNIEnv *env,
+        const jobject jVkDebugMarkerMarkerInfoEXTObject,
+		VkDebugMarkerMarkerInfoEXT *vkDebugMarkerMarkerInfoEXT,
+        std::vector<void *> *memoryToFree);
+
+    void getVkImageResolve(
+            JNIEnv *env,
+            const jobject jVkImageResolveObject,
+			VkImageResolve *vkImageResolve,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImageResolveCollection(
+            JNIEnv *env,
+            const jobject jVkImageResolveCollectionObject,
+			VkImageResolve **vkImageResolves,
+            int *numberOfVkImageResolves,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewport(
+            JNIEnv *env,
+            jobject jVkViewportObject,
+            VkViewport *vkViewport,
+            std::vector<void *> *memoryToFree);
+
+    void getVkViewportCollection(
+            JNIEnv *env,
+            const jobject jVkViewportCollectionObject,
+            VkViewport **viewports,
+            int *numberOfViewports,
+            std::vector<void *> *memoryToFree);
+
+    /*
+	 * Make sure you free() the resulting string.
+	 */
+	char *getClassName(JNIEnv *env, const jobject theObject);
+
+    jobject createEnumFromValue(JNIEnv *env, const char *enumClassString, jint value);
 
 	JNIEnv *getJNIEnv();
 

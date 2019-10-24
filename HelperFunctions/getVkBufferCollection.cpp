@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkBufferCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 15, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,17 +25,23 @@
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkBufferCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkBufferCollectionObject,
+			VkBuffer **vkBuffers,
+            int *numberOfVkBuffers,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
+        if (jVkBufferCollectionObject == nullptr)
+        {
+        	LOGWARN(env, "%s", "jVkBufferCollectionObject was null");
+            return;
+        }
+
+        jclass theClass = env->GetObjectClass(jVkBufferCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
+        	LOGERROR(env, "%s", "Could not get class for jVkBufferCollectionObject");
             return;
         }
 
@@ -46,22 +52,21 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkBufferCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallIntMethod");
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        *numberOfVkBuffers = numberOfElements;
+        *vkBuffers = (VkBuffer *)calloc(numberOfElements, sizeof(VkBuffer));
+        if (*vkBuffers == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
+        	LOGERROR(env, "%s", "Could not allocate memory for *vkBufferss.");
             return;
         }
-
-        memoryToFree->push_back(*vkFormats);
+        memoryToFree->push_back(*vkBuffers);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,17 +75,17 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkBufferCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for iteratorObject.");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
@@ -104,7 +109,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
                 break;
             }
 
@@ -113,23 +118,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkBufferObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling CallObjectMethod");
-                break;
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
+            	break;
             }
 
-            getVkFormat(
-                    env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
-                    memoryToFree);
+            VkBuffer_T *vkBufferHandle = (VkBuffer_T *)getHandleValue(env, jVkBufferObject);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
-                break;
+            	LOGERROR(env, "%s", "Error calling getHandleValue.");
+                return;
             }
+
+            (*vkBuffers)[i] = vkBufferHandle;
 
             i++;
         } while(true);

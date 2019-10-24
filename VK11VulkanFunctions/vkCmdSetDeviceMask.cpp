@@ -13,20 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
-
-using namespace std;
+/*
+ * vkCmdSetDeviceMask.cpp
+ *
+ *  Created on: Oct 24, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkCmdWriteAccelerationStructurePropertiesNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNVX;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryType;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkQueryPool;I)V
+ * Method:    vkCmdSetDeviceMask
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;I)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdWriteAccelerationStructurePropertiesNVX
-  (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jint)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdSetDeviceMask
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jint deviceMask)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    vkCmdSetDeviceMask(
+    		commandBufferHandle,
+			deviceMask);
 }

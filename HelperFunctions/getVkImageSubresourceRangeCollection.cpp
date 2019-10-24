@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkFormatCollection.cpp
+ * getVkImageSubresourceRangeCollection.cpp
  *
- *  Created on: May 27, 2019
+ *  Created on: Oct 23, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,17 +25,17 @@
 
 namespace jvulkan
 {
-    void getVkFormatCollection(
+    void getVkImageSubresourceRangeCollection(
             JNIEnv *env,
-            const jobject jVkFormatObject,
-			VkFormat **vkFormats,
-            int *numberOfVkFormats,
+            const jobject jVkImageSubresourceRangeCollectionObject,
+			VkImageSubresourceRange **vkImageSubresourceRanges,
+            int *numberOfVkImageSubresourceRanges,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkFormatObject);
+        jclass theClass = env->GetObjectClass(jVkImageSubresourceRangeCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkFormatObject.");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageSubresourceRangeCollectionObject.");
             return;
         }
 
@@ -46,22 +46,22 @@ namespace jvulkan
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkFormatObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkImageSubresourceRangeCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkFormats = numberOfElements;
-        *vkFormats = (VkFormat *)calloc(numberOfElements, sizeof(VkFormat));
-        if (*vkFormats == nullptr)
+        *numberOfVkImageSubresourceRanges = numberOfElements;
+        *vkImageSubresourceRanges = (VkImageSubresourceRange *)calloc(numberOfElements, sizeof(VkImageSubresourceRange));
+        if (*vkImageSubresourceRanges == nullptr)
         {
-        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkFormats");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkImageSubresourceRanges");
             return;
         }
 
-        memoryToFree->push_back(*vkFormats);
+        memoryToFree->push_back(*vkImageSubresourceRanges);
 
         jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
@@ -70,7 +70,7 @@ namespace jvulkan
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkFormatObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkImageSubresourceRangeCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -113,21 +113,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkFormatObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkImageSubresourceRangeObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkFormat(
+            getVkImageSubresourceRange(
                     env,
-					jVkFormatObject,
-                    &((*vkFormats)[i]),
+					jVkImageSubresourceRangeObject,
+                    &((*vkImageSubresourceRanges)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "Error calling method getVkFormat");
+            	LOGERROR(env, "%s", "Error calling method getVkImageSubresourceRange");
                 break;
             }
 

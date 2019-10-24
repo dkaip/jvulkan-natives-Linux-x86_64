@@ -21,68 +21,6 @@
 
 namespace jvulkan
 {
-    void getVkDescriptorBufferInfo(
-            JNIEnv *env,
-            const jobject jVkDescriptorBufferInfoObject,
-            VkDescriptorBufferInfo *vkDescriptorBufferInfo,
-            std::vector<void *> *memoryToFree)
-    {
-        jclass vkDescriptorBufferInfoClass = env->GetObjectClass(jVkDescriptorBufferInfoObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jobject jVkBufferObject = env->CallObjectMethod(jVkDescriptorBufferInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferObject);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getOffset", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jlong jOffset = env->CallLongMethod(jVkDescriptorBufferInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-         methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getRange", "()J");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jlong jRange = env->CallLongMethod(jVkDescriptorBufferInfoObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        vkDescriptorBufferInfo->buffer = bufferHandle;
-        vkDescriptorBufferInfo->offset = jOffset;
-        vkDescriptorBufferInfo->range = jRange;
-    }
-
     void getVkDescriptorBufferInfoCollection(
             JNIEnv *env,
             const jobject jVkDescriptorBufferInfoCollectionObject,

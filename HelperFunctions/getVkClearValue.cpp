@@ -25,6 +25,7 @@
 #include <stdlib.h>
 
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -54,81 +55,92 @@ namespace jvulkan
 
         if (jClearColorValueObject != nullptr)
         {
-            /*
-             * Okay, we have determined that the VkClearValue is a VkClearColorValue
-             * object.
-             */
+            getVkClearColorValue(
+                    env,
+					jClearColorValueObject,
+					&vkClearValue->color,
+                    memoryToFree);
+			if (env->ExceptionOccurred())
+			{
+				LOGERROR(env, "%s", "Error calling getVkClearColorValue");
+				return;
+			}
 
-            jclass vkClearColorValueClass = env->GetObjectClass(jClearColorValueObject);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-
-            methodId = env->GetMethodID(vkClearColorValueClass, "getFloatValues", "()[F");
-            jfloatArray floatArrayObject = (jfloatArray)env->CallObjectMethod(jClearColorValueObject, methodId);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-
-            if (floatArrayObject != nullptr)
-            {
-                env->GetFloatArrayRegion(floatArrayObject, 0, sizeof(vkClearValue->color.float32)/4, vkClearValue->color.float32);
-                if (env->ExceptionOccurred())
-                {
-                    return;
-                }
+//            /*
+//             * Okay, we have determined that the VkClearValue is a VkClearColorValue
+//             * object.
+//             */
 //
-//                std::cerr << vkClearValue->color.float32[0] << " " << vkClearValue->color.float32[1] <<
-//                        " " << vkClearValue->color.float32[2] << " " << vkClearValue->color.float32[3] << std::endl;
-            }
-            else
-            {
-                // Well, it is not a float array
-                methodId = env->GetMethodID(vkClearColorValueClass, "getIntValues", "()[I");
-                jintArray intArrayObject = (jintArray)env->CallObjectMethod(jClearColorValueObject, methodId);
-                if (env->ExceptionOccurred())
-                {
-                    return;
-                }
-
-                if (intArrayObject != nullptr)
-                {
-                    env->GetIntArrayRegion(intArrayObject, 0, sizeof(vkClearValue->color.int32)/4, vkClearValue->color.int32);
-                    if (env->ExceptionOccurred())
-                    {
-                        return;
-                    }
-                }
-                else
-                {
-                    methodId = env->GetMethodID(vkClearColorValueClass, "getUintValues", "()[J");
-                    jlongArray longArrayObject = (jlongArray)env->CallObjectMethod(jClearColorValueObject, methodId);
-                    if (env->ExceptionOccurred())
-                    {
-                        return;
-                    }
-
-                    if (longArrayObject == nullptr)
-                    {
-                        std::cerr << "The VkClearColorValue object does not seem to have been initialized." << std::endl;
-                        return;
-                    }
-
-                    jlong tempLongArray[4];
-                    env->GetLongArrayRegion(longArrayObject, 0, sizeof(tempLongArray), tempLongArray);
-                    if (env->ExceptionOccurred())
-                    {
-                        return;
-                    }
-
-                    vkClearValue->color.uint32[0] =  (uint32_t)tempLongArray[0];
-                    vkClearValue->color.uint32[1] =  (uint32_t)tempLongArray[1];
-                    vkClearValue->color.uint32[2] =  (uint32_t)tempLongArray[2];
-                    vkClearValue->color.uint32[3] =  (uint32_t)tempLongArray[3];
-                }
-            }
+//            jclass vkClearColorValueClass = env->GetObjectClass(jClearColorValueObject);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//
+//            methodId = env->GetMethodID(vkClearColorValueClass, "getFloatValues", "()[F");
+//            jfloatArray floatArrayObject = (jfloatArray)env->CallObjectMethod(jClearColorValueObject, methodId);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//
+//            if (floatArrayObject != nullptr)
+//            {
+//                env->GetFloatArrayRegion(floatArrayObject, 0, sizeof(vkClearValue->color.float32)/4, vkClearValue->color.float32);
+//                if (env->ExceptionOccurred())
+//                {
+//                    return;
+//                }
+////
+////                std::cerr << vkClearValue->color.float32[0] << " " << vkClearValue->color.float32[1] <<
+////                        " " << vkClearValue->color.float32[2] << " " << vkClearValue->color.float32[3] << std::endl;
+//            }
+//            else
+//            {
+//                // Well, it is not a float array
+//                methodId = env->GetMethodID(vkClearColorValueClass, "getIntValues", "()[I");
+//                jintArray intArrayObject = (jintArray)env->CallObjectMethod(jClearColorValueObject, methodId);
+//                if (env->ExceptionOccurred())
+//                {
+//                    return;
+//                }
+//
+//                if (intArrayObject != nullptr)
+//                {
+//                    env->GetIntArrayRegion(intArrayObject, 0, sizeof(vkClearValue->color.int32)/4, vkClearValue->color.int32);
+//                    if (env->ExceptionOccurred())
+//                    {
+//                        return;
+//                    }
+//                }
+//                else
+//                {
+//                    methodId = env->GetMethodID(vkClearColorValueClass, "getUintValues", "()[J");
+//                    jlongArray longArrayObject = (jlongArray)env->CallObjectMethod(jClearColorValueObject, methodId);
+//                    if (env->ExceptionOccurred())
+//                    {
+//                        return;
+//                    }
+//
+//                    if (longArrayObject == nullptr)
+//                    {
+//                        std::cerr << "The VkClearColorValue object does not seem to have been initialized." << std::endl;
+//                        return;
+//                    }
+//
+//                    jlong tempLongArray[4];
+//                    env->GetLongArrayRegion(longArrayObject, 0, sizeof(tempLongArray), tempLongArray);
+//                    if (env->ExceptionOccurred())
+//                    {
+//                        return;
+//                    }
+//
+//                    vkClearValue->color.uint32[0] =  (uint32_t)tempLongArray[0];
+//                    vkClearValue->color.uint32[1] =  (uint32_t)tempLongArray[1];
+//                    vkClearValue->color.uint32[2] =  (uint32_t)tempLongArray[2];
+//                    vkClearValue->color.uint32[3] =  (uint32_t)tempLongArray[3];
+//                }
+//            }
         }
         else
         {
@@ -154,29 +166,40 @@ namespace jvulkan
                 return;
             }
 
-            jclass vkClearDepthStencilValueClass = env->GetObjectClass(jClearDepthStencilValueObject);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
+            getVkClearDepthStencilValue(
+                    env,
+                    jClearDepthStencilValueObject,
+					&vkClearValue->depthStencil,
+                    memoryToFree);
+			if (env->ExceptionOccurred())
+			{
+				LOGERROR(env, "%s", "Error calling getVkClearDepthStencilValue");
+				return;
+			}
 
-            methodId = env->GetMethodID(vkClearDepthStencilValueClass, "getDepth", "()F");
-            jfloat depth = env->CallFloatMethod(jClearDepthStencilValueObject, methodId);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-
-            methodId = env->GetMethodID(vkClearDepthStencilValueClass, "getStencil", "()J");
-            jlong stencil = env->CallLongMethod(jClearDepthStencilValueObject, methodId);
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-
-//            std::cerr << "Depth " << depth << " stencil " << stencil << std::endl;
-            vkClearValue->depthStencil.depth = depth;
-            vkClearValue->depthStencil.stencil = (uint32_t)stencil;
+//            jclass vkClearDepthStencilValueClass = env->GetObjectClass(jClearDepthStencilValueObject);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//
+//            methodId = env->GetMethodID(vkClearDepthStencilValueClass, "getDepth", "()F");
+//            jfloat depth = env->CallFloatMethod(jClearDepthStencilValueObject, methodId);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//
+//            methodId = env->GetMethodID(vkClearDepthStencilValueClass, "getStencil", "()J");
+//            jlong stencil = env->CallLongMethod(jClearDepthStencilValueObject, methodId);
+//            if (env->ExceptionOccurred())
+//            {
+//                return;
+//            }
+//
+////            std::cerr << "Depth " << depth << " stencil " << stencil << std::endl;
+//            vkClearValue->depthStencil.depth = depth;
+//            vkClearValue->depthStencil.stencil = (uint32_t)stencil;
         }
     }
 }
