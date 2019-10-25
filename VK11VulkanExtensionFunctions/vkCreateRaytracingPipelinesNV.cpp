@@ -25,7 +25,7 @@ using namespace std;
  * Method:    vkCreateRaytracingPipelinesNVX
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineCache;Ljava/util/Collection;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAllocationCallbacks;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateRaytracingPipelinesNVX
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateRaytracingPipelinesNV
   (JNIEnv *env, jobject, jobject, jobject, jobject, jobject, jobject)
 {
     std::cerr << "Not implemented yet." << std::endl;

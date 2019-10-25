@@ -24,6 +24,7 @@
 #include <jni.h>
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
+#include <vulkan/vulkan_android.h>
 #include <vulkan/vulkan_wayland.h>
 
 #ifndef STRUCTUREHELPERFUNCTIONS_HH_
@@ -2460,6 +2461,49 @@ namespace jvulkan
             const jobject jVkViewportCollectionObject,
             VkViewport **viewports,
             int *numberOfViewports,
+            std::vector<void *> *memoryToFree);
+
+	void getVkEventCreateInfo(
+			JNIEnv *env,
+			jobject jVkEventCreateInfoObject,
+			VkEventCreateInfo *vkEventCreateInfo,
+			std::vector<void *> *memoryToFree);
+
+	void getVkPipelineCacheCreateInfo(
+			JNIEnv *env,
+			jobject jVkPipelineCacheCreateInfoObject,
+			VkPipelineCacheCreateInfo *vkPipelineCacheCreateInfo,
+			std::vector<void *> *memoryToFree);
+
+	void getVkQueryPoolCreateInfo(
+			JNIEnv *env,
+			jobject jVkQueryPoolCreateInfoObject,
+			VkQueryPoolCreateInfo *vkQueryPoolCreateInfo,
+			std::vector<void *> *memoryToFree);
+
+	void getVkComponentMapping(
+			JNIEnv *env,
+			jobject jVkComponentMappingObject,
+			VkComponentMapping *vkComponentMapping,
+			std::vector<void *> *memoryToFree);
+
+	void getVkSamplerYcbcrConversionCreateInfo(
+			JNIEnv *env,
+			jobject jVkSamplerYcbcrConversionCreateInfoObject,
+			VkSamplerYcbcrConversionCreateInfo *vkSamplerYcbcrConversionCreateInfo,
+			std::vector<void *> *memoryToFree);
+
+	void getVkExternalFormatANDROID(
+			JNIEnv *env,
+			jobject jVkExternalFormatANDROIDObject,
+			VkExternalFormatANDROID *vkExternalFormatANDROID,
+			std::vector<void *> *memoryToFree);
+
+    void getVkSwapchainCreateInfoKHRCollection(
+            JNIEnv *env,
+            const jobject jVkSwapchainCreateInfoKHRCollectionObject,
+			VkSwapchainCreateInfoKHR **vkSwapchainCreateInfoKHRs,
+            int *numberOfVkSwapchainCreateInfoKHRs,
             std::vector<void *> *memoryToFree);
 
     /*

@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
+/*
+ * setIntReturnValue.cpp
+ *
+ *  Created on: Oct 25, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
@@ -22,17 +27,6 @@ using namespace std;
 
 namespace jvulkan
 {
-    void freeMemory(std::vector<void *> *memoryToFree)
-    {
-        if (memoryToFree->size() == 0)
-            return;
-
-        for (long unsigned int i = 0; i < memoryToFree->size(); i++)
-        {
-            free((*memoryToFree)[i]);
-        }
-    }
-
     void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value)
     {
         jclass handleClass = env->GetObjectClass(jReturnValue);
@@ -51,12 +45,4 @@ namespace jvulkan
 
         env->CallVoidMethod(jReturnValue, methodId, value);
     }
-
-    void getAllocatorCallbacks(
-	        JNIEnv *env,
-	        const jobject jAlternateAllocator,
-	        VkAllocationCallbacks *allocatorCallbacks)
-	{
-
-	}
 }

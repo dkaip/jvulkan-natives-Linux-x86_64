@@ -20,6 +20,9 @@
  *      Author: Douglas Kaip
  */
 
+#include <vulkan/vulkan.h>
+#include <vulkan/vulkan_core.h>
+#include <vulkan/vulkan_android.h>
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -2861,6 +2864,27 @@ namespace jvulkan
 	            }
 
 	            *headOfpNextChain = vkFilterCubicImageViewImageFormatPropertiesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID");
+
+	        	VkExternalFormatANDROID *vkExternalFormatANDROID = (VkExternalFormatANDROID *)calloc(1, sizeof(VkExternalFormatANDROID));
+	        	memoryToFree->push_back(vkExternalFormatANDROID);
+
+	            getVkExternalFormatANDROID(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExternalFormatANDROID,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExternalFormatANDROID failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExternalFormatANDROID;
 			}
 			break;
 			default:
