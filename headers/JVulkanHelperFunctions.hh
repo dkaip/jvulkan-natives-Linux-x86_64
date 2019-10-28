@@ -2506,6 +2506,47 @@ namespace jvulkan
             int *numberOfVkSwapchainCreateInfoKHRs,
             std::vector<void *> *memoryToFree);
 
+    void getVkValidationCacheCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkValidationCacheCreateInfoEXTObject,
+			VkValidationCacheCreateInfoEXT *vkValidationCacheCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDebugMarkerObjectNameInfoEXT(
+            JNIEnv *env,
+            jobject jVkDebugMarkerObjectNameInfoEXTObject,
+			VkDebugMarkerObjectNameInfoEXT *vkDebugMarkerObjectNameInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDebugMarkerObjectTagInfoEXT(
+            JNIEnv *env,
+            jobject jVkDebugMarkerObjectTagInfoEXTObject,
+			VkDebugMarkerObjectTagInfoEXT *vkDebugMarkerObjectTagInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	void getVkDisplayPowerInfoEXT(
+			JNIEnv *env,
+			jobject jVkDisplayPowerInfoEXTObject,
+			VkDisplayPowerInfoEXT *vkDisplayPowerInfoEXT,
+			std::vector<void *> *memoryToFree);
+
+    void populateVkLayerProperties(
+    		JNIEnv *env,
+			jobject jVkLayerPropertiesObject,
+			const VkLayerProperties *vkLayerProperties);
+
+    void populateVkExtensionProperties(
+    		JNIEnv *env,
+			jobject jVkExtensionPropertiesObject,
+			const VkExtensionProperties *vkExtensionProperties);
+
+    void populateVkPhysicalDeviceGroupProperties(
+    		JNIEnv *env,
+			jobject jVkPhysicalDeviceGroupPropertiesObject,
+			const VkPhysicalDeviceGroupProperties *vkPhysicalDeviceGroupProperties);
+
+    jobject createVulkanHandleCollection(JNIEnv *env, const char *className, int handleCount, const void **handles);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */

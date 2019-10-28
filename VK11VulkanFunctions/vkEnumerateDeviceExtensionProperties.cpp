@@ -165,7 +165,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     if (jlayerName != nullptr)
     {
-        env->GetStringUTFChars(jlayerName, (unsigned char *)layerName);
+        env->ReleaseStringUTFChars(jlayerName, layerName);
         if (env->ExceptionOccurred())
         {
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);

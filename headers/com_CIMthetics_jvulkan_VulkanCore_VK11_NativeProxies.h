@@ -1162,10 +1162,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkDebugReportMessageEXT
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Ljava/util/EnumSet;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportObjectTypeEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;JILjava/lang/String;Ljava/lang/String;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkInstance;Ljava/util/EnumSet;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportObjectTypeEXT;JJILjava/lang/String;Ljava/lang/String;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkDebugReportMessageEXT
-  (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jlong, jint, jstring, jstring);
+  (JNIEnv *, jobject, jobject, jobject, jobject, jlong, jlong, jint, jstring, jstring);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
