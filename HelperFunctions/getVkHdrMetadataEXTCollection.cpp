@@ -14,72 +14,87 @@
  * limitations under the License.
  */
 /*
- * getVkBindBufferMemoryInfoCollection.cpp
+ * getVkHdrMetadataEXTCollection.cpp
  *
- *  Created on: Mar 22, 2019
+ *  Created on: Oct 28, 2019
  *      Author: Douglas Kaip
  */
+
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkBindBufferMemoryInfoCollection(
+    void getVkHdrMetadataEXTCollection(
             JNIEnv *env,
-            const jobject jVkBindBufferMemoryInfoCollectionObject,
-            VkBindBufferMemoryInfo **vkBindBufferMemoryInfos,
-            int *numberOfVkBindBufferMemoryInfos,
+            const jobject jVkHdrMetadataEXTCollectionObject,
+			VkHdrMetadataEXT **vkHdrMetadataEXTs,
+            int *numberOfVkHdrMetadataEXTs,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkBindBufferMemoryInfoCollectionClass = env->GetObjectClass(jVkBindBufferMemoryInfoCollectionObject);
+        jclass theClass = env->GetObjectClass(jVkHdrMetadataEXTCollectionObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for jVkHdrMetadataEXTCollectionObject.");
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkBindBufferMemoryInfoCollectionClass, "size", "()I");
+        jmethodID methodId = env->GetMethodID(theClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for size");
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkBindBufferMemoryInfoCollectionObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkHdrMetadataEXTCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkBindBufferMemoryInfos = numberOfElements;
-        *vkBindBufferMemoryInfos = (VkBindBufferMemoryInfo *)calloc(numberOfElements, sizeof(VkBindBufferMemoryInfo));
-        memoryToFree->push_back(*vkBindBufferMemoryInfos);
-
-        jmethodID iteratorMethodId = env->GetMethodID(vkBindBufferMemoryInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
-        if (env->ExceptionOccurred())
+        *numberOfVkHdrMetadataEXTs = numberOfElements;
+        *vkHdrMetadataEXTs = (VkHdrMetadataEXT *)calloc(numberOfElements, sizeof(VkHdrMetadataEXT));
+        if (*vkHdrMetadataEXTs == nullptr)
         {
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkHdrMetadataEXTs");
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(vkBindBufferMemoryInfoCollectionClass, iteratorMethodId);
+        memoryToFree->push_back(*vkHdrMetadataEXTs);
+
+        jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for iterator");
+            return;
+        }
+
+        jobject iteratorObject = env->CallObjectMethod(jVkHdrMetadataEXTCollectionObject, iteratorMethodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for iteratorObject.");
             return;
         }
 
         jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for hasNext");
             return;
         }
 
         jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for next");
             return;
         }
 
@@ -89,6 +104,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
                 break;
             }
 
@@ -97,20 +113,25 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkBindBufferMemoryInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkHdrMetadataEXTObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkBindBufferMemoryInfo(
+            getVkHdrMetadataEXT(
                     env,
-                    jVkBindBufferMemoryInfoObject,
-                    &((*vkBindBufferMemoryInfos)[i]),
+					jVkHdrMetadataEXTObject,
+                    &((*vkHdrMetadataEXTs)[i]),
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling method getVkHdrMetadataEXT");
+                break;
+            }
 
             i++;
         } while(true);
     }
 }
-

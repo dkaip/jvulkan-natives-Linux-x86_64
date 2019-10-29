@@ -13,76 +13,88 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * getVkSparseMemoryBindCollection.cpp
+ *
+ *  Created on: Oct 28, 2019
+ *      Author: Douglas Kaip
+ */
 
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkSubmitInfoCollection(
+    void getVkSparseMemoryBindCollection(
             JNIEnv *env,
-            const jobject jVkSubmitInfoCollectionObject,
-            VkSubmitInfo **vkSubmitInfos,
-            int *numberOfVkSubmitInfos,
+            const jobject jVkSparseMemoryBindCollectionObject,
+			VkSparseMemoryBind **vkSparseMemoryBinds,
+            int *numberOfVkSparseMemoryBinds,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkSubmitInfoCollectionClass = env->GetObjectClass(jVkSubmitInfoCollectionObject);
+        jclass theClass = env->GetObjectClass(jVkSparseMemoryBindCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not get class for jVkSubmitInfoCollectionObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkSparseMemoryBindCollectionObject.");
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkSubmitInfoCollectionClass, "size", "()I");
+        jmethodID methodId = env->GetMethodID(theClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not get methodId for size");
+        	LOGERROR(env, "%s", "Could not find method id for size");
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkSubmitInfoCollectionObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkSparseMemoryBindCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "CallIntMethod failed for size");
+        	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
-        *numberOfVkSubmitInfos = numberOfElements;
-        *vkSubmitInfos = (VkSubmitInfo *)calloc(numberOfElements, sizeof(VkSubmitInfo));
-        memoryToFree->push_back(*vkSubmitInfos);
-
-        jmethodID iteratorMethodId = env->GetMethodID(vkSubmitInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
-        if (env->ExceptionOccurred())
+        *numberOfVkSparseMemoryBinds = numberOfElements;
+        *vkSparseMemoryBinds = (VkSparseMemoryBind *)calloc(numberOfElements, sizeof(VkSparseMemoryBind));
+        if (*vkSparseMemoryBinds == nullptr)
         {
-        	LOGERROR(env, "%s", "Could not get methodId for iterator");
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkSparseMemoryBinds");
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkSubmitInfoCollectionObject, iteratorMethodId);
+        memoryToFree->push_back(*vkSparseMemoryBinds);
+
+        jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "CallObjectMethod failed for iterator");
+        	LOGERROR(env, "%s", "Could not find method id for iterator");
+            return;
+        }
+
+        jobject iteratorObject = env->CallObjectMethod(jVkSparseMemoryBindCollectionObject, iteratorMethodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "GetObjectClass failed for iterator");
+        	LOGERROR(env, "%s", "Could not find class for iteratorObject.");
             return;
         }
 
         jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not get methodId for hasNext");
+        	LOGERROR(env, "%s", "Could not find method id for hasNext");
             return;
         }
 
         jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not get methodId for next");
+        	LOGERROR(env, "%s", "Could not find method id for next");
             return;
         }
 
@@ -92,7 +104,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "CallBooleanMethod failed for hasNext");
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
                 break;
             }
 
@@ -101,22 +113,22 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkSubmitInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkSparseMemoryBindObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "CallObjectMethod failed for next");
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod");
                 break;
             }
 
-            getVkSubmitInfo(
+            getVkSparseMemoryBind(
                     env,
-                    jVkSubmitInfoObject,
-                    &((*vkSubmitInfos)[i]),
+					jVkSparseMemoryBindObject,
+                    &((*vkSparseMemoryBinds)[i]),
                     memoryToFree);
             if (env->ExceptionOccurred())
             {
-            	LOGERROR(env, "%s", "getVkSubmitInfo failed");
-                return;
+            	LOGERROR(env, "%s", "Error calling method getVkSparseMemoryBind");
+                break;
             }
 
             i++;

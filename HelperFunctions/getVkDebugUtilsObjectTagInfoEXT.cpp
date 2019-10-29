@@ -167,5 +167,3 @@ namespace jvulkan
 		vkDebugUtilsObjectTagInfoEXT->pTag = tagArray;
     }
 }
-
-

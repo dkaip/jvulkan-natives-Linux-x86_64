@@ -22,11 +22,11 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkGetRaytracingShaderHandlesNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;IILjava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ * Method:    vkGetAccelerationStructureHandleNV
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNV;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetRaytracingShaderHandlesNVX
-  (JNIEnv *env, jobject, jobject, jobject, jint, jint, jobject)
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetAccelerationStructureHandleNV
+  (JNIEnv *env, jobject, jobject, jobject, jobject)
 {
     std::cerr << "Not implemented yet." << std::endl;
 

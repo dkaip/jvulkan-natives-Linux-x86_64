@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * setIntReturnValue.cpp
+ * setLongReturnValue.cpp
  *
- *  Created on: Oct 25, 2019
+ *  Created on: Oct 29, 2019
  *      Author: Douglas Kaip
  */
 
@@ -27,7 +27,7 @@ using namespace std;
 
 namespace jvulkan
 {
-    void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value)
+    void setLongReturnValue(JNIEnv *env, jobject jReturnValue, jlong value)
     {
         jclass handleClass = env->GetObjectClass(jReturnValue);
         if (env->ExceptionOccurred())
@@ -36,10 +36,10 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(handleClass, "setValue", "(I)V");
+        jmethodID methodId = env->GetMethodID(handleClass, "setValue", "(J)V");
         if (env->ExceptionOccurred())
         {
-            cout << "setIntReturnValue: could not find method setValue (I)V" << endl;
+            cout << "setIntReturnValue: could not find method setValue (J)V" << endl;
             return;
         }
 

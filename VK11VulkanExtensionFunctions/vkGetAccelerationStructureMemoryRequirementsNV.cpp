@@ -22,10 +22,10 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkGetAccelerationStructureMemoryRequirementsNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkAccelerationStructureMemoryRequirementsInfoNVX;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkMemoryRequirements2KHR;)V
+ * Method:    vkGetAccelerationStructureMemoryRequirementsNV
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkAccelerationStructureMemoryRequirementsInfoNV;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkMemoryRequirements2KHR;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetAccelerationStructureMemoryRequirementsNVX
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetAccelerationStructureMemoryRequirementsNV
   (JNIEnv *, jobject, jobject, jobject, jobject)
 {
     std::cerr << "Not implemented yet." << std::endl;

@@ -74,6 +74,8 @@ namespace jvulkan
 
     void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value);
 
+    void setLongReturnValue(JNIEnv *env, jobject jReturnValue, jlong value);
+
     jobject createVulkanHandle(JNIEnv *env, const char *className, void *value);
 
     jobject createVkResult(JNIEnv *env, jint value);
@@ -2546,6 +2548,176 @@ namespace jvulkan
 			const VkPhysicalDeviceGroupProperties *vkPhysicalDeviceGroupProperties);
 
     jobject createVulkanHandleCollection(JNIEnv *env, const char *className, int handleCount, const void **handles);
+
+    void getVkMappedMemoryRange(
+            JNIEnv *env,
+            const jobject jVkMappedMemoryRangeObject,
+			VkMappedMemoryRange *vkMappedMemoryRange,
+            std::vector<void *> *memoryToFree);
+
+    void getVkMappedMemoryRangeCollection(
+            JNIEnv *env,
+            const jobject jVkMappedMemoryRangeCollectionObject,
+			VkMappedMemoryRange **vkMappedMemoryRanges,
+            int *numberOfVkMappedMemoryRanges,
+            std::vector<void *> *memoryToFree);
+
+	void getVkXYColorEXT(
+			JNIEnv *env,
+			jobject jVkXYColorEXTObject,
+			VkXYColorEXT *vkXYColorEXT,
+			std::vector<void *> *memoryToFree);
+
+	void getVkHdrMetadataEXT(
+			JNIEnv *env,
+			jobject jVkHdrMetadataEXTObject,
+			VkHdrMetadataEXT *vkHdrMetadataEXT,
+			std::vector<void *> *memoryToFree);
+
+	void getVkHdrMetadataEXTCollection(
+            JNIEnv *env,
+            const jobject jVkHdrMetadataEXTCollectionObject,
+			VkHdrMetadataEXT **vkHdrMetadataEXTs,
+            int *numberOfVkHdrMetadataEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceEventInfoEXT(
+            JNIEnv *env,
+            const jobject jVkDeviceEventInfoEXTObject,
+			VkDeviceEventInfoEXT *vkDeviceEventInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDisplayEventInfoEXT(
+            JNIEnv *env,
+            const jobject jVkDisplayEventInfoEXTObject,
+			VkDisplayEventInfoEXT *vkDisplayEventInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	void getVkBindSparseInfo(
+        JNIEnv *env,
+        const jobject jVkBindSparseInfoObject,
+		VkBindSparseInfo *vkBindSparseInfo,
+        std::vector<void *> *memoryToFree);
+
+	void getVkBindSparseInfoCollection(
+            JNIEnv *env,
+            const jobject jVkBindSparseInfoollectionObject,
+			VkBindSparseInfo **vkBindSparseInfos,
+            int *numberOfVkBindSparseInfos,
+            std::vector<void *> *memoryToFree);
+
+	void getVkSparseMemoryBind(
+        JNIEnv *env,
+        const jobject jVkSparseMemoryBindObject,
+		VkSparseMemoryBind *vkSparseMemoryBind,
+        std::vector<void *> *memoryToFree);
+
+	void getVkSparseMemoryBindCollection(
+            JNIEnv *env,
+            const jobject jVkSparseMemoryBindCollectionObject,
+			VkSparseMemoryBind **vkSparseMemoryBinds,
+            int *numberOfVkSparseMemoryBinds,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSparseBufferMemoryBindInfo(
+        JNIEnv *env,
+        const jobject jVkSparseBufferMemoryBindInfoObject,
+		VkSparseBufferMemoryBindInfo *vkSparseBufferMemoryBindInfo,
+        std::vector<void *> *memoryToFree);
+
+	void getVkSparseBufferMemoryBindInfoCollection(
+            JNIEnv *env,
+            const jobject jVkSparseBufferMemoryBindInfoCollectionObject,
+			VkSparseBufferMemoryBindInfo **vkSparseBufferMemoryBindInfos,
+            int *numberOfVkSparseBufferMemoryBindInfos,
+            std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageOpaqueMemoryBindInfo(
+        JNIEnv *env,
+        const jobject jVkSparseImageOpaqueMemoryBindInfoObject,
+		VkSparseImageOpaqueMemoryBindInfo *vkSparseImageOpaqueMemoryBindInfo,
+        std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageOpaqueMemoryBindInfoCollection(
+            JNIEnv *env,
+            const jobject jVkSparseImageOpaqueMemoryBindInfoCollectionObject,
+			VkSparseImageOpaqueMemoryBindInfo **vkSparseImageOpaqueMemoryBindInfos,
+            int *numberOfVkSparseImageOpaqueMemoryBindInfos,
+            std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageMemoryBindInfo(
+        JNIEnv *env,
+        const jobject jVkSparseImageMemoryBindInfoObject,
+		VkSparseImageMemoryBindInfo *vkSparseImageMemoryBindInfo,
+        std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageMemoryBindInfoCollection(
+            JNIEnv *env,
+            const jobject jVkSparseImageMemoryBindInfoCollectionObject,
+			VkSparseImageMemoryBindInfo **VkSparseImageMemoryBindInfos,
+            int *numberOfVkSparseImageMemoryBindInfos,
+            std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageMemoryBind(
+        JNIEnv *env,
+        const jobject jVkSparseImageMemoryBindObject,
+		VkSparseImageMemoryBind *vkSparseImageMemoryBind,
+        std::vector<void *> *memoryToFree);
+
+	void getVkSparseImageMemoryBindCollection(
+            JNIEnv *env,
+            const jobject jVkSparseImageMemoryBindCollectionObject,
+			VkSparseImageMemoryBind **VkSparseImageMemoryBinds,
+            int *numberOfVkSparseImageMemoryBinds,
+            std::vector<void *> *memoryToFree);
+
+	void getVkImageSubresource(
+        JNIEnv *env,
+        const jobject jVkImageSubresourceObject,
+		VkImageSubresource *vkImageSubresource,
+        std::vector<void *> *memoryToFree);
+
+    void getVkImportFenceFdInfoKHR(
+            JNIEnv *env,
+            jobject jVkImportFenceFdInfoKHR,
+			VkImportFenceFdInfoKHR *vkImportFenceFdInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkImportSemaphoreFdInfoKHR(
+            JNIEnv *env,
+            jobject jVkImportSemaphoreFdInfoKHR,
+			VkImportSemaphoreFdInfoKHR *vkImportSemaphoreFdInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+	void getVkRefreshCycleDurationGOOGLE(
+        JNIEnv *env,
+        const jobject jVkRefreshCycleDurationGOOGLEObject,
+		VkRefreshCycleDurationGOOGLE *vkRefreshCycleDurationGOOGLE,
+        std::vector<void *> *memoryToFree);
+
+    void getVkSemaphoreGetFdInfoKHR(
+            JNIEnv *env,
+            jobject jVkSemaphoreGetFdInfoKHR,
+			VkSemaphoreGetFdInfoKHR *vkSemaphoreGetFdInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkFenceGetFdInfoKHR(
+            JNIEnv *env,
+            jobject jVkFenceGetFdInfoKHR,
+			VkFenceGetFdInfoKHR *vkFenceGetFdInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkImageDrmFormatModifierPropertiesEXT(
+		JNIEnv *env,
+		jobject jVkImageDrmFormatModifierPropertiesEXTObject,
+		const VkImageDrmFormatModifierPropertiesEXT *vkImageDrmFormatModifierPropertiesEXT,
+		std::vector<void *> *memoryToFree);
+
+    void getVkMemoryGetFdInfoKHR(
+            JNIEnv *env,
+            jobject jVkMemoryGetFdInfoKHR,
+			VkMemoryGetFdInfoKHR *vkMemoryGetFdInfoKHR,
+            std::vector<void *> *memoryToFree);
 
     /*
 	 * Make sure you free() the resulting string.

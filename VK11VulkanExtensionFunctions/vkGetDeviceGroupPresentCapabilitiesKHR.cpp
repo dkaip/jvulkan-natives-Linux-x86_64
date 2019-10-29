@@ -41,6 +41,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     std::vector<void *> memoryToFree(10);
     VkDeviceGroupPresentCapabilitiesKHR vkDeviceGroupPresentCapabilitiesKHR = {};
+    vkDeviceGroupPresentCapabilitiesKHR.sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR;
+    vkDeviceGroupPresentCapabilitiesKHR.pNext = nullptr;
 
     VkResult result = vkGetDeviceGroupPresentCapabilitiesKHR(
     		deviceHandle,
