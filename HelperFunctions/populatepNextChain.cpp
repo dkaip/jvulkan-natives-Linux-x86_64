@@ -527,6 +527,18 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS");
+				populateVkMemoryDedicatedRequirements(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkMemoryDedicatedRequirements *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkMemoryDedicatedRequirements.");
+					return;
+				}
+				break;
 			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2:
 				/*
 				 *  This should not be in the pNext chain except for the first

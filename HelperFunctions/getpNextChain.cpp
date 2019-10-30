@@ -2887,6 +2887,27 @@ namespace jvulkan
 	            *headOfpNextChain = vkExternalFormatANDROID;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT");
+
+	        	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *vkDescriptorSetLayoutBindingFlagsCreateInfoEXT = (VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *)calloc(1, sizeof(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT));
+	        	memoryToFree->push_back(vkDescriptorSetLayoutBindingFlagsCreateInfoEXT);
+
+	            getVkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDescriptorSetLayoutBindingFlagsCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDescriptorSetLayoutBindingFlagsCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDescriptorSetLayoutBindingFlagsCreateInfoEXT;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

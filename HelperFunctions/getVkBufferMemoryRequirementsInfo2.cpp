@@ -21,5 +21,72 @@
  */
 
 
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
+
+namespace jvulkan
+{
+    void getVkBufferMemoryRequirementsInfo2(
+            JNIEnv *env,
+            const jobject jVkBufferMemoryRequirementsInfo2Object,
+			VkBufferMemoryRequirementsInfo2 *vkBufferMemoryRequirementsInfo2,
+            std::vector<void *> *memoryToFree)
+    {
+        jclass theClass = env->GetObjectClass(jVkBufferMemoryRequirementsInfo2Object);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find class for jVkBufferMemoryRequirementsInfo2Object");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkBufferMemoryRequirementsInfo2Object);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        jobject jpNextObject = getpNextObject(env, jVkBufferMemoryRequirementsInfo2Object);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
+            return;
+        }
+
+        void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	LOGERROR(env, "%s", "pNext must be null.");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        jmethodID methodId = env->GetMethodID(theClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find methodId for getBuffer");
+            return;
+        }
+
+        jobject jVkBufferHandle = env->CallObjectMethod(jVkBufferMemoryRequirementsInfo2Object, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
+            return;
+        }
+
+        VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferHandle);
+    	if (env->ExceptionOccurred())
+    	{
+    		LOGERROR(env, "%s", "Could not retrieve VkFence handle");
+    		return;
+    	}
 
 
+    	vkBufferMemoryRequirementsInfo2->sType 		= sTypeValue;
+    	vkBufferMemoryRequirementsInfo2->pNext 		= pNext;
+    	vkBufferMemoryRequirementsInfo2->buffer		= bufferHandle;
+    }
+}

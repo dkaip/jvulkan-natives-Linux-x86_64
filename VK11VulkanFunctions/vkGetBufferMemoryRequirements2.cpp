@@ -52,12 +52,63 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         return;
     }
 
+    void *headOfpNextChain = nullptr;
+
+    ////////////////////////////////////////////////////////////////////////
+    jobject jpNextObject = jvulkan::getpNextObject(env, jVkMemoryRequirements2);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Call to getpNext failed.");
+        return;
+    }
+
+    if (jpNextObject != nullptr)
+    {
+		/*
+		 * Crawl the pNext chain and identify / create any needed elements.
+		 */
+		jvulkan::getpNextChain(
+				env,
+				jpNextObject,
+				&headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
+    }
+
     VkMemoryRequirements2 vkMemoryRequirements2 = {};
+    vkMemoryRequirements2.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+    vkMemoryRequirements2.pNext = headOfpNextChain;
 
     vkGetBufferMemoryRequirements2(
     		deviceHandle,
 			&vkBufferMemoryRequirementsInfo2,
 			&vkMemoryRequirements2);
+
+    /*
+     * We have the data now we have some other work to do.
+     *
+     * First we need to crawl the pNext chain again and
+     * populate the Java Object equivalents that may be
+     * on it.  In this case the pNext chain data is out bound.
+     */
+
+    if (jpNextObject != nullptr)
+    {
+		jvulkan::populatepNextChain(
+				env,
+				jpNextObject,
+				headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
+    }
 
     jvulkan::populateVkMemoryRequirements2(
     		env,

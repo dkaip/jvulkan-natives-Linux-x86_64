@@ -77,7 +77,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     if (jpNextObject != nullptr)
     {
-    	LOGERROR(env, "%s", "jpNextObject is not null");
+//    	LOGERROR(env, "%s", "jpNextObject is not null");
 		/*
 		 * Crawl the pNext chain and identify / create any needed elements.
 		 */
@@ -105,11 +105,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     vkSurfaceCapabilities2KHR.sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
     vkSurfaceCapabilities2KHR.pNext = headOfpNextChain;
 
-    LOGERROR(env, "%s:hpnc:%lx", "vkPhysicalDeviceSurfaceInfo2KHR", vkPhysicalDeviceSurfaceInfo2KHR.pNext);
-    LOGERROR(env, "%s:hpnc:%lx", "vkSurfaceCapabilities2KHR", headOfpNextChain);
-    LOGERROR(env, "pdh:%lx", physicalDeviceHandle);
-    LOGERROR(env, "vkPhysicalDeviceSurfaceInfo2KHR sType:%d surface:%lx", vkPhysicalDeviceSurfaceInfo2KHR.sType, vkPhysicalDeviceSurfaceInfo2KHR.surface);
-    LOGERROR(env, "vkSurfaceCapabilities2KHR sType:%d maxImageArrayLayers:%d", vkSurfaceCapabilities2KHR.sType, vkSurfaceCapabilities2KHR.surfaceCapabilities.maxImageArrayLayers);
+//    LOGERROR(env, "%s:hpnc:%lx", "vkPhysicalDeviceSurfaceInfo2KHR", vkPhysicalDeviceSurfaceInfo2KHR.pNext);
+//    LOGERROR(env, "%s:hpnc:%lx", "vkSurfaceCapabilities2KHR", headOfpNextChain);
+//    LOGERROR(env, "pdh:%lx", physicalDeviceHandle);
+//    LOGERROR(env, "vkPhysicalDeviceSurfaceInfo2KHR sType:%d surface:%lx", vkPhysicalDeviceSurfaceInfo2KHR.sType, vkPhysicalDeviceSurfaceInfo2KHR.surface);
+//    LOGERROR(env, "vkSurfaceCapabilities2KHR sType:%d maxImageArrayLayers:%d", vkSurfaceCapabilities2KHR.sType, vkSurfaceCapabilities2KHR.surfaceCapabilities.maxImageArrayLayers);
 //    VkResult result = vkGetPhysicalDeviceSurfaceCapabilitiesKHR(physicalDeviceHandle, vkPhysicalDeviceSurfaceInfo2KHR.surface, &vkSurfaceCapabilities2KHR.surfaceCapabilities);
     VkResult result = vkGetPhysicalDeviceSurfaceCapabilities2KHR(nullptr, &vkPhysicalDeviceSurfaceInfo2KHR, &vkSurfaceCapabilities2KHR);
     if (result != VK_SUCCESS)

@@ -39,7 +39,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkDescriptorPool_T *descriptorPoolHandle = (VkDescriptorPool_T *)jvulkan::getHandleValue(env, VkDescriptorPool);
+    VkDescriptorPool_T *descriptorPoolHandle = (VkDescriptorPool_T *)jvulkan::getHandleValue(env, jVkDescriptorPool);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Could not retrieve VkDescriptorPool handle");

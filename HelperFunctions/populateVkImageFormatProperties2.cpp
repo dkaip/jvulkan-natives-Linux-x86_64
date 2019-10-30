@@ -30,8 +30,7 @@ namespace jvulkan
 	void populateVkImageFormatProperties2(
 			JNIEnv *env,
 			jobject jVkImageFormatProperties2Object,
-			const VkImageFormatProperties2 *vkImageFormatProperties2,
-			std::vector<void *> *memoryToFree)
+			const VkImageFormatProperties2 *vkImageFormatProperties2)
 	{
 		if (jVkImageFormatProperties2Object == nullptr)
 		{

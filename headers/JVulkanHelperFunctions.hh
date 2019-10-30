@@ -2263,7 +2263,8 @@ namespace jvulkan
     void populateVkPhysicalDeviceMemoryProperties(
             JNIEnv *env,
             jobject jVkPhysicalDeviceMemoryPropertiesObject,
-			const VkPhysicalDeviceMemoryProperties *vkPhysicalDeviceMemoryProperties);
+			const VkPhysicalDeviceMemoryProperties *vkPhysicalDeviceMemoryProperties,
+    		std::vector<void *> *memoryToFree);
 
     void getVkMemoryRequirements(
             JNIEnv *env,
@@ -2547,6 +2548,27 @@ namespace jvulkan
 			jobject jVkPhysicalDeviceGroupPropertiesObject,
 			const VkPhysicalDeviceGroupProperties *vkPhysicalDeviceGroupProperties);
 
+	void populateVkImageDrmFormatModifierPropertiesEXT(
+		JNIEnv *env,
+		jobject jVkImageDrmFormatModifierPropertiesEXTObject,
+		const VkImageDrmFormatModifierPropertiesEXT *vkImageDrmFormatModifierPropertiesEXT,
+		std::vector<void *> *memoryToFree);
+
+	void populateVkMemoryDedicatedRequirements(
+			JNIEnv *env,
+			jobject jVkMemoryDedicatedRequirementsObject,
+			const VkMemoryDedicatedRequirements *vkMemoryDedicatedRequirements);
+
+	void populateVkMemoryRequirements(
+			JNIEnv *env,
+			jobject jVkMemoryRequirementsObject,
+			const VkMemoryRequirements *vkMemoryRequirements);
+
+    void populateVkMemoryRequirements2(
+    		JNIEnv *env,
+			jobject jVkMemoryRequirements2Object,
+			const VkMemoryRequirements2 *vkMemoryRequirements2);
+
     jobject createVulkanHandleCollection(JNIEnv *env, const char *className, int handleCount, const void **handles);
 
     void getVkMappedMemoryRange(
@@ -2707,17 +2729,48 @@ namespace jvulkan
 			VkFenceGetFdInfoKHR *vkFenceGetFdInfoKHR,
             std::vector<void *> *memoryToFree);
 
-	void populateVkImageDrmFormatModifierPropertiesEXT(
-		JNIEnv *env,
-		jobject jVkImageDrmFormatModifierPropertiesEXTObject,
-		const VkImageDrmFormatModifierPropertiesEXT *vkImageDrmFormatModifierPropertiesEXT,
-		std::vector<void *> *memoryToFree);
-
     void getVkMemoryGetFdInfoKHR(
             JNIEnv *env,
             jobject jVkMemoryGetFdInfoKHR,
 			VkMemoryGetFdInfoKHR *vkMemoryGetFdInfoKHR,
             std::vector<void *> *memoryToFree);
+
+    void getVkBufferMemoryRequirementsInfo2(
+            JNIEnv *env,
+            const jobject jVkBufferMemoryRequirementsInfo2Object,
+			VkBufferMemoryRequirementsInfo2 *vkBufferMemoryRequirementsInfo2,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCalibratedTimestampInfoEXT(
+            JNIEnv *env,
+            const jobject jVkCalibratedTimestampInfoEXTObject,
+			VkCalibratedTimestampInfoEXT *vkCalibratedTimestampInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCalibratedTimestampInfoEXTCollection(
+            JNIEnv *env,
+            const jobject jVkCalibratedTimestampInfoEXTCollectionObject,
+			VkCalibratedTimestampInfoEXT **vkCalibratedTimestampInfoEXTs,
+            int *numberOfVkCalibratedTimestampInfoEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkDescriptorSetLayoutBindingFlagsCreateInfoEXTObject,
+			VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *vkDescriptorSetLayoutBindingFlagsCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDescriptorBindingFlagsEXTCollection(
+            JNIEnv *env,
+            const jobject jVkDescriptorBindingFlagsEXTCollectionObject,
+			VkDescriptorBindingFlagsEXT **vkDescriptorBindingFlagsEXTs,
+            int *numberOfVkDescriptorBindingFlagsEXTs,
+            std::vector<void *> *memoryToFree);
+
+    void populateVkDescriptorSetLayoutSupport(
+    		JNIEnv *env,
+			jobject jVkDescriptorSetLayoutSupportObject,
+			const VkDescriptorSetLayoutSupport *vkDescriptorSetLayoutSupport);
 
     /*
 	 * Make sure you free() the resulting string.
