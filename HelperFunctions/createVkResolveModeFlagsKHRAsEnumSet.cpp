@@ -85,7 +85,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        if (vkResolveModeFlagsKHR == VK_RESOLVE_MODE_NONE_KHR)
+        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_NONE_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_NONE_KHR", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
@@ -98,7 +98,7 @@ namespace jvulkan
             }
         }
 
-        if (vkResolveModeFlagsKHR == VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR)
+        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
@@ -111,7 +111,7 @@ namespace jvulkan
             }
         }
 
-        if (vkResolveModeFlagsKHR == VK_RESOLVE_MODE_AVERAGE_BIT_KHR)
+        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_AVERAGE_BIT_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_AVERAGE_BIT_KHR", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
@@ -124,7 +124,7 @@ namespace jvulkan
             }
         }
 
-        if (vkResolveModeFlagsKHR == VK_RESOLVE_MODE_MIN_BIT_KHR)
+        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_MIN_BIT_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MIN_BIT_KHR", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
@@ -137,7 +137,7 @@ namespace jvulkan
             }
         }
 
-        if (vkResolveModeFlagsKHR == VK_RESOLVE_MODE_MAX_BIT_KHR)
+        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_MAX_BIT_KHR)
         {
             jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MAX_BIT_KHR", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
