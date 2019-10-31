@@ -2772,6 +2772,8 @@ namespace jvulkan
 			jobject jVkDescriptorSetLayoutSupportObject,
 			const VkDescriptorSetLayoutSupport *vkDescriptorSetLayoutSupport);
 
+    void setVkPeerMemoryFeatureFlagsEnumSet(JNIEnv *env, jobject jVkPeerMemoryFeatureFlagsObject, VkPeerMemoryFeatureFlags vkPeerMemoryFeatureFlags);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */

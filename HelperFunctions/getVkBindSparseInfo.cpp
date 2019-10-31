@@ -17,7 +17,7 @@
  * getVkBindSparseInfo.cpp
  *
  *  Created on: Oct 28, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "JVulkanHelperFunctions.hh"

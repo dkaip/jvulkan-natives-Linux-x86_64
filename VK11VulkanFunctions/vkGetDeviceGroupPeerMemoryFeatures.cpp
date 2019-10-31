@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkUnregisterObjectsNVX.cpp
+ * vkGetDeviceGroupPeerMemoryFeatures.cpp
  *
- *  Created on: Oct 28, 2019
+ *  Created on: Oct 30, 2019
  *      Author: Douglas Kaip
  */
 
@@ -26,19 +26,32 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkUnregisterObjectsNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkObjectTableNVX;Ljava/util/Collection;[I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ * Method:    vkGetDeviceGroupPeerMemoryFeatures
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;IIILjava/util/EnumSet;)V
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkUnregisterObjectsNVX
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkObjectTableNVX, jobject jVkObjectEntryTypeNVXCollection, jintArray jObjectIndices)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetDeviceGroupPeerMemoryFeatures
+  (JNIEnv *env, jobject, jobject jVkDevice, jint heapIndex, jint localDeviceIndex, jint remoteDeviceIndex, jobject jPeerMemoryFeatures)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        return;
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkPeerMemoryFeatureFlags flags = 0;
+    vkGetDeviceGroupPeerMemoryFeatures(
+    		deviceHandle,
+			heapIndex,
+			localDeviceIndex,
+			remoteDeviceIndex,
+			&flags);
+
+    jvulkan::setVkPeerMemoryFeatureFlagsEnumSet(env, jPeerMemoryFeatures, flags);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling setVkPeerMemoryFeatureFlagsEnumSet.");
+        return;
+    }
+
 }

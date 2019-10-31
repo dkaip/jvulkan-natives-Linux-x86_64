@@ -17,7 +17,7 @@
  * vkCmdCopyImageToBuffer.cpp
  *
  *  Created on: Oct 23, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"

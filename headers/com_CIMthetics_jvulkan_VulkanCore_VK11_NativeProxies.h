@@ -1585,6 +1585,14 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkGetDeviceGroupPeerMemoryFeatures
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;IIILjava/util/EnumSet;)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetDeviceGroupPeerMemoryFeatures
+  (JNIEnv *, jobject, jobject, jint, jint, jint, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetDeviceGroupPresentCapabilitiesKHR
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDeviceGroupPresentCapabilitiesKHR;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
