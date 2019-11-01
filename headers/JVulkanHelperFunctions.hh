@@ -2774,6 +2774,73 @@ namespace jvulkan
 
     void setVkPeerMemoryFeatureFlagsEnumSet(JNIEnv *env, jobject jVkPeerMemoryFeatureFlagsObject, VkPeerMemoryFeatureFlags vkPeerMemoryFeatureFlags);
 
+    void getVkDeviceQueueInfo2(
+            JNIEnv *env,
+            const jobject jVkDeviceQueueInfo2Object,
+			VkDeviceQueueInfo2 *vkDeviceQueueInfo2,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkDisplayModeProperties2KHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayModeProperties2KHRCollectionObject,
+			VkDisplayModeProperties2KHR const *vkDisplayModeProperties2KHRs,
+			int numberOfVkDisplayModeProperties2KHRs);
+
+	jobject createVkDisplayModeProperties2KHR(
+			JNIEnv *env,
+			VkDisplayModeProperties2KHR const *vkDisplayModeProperties2KHR);
+
+	jobject createVkDisplayModePropertiesKHR(
+			JNIEnv *env,
+			VkDisplayModePropertiesKHR const *vkDisplayModePropertiesKHR);
+
+	jobject createVkDisplayModeParametersKHR(
+			JNIEnv *env,
+			VkDisplayModeParametersKHR const *vkDisplayModeParametersKHR);
+
+	void populateVkDisplayModePropertiesKHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayModePropertiesKHRCollectionObject,
+			VkDisplayModePropertiesKHR const *vkDisplayModePropertiesKHRs,
+			int numberOfVkDisplayModePropertiesKHRs);
+
+    void getVkDisplayPlaneInfo2KHR(
+            JNIEnv *env,
+            jobject jVkDisplayPlaneInfo2KHR,
+			VkDisplayPlaneInfo2KHR *vkDisplayPlaneInfo2KHR,
+            std::vector<void *> *memoryToFree);
+
+	jobject createVkOffset2D(JNIEnv *env, const VkOffset2D *vkOffset2D);
+
+    jobject createVkDisplayPlaneAlphaFlagBitsKHRAsEnumSet(JNIEnv *env, VkDisplayPlaneAlphaFlagsKHR vkDisplayPlaneAlphaFlagsKHR);
+
+	jobject createVkDisplayPlaneCapabilitiesKHR(
+			JNIEnv *env,
+			VkDisplayPlaneCapabilitiesKHR const *vkDisplayPlaneCapabilitiesKHR);
+
+    void populateVkDisplayPlaneCapabilities2KHR(
+    		JNIEnv *env,
+			jobject jVkDisplayPlaneCapabilities2KHRObject,
+			const VkDisplayPlaneCapabilities2KHR *vkDisplayPlaneCapabilities2KHR);
+
+    void populateVkDisplayPlaneCapabilitiesKHR(
+    		JNIEnv *env,
+			jobject jVkDisplayPlaneCapabilitiesKHRObject,
+			const VkDisplayPlaneCapabilitiesKHR *vkDisplayPlaneCapabilitiesKHR);
+
+    void populateVulkanHandleCollection(
+    		JNIEnv *env,
+			const char *className,
+			jobject jVulkanHandleCollection,
+			int handlesCount,
+			const void **handles);
+
+    void getVkImageMemoryRequirementsInfo2(
+            JNIEnv *env,
+            const jobject jVkImageMemoryRequirementsInfo2Object,
+			VkImageMemoryRequirementsInfo2 *vkImageMemoryRequirementsInfo2,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */

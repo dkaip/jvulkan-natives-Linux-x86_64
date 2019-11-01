@@ -44,8 +44,15 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     }
 
     std::vector<void *> memoryToFree(20);
-    void *headOfpNextChain = nullptr;
 
+
+    /*
+     * For "output" data we need to crawl the pNext chain "first" so that all of
+     * the pNext structures are already in place before the API call.  For "input"
+     * items their pNext has already been crawled in the "get" functions (in this
+     * case NA) before the API call.
+     */
+    void *headOfpNextChain = nullptr;
     ////////////////////////////////////////////////////////////////////////
     jobject jpNextObject = jvulkan::getpNextObject(env, jVkPhysicalDeviceProperties2Object);
     if (env->ExceptionOccurred())

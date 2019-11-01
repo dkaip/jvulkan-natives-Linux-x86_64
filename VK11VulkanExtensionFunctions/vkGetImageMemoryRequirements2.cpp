@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkGetBufferMemoryRequirements2.cpp
+ * vkGetImageMemoryRequirements2.cpp
  *
- *  Created on: Oct 28, 2019
+ *  Created on: Nov 1, 2019
  *      Author: Douglas Kaip
  */
 
@@ -26,11 +26,11 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkGetBufferMemoryRequirements2
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkBufferMemoryRequirementsInfo2;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkMemoryRequirements2;)V
+ * Method:    vkGetImageMemoryRequirements2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageMemoryRequirementsInfo2;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkMemoryRequirements2;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetBufferMemoryRequirements2
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkBufferMemoryRequirementsInfo2, jobject jVkMemoryRequirements2)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetImageMemoryRequirements2
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkImageMemoryRequirementsInfo2, jobject jVkMemoryRequirements2)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
@@ -39,16 +39,24 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         return;
     }
 
-    std::vector<void *> memoryToFree(5);
-    VkBufferMemoryRequirementsInfo2 vkBufferMemoryRequirementsInfo2 = {};
-    jvulkan::getVkBufferMemoryRequirementsInfo2(
+    if (jVkMemoryRequirements2 == nullptr)
+    {
+    	LOGERROR(env, "%s", "jVkMemoryRequirements2 must be created before calling vkGetImageMemoryRequirements2.");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(20);
+
+    VkImageMemoryRequirementsInfo2 vkImageMemoryRequirementsInfo2 = {};
+    jvulkan::getVkImageMemoryRequirementsInfo2(
             env,
-			jVkBufferMemoryRequirementsInfo2,
-			&vkBufferMemoryRequirementsInfo2,
+			jVkImageMemoryRequirementsInfo2,
+			&vkImageMemoryRequirementsInfo2,
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error calling getVkBufferMemoryRequirementsInfo2.");
+    	LOGERROR(env, "%s", "Error calling jvulkan::getVkImageMemoryRequirementsInfo2.");
+        jvulkan::freeMemory(&memoryToFree);
         return;
     }
 
@@ -56,7 +64,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * For "output" data we need to crawl the pNext chain "first" so that all of
      * the pNext structures are already in place before the API call.  For "input"
      * items their pNext has already been crawled in the "get" functions (in this
-     * case getVkBufferMemoryRequirementsInfo2) before the API call.
+     * case getVkImageMemoryRequirementsInfo2) before the API call.
      */
     void *headOfpNextChain = nullptr;
     ////////////////////////////////////////////////////////////////////////
@@ -88,32 +96,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     vkMemoryRequirements2.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
     vkMemoryRequirements2.pNext = headOfpNextChain;
 
-    vkGetBufferMemoryRequirements2(
+    vkGetImageMemoryRequirements2(
     		deviceHandle,
-			&vkBufferMemoryRequirementsInfo2,
+			&vkImageMemoryRequirementsInfo2,
 			&vkMemoryRequirements2);
-
-    /*
-     * We have the data now we have some other work to do.
-     *
-     * First we need to crawl the pNext chain again and
-     * populate the Java Object equivalents that may be
-     * on it.  In this case the pNext chain data is out bound.
-     */
-
-    if (jpNextObject != nullptr)
-    {
-		jvulkan::populatepNextChain(
-				env,
-				jpNextObject,
-				headOfpNextChain,
-				&memoryToFree);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
-			return;
-		}
-    }
 
     jvulkan::populateVkMemoryRequirements2(
     		env,

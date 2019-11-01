@@ -65,6 +65,12 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
+    /*
+     * For "output" data we need to crawl the pNext chain "first" so that all of
+     * the pNext structures are already in place before the API call.  For "input"
+     * items their pNext has already been crawled in the "get" functions (in this
+     * case getVkPhysicalDeviceSurfaceInfo2KHR) before the API call.
+     */
     void *headOfpNextChain = nullptr;
     ////////////////////////////////////////////////////////////////////////
     jobject jpNextObject = jvulkan::getpNextObject(env, jVkSurfaceCapabilities2KHR);

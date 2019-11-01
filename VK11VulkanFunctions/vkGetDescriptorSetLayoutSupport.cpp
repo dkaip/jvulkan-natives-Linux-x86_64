@@ -52,52 +52,30 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         return;
     }
 
-    void *headOfpNextChain1 = nullptr;
-
+    /*
+     * For "output" data we need to crawl the pNext chain "first" so that all of
+     * the pNext structures are already in place before the API call.  For "input"
+     * items their pNext has already been crawled in the "get" functions (in this
+     * case getVkDescriptorSetLayoutCreateInfo) before the API call.
+     */
+    void *headOfpNextChain = nullptr;
     ////////////////////////////////////////////////////////////////////////
-    jobject jpNextObject1 = jvulkan::getpNextObject(env, jVkDescriptorSetLayoutCreateInfo);
+    jobject jpNextObject = jvulkan::getpNextObject(env, jVkDescriptorSetLayoutSupport);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getpNext failed.");
         return;
     }
 
-    if (jpNextObject1 != nullptr)
+    if (jpNextObject != nullptr)
     {
 		/*
 		 * Crawl the pNext chain and identify / create any needed elements.
 		 */
 		jvulkan::getpNextChain(
 				env,
-				jpNextObject1,
-				&headOfpNextChain1,
-				&memoryToFree);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
-			return;
-		}
-    }
-
-    void *headOfpNextChain2 = nullptr;
-
-    ////////////////////////////////////////////////////////////////////////
-    jobject jpNextObject2 = jvulkan::getpNextObject(env, jVkDescriptorSetLayoutSupport);
-    if (env->ExceptionOccurred())
-    {
-    	LOGERROR(env, "%s", "Call to getpNext failed.");
-        return;
-    }
-
-    if (jpNextObject2 != nullptr)
-    {
-		/*
-		 * Crawl the pNext chain and identify / create any needed elements.
-		 */
-		jvulkan::getpNextChain(
-				env,
-				jpNextObject2,
-				&headOfpNextChain2,
+				jpNextObject,
+				&headOfpNextChain,
 				&memoryToFree);
 		if (env->ExceptionOccurred())
 		{
@@ -108,7 +86,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
     VkDescriptorSetLayoutSupport vkDescriptorSetLayoutSupport = {};
     vkDescriptorSetLayoutSupport.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT;
-    vkDescriptorSetLayoutSupport.pNext = headOfpNextChain2;
+    vkDescriptorSetLayoutSupport.pNext = headOfpNextChain;
 
     vkGetDescriptorSetLayoutSupport(
     		deviceHandle,
@@ -123,26 +101,12 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * on it.  In this case the pNext chain data is out bound.
      */
 
-    if (jpNextObject1 != nullptr)
+    if (jpNextObject != nullptr)
     {
 		jvulkan::populatepNextChain(
 				env,
-				jpNextObject1,
-				headOfpNextChain1,
-				&memoryToFree);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
-			return;
-		}
-    }
-
-    if (jpNextObject2 != nullptr)
-    {
-		jvulkan::populatepNextChain(
-				env,
-				jpNextObject2,
-				headOfpNextChain2,
+				jpNextObject,
+				headOfpNextChain,
 				&memoryToFree);
 		if (env->ExceptionOccurred())
 		{

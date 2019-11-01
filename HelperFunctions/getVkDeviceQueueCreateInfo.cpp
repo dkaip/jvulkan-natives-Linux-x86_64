@@ -110,7 +110,7 @@ namespace jvulkan
             return;
         }
 
-        jint queueCount = env->CallLongMethod(jVkDeviceQueueCreateInfoObject, methodId);
+        jint queueCount = env->CallIntMethod(jVkDeviceQueueCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to CallIntMethod failed.");
