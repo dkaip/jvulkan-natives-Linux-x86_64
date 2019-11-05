@@ -169,7 +169,7 @@ namespace jvulkan
         jobject jsupportedTransforms = createVkSurfaceTransformFlagsKHRAsEnumSet(env, vkSurfaceCapabilitiesKHR->supportedTransforms);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling getVkSurfaceTransformFlagsKHRAsEnumSet");
+        	LOGERROR(env, "%s", "Error calling createVkSurfaceTransformFlagsKHRAsEnumSet");
             return;
         }
 

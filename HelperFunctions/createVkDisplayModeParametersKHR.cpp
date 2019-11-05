@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayModeParametersKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/vkDisplayModeParametersKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/vkDisplayModeParametersKHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR");
             return nullptr;
         }
 

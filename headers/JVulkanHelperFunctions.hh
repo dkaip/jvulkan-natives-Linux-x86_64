@@ -2841,7 +2841,116 @@ namespace jvulkan
 			VkImageMemoryRequirementsInfo2 *vkImageMemoryRequirementsInfo2,
             std::vector<void *> *memoryToFree);
 
-    /*
+    void populateVkSparseImageFormatProperties(
+    		JNIEnv *env,
+			jobject jVkSparseImageFormatPropertiesObject,
+			const VkSparseImageFormatProperties *vkSparseImageFormatProperties);
+
+    jobject createVkImageAspectFlagsAsEnumSet(JNIEnv *env, VkImageAspectFlags vkImageAspectFlags);
+
+    jobject createVkSparseImageFormatFlagsAsEnumSet(JNIEnv *env, VkSparseImageFormatFlags vkSparseImageFormatFlags);
+
+	jobject createVkSparseImageMemoryRequirements(
+			JNIEnv *env,
+			VkSparseImageMemoryRequirements const *vkSparseImageMemoryRequirements);
+
+	void populateVkSparseImageMemoryRequirementsCollection(
+			JNIEnv *env,
+			jobject jVkSparseImageMemoryRequirementsCollectionObject,
+			VkSparseImageMemoryRequirements const *vkSparseImageMemoryRequirements,
+			int numberOfVkSparseImageMemoryRequirements);
+
+    void getVkImageSparseMemoryRequirementsInfo2(
+            JNIEnv *env,
+            const jobject jVkImageSparseMemoryRequirementsInfo2Object,
+			VkImageSparseMemoryRequirementsInfo2 *vkImageSparseMemoryRequirementsInfo2,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSparseImageMemoryRequirements2Collection(
+			JNIEnv *env,
+			jobject jVkSparseImageMemoryRequirements2CollectionObject,
+			VkSparseImageMemoryRequirements2 const *VkSparseImageMemoryRequirements2s,
+			int numberOfVkSparseImageMemoryRequirements2s);
+
+	jobject createVkSparseImageMemoryRequirements2(
+			JNIEnv *env,
+			VkSparseImageMemoryRequirements2 const *vkSparseImageMemoryRequirements2);
+
+    void populateVkSubresourceLayout(
+    		JNIEnv *env,
+			jobject jVkSubresourceLayoutObject,
+			const VkSubresourceLayout *vkSubresourceLayout);
+
+	void populateVkImageViewHandleInfoNVX(
+			JNIEnv *env,
+			jobject jVkImageViewHandleInfoNVXObject,
+			VkImageViewHandleInfoNVX const *vkImageViewHandleInfoNVX);
+
+	void populateVkMemoryFdPropertiesKHR(
+			JNIEnv *env,
+			jobject jVkMemoryFdPropertiesKHRObject,
+			const VkMemoryFdPropertiesKHR *vkMemoryFdPropertiesKHR);
+
+	void populateVkMemoryHostPointerPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkMemoryHostPointerPropertiesEXTObject,
+			const VkMemoryHostPointerPropertiesEXT *vkMemoryHostPointerPropertiesEXT);
+
+	jobject createVkPastPresentationTimingGOOGLE(JNIEnv *env, const VkPastPresentationTimingGOOGLE *vkPastPresentationTimingGOOGLE);
+
+	void populateVkPastPresentationTimingGOOGLECollection(
+			JNIEnv *env,
+			jobject jVkPastPresentationTimingGOOGLECollectionObject,
+			VkPastPresentationTimingGOOGLE const *vkPastPresentationTimingGOOGLEs,
+			int numberOfVkPastPresentationTimingGOOGLEs);
+
+	void populateVkTimeDomainEXTCollection(
+			JNIEnv *env,
+			jobject jVkTimeDomainEXTCollectionObject,
+			VkTimeDomainEXT const *vkTimeDomainEXTs,
+			int numberOfVkTimeDomainEXTs);
+
+	jobject createVkDisplayPlaneProperties2KHR(
+			JNIEnv *env,
+			VkDisplayPlaneProperties2KHR const *vkDisplayPlaneProperties2KHR);
+
+	void populateVkDisplayPlaneProperties2KHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayPlaneProperties2KHRCollectionObject,
+			VkDisplayPlaneProperties2KHR const *vkDisplayPlaneProperties2KHRs,
+			int numberOfVkDisplayPlaneProperties2KHRs);
+
+	jobject createVkDisplayPlanePropertiesKHR(
+			JNIEnv *env,
+			VkDisplayPlanePropertiesKHR const *vkDisplayPlanePropertiesKHR);
+
+	void populateVkDisplayPlanePropertiesKHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayPlanePropertiesKHRCollectionObject,
+			VkDisplayPlanePropertiesKHR const *vkDisplayPlanePropertiesKHRs,
+			int numberOfVkDisplayPlanePropertiesKHRs);
+
+	jobject createVkDisplayPropertiesKHR(
+			JNIEnv *env,
+			VkDisplayPropertiesKHR const *vkDisplayPropertiesKHR);
+
+	jobject createVkDisplayProperties2KHR(
+			JNIEnv *env,
+			VkDisplayProperties2KHR const *vkDisplayProperties2KHR);
+
+	void populateVkDisplayProperties2KHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayProperties2KHRCollectionObject,
+			VkDisplayProperties2KHR const *vkDisplayProperties2KHRs,
+			int numberOfVkDisplayProperties2KHRs);
+
+	void populateVkDisplayPropertiesKHRCollection(
+			JNIEnv *env,
+			jobject jVkDisplayPropertiesKHRCollectionObject,
+			VkDisplayPropertiesKHR const *vkDisplayPropertiesKHRs,
+			int numberOfVkDisplayPropertiesKHRs);
+
+	/*
 	 * Make sure you free() the resulting string.
 	 */
 	char *getClassName(JNIEnv *env, const jobject theObject);
