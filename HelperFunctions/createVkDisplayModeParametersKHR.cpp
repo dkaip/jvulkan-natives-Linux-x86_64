@@ -17,7 +17,7 @@
  * createVkDisplayModeParametersKHR.cpp
  *
  *  Created on: Oct 31, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "JVulkanHelperFunctions.hh"

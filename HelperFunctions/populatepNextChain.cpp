@@ -539,6 +539,31 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT");
+				populateVkPhysicalDeviceMemoryBudgetPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceMemoryBudgetPropertiesEXT *)headOfpNextChain,
+						nullptr);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceMemoryBudgetPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV");
+				populateVkQueueFamilyCheckpointPropertiesNV(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkQueueFamilyCheckpointPropertiesNV *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkQueueFamilyCheckpointPropertiesNV.");
+					return;
+				}
+				break;
 			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2:
 				/*
 				 *  This should not be in the pNext chain except for the first

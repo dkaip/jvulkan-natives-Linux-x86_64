@@ -2950,7 +2950,111 @@ namespace jvulkan
 			VkDisplayPropertiesKHR const *vkDisplayPropertiesKHRs,
 			int numberOfVkDisplayPropertiesKHRs);
 
-	/*
+    void getVkPhysicalDeviceExternalBufferInfo(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceExternalBufferInfoObject,
+			VkPhysicalDeviceExternalBufferInfo *vkPhysicalDeviceExternalBufferInfo,
+            std::vector<void *> *memoryToFree);
+
+    jobject createVkExternalMemoryFeatureFlagsAsEnumSet(JNIEnv *env, VkExternalMemoryFeatureFlags vkExternalMemoryFeatureFlags);
+
+    jobject createVkExternalMemoryHandleTypeFlagsAsEnumSet(JNIEnv *env, VkExternalMemoryHandleTypeFlags vkExternalMemoryHandleTypeFlags);
+
+    void populateVkExternalMemoryProperties(
+    		JNIEnv *env,
+			jobject jVkExternalMemoryPropertiesObject,
+			const VkExternalMemoryProperties *vkExternalMemoryProperties);
+
+    void populateVkExternalBufferProperties(
+    		JNIEnv *env,
+			jobject jVkExternalBufferPropertiesObject,
+			const VkExternalBufferProperties *vkExternalBufferProperties);
+
+    void getVkPhysicalDeviceExternalFenceInfo(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceExternalFenceInfoObject,
+			VkPhysicalDeviceExternalFenceInfo *vkPhysicalDeviceExternalFenceInfo,
+            std::vector<void *> *memoryToFree);
+
+    void populateVkExternalFenceProperties(
+    		JNIEnv *env,
+			jobject jVkExternalFencePropertiesObject,
+			const VkExternalFenceProperties *vkExternalFenceProperties);
+
+    jobject createVkExternalFenceHandleTypeFlagsAsEnumSet(JNIEnv *env, VkExternalFenceHandleTypeFlags vkExternalFenceHandleTypeFlags);
+
+    jobject createVkExternalFenceFeatureFlagsAsEnumSet(JNIEnv *env, VkExternalFenceFeatureFlags vkExternalFenceFeatureFlags);
+
+	void populateVkExternalImageFormatPropertiesNV(
+			JNIEnv *env,
+			jobject jVkExternalImageFormatPropertiesNVObject,
+			const VkExternalImageFormatPropertiesNV *vkExternalImageFormatPropertiesNV);
+
+    jobject createVkExternalMemoryFeatureFlagsNVAsEnumSet(JNIEnv *env, VkExternalMemoryFeatureFlagsNV vkExternalMemoryFeatureFlagsNV);
+
+    jobject createVkExternalMemoryHandleTypeFlagsNVAsEnumSet(JNIEnv *env, VkExternalMemoryHandleTypeFlagsNV vkExternalMemoryHandleTypeFlagsNV);
+
+    void getVkPhysicalDeviceExternalSemaphoreInfo(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceExternalSemaphoreInfoObject,
+			VkPhysicalDeviceExternalSemaphoreInfo *vkPhysicalDeviceExternalSemaphoreInfo,
+            std::vector<void *> *memoryToFree);
+
+    void populateVkExternalSemaphoreProperties(
+    		JNIEnv *env,
+			jobject jVkExternalSemaphorePropertiesObject,
+			const VkExternalSemaphoreProperties *vkExternalSemaphoreProperties);
+
+    jobject createVkExternalSemaphoreHandleTypeFlagsAsEnumSet(JNIEnv *env, VkExternalSemaphoreHandleTypeFlags vkExternalSemaphoreHandleTypeFlags);
+
+    jobject createVkExternalSemaphoreFeatureFlagsAsEnumSet(JNIEnv *env, VkExternalSemaphoreFeatureFlags vkExternalSemaphoreFeatureFlags);
+
+    jobject createVkFormatFeatureFlagsAsEnumSet(JNIEnv *env, VkFormatFeatureFlags vkFormatFeatureFlags);
+
+    void populateVkFormatProperties(
+    		JNIEnv *env,
+			jobject jVkFormatPropertiesObject,
+			const VkFormatProperties *vkFormatProperties);
+
+    void getVkPhysicalDeviceMemoryBudgetPropertiesEXT(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceMemoryBudgetPropertiesEXTObject,
+			VkPhysicalDeviceMemoryBudgetPropertiesEXT *vkPhysicalDeviceMemoryBudgetPropertiesEXT,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceMemoryBudgetPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceMemoryBudgetPropertiesEXTObject,
+			const VkPhysicalDeviceMemoryBudgetPropertiesEXT *vkPhysicalDeviceMemoryBudgetPropertiesEXT,
+			std::vector<void *> *memoryToFree);
+
+	void populateVkMultisamplePropertiesEXT(
+			JNIEnv *env,
+			jobject jVkMultisamplePropertiesEXTObject,
+			const VkMultisamplePropertiesEXT *vkMultisamplePropertiesEXT);
+
+	jobject createVkRect2D(JNIEnv *env, const VkRect2D *vkRect2D);
+
+	void populateVkRect2DCollection(
+			JNIEnv *env,
+			jobject jVkRect2DCollectionObject,
+			VkRect2D const *VkRect2Ds,
+			int numberOfVkRect2Ds);
+
+    void getVkQueueFamilyCheckpointPropertiesNV(
+            JNIEnv *env,
+            const jobject jVkQueueFamilyCheckpointPropertiesNVObject,
+			VkQueueFamilyCheckpointPropertiesNV *vkQueueFamilyCheckpointPropertiesNV,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkQueueFamilyCheckpointPropertiesNV(
+			JNIEnv *env,
+			jobject jVkQueueFamilyCheckpointPropertiesNVObject,
+			const VkQueueFamilyCheckpointPropertiesNV *vkQueueFamilyCheckpointPropertiesNV);
+
+    jobject createVkPipelineStageFlagsAsEnumSet(JNIEnv *env, VkPipelineStageFlags vkPipelineStageFlags);
+
+    /*
 	 * Make sure you free() the resulting string.
 	 */
 	char *getClassName(JNIEnv *env, const jobject theObject);

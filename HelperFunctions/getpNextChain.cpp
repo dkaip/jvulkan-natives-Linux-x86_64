@@ -2908,6 +2908,48 @@ namespace jvulkan
 	            *headOfpNextChain = vkDescriptorSetLayoutBindingFlagsCreateInfoEXT;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT");
+
+	        	VkPhysicalDeviceMemoryBudgetPropertiesEXT *vkPhysicalDeviceMemoryBudgetPropertiesEXT = (VkPhysicalDeviceMemoryBudgetPropertiesEXT *)calloc(1, sizeof(VkPhysicalDeviceMemoryBudgetPropertiesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceMemoryBudgetPropertiesEXT);
+
+	            getVkPhysicalDeviceMemoryBudgetPropertiesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceMemoryBudgetPropertiesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceMemoryBudgetPropertiesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceMemoryBudgetPropertiesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV");
+
+	        	VkQueueFamilyCheckpointPropertiesNV *vkQueueFamilyCheckpointPropertiesNV = (VkQueueFamilyCheckpointPropertiesNV *)calloc(1, sizeof(VkQueueFamilyCheckpointPropertiesNV));
+	        	memoryToFree->push_back(vkQueueFamilyCheckpointPropertiesNV);
+
+	            getVkQueueFamilyCheckpointPropertiesNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkQueueFamilyCheckpointPropertiesNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkQueueFamilyCheckpointPropertiesNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkQueueFamilyCheckpointPropertiesNV;
+			}
+			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

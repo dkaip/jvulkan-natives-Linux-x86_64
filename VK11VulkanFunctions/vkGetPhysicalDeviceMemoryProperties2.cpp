@@ -14,27 +14,25 @@
  * limitations under the License.
  */
 /*
- * vkGetPhysicalDeviceProperties2.cpp
+ * vkGetPhysicalDeviceMemoryProperties2.cpp
  *
- *  Created on: May 10, 2019
+ *  Created on: Nov 5, 2019
  *      Author: Douglas Kaip
  */
 
-#include "JVulkanHelperFunctions.hh"
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
-
-using namespace std;
 
 extern const char *voidMethodErrorText;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
- * Method:    vkGetPhysicalDeviceProperties2
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties2;)V
+ * Method:    vkGetPhysicalDeviceMemoryProperties2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties2;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceProperties2
-  (JNIEnv *env , jobject, jobject jVkPhysicalDevice, jobject jVkPhysicalDeviceProperties2Object)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPhysicalDeviceMemoryProperties2
+  (JNIEnv *env, jobject, jobject jVkPhysicalDevice, jobject jVkPhysicalDeviceMemoryProperties2Object)
 {
     VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
@@ -52,7 +50,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      */
     void *headOfpNextChain = nullptr;
     ////////////////////////////////////////////////////////////////////////
-    jobject jpNextObject = jvulkan::getpNextObject(env, jVkPhysicalDeviceProperties2Object);
+    jobject jpNextObject = jvulkan::getpNextObject(env, jVkPhysicalDeviceMemoryProperties2Object);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -76,19 +74,19 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 		}
     }
 
-    VkPhysicalDeviceProperties2 vkPhysicalDeviceProperties2 = {};
+    VkPhysicalDeviceMemoryProperties2 vkPhysicalDeviceMemoryProperties2 = {};
     /*
      * This needs to be done because the above line does not
      * properly init the object.  In other cases a "get"
      * helper function is called which does the job or it is
      * taken care of in getpNextChain
      */
-    vkPhysicalDeviceProperties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
-    vkPhysicalDeviceProperties2.pNext = headOfpNextChain;
+    vkPhysicalDeviceMemoryProperties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2;
+    vkPhysicalDeviceMemoryProperties2.pNext = headOfpNextChain;
 
-    vkGetPhysicalDeviceProperties2(
+    vkGetPhysicalDeviceMemoryProperties2(
     		vkPhysicalDeviceHandle,
-			&vkPhysicalDeviceProperties2);
+			&vkPhysicalDeviceMemoryProperties2);
 
     /*
      * We have the data now we have some other work to do.
@@ -116,56 +114,57 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
      * Now populate the properties attribute of the VkPhysicalDeviceProperties2
      * object
      */
-	jclass vkPhysicalDevicePropertiesClass = env->FindClass(
-			"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+	jclass vkPhysicalDeviceMemoryPropertiesClass = env->FindClass(
+			"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties");
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties");
 			return;
 		}
 
 	// Locate the constructor
-	jmethodID methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "<init>", "()V");
+	jmethodID methodId = env->GetMethodID(vkPhysicalDeviceMemoryPropertiesClass, "<init>", "()V");
 	if (env->ExceptionOccurred())
 	{
-		LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+		LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties");
 		return;
 	}
 
-	// Create the Java vkPhysicalDeviceProperties object
-	jobject jVkPhysicalDevicePropertiesObject =
-			env->NewObject(vkPhysicalDevicePropertiesClass, methodId);
+	// Create the Java VkPhysicalDeviceMemoryProperties object
+	jobject jVkPhysicalDeviceMemoryPropertiesObject =
+			env->NewObject(vkPhysicalDeviceMemoryPropertiesClass, methodId);
 	if (env->ExceptionOccurred())
 	{
-		LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+		LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties");
 		return;
 	}
 
-    jvulkan::populateVkPhysicalDeviceProperties(
+    jvulkan::populateVkPhysicalDeviceMemoryProperties(
     		env,
-			jVkPhysicalDevicePropertiesObject,
-			&vkPhysicalDeviceProperties2.properties);
+			jVkPhysicalDeviceMemoryPropertiesObject,
+			&vkPhysicalDeviceMemoryProperties2.memoryProperties,
+			nullptr);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceProperties");
+    	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceMemoryProperties");
         return;
     }
 
-    jclass vkPhysicalDeviceProperties2Class = env->GetObjectClass(jVkPhysicalDeviceProperties2Object);
+    jclass vkPhysicalDeviceMemoryProperties2ObjectClass = env->GetObjectClass(jVkPhysicalDeviceMemoryProperties2Object);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not find class of jVkPhysicalDeviceProperties2");
+    	LOGERROR(env, "%s", "Could not find class of jVkPhysicalDeviceMemoryProperties2");
         return;
     }
 
-    methodId = env->GetMethodID(vkPhysicalDeviceProperties2Class, "setProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties;)V");
+    methodId = env->GetMethodID(vkPhysicalDeviceMemoryProperties2ObjectClass, "setMemoryProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties;)V");
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not find method id setProperties for class jVkPhysicalDeviceProperties2");
+    	LOGERROR(env, "%s", "Could not find method id setProperties for class setMemoryProperties");
         return;
     }
 
-    env->CallVoidMethod(jVkPhysicalDeviceProperties2Object, methodId, jVkPhysicalDevicePropertiesObject);
+    env->CallVoidMethod(jVkPhysicalDeviceMemoryProperties2Object, methodId, jVkPhysicalDeviceMemoryPropertiesObject);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", voidMethodErrorText);

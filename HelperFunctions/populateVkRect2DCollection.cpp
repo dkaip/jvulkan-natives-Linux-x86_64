@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * populateVkDisplayProperties2KHRCollection.cpp
+ * populateVkRect2DCollection.cpp
  *
- *  Created on: Nov 4, 2019
+ *  Created on: Nov 5, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,16 +25,16 @@
 
 namespace jvulkan
 {
-	void populateVkDisplayProperties2KHRCollection(
+	void populateVkRect2DCollection(
 			JNIEnv *env,
-			jobject jVkDisplayProperties2KHRCollectionObject,
-			VkDisplayProperties2KHR const *vkDisplayProperties2KHRs,
-			int numberOfVkDisplayProperties2KHRs)
+			jobject jVkRect2DCollectionObject,
+			VkRect2D const *VkRect2Ds,
+			int numberOfVkRect2Ds)
 	{
-        jclass theClass = env->GetObjectClass(jVkDisplayProperties2KHRCollectionObject);
+        jclass theClass = env->GetObjectClass(jVkRect2DCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayProperties2KHR");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkRect2D");
             return;
         }
 
@@ -45,18 +45,13 @@ namespace jvulkan
             return;
         }
 
-        for(int i = 0; i < numberOfVkDisplayProperties2KHRs; i++)
+        for(int i = 0; i < numberOfVkRect2Ds; i++)
         {
-            jobject jVkDisplayProperties2KHRObject = createVkDisplayProperties2KHR(
+        	jobject jVkRect2DObject = createVkRect2D(
         			env,
-        			&vkDisplayProperties2KHRs[i]);
-			if (env->ExceptionOccurred())
-			{
-				LOGERROR(env, "Error calling createVkDisplayProperties2KHR for object %d.", i);
-				return;
-			}
+					&VkRect2Ds[i]);
 
-			jboolean addResult = env->CallBooleanMethod(jVkDisplayProperties2KHRCollectionObject, addMethodId, jVkDisplayProperties2KHRObject);
+			jboolean addResult = env->CallBooleanMethod(jVkRect2DCollectionObject, addMethodId, jVkRect2DObject);
 			if (env->ExceptionOccurred())
 			{
 				LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -65,7 +60,7 @@ namespace jvulkan
 
 			if (addResult == 0)
 			{
-				LOGERROR(env, "%s", "Failed trying to add jVkDisplayProperties2KHRObject Object");
+				LOGERROR(env, "%s", "Failed trying to add jVkRect2DObject Object");
 			}
         }
 	}

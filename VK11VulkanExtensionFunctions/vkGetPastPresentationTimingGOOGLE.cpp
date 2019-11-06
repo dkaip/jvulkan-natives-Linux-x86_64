@@ -17,7 +17,7 @@
  * vkGetPastPresentationTimingGOOGLE.cpp
  *
  *  Created on: Nov 4, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
