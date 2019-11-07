@@ -6,7 +6,7 @@ and the [Vulkan® SDK](https://www.lunarg.com/vulkan-sdk/) from LUNARG which is 
 
 ## Prerequisites
 You will need the [Vulkan® SDK](https://www.lunarg.com/vulkan-sdk/) from LUNARG.  You will 
-need to download and build it.  If possible get the version <code>1.1.106.0</code>.  Later 
+need to download and build it.  If possible get the version <code>1.1.121.0</code>.  Later 
 **might** work as well.
 
 You will also need the Wayland development code.  It may be in the package 
