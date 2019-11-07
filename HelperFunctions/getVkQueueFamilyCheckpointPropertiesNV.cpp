@@ -99,3 +99,4 @@ namespace jvulkan
         vkQueueFamilyCheckpointPropertiesNV->pNext = pNext;
         vkQueueFamilyCheckpointPropertiesNV->checkpointExecutionStageMask = checkpointExecutionStageMask;
     }
+}

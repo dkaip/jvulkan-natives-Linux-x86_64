@@ -106,7 +106,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         successfulAdd = env->CallBooleanMethod(jVkPresentModeKHRCollection, addMethodId, formatEnum);
         if (successfulAdd == false)
         {
-            cout << "ERROR:vkGetPhysicalDeviceSurfacePresentModesKHR the new VkSurfaceFormatKHR element was not added to jVkSurfaceFormatKHRCollection" << endl;
+            cout << "ERROR:vkGetPhysicalDeviceSurfacePresentModesKHR the new VkPresentModeKHR element was not added to jVkPresentModeKHRCollection" << endl;
         }
     }
 

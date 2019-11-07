@@ -51,10 +51,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 //    	LOGERROR(env, "%s", "Error calling getVkPhysicalDeviceSurfaceInfo2KHR");
 //        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 //    }
-
-
-	LOGERROR(env, "%s", "The function vkGetDeviceGroupSurfacePresentModes2EXT seems to have gotten lost from vulkan_core.h in 121");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 //
 //    VkDeviceGroupPresentModeFlagsKHR vkDeviceGroupPresentModeFlagsKHR;
 //    VkResult result = vkGetDeviceGroupSurfacePresentModes2EXT(
@@ -64,5 +60,15 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 //
 //    jvulkan::freeMemory(&memoryToFree);
 //
+//	jvulkan::populateVkDeviceGroupPresentModeFlagsKHR(env, jVkDeviceGroupPresentModeFlagsKHR, vkDeviceGroupPresentModeFlagsKHR);
+//	if (env->ExceptionOccurred())
+//	{
+//		LOGERROR(env, "%s", "Error calling populateVkDeviceGroupPresentModeFlagsKHR.");
+//		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//	}
+//
 //    return jvulkan::createVkResult(env, result);
+
+    LOGERROR(env, "%s", "The function vkGetDeviceGroupSurfacePresentModes2EXT seems to have gotten lost from vulkan_core.h in 121");
+    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }

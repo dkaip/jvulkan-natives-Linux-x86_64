@@ -1609,6 +1609,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkGetDeviceGroupSurfacePresentModesKHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;Ljava/util/EnumSet;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ */
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetDeviceGroupSurfacePresentModesKHR
+  (JNIEnv *, jobject, jobject, jobject, jobject);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetDeviceMemoryCommitment
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/LongReturnValue;)V
  */
@@ -2090,10 +2098,10 @@ JNIEXPORT jboolean JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativePro
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPipelineCacheData
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineCache;[B)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineCache;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/ByteArrayReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetPipelineCacheData
-  (JNIEnv *, jobject, jobject, jobject, jbyteArray);
+  (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -2178,10 +2186,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetShaderInfoAMD
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderInfoTypeAMD;[B)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderInfoTypeAMD;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/ByteArrayReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetShaderInfoAMD
-  (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jbyteArray);
+  (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -2210,10 +2218,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetValidationCacheDataEXT
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkValidationCacheEXT;[B)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkValidationCacheEXT;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/ByteArrayReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkGetValidationCacheDataEXT
-  (JNIEnv *, jobject, jobject, jobject, jbyteArray);
+  (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies

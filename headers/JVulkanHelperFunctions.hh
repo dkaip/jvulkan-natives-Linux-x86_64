@@ -2294,6 +2294,8 @@ namespace jvulkan
 
 	jobject createVkDeviceGroupPresentModeFlagsKHRAsEnumSet(JNIEnv *env, VkDeviceGroupPresentModeFlagsKHR modes);
 
+	void populateVkDeviceGroupPresentModeFlagsKHR(JNIEnv *env, jobject jVkDeviceGroupPresentModeFlagsKHR, VkDeviceGroupPresentModeFlagsKHR modes);
+
 	void populateVkDeviceGroupPresentCapabilitiesKHR(
 			JNIEnv *env,
 			jobject jVkDeviceGroupPresentCapabilitiesKHRObject,
@@ -3053,6 +3055,79 @@ namespace jvulkan
 			const VkQueueFamilyCheckpointPropertiesNV *vkQueueFamilyCheckpointPropertiesNV);
 
     jobject createVkPipelineStageFlagsAsEnumSet(JNIEnv *env, VkPipelineStageFlags vkPipelineStageFlags);
+
+    void getVkBufferDeviceAddressInfoEXT(
+            JNIEnv *env,
+            const jobject jVkBufferDeviceAddressInfoEXTObject,
+			VkBufferDeviceAddressInfoEXT *vkBufferDeviceAddressInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSparseImageFormatPropertiesCollection(
+			JNIEnv *env,
+			jobject jVkSparseImageFormatPropertiesCollectionObject,
+			VkSparseImageFormatProperties const *vkSparseImageFormatProperties,
+			int numberOfVkSparseImageFormatProperties);
+
+	jobject createVkSparseImageFormatProperties(
+			JNIEnv *env,
+			VkSparseImageFormatProperties const *vkSparseImageFormatProperties);
+
+	void populateVkSurfaceCapabilities2EXT(
+			JNIEnv *env,
+			jobject jVkSurfaceCapabilities2EXTObject,
+			const VkSurfaceCapabilities2EXT *vkSurfaceCapabilities2EXT);
+
+	jobject createVkSurfaceCounterFlagsEXTAsEnumSet(JNIEnv *env, VkSurfaceCounterFlagsEXT vkSurfaceCounterFlagsEXT);
+
+    void getVkPhysicalDeviceSparseImageFormatInfo2(
+            JNIEnv *env,
+            const jobject jVkPhysicalDeviceSparseImageFormatInfo2Object,
+			VkPhysicalDeviceSparseImageFormatInfo2 *vkPhysicalDeviceSparseImageFormatInfo2,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSparseImageFormatProperties2Collection(
+			JNIEnv *env,
+			jobject jVkSparseImageFormatProperties2CollectionObject,
+			VkSparseImageFormatProperties2 const *vkSparseImageFormatProperties2s,
+			int numberOfVkSparseImageFormatProperties2s);
+
+	jobject createVkPhysicalDeviceSparseImageFormatInfo2(
+			JNIEnv *env,
+			VkSparseImageFormatProperties2 const *vkSparseImageFormatProperties2);
+
+    void getVkPhysicalDeviceSurfaceInfo2KHR(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceSurfaceInfo2KHR,
+			VkPhysicalDeviceSurfaceInfo2KHR *vkPhysicalDeviceSurfaceInfo2KHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkSurfaceFormat2KHRCollection(
+			JNIEnv *env,
+			jobject jVkSurfaceFormat2KHRCollectionObject,
+			VkSurfaceFormat2KHR const *vkSurfaceFormat2KHRs,
+			int numberOfVkSurfaceFormat2KHRs);
+
+	jobject createVkSurfaceFormatKHR(
+			JNIEnv *env,
+			VkSurfaceFormatKHR const *vkSurfaceFormatKHR);
+
+	jobject createVkSurfaceFormat2KHR(
+			JNIEnv *env,
+			VkSurfaceFormat2KHR const *vkSurfaceFormat2KHR);
+
+	void populateVkQueueFamilyProperties2Collection(
+			JNIEnv *env,
+			jobject jVkQueueFamilyProperties2CollectionObject,
+			VkQueueFamilyProperties2 const *vkQueueFamilyProperties2s,
+			int numberOfVkQueueFamilyProperties2s);
+
+	jobject createVkQueueFamilyProperties2(
+			JNIEnv *env,
+			VkQueueFamilyProperties2 const *vkQueueFamilyProperties2);
+
+	jobject createVkQueueFamilyProperties(JNIEnv *env, const VkQueueFamilyProperties *vkQueueFamilyProperties);
+
+    jobject createVkQueueFlagsKHRAsEnumSet(JNIEnv *env, VkQueueFlags vkQueueFlags);
 
     /*
 	 * Make sure you free() the resulting string.

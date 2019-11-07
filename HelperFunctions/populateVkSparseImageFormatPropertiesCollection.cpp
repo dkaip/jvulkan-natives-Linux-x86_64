@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * populateVkPastPresentationTimingGOOGLECollection.cpp
+ * populateVkSparseImageFormatPropertiesCollection.cpp
  *
- *  Created on: Nov 4, 2019
+ *  Created on: Nov 6, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,16 +25,16 @@
 
 namespace jvulkan
 {
-	void populateVkPastPresentationTimingGOOGLECollection(
+	void populateVkSparseImageFormatPropertiesCollection(
 			JNIEnv *env,
-			jobject jVkPastPresentationTimingGOOGLECollectionObject,
-			VkPastPresentationTimingGOOGLE const *vkPastPresentationTimingGOOGLEs,
-			int numberOfVkPastPresentationTimingGOOGLEs)
+			jobject jVkSparseImageFormatPropertiesCollectionObject,
+			VkSparseImageFormatProperties const *vkSparseImageFormatProperties,
+			int numberOfVkSparseImageFormatProperties)
 	{
-        jclass theClass = env->GetObjectClass(jVkPastPresentationTimingGOOGLECollectionObject);
+        jclass theClass = env->GetObjectClass(jVkSparseImageFormatPropertiesCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/jVkPastPresentationTimingGOOGLECollectionObject");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageFormatProperties");
             return;
         }
 
@@ -45,13 +45,13 @@ namespace jvulkan
             return;
         }
 
-        for(int i = 0; i < numberOfVkPastPresentationTimingGOOGLEs; i++)
+        for(int i = 0; i < numberOfVkSparseImageFormatProperties; i++)
         {
-        	jobject jVkPastPresentationTimingGOOGLEObject = createVkPastPresentationTimingGOOGLE(
+        	jobject jVkSparseImageFormatPropertiesObject = createVkSparseImageFormatProperties(
         			env,
-					&vkPastPresentationTimingGOOGLEs[i]);
+					&vkSparseImageFormatProperties[i]);
 
-			jboolean addResult = env->CallBooleanMethod(jVkPastPresentationTimingGOOGLECollectionObject, addMethodId, jVkPastPresentationTimingGOOGLEObject);
+			jboolean addResult = env->CallBooleanMethod(jVkSparseImageFormatPropertiesCollectionObject, addMethodId, jVkSparseImageFormatPropertiesObject);
 			if (env->ExceptionOccurred())
 			{
 				LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -60,7 +60,7 @@ namespace jvulkan
 
 			if (addResult == 0)
 			{
-				LOGERROR(env, "%s", "Failed trying to add jVkPastPresentationTimingGOOGLEObject Object");
+				LOGERROR(env, "%s", "Failed trying to add jVkSparseImageFormatPropertiesCollectionObject Object");
 			}
         }
 	}
