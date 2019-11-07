@@ -142,8 +142,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     jvulkan::populateVkPhysicalDeviceMemoryProperties(
     		env,
 			jVkPhysicalDeviceMemoryPropertiesObject,
-			&vkPhysicalDeviceMemoryProperties2.memoryProperties,
-			nullptr);
+			&vkPhysicalDeviceMemoryProperties2.memoryProperties);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceMemoryProperties");

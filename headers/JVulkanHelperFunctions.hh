@@ -2203,8 +2203,7 @@ namespace jvulkan
 	void populateVkImageFormatProperties2(
 			JNIEnv *env,
 			jobject jVkImageFormatProperties2Object,
-			const VkImageFormatProperties2 *vkImageFormatProperties2,
-			std::vector<void *> *memoryToFree);
+			const VkImageFormatProperties2 *vkImageFormatProperties2);
 
 	jobject createVkExtent3D(JNIEnv *env, const VkExtent3D *vkExtent3D);
 
@@ -2263,8 +2262,7 @@ namespace jvulkan
     void populateVkPhysicalDeviceMemoryProperties(
             JNIEnv *env,
             jobject jVkPhysicalDeviceMemoryPropertiesObject,
-			const VkPhysicalDeviceMemoryProperties *vkPhysicalDeviceMemoryProperties,
-    		std::vector<void *> *memoryToFree);
+			const VkPhysicalDeviceMemoryProperties *vkPhysicalDeviceMemoryProperties);
 
     void getVkMemoryRequirements(
             JNIEnv *env,

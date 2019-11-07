@@ -78,8 +78,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 		jvulkan::populateVkImageFormatProperties2(
 				env,
 				jVkImageFormatProperties2Object,
-				&vkImageFormatProperties2,
-				&memoryToFree);
+				&vkImageFormatProperties2);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Error calling jvulkan::populateVkImageFormatProperties2");
