@@ -1,0 +1,157 @@
+/*
+ * Copyright 2019 Douglas Kaip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*
+ * getVkSemaphoreWaitInfoKHR.cpp
+ *
+ *  Created on: Nov 7, 2019
+ *      Author: Douglas Kaip
+ */
+
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
+
+namespace jvulkan
+{
+    void getVkSemaphoreWaitInfoKHR(
+            JNIEnv *env,
+            jobject jVkSemaphoreWaitInfoKHR,
+			VkSemaphoreWaitInfoKHR *vkSemaphoreWaitInfoKHR,
+            std::vector<void *> *memoryToFree)
+    {
+        jclass theClass = env->GetObjectClass(jVkSemaphoreWaitInfoKHR);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get class of jVkSemaphoreWaitInfoKHR");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkSemaphoreWaitInfoKHR);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");
+            return;
+        }
+
+        ////////////////////////////////////////////////////////////////////////
+        jobject jpNextObject = getpNextObject(env, jVkSemaphoreWaitInfoKHR);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
+            return;
+        }
+
+        void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	LOGERROR(env, "%s", "pNext must be null.");
+            return;
+        }
+
+		////////////////////////////////////////////////////////////////////////
+		jmethodID methodId = env->GetMethodID(theClass, "getFlags", "()Ljava/util/EnumSet;");
+		if (env->ExceptionOccurred())
+		{
+        	LOGERROR(env, "%s", "Could not find method id for getFlags");
+			return;
+		}
+
+		jobject flagsObject = env->CallObjectMethod(jVkSemaphoreWaitInfoKHR, methodId);
+		if (env->ExceptionOccurred())
+		{
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+			return;
+		}
+
+		VkSemaphoreWaitFlagsKHR flags = (VkSemaphoreWaitFlagsKHR)getEnumSetValue(
+				env,
+				flagsObject,
+				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSemaphoreWaitFlagBitsKHR");
+		if (env->ExceptionOccurred())
+		{
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue");
+			return;
+		}
+
+		////////////////////////////////////////////////////////////////////////
+		methodId = env->GetMethodID(theClass, "getSemaphores", "()Ljava/util/Collection;");
+		if (env->ExceptionOccurred())
+		{
+        	LOGERROR(env, "%s", "Could not find method id for getSemaphores");
+			return;
+		}
+
+		jobject jCollection = env->CallObjectMethod(jVkSemaphoreWaitInfoKHR, methodId);
+		if (env->ExceptionOccurred())
+		{
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+			return;
+		}
+
+        int numberOfSemaphores = 0;
+        VkSemaphore *semaphores = nullptr;
+    	jvulkan::getVulkanHandleCollection(
+    			env,
+				jCollection,
+    			(void **)&semaphores,
+    			&numberOfSemaphores,
+    			memoryToFree);
+    	if (env->ExceptionOccurred())
+    	{
+    		LOGERROR(env, "%s", "Error calling getVulkanHandleCollection");
+            return;
+    	}
+
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(theClass, "getValues", "()[J");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id for getValues");
+            return;
+        }
+
+        jlongArray jValuesObject = (jlongArray)env->CallObjectMethod(jVkSemaphoreWaitInfoKHR, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
+        uint64_t *values = nullptr;
+        jsize arrayLength = 0;
+        if (jValuesObject != nullptr)
+        {
+            arrayLength = env->GetArrayLength(jValuesObject);
+
+            values = (uint64_t *)calloc(arrayLength, sizeof(uint64_t));
+            memoryToFree->push_back(values);
+
+            env->GetLongArrayRegion(jValuesObject, 0, arrayLength, (long int *)values);
+            if (env->ExceptionOccurred())
+            {
+                return;
+            }
+        }
+
+
+		vkSemaphoreWaitInfoKHR->sType 		= sTypeValue;
+        vkSemaphoreWaitInfoKHR->pNext 		= (void *)pNext;
+        vkSemaphoreWaitInfoKHR->flags		= flags;
+        vkSemaphoreWaitInfoKHR->semaphoreCount	= numberOfSemaphores;
+        vkSemaphoreWaitInfoKHR->pSemaphores 	= semaphores;
+        vkSemaphoreWaitInfoKHR->pValues		= values;
+    }
+}

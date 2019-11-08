@@ -3127,6 +3127,18 @@ namespace jvulkan
 
     jobject createVkQueueFlagsKHRAsEnumSet(JNIEnv *env, VkQueueFlags vkQueueFlags);
 
+    void getVkSemaphoreWaitInfoKHR(
+            JNIEnv *env,
+            jobject jVkSemaphoreWaitInfoKHR,
+			VkSemaphoreWaitInfoKHR *vkSemaphoreWaitInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSemaphoreSignalInfoKHR(
+            JNIEnv *env,
+            jobject jVkSemaphoreSignalInfoKHR,
+			VkSemaphoreSignalInfoKHR *vkSemaphoreSignalInfoKHR,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
