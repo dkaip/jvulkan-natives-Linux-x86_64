@@ -59,5 +59,4 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jvulkan::freeMemory(&memoryToFree);
 
     return jvulkan::createVkResult(env, result);
-
 }
