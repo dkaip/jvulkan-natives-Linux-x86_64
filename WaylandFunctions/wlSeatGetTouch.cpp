@@ -28,10 +28,10 @@ using namespace std;
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
-extern JavaVM *l_JavaVM;
-
-extern jobject globalWaylandEventQueueObject;
-
+//extern JavaVM *l_JavaVM;
+//
+//extern jobject globalWaylandEventQueueObject;
+//
 static void wltouchHandleDown(void *data, struct wl_touch *wl_touch, uint32_t serialNumber, uint32_t time, struct wl_surface *wl_surface, int32_t id, wl_fixed_t x, wl_fixed_t y)
 {
 }
