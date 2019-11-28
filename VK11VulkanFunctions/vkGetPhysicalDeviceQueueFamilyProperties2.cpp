@@ -24,8 +24,6 @@
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
-extern const char *voidMethodErrorText;
-
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkGetPhysicalDeviceQueueFamilyProperties2

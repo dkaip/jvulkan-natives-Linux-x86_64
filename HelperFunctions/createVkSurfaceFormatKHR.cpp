@@ -23,8 +23,6 @@
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
-extern const char *voidMethodErrorText;
-
 namespace jvulkan
 {
 	jobject createVkSurfaceFormatKHR(
