@@ -80,7 +80,12 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject roundingModeIndependenceEnum = env->CallStaticObjectMethod(vkShaderFloatControlsIndependenceKHRClass, methodId, vkPhysicalDeviceFloatControlsPropertiesKHR->roundingModeIndependence);
+        jobject roundingModeIndependenceEnum = env->CallStaticObjectMethod(vkShaderFloatControlsIndependenceKHRClass, fromValueMethodId, vkPhysicalDeviceFloatControlsPropertiesKHR->roundingModeIndependence);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "failed executing method CallStaticObjectMethod");
+            return;
+        }
 
         methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesKHRClass, "setRoundingModeIndependence", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR;)V");
         if (env->ExceptionOccurred())
