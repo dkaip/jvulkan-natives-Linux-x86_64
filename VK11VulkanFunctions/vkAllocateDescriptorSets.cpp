@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -32,6 +33,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -42,113 +44,67 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             jVkDescriptorSetAllocateInfo,
             &vkDescriptorSetAllocateInfo,
             &memoryToFree);
-//    int numberOfVkDescriptorSetAllocateInfos = 0;
-//    VkDescriptorSetAllocateInfo *vkDescriptorSetAllocateInfo = nullptr;
-//
-//    std::cout << "Gack00" << std::endl;
-//    jvulkan::getVkDescriptorSetAllocateInfoCollection(
-//            env,
-//            jVkDescriptorSetAllocateInfoCollection,
-//            &vkDescriptorSetAllocateInfo,
-//            &numberOfVkDescriptorSetAllocateInfos,
-//            &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkDescriptorSetAllocateInfo");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkDescriptorSet *descriptorSets = (VkDescriptorSet *)calloc(vkDescriptorSetAllocateInfo.descriptorSetCount, sizeof(VkDescriptorSet *));
+    std::vector<VkDescriptorSet> descriptorSets(vkDescriptorSetAllocateInfo.descriptorSetCount);
 
-    int result = vkAllocateDescriptorSets(
+    VkResult result = vkAllocateDescriptorSets(
             logicalDeviceHandle,
             &vkDescriptorSetAllocateInfo,
-            descriptorSets);
+            descriptorSets.data());
 
     jvulkan::freeMemory(&memoryToFree);
+
+    if (result != VK_SUCCESS)
+    {
+    	LOGERROR(env, "Error calling vkAllocateDescriptorSets. Error code is:%d", result);
+    	return jvulkan::createVkResult(env, result);
+    }
+
 
     jclass vkDescriptorSetCollectionClass = env->GetObjectClass(jVkDescriptorSetCollection);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not find class for jVkDescriptorSetCollection");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    jmethodID methodId = env->GetMethodID(vkDescriptorSetCollectionClass, "size", "()I");
+    jmethodID addMethodId = env->GetMethodID(vkDescriptorSetCollectionClass, "add", "(Ljava/lang/Object;)Z");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not find method id add.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    jint numberOfElements = env->CallIntMethod(jVkDescriptorSetCollection, methodId);
-    if (env->ExceptionOccurred())
+    for (const auto& descriptorSet : descriptorSets)
     {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    if (vkDescriptorSetAllocateInfo.descriptorSetCount != (uint32_t)numberOfElements)
-    {
-        std::cerr << "ERROR: The collection size for resulting descriptor set collection must be the same as vkDescriptorSetAllocateInfo.descriptorSetCount." << std::endl;
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jmethodID iteratorMethodId = env->GetMethodID(vkDescriptorSetCollectionClass, "iterator", "()Ljava/util/Iterator;");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jobject iteratorObject = env->CallObjectMethod(jVkDescriptorSetCollection, iteratorMethodId);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jclass iteratorClass = env->GetObjectClass(iteratorObject);
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
-    if (env->ExceptionOccurred())
-    {
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    int i = 0;
-    do
-    {
-        jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
+    	jobject jDescriptorSetHandle = jvulkan::createVulkanHandle(
+    			env,
+				"com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet",
+				descriptorSet);
         if (env->ExceptionOccurred())
         {
-            break;
+        	LOGERROR(env, "%s", "Error calling createVulkanHandle");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
-        if (hasNext == false)
-        {
-            break;
-        }
-
-        jobject jVkDescriptorSet = env->CallObjectMethod(iteratorObject, nextMethod);
+        bool addResult = env->CallBooleanMethod(jVkDescriptorSetCollection, addMethodId, jDescriptorSetHandle);
         if (env->ExceptionOccurred())
         {
-            break;
+        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
-        /*
-         * Now transfer the VkDevice data to Java
-         */
-        jvulkan::setHandleValue(env, jVkDescriptorSet, descriptorSets[i]);
-
-        i++;
-    } while(true);
-
-    free(descriptorSets);
+        if (addResult == false)
+        {
+        	LOGERROR(env, "%s", "Error jDescriptorSetHandle element did not get added to jVkDescriptorSetCollection.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+    }
 
     return jvulkan::createVkResult(env, result);
 }
