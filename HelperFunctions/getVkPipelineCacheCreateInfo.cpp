@@ -115,12 +115,16 @@ namespace jvulkan
             return;
         }
 
-    	void *handle = (void *)jvulkan::getHandleValue(env, jHandle);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not retrieve jHandle handle");
-            return;
-        }
+    	void *handle = nullptr;
+    	if (jHandle != nullptr)
+    	{
+    		handle = (void *)jvulkan::getHandleValue(env, jHandle);
+			if (env->ExceptionOccurred())
+			{
+				LOGERROR(env, "%s", "Could not retrieve jHandle handle");
+				return;
+			}
+		}
 
 
 		vkPipelineCacheCreateInfo->sType 	= (VkStructureType)sTypeValue;
