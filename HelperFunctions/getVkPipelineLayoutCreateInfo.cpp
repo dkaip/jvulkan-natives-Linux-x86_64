@@ -123,13 +123,15 @@ namespace jvulkan
         jclass vkPushConstantRangeClass = env->GetObjectClass(jVkPushConstantRangeObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find class for jVkPushConstantRangeObject.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkPushConstantRangeClass, "getFlags", "()Ljava/util/EnumSet;");
+        jmethodID methodId = env->GetMethodID(vkPushConstantRangeClass, "getStageFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getStageFlags.");
             return;
         }
 
@@ -138,24 +140,41 @@ namespace jvulkan
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
+            return;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPushConstantRangeClass, "getOffset", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getOffset.");
             return;
         }
 
         jint offset = env->CallIntMethod(jVkPushConstantRangeObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
+            return;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPushConstantRangeClass, "getSize", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getSize.");
             return;
         }
 
         jint size = env->CallIntMethod(jVkPushConstantRangeObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
+            return;
+        }
 
         pushConstantRange->stageFlags = (VkShaderStageFlags)flags;
         pushConstantRange->offset     = offset;
@@ -171,6 +190,7 @@ namespace jvulkan
     {
         if (jVkPushConstantRangeCollectionObject == nullptr)
         {
+        	LOGERROR(env, "%s", "jVkPushConstantRangeCollectionObject was nullptr.");
             return;
         }
 
@@ -189,6 +209,7 @@ namespace jvulkan
         jint numberOfElements = env->CallIntMethod(jVkPushConstantRangeCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
@@ -205,6 +226,7 @@ namespace jvulkan
         jobject iteratorObject = env->CallObjectMethod(jVkPushConstantRangeCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
@@ -232,6 +254,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
                 break;
             }
 
@@ -243,6 +266,7 @@ namespace jvulkan
             jobject jVkPushConstantRangeObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
                 break;
             }
 
@@ -252,6 +276,7 @@ namespace jvulkan
                     &(*pushConstantRanges)[i]);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling getVkPushConstantRange.");
                 return;
             }
 
@@ -268,13 +293,15 @@ namespace jvulkan
         jclass vkPipelineLayoutCreateInfoClass = env->GetObjectClass(jVkPipelineLayoutCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not retrieve class for jVkPipelineLayoutCreateInfoObject.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPipelineLayoutCreateInfoObject);
+        VkStructureType sTypeValue = getSTypeAsInt(env, jVkPipelineLayoutCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
             return;
         }
 
@@ -298,6 +325,7 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkPipelineLayoutCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getFlags.");
             return;
         }
 
@@ -306,17 +334,24 @@ namespace jvulkan
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineLayoutCreateFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
+            return;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineLayoutCreateInfoClass, "getSetLayouts", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getSetLayouts.");
             return;
         }
 
         jobject jVkDescriptorSetLayoutCollection = env->CallObjectMethod(jVkPipelineLayoutCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
@@ -331,18 +366,25 @@ namespace jvulkan
                     &vkDescriptorSetLayouts,
                     &numberOfDescriptorSetLayouts,
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling getCollectionOfVkDescriptorSetLayout.");
+                return;
+            }
         }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineLayoutCreateInfoClass, "getPushConstantRanges", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getPushConstantRanges.");
             return;
         }
 
         jobject jVkPushConstantRangeCollection = env->CallObjectMethod(jVkPipelineLayoutCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
@@ -357,6 +399,11 @@ namespace jvulkan
                     &vkPushConstantRanges,
                     &numberOfPushConstantRanges,
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling getCollectionOfVkPushConstantRange.");
+                return;
+            }
         }
 
         vkPipelineLayoutCreateInfo->sType = (VkStructureType)sTypeValue;
