@@ -74,3 +74,107 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 
 	free(values);
 }
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkCmdPushConstants
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Ljava/util/EnumSet;I[F)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants__Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkCommandBuffer_2Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkPipelineLayout_2Ljava_util_EnumSet_2I_3F
+(JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkPipelineLayout, jobject jVkShaderStageFlags, jint offset, jfloatArray jValues)
+{
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayout);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkBuffer handle");
+        return;
+    }
+
+    VkShaderStageFlags stageFlags = jvulkan::getEnumSetValue(
+            env,
+			jVkShaderStageFlags,
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+
+    float *values = nullptr;
+    jsize arrayLength = 0;
+	arrayLength = env->GetArrayLength(jValues);
+
+	values = (float *)calloc(arrayLength, sizeof(float));
+
+	env->GetFloatArrayRegion(jValues, 0, arrayLength, (float *)values);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error calling GetFloatArrayRegion");
+		return;
+	}
+
+	vkCmdPushConstants(
+			commandBufferHandle,
+			pipelineLayoutHandle,
+			stageFlags,
+			(unsigned int)offset,
+			(unsigned int)arrayLength * sizeof(float),
+			(void *)values);
+
+	free(values);
+}
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkCmdPushConstants
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Ljava/util/EnumSet;I[I)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants__Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkCommandBuffer_2Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkPipelineLayout_2Ljava_util_EnumSet_2I_3I
+(JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkPipelineLayout, jobject jVkShaderStageFlags, jint offset, jintArray jValues)
+{
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayout);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkBuffer handle");
+        return;
+    }
+
+    VkShaderStageFlags stageFlags = jvulkan::getEnumSetValue(
+            env,
+			jVkShaderStageFlags,
+            "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+
+    uint32_t *values = nullptr;
+    jsize arrayLength = 0;
+	arrayLength = env->GetArrayLength(jValues);
+
+	values = (uint32_t *)calloc(arrayLength, sizeof(uint32_t));
+
+	env->GetIntArrayRegion(jValues, 0, arrayLength, (int *)values);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error calling GetIntArrayRegion");
+		return;
+	}
+
+	vkCmdPushConstants(
+			commandBufferHandle,
+			pipelineLayoutHandle,
+			stageFlags,
+			(unsigned int)offset,
+			(unsigned int)arrayLength * sizeof(uint32_t),
+			(void *)values);
+
+	free(values);
+}
+
+

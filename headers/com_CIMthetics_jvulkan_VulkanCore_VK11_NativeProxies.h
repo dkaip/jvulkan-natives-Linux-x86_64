@@ -556,8 +556,24 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdPushConstants
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Ljava/util/EnumSet;I[B)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants__Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkCommandBuffer_2Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkPipelineLayout_2Ljava_util_EnumSet_2I_3B
   (JNIEnv *, jobject, jobject, jobject, jobject, jint, jbyteArray);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkCmdPushConstants
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Ljava/util/EnumSet;I[F)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants__Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkCommandBuffer_2Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkPipelineLayout_2Ljava_util_EnumSet_2I_3F
+  (JNIEnv *, jobject, jobject, jobject, jobject, jint, jfloatArray);
+
+/*
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Method:    vkCmdPushConstants
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;Ljava/util/EnumSet;I[I)V
+ */
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCmdPushConstants__Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkCommandBuffer_2Lcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_VkPipelineLayout_2Ljava_util_EnumSet_2I_3I
+  (JNIEnv *, jobject, jobject, jobject, jobject, jint, jintArray);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
