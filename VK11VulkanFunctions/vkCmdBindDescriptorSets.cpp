@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -32,21 +33,29 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVkCommandBuffer.");
         return;
     }
 
     ////////////////////////////////////////////////////////////////////////
     jclass vkPipelineBindPointEnumClass = env->GetObjectClass(jVkPipelineBindPoint);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error trying to get class of jVkPipelineBindPoint.");
+        return;
+    }
 
     jmethodID valueOfMethodId = env->GetMethodID(vkPipelineBindPointEnumClass, "valueOf", "()I");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get method id for valueOf.");
         return;
     }
 
     VkPipelineBindPoint vkPipelineBindPointEnumValue = (VkPipelineBindPoint)env->CallIntMethod(jVkPipelineBindPoint, valueOfMethodId);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling CallIntMethod.");
         return;
     }
 
@@ -54,6 +63,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkPipelineLayout_T *pipelineLayoutHandle = (VkPipelineLayout_T *)jvulkan::getHandleValue(env, jVkPipelineLayout);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVkPipelineLayout.");
         return;
     }
 
@@ -69,6 +79,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkDescriptorSetCollection.");
         return;
     }
 
@@ -84,10 +95,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         env->GetIntArrayRegion(jDynamicOffsets, 0, numberOfDynamicOffsets, dynamicOffsetsArray);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling GetIntArrayRegion.");
             return;
         }
     }
-
 
     vkCmdBindDescriptorSets(
             commandBufferHandle,

@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "JVulkanHelperFunctions.hh"
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -31,12 +28,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     signed char *destinationMemoryHandle = (signed char *)jvulkan::getHandleValue(env, jVoidPointer);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVoidPointer");
         return;
     }
 
     if (jDataToCopyArray == nullptr)
     {
-        std::cerr << "jDataToCopyArray is nullptr" << std::endl;
+    	LOGERROR(env, "%s", "Push source data is null.");
         return;
     }
 
@@ -46,6 +44,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     env->GetByteArrayRegion(jDataToCopyArray, 0, arrayLength, destinationMemoryHandle);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling GetByteArrayRegion.");
         return;
     }
 }
@@ -61,12 +60,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     float *destinationMemoryHandle = (float *)jvulkan::getHandleValue(env, jVoidPointer);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVoidPointer");
         return;
     }
 
     if (jDataToCopyArray == nullptr)
     {
-        std::cerr << "jDataToCopyArray is nullptr" << std::endl;
+    	LOGERROR(env, "%s", "Push source data is null.");
         return;
     }
 
@@ -76,6 +76,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     env->GetFloatArrayRegion(jDataToCopyArray, 0, arrayLength, destinationMemoryHandle);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling GetFloatArrayRegion.");
         return;
     }
 }
@@ -91,12 +92,13 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     int *destinationMemoryHandle = (int *)jvulkan::getHandleValue(env, jVoidPointer);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVoidPointer");
         return;
     }
 
     if (jDataToCopyArray == nullptr)
     {
-        std::cerr << "jDataToCopyArray is nullptr" << std::endl;
+    	LOGERROR(env, "%s", "Push source data is null.");
         return;
     }
 
@@ -106,6 +108,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     env->GetIntArrayRegion(jDataToCopyArray, 0, arrayLength, destinationMemoryHandle);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling GetIntArrayRegion.");
         return;
     }
 }
