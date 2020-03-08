@@ -36,7 +36,7 @@ namespace jvulkan
 			env->ExceptionClear();
 		}
 
-        int signatureLength = strlen(enumClassString + 6);
+        int signatureLength = strlen(enumClassString) + 5 + 1;
         char *fromValueSignature = (char *)calloc(signatureLength, sizeof(char));
         fromValueSignature[0] = '(';
         fromValueSignature[1] = 'I';
