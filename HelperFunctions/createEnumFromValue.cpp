@@ -49,6 +49,7 @@ namespace jvulkan
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "Could not find class %s.", enumClassString);
+			free(fromValueSignature);
 			return nullptr;
 		}
 
@@ -56,8 +57,11 @@ namespace jvulkan
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "Could not find static method fromValue with signature %s", fromValueSignature);
+			free(fromValueSignature);
 			return nullptr;
 		}
+
+		free(fromValueSignature);
 
 		return env->CallStaticObjectMethod(vkResultClass, methodId, value);
 	}
