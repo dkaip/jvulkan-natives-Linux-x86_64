@@ -43,7 +43,7 @@ namespace jvulkan
         fromValueSignature[2] = ')';
         fromValueSignature[3] = 'L';
         strcat(&fromValueSignature[4], enumClassString);
-        fromValueSignature[signatureLength+4] = ';';
+        fromValueSignature[signatureLength-2] = ';';
 
 		jclass vkResultClass = env->FindClass(enumClassString);
 		if (env->ExceptionOccurred())
