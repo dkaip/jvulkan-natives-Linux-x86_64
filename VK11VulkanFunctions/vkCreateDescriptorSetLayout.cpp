@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
+//#include <iostream>
 #include <vector>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -32,6 +33,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -40,6 +42,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     {
         allocatorCallbacks = new VkAllocationCallbacks();
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getAllocatorCallbacks.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
     }
 
     std::vector<void *> memoryToFree(5);
@@ -52,6 +59,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkDescriptorSetLayoutCreateInfo.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -63,6 +71,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             allocatorCallbacks,
             &vkDescriptorSetLayout);
 
+    if (result != VK_SUCCESS)
+    {
+    	LOGERROR(env, "%s", "Error calling vkCreateDescriptorSetLayout.");
+    }
 
     // Free up the allocator callback structure if created.
     delete allocatorCallbacks;
