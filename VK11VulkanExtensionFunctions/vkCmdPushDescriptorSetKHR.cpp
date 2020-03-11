@@ -24,6 +24,8 @@
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
+extern PFN_vkCmdPushDescriptorSetKHR 	vkCmdPushDescriptorSetKHRFunc;
+
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCmdPushDescriptorSetKHR
@@ -82,7 +84,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 		return;
 	}
 
-    vkCmdPushDescriptorSetKHR(
+	vkCmdPushDescriptorSetKHRFunc(
     		commandBufferHandle,
 			vkPipelineBindPointEnumValue,
 			pipelineLayoutHandle,

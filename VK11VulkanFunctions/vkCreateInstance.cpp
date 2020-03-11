@@ -24,6 +24,9 @@ const char *voidMethodErrorText = "Error Calling CallVoidMethod";
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
+PFN_vkCmdPushDescriptorSetKHR 	vkCmdPushDescriptorSetKHRFunc = nullptr;
+
+
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
  * Method:    vkCreateInstance
@@ -32,7 +35,7 @@ const char *voidMethodErrorText = "Error Calling CallVoidMethod";
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_vkCreateInstance
   (JNIEnv *env, jobject, jobject jVkInstanceCreateInfoObject, jobject jAlternateAllocator, jobject jVkInstance)
 {
-	LOGTRACE(env, "%s", "vkCreateInstance called"); // This line is mainly here so that the logging stuff gets initialized before any errors.
+	LOGTRACE(env, "%s", "Initializing natives logging."); // This line is mainly here so that the logging stuff gets initialized before any errors.
 
     VkInstanceCreateInfo vkInstanceCreateInfo = {};
 
@@ -70,6 +73,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jvulkan::setHandleValue(env, jVkInstance, instance);
 
     jvulkan::freeMemory(&memoryToFree);
+
+	if (vkCmdPushDescriptorSetKHRFunc == nullptr)
+	{
+		vkCmdPushDescriptorSetKHRFunc =
+					(PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
+	}
+
+
 
     return jvulkan::createVkResult(env, result);
 }
