@@ -13,11 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
 
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -31,52 +29,66 @@ namespace jvulkan
         jclass vkDescriptorImageInfoCollectionClass = env->GetObjectClass(jVkDescriptorImageInfoCollectionObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get class for jVkDescriptorImageInfoCollectionObject.");
             return;
         }
 
         jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoCollectionClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get method id for size.");
             return;
         }
 
         jint numberOfElements = env->CallIntMethod(jVkDescriptorImageInfoCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
         *numberOfVkDescriptorImageInfos = numberOfElements;
         *vkDescriptorImageInfos = (VkDescriptorImageInfo *)calloc(numberOfElements, sizeof(VkDescriptorImageInfo));
+        if (*vkDescriptorImageInfos == nullptr)
+        {
+        	LOGERROR(env, "Could not allocate %d elements for vkDescriptorImageInfos,", numberOfElements);
+        	return;
+        }
+
         memoryToFree->push_back(*vkDescriptorImageInfos);
 
         jmethodID iteratorMethodId = env->GetMethodID(vkDescriptorImageInfoCollectionClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get method id for iterator.");
             return;
         }
 
         jobject iteratorObject = env->CallObjectMethod(jVkDescriptorImageInfoCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         jclass iteratorClass = env->GetObjectClass(iteratorObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get class for iteratorObject.");
             return;
         }
 
         jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get method id for hasNext.");
             return;
         }
 
         jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error trying to get method id for next.");
             return;
         }
 
@@ -86,6 +98,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
                 break;
             }
 
@@ -97,7 +110,13 @@ namespace jvulkan
             jobject jVkDescriptorImageInfoObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
                 break;
+            }
+
+            if (jVkDescriptorImageInfoObject == nullptr)
+            {
+            	LOGERROR(env, "%s", "jVkDescriptorImageInfoObject is null");
             }
 
             getVkDescriptorImageInfo(
