@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
@@ -32,6 +33,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get jVkDevice.");
         return;
     }
 
@@ -49,6 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
                 &memoryToFree);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getVkWriteDescriptorSetCollection.");
             return;
         }
     }
@@ -66,6 +69,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
                 &memoryToFree);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getVkCopyDescriptorSetCollection.");
             return;
         }
     }
