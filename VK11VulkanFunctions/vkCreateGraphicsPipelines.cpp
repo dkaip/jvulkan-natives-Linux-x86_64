@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
-#include <vector>
 
 using namespace std;
 
@@ -33,6 +31,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -49,6 +48,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         pipelineCacheHandle = (VkPipelineCache_T *)jvulkan::getHandleValue(env, jVkPipelineCache);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not retrieve VkPipelineCache handle");
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
     }
@@ -65,11 +65,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkGraphicsPipelineCreateInfoCollection.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkPipeline *pipelines = (VkPipeline *)calloc(numberOfCreateInfos, sizeof(VkPipeline *));
-
     int result = vkCreateGraphicsPipelines(
             logicalDeviceHandle,
             pipelineCacheHandle,
@@ -98,54 +98,62 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
     jclass vkPipelineCollectionClass = env->GetObjectClass(jVkPipelineCollection);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to class for jVkPipelineCollection.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID methodId = env->GetMethodID(vkPipelineCollectionClass, "size", "()I");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get method id for size.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jint numberOfElements = env->CallIntMethod(jVkPipelineCollection, methodId);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling CallIntMethod.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     if (numberOfCreateInfos != numberOfElements)
     {
-        std::cerr << "ERROR: The collection size for resulting pipeline collection must be the same as jVkGraphicsPipelineCreateInfoCollection." << std::endl;
+    	LOGERROR(env, "%s", "The collection size for resulting pipeline collection must be the same as jVkGraphicsPipelineCreateInfoCollection.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID iteratorMethodId = env->GetMethodID(vkPipelineCollectionClass, "iterator", "()Ljava/util/Iterator;");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get method id for iterator.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jobject iteratorObject = env->CallObjectMethod(jVkPipelineCollection, iteratorMethodId);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jclass iteratorClass = env->GetObjectClass(iteratorObject);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to class for iteratorObject.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get method id for hasNext.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error trying to get method id for next.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -155,6 +163,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
             break;
         }
 
@@ -166,6 +175,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
         jobject jVkPipelineObject = env->CallObjectMethod(iteratorObject, nextMethod);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             break;
         }
 
@@ -173,6 +183,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
          * Now transfer the VkDevice data to Java
          */
         jvulkan::setHandleValue(env, jVkPipelineObject, pipelines[i]);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling setHandleValue.");
+            break;
+        }
 
         i++;
     } while(true);
