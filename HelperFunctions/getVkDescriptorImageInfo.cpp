@@ -20,11 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -37,6 +34,7 @@ namespace jvulkan
         jclass vkDescriptorImageInfoClass = env->GetObjectClass(jVkDescriptorImageInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class for jVkDescriptorImageInfoObject.");
             return;
         }
 
@@ -44,18 +42,21 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getSampler", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSampler;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getSampler.");
             return;
         }
 
         jobject jVkSamplerObject = env->CallObjectMethod(jVkDescriptorImageInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         VkSampler_T *samplerHandle = (VkSampler_T *)jvulkan::getHandleValue(env, jVkSamplerObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue.");
             return;
         }
 
@@ -63,18 +64,21 @@ namespace jvulkan
         methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageView", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImageView;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getImageView.");
             return;
         }
 
         jobject jVkImageViewObject = env->CallObjectMethod(jVkDescriptorImageInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         VkImageView_T *imageViewHandle = (VkImageView_T *)jvulkan::getHandleValue(env, jVkImageViewObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue.");
             return;
         }
 
@@ -82,26 +86,35 @@ namespace jvulkan
         methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getImageLayout.");
             return;
         }
 
         jobject jVkImageLayoutObject = env->CallObjectMethod(jVkDescriptorImageInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         jclass vkImageLayoutEnumClass = env->GetObjectClass(jVkImageLayoutObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not get class for jVkImageLayoutObject.");
+            return;
+        }
 
         jmethodID valueOfMethodId = env->GetMethodID(vkImageLayoutEnumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for valueOf.");
             return;
         }
 
         VkImageLayout vkImageLayoutEnumValue = (VkImageLayout)env->CallIntMethod(jVkImageLayoutObject, valueOfMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
             return;
         }
 
