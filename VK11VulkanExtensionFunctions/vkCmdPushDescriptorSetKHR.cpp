@@ -51,7 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 	jmethodID valueOfMethodId = env->GetMethodID(vkPipelineBindPointEnumClass, "valueOf", "()I");
 	if (env->ExceptionOccurred())
 	{
-		LOGERROR(env, "%s", "Could not find method id valueOf");
+		LOGERROR(env, "%s", "Could not find method id for valueOf.");
 		return;
 	}
 
