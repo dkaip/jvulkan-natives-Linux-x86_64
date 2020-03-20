@@ -130,7 +130,6 @@ namespace jvulkan
                 break;
             }
 
-
             i++;
         } while(true);
     }
