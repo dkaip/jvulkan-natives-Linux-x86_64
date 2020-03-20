@@ -20,11 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 namespace jvulkan
 {
@@ -37,6 +34,7 @@ namespace jvulkan
         jclass vkDescriptorBufferInfoClass = env->GetObjectClass(jVkDescriptorBufferInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class for jVkDescriptorBufferInfoObject.");
             return;
         }
 
@@ -44,18 +42,21 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getBuffer.");
             return;
         }
 
         jobject jVkBufferObject = env->CallObjectMethod(jVkDescriptorBufferInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
         VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue.");
             return;
         }
 
@@ -63,12 +64,14 @@ namespace jvulkan
         methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getOffset", "()J");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getOffset.");
             return;
         }
 
         jlong jOffset = env->CallLongMethod(jVkDescriptorBufferInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallLongMethod.");
             return;
         }
 
@@ -76,12 +79,14 @@ namespace jvulkan
          methodId = env->GetMethodID(vkDescriptorBufferInfoClass, "getRange", "()J");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get method id for getRange.");
             return;
         }
 
         jlong jRange = env->CallLongMethod(jVkDescriptorBufferInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallLongMethod.");
             return;
         }
 
