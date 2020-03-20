@@ -124,6 +124,11 @@ namespace jvulkan
                     jVkDescriptorBufferInfoObject,
                     &((*vkDescriptorBufferInfos)[i]),
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling getVkDescriptorBufferInfo.");
+                break;
+            }
 
             i++;
         } while(true);
