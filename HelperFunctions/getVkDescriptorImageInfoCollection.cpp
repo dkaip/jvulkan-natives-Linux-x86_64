@@ -124,6 +124,12 @@ namespace jvulkan
                     jVkDescriptorImageInfoObject,
                     &((*vkDescriptorImageInfos)[i]),
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling getVkDescriptorImageInfo.");
+                break;
+            }
+
 
             i++;
         } while(true);
