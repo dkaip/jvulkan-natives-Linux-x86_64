@@ -98,7 +98,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
     }
 
     VkBuffer_T  **arrayOfPointers = (VkBuffer_T **)calloc(collectionSize, sizeof(VkBuffer_T *));
-    if (*arrayOfPointers == nullptr)
+    if (arrayOfPointers == nullptr)
     {
 		LOGERROR(env, "Could not allocate %d bytes of memory for arrayOfPointers.", collectionSize * sizeof(VkBuffer_T *));
         return;
@@ -146,7 +146,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
         offsetsArray = (long *)calloc(arrayLength, sizeof(long));
         if (offsetsArray == nullptr)
         {
-    		LOGERROR(env, "Could not allocate %d bytes of memory for arrayOfPointers.", arrayLength * sizeof(long));
+    		LOGERROR(env, "Could not allocate %d bytes of memory for offsetsArray.", arrayLength * sizeof(long));
             return;
         }
 
