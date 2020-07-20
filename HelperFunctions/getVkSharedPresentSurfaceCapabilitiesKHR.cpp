@@ -81,7 +81,7 @@ namespace jvulkan
         VkImageUsageFlags flags = (VkImageUsageFlags)getEnumSetValue(
                 env,
 				sharedPresentSupportedUsageFlagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
 
 
         vkSharedPresentSurfaceCapabilitiesKHR->sType = sTypeValue;

@@ -62,7 +62,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryNVClass, "getGeometryType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkGeometryTypeNV;");
+        jmethodID methodId = env->GetMethodID(vkGeometryNVClass, "getGeometryType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkGeometryTypeNV;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -89,7 +89,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryNVClass, "getGeometry", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkGeometryDataNV;");
+        methodId = env->GetMethodID(vkGeometryNVClass, "getGeometry", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeometryDataNV;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -112,7 +112,7 @@ namespace jvulkan
         VkGeometryFlagsNV flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkGeometryFlagBitsNV");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkGeometryFlagBitsNV");
 
         vkGeometryNV->sType         = (VkStructureType)sTypeValue;
         vkGeometryNV->pNext         = (void *)pNext;

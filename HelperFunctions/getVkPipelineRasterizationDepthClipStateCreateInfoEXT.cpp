@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineRasterizationDepthClipStateCreateFlagsEXT flags = (VkPipelineRasterizationDepthClipStateCreateFlagsEXT)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineRasterizationDepthClipStateCreateFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineRasterizationDepthClipStateCreateFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

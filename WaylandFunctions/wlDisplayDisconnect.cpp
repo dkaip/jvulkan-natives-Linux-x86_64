@@ -19,15 +19,15 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlDisplayDisconnect
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayDisconnect
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlDisplayDisconnect
   (JNIEnv *env, jobject, jobject jWlDisplay)
 {
     struct wl_display *waylandDisplayHandle = (struct wl_display *)jvulkan::getHandleValue(env, jWlDisplay);

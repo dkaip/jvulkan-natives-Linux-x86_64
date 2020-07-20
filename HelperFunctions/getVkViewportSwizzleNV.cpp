@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getX", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkViewportCoordinateSwizzleNV;");
+        jmethodID methodId = env->GetMethodID(theClass, "getX", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkViewportCoordinateSwizzleNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getX");
@@ -75,7 +75,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getY", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkViewportCoordinateSwizzleNV;");
+        methodId = env->GetMethodID(theClass, "getY", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkViewportCoordinateSwizzleNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getY");
@@ -97,7 +97,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getZ", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkViewportCoordinateSwizzleNV;");
+        methodId = env->GetMethodID(theClass, "getZ", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkViewportCoordinateSwizzleNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getZ");
@@ -119,7 +119,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getW", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkViewportCoordinateSwizzleNV;");
+        methodId = env->GetMethodID(theClass, "getW", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkViewportCoordinateSwizzleNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getW");

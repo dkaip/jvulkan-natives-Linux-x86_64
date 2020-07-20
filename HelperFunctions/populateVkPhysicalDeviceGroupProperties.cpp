@@ -56,7 +56,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkPhysicalDeviceGroupPropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceGroupProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceGroupProperties");
             return;
         }
 
@@ -70,7 +70,7 @@ namespace jvulkan
 
         jobject handleCollection = createVulkanHandleCollection(
         		env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPhysicalDevice",
+				"com/CIMthetics/jvulkan/VulkanCore/Handles/VkPhysicalDevice",
 				vkPhysicalDeviceGroupProperties->physicalDeviceCount,
 				(const void **)vkPhysicalDeviceGroupProperties->physicalDevices);
 

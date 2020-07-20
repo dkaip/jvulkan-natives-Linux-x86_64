@@ -78,7 +78,7 @@ namespace jvulkan
         VkDebugUtilsMessengerCreateFlagsEXT flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCreateFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessengerCreateFlagBitsEXT");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDebugUtilsMessengerCreateInfoEXTClass, "getMessageSeverity", "()Ljava/util/EnumSet;");
@@ -91,7 +91,7 @@ namespace jvulkan
         VkDebugUtilsMessageSeverityFlagsEXT messageSeverity = getEnumSetValue(
                 env,
 				messageSeverityObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDebugUtilsMessengerCreateInfoEXTClass, "getMessageType", "()Ljava/util/EnumSet;");
@@ -104,7 +104,7 @@ namespace jvulkan
         VkDebugUtilsMessengerCreateFlagsEXT messageType = getEnumSetValue(
                 env,
 				messageTypeObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageTypeFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageTypeFlagBitsEXT");
 
 
 

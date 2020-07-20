@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayModePropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModePropertiesKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModePropertiesKHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR");
             return nullptr;
         }
 
@@ -63,7 +63,7 @@ namespace jvulkan
 
         jobject jVkDisplayModeKHR = createVulkanHandle(
         		env,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayModeKHR",
+				"com/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR",
 				vkDisplayModePropertiesKHR->displayMode);
         if (env->ExceptionOccurred())
         {
@@ -71,7 +71,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setDisplayMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayModeKHR;)V");
+		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setDisplayMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplayMode");
@@ -94,7 +94,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setParameters", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR;)V");
+		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setParameters", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setParameters");

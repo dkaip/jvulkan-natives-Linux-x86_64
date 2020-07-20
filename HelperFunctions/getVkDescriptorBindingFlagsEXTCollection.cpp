@@ -123,7 +123,7 @@ namespace jvulkan
             VkDescriptorBindingFlagsEXT flags = (VkDescriptorBindingFlagsEXT)getEnumSetValue(
     				env,
 					jVkDescriptorBindingFlagsEXTObject,
-    				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDescriptorBindingFlagBitsEXT");
+    				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDescriptorBindingFlagBitsEXT");
     		if (env->ExceptionOccurred())
     		{
             	LOGERROR(env, "%s", "Error calling getEnumSetValue");

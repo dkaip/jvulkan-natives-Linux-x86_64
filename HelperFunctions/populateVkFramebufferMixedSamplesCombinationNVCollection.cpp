@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkFramebufferMixedSamplesCombinationNVCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkFramebufferMixedSamplesCombinationNV");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkFramebufferMixedSamplesCombinationNV");
             return;
         }
 
@@ -45,10 +45,10 @@ namespace jvulkan
             return;
         }
 
-        jclass vkFramebufferMixedSamplesCombinationNVClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkFramebufferMixedSamplesCombinationNV;");
+        jclass vkFramebufferMixedSamplesCombinationNVClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkFramebufferMixedSamplesCombinationNV;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkFramebufferMixedSamplesCombinationNV");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkFramebufferMixedSamplesCombinationNV");
             return;
         }
 

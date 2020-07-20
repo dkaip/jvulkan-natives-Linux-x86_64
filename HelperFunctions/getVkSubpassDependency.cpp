@@ -74,7 +74,7 @@ namespace jvulkan
 		int32_t srcStageMask = getEnumSetValue(
 				env,
 				enumSetObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(vkSubpassDependencyClass, "getDstStageMask", "()Ljava/util/EnumSet;");
@@ -87,7 +87,7 @@ namespace jvulkan
 		int32_t dstStageMask = getEnumSetValue(
 				env,
 				enumSetObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(vkSubpassDependencyClass, "getSrcAccessMask", "()Ljava/util/EnumSet;");
@@ -100,7 +100,7 @@ namespace jvulkan
 		int32_t srcAccessMask = getEnumSetValue(
 				env,
 				enumSetObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkAccessFlagBits");
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(vkSubpassDependencyClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -113,7 +113,7 @@ namespace jvulkan
 		int32_t dstAccessMask = getEnumSetValue(
 				env,
 				enumSetObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkAccessFlagBits");
 
 		methodId = env->GetMethodID(vkSubpassDependencyClass, "getDependencyFlags", "()Ljava/util/EnumSet;");
 		if (env->ExceptionOccurred())
@@ -125,7 +125,7 @@ namespace jvulkan
 		int32_t dependencyFlags = getEnumSetValue(
 				env,
 				enumSetObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDependencyFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkDependencyFlagBits");
 
 		subpassDependency->srcSubpass = (uint32_t)srcSubpass;
 		subpassDependency->dstSubpass = (uint32_t)dstSubpass;

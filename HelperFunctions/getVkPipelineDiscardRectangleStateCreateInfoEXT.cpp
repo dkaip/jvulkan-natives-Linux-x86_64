@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineDiscardRectangleStateCreateFlagsEXT flags = (VkPipelineDiscardRectangleStateCreateFlagsEXT)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineDiscardRectangleStateCreateFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineDiscardRectangleStateCreateFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");
@@ -95,7 +95,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getDiscardRectangleMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDiscardRectangleModeEXT;");
+        methodId = env->GetMethodID(theClass, "getDiscardRectangleMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDiscardRectangleModeEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getDiscardRectangleMode methodId");

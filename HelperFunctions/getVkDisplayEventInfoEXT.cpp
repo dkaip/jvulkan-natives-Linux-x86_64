@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getDisplayEvent", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDisplayEventTypeEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getDisplayEvent", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDisplayEventTypeEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType getDisplayEvent");

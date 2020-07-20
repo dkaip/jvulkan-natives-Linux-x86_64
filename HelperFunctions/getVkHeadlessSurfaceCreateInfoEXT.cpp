@@ -87,7 +87,7 @@ namespace jvulkan
         VkHeadlessSurfaceCreateFlagsEXT flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkHeadlessSurfaceCreateFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkHeadlessSurfaceCreateFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

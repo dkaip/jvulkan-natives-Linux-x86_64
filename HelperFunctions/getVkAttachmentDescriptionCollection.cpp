@@ -131,49 +131,49 @@ namespace jvulkan
 					return;
 				}
 
-				getFormatMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+				getFormatMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getSamplesMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+				getSamplesMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+				getLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkAttachmentLoadOp;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+				getStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkAttachmentStoreOp;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getStencilLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentLoadOp;");
+				getStencilLoadOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilLoadOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkAttachmentLoadOp;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getStencilStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentStoreOp;");
+				getStencilStoreOpMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getStencilStoreOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkAttachmentStoreOp;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getInitialLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
+				getInitialLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageLayout;");
 				if (env->ExceptionOccurred())
 				{
 					return;
 				}
 
-				getFinalLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFinalLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
+				getFinalLayoutMethodId = env->GetMethodID(vkAttachmentDescriptionClass, "getFinalLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageLayout;");
 				if (env->ExceptionOccurred())
 				{
 					return;
@@ -186,7 +186,7 @@ namespace jvulkan
 			int32_t flags = getEnumSetValue(
 					env,
 					flagsObject,
-					"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAttachmentDescriptionFlagBits");
+					"com/CIMthetics/jvulkan/VulkanCore/Enums/VkAttachmentDescriptionFlagBits");
 
 			////////////////////////////////////////////////////////////////////////
 			jobject vkFormatEnumObject = env->CallObjectMethod(jVkAttachmentDescriptionObject, getFormatMethodId);

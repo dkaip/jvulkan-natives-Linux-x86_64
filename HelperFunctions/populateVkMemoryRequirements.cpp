@@ -56,7 +56,7 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkMemoryRequirementsObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/jVkMemoryRequirementsObject");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/jVkMemoryRequirementsObject");
 			return;
 		}
 

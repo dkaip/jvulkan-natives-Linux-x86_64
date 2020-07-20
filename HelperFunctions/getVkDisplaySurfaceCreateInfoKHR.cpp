@@ -76,10 +76,10 @@ namespace jvulkan
         VkDisplaySurfaceCreateFlagsKHR flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulka/VulkanExtensions/VK11/Enums/VkDisplaySurfaceCreateFlagBitsKHR");
+                "com/CIMthetics/jvulka/VulkanExtensions/Enums/VkDisplaySurfaceCreateFlagBitsKHR");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getDisplayMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayModeKHR;");
+        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getDisplayMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getDisplayMode methodId");
@@ -131,7 +131,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getTransform", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
+        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getTransform", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTransform methodId");
@@ -177,7 +177,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getAlphaMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDisplayPlaneAlphaFlagBitsKHR;");
+        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getAlphaMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDisplayPlaneAlphaFlagBitsKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getAlphaMode methodId");
@@ -208,7 +208,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
+        methodId = env->GetMethodID(vkDisplaySurfaceCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getImageExtent");

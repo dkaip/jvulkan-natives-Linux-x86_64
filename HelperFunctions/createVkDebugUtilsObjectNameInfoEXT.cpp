@@ -29,10 +29,10 @@ namespace jvulkan
 	{
 		// Locate the VkDebugUtilsMessengerCallbackDataEXT class
 		jclass vkDebugUtilsObjectNameInfoEXTclass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsObjectNameInfoEXT");
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsObjectNameInfoEXT\"");
+			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsObjectNameInfoEXT\"");
 			return nullptr;
 		}
 
@@ -54,14 +54,14 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType");
+		jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType");
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType\"");
+			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType\"");
 			return nullptr;
 		}
 
-		methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
+		methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find static method fromValue");
@@ -70,7 +70,7 @@ namespace jvulkan
 
 		jobject theObject =  env->CallStaticObjectMethod(theClass, methodId, objectNameInfo->objectType);
 
-		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;)V");
+		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectType");
@@ -87,10 +87,10 @@ namespace jvulkan
 		////////////////////////////////////////////////////////////////////////
 		jobject jObjectHandle = createVulkanHandle(
 				env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle",
+				"com/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle",
 				(void *)objectNameInfo->objectHandle);
 
-		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectHandle", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;)V");
+		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectHandle", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectHandle");

@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkSurfaceFormat2KHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceFormat2KHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormat2KHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceFormat2KHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormat2KHR");
             return nullptr;
         }
 
@@ -68,7 +68,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkSurfaceFormat2KHRClass, "setSurfaceFormat", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceFormatKHR;)V");
+        methodId = env->GetMethodID(vkSurfaceFormat2KHRClass, "setSurfaceFormat", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormatKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSurfaceFormat");

@@ -28,8 +28,8 @@ namespace jvulkan
 {
     jobject createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessengerCallbackDataFlagsEXT;";
         /*
          * Create the EnumSet for the flags.
          */

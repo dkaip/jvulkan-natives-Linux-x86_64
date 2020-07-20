@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkQueueFamilyProperties2Class = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties2");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties2");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
             return nullptr;
         }
 
@@ -70,7 +70,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkQueueFamilyProperties2Class, "setQueueFamilyProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties;)V");
+		methodId = env->GetMethodID(vkQueueFamilyProperties2Class, "setQueueFamilyProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setQueueFamilyProperties");

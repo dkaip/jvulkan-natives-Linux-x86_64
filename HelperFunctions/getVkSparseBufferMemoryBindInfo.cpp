@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
 		////////////////////////////////////////////////////////////////////////
-		jmethodID methodId = env->GetMethodID(theClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+		jmethodID methodId = env->GetMethodID(theClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getBuffer");

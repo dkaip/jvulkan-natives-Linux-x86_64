@@ -62,7 +62,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -120,7 +120,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getVertexFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -147,7 +147,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getIndexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getIndexData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -192,7 +192,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getIndexType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkIndexType;");
+        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getIndexType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkIndexType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -219,7 +219,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getTransformData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        methodId = env->GetMethodID(vkGeometryTrianglesNVClass, "getTransformData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;

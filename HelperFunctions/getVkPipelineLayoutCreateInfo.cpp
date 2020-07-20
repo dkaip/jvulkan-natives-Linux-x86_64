@@ -139,7 +139,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderStageFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
@@ -333,7 +333,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineLayoutCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineLayoutCreateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

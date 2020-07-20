@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceVertexAttributeDivisorPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT");
 			return;
 		}
 

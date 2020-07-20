@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getPipeline", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;");
+        jmethodID methodId = env->GetMethodID(theClass, "getPipeline", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get method id for getPipeline");

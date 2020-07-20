@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkDisplayProperties2KHRCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayProperties2KHR");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayProperties2KHR");
             return;
         }
 

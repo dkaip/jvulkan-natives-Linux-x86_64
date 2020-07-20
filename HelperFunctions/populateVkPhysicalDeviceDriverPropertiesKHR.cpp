@@ -44,19 +44,19 @@ namespace jvulkan
 				jVkPhysicalDeviceDriverPropertiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceDriverPropertiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceDriverPropertiesKHR");
 			return;
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkDriverIdKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDriverIdKHR");
+        jclass vkDriverIdKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR");
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDriverIdKHR");
+			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkDriverIdKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDriverIdKHR;");
+        jmethodID methodId = env->GetStaticMethodID(vkDriverIdKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR;");
         if (env->ExceptionOccurred())
         {
 			LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -65,7 +65,7 @@ namespace jvulkan
 
         jobject vkDriverIdKHREnum = env->CallStaticObjectMethod(vkDriverIdKHRClass, methodId, vkPhysicalDeviceDriverPropertiesKHR->driverID);
 
-        methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDriverIdKHR;)V");
+        methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setDriverId");
@@ -118,7 +118,7 @@ namespace jvulkan
         env->DeleteLocalRef(driverInfoString);
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setConformanceVersion", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkConformanceVersionKHR;)V");
+        methodId = env->GetMethodID(theClass, "setConformanceVersion", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkConformanceVersionKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setConformanceVersion");

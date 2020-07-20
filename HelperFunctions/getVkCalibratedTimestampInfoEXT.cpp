@@ -62,7 +62,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getTimeDomain", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkTimeDomainEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getTimeDomain", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkTimeDomainEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getTimeDomain");

@@ -34,10 +34,10 @@ namespace jvulkan
 		}
 
 		jclass vkOffset2DClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset2D");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset2D");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D");
             return nullptr;
         }
 

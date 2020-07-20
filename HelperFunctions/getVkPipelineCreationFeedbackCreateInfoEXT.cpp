@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getPipelineCreationFeedback", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPipelineCreationFeedbackEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getPipelineCreationFeedback", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPipelineCreationFeedbackEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getPipelineCreationFeedback");

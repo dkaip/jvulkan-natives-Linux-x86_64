@@ -72,7 +72,7 @@ namespace jvulkan
         VkDescriptorUpdateTemplateCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorUpdateTemplateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorUpdateTemplateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getDescriptorUpdateEntries", "()Ljava/util/Collection;");
@@ -108,7 +108,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getTemplateType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorUpdateTemplateType;");
+        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getTemplateType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorUpdateTemplateType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType methodId");
@@ -139,7 +139,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getDescriptorSetLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSetLayout;");
+        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getDescriptorSetLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDescriptorSetLayout;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getDescriptorSetLayout methodId");
@@ -161,7 +161,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
+        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineBindPoint;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getPipelineBindPoint methodId");
@@ -192,7 +192,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getPipelineLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;");
+        methodId = env->GetMethodID(vkDescriptorUpdateTemplateCreateInfoClass, "getPipelineLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipelineLayout;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getPipelineLayout methodId");

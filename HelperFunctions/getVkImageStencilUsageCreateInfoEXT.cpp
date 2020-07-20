@@ -87,7 +87,7 @@ namespace jvulkan
         VkImageUsageFlags stencilUsageFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getEnumSetValue failed for VkImageUsageFlagBits.");

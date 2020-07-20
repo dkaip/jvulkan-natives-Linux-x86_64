@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceBlendOperationAdvancedPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT");
 			return;
 		}
 

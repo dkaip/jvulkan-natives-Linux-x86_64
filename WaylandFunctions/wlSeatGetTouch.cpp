@@ -24,7 +24,7 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -71,11 +71,11 @@ static const wl_touch_listener touch_listener
 	wltouchHandleOrientation
 };
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlSeatGetTouch
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Objects/WlSeatHandle;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlTouchHandle;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlSeatGetTouch
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlSeatGetTouch
   (JNIEnv *env, jobject, jobject jWLSeat)
 {
     struct wl_seat *waylandSeatHandle = (struct wl_seat *)jvulkan::getHandleValue(env, jWLSeat);

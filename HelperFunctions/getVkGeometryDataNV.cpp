@@ -42,7 +42,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryDataNVClass, "getTriangles", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkGeometryTrianglesNV;");
+        jmethodID methodId = env->GetMethodID(vkGeometryDataNVClass, "getTriangles", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeometryTrianglesNV;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -55,7 +55,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryDataNVClass, "getAabbs", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkGeometryAABBNV;");
+        methodId = env->GetMethodID(vkGeometryDataNVClass, "getAabbs", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeometryAABBNV;");
         if (env->ExceptionOccurred())
         {
             return;

@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceIDPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceIDProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceIDProperties");
 			return;
 		}
 

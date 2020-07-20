@@ -23,8 +23,8 @@ namespace jvulkan
 {
     jobject createVkMemoryHeapFlagsAsEnumSet(JNIEnv *env, VkMemoryHeapFlags memoryHeapFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryHeapFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkMemoryHeapFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkMemoryHeapFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */

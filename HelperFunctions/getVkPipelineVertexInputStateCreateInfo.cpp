@@ -58,7 +58,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkVertexInputBindingDescriptionClass, "getInputRate", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkVertexInputRate;");
+        methodId = env->GetMethodID(vkVertexInputBindingDescriptionClass, "getInputRate", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkVertexInputRate;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -221,7 +221,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkVertexInputAttributeDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkVertexInputAttributeDescriptionClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -405,7 +405,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineVertexInputStateCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////

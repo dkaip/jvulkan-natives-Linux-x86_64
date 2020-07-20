@@ -55,7 +55,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getCommandPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkCommandPool;");
+        jmethodID methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getCommandPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandPool;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -74,7 +74,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getLevel", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCommandBufferLevel;");
+        methodId = env->GetMethodID(vkCommandBufferAllocateInfoClass, "getLevel", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkCommandBufferLevel;");
         if (env->ExceptionOccurred())
         {
             return;

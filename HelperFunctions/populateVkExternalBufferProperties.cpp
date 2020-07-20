@@ -56,15 +56,15 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkExternalBufferPropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExternalBufferProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalBufferProperties");
             return;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkExternalMemoryPropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExternalMemoryProperties");
+        jclass vkExternalMemoryPropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalMemoryProperties");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExternalMemoryProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalMemoryProperties");
             return;
         }
 
@@ -93,7 +93,7 @@ namespace jvulkan
         }
 
 
-        methodId = env->GetMethodID(theClass, "setExternalMemoryProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExternalMemoryProperties;)V");
+        methodId = env->GetMethodID(theClass, "setExternalMemoryProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalMemoryProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setExternalMemoryProperties");

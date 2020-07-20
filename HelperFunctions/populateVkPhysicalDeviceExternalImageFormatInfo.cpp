@@ -43,19 +43,19 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkPhysicalDeviceExternalImageFormatInfoObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageFormatProperties2");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties2");
 			return;
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkExternalMemoryHandleTypeFlagBitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits");
+        jclass vkExternalMemoryHandleTypeFlagBitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkExternalMemoryHandleTypeFlagBitsClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits;");
+        jmethodID methodId = env->GetStaticMethodID(vkExternalMemoryHandleTypeFlagBitsClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -69,7 +69,7 @@ namespace jvulkan
             return;
         }
 
-        methodId = env->GetMethodID(theClass, "setHandleType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits;)V");
+        methodId = env->GetMethodID(theClass, "setHandleType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setHandleType");

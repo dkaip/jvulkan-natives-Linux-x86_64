@@ -56,7 +56,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkExternalFencePropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExternalFenceProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalFenceProperties");
             return;
         }
 

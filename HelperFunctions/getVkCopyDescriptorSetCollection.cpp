@@ -55,7 +55,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getSrcSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        jmethodID methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getSrcSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -100,7 +100,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        methodId = env->GetMethodID(vkCopyDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
             return;

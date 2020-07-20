@@ -61,7 +61,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getAccelerationStructure", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkAccelerationStructureNV;");
+        jmethodID methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getAccelerationStructure", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -80,7 +80,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;");
+        methodId = env->GetMethodID(vkBindAccelerationStructureMemoryInfoNVClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDeviceMemory;");
         if (env->ExceptionOccurred())
         {
             return;

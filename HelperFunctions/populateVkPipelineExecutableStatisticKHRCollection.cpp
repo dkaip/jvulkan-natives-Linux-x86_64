@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkPipelineExecutableStatisticKHRCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPipelineExecutableStatisticKHR");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPipelineExecutableStatisticKHR");
             return;
         }
 
@@ -45,10 +45,10 @@ namespace jvulkan
             return;
         }
 
-        jclass vkPipelineExecutableStatisticKHRClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPipelineExecutableStatisticKHR;");
+        jclass vkPipelineExecutableStatisticKHRClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPipelineExecutableStatisticKHR;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPipelineExecutableStatisticKHR");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPipelineExecutableStatisticKHR");
             return;
         }
 

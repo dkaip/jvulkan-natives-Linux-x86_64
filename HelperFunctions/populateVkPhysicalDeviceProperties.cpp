@@ -39,7 +39,7 @@ namespace jvulkan
         jclass vkPhysicalDevicePropertiesClass = env->GetObjectClass(jVkPhysicalDevicePropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties");
             return;
         }
 
@@ -129,14 +129,14 @@ namespace jvulkan
                 return;
         }
 
-        jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType");
+        jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkPhysicalDeviceType");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkPhysicalDeviceType");
             return;
         }
 
-        jfieldID fieldId = env->GetStaticFieldID(enumClass, deviceTypeName, "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType;");
+        jfieldID fieldId = env->GetStaticFieldID(enumClass, deviceTypeName, "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPhysicalDeviceType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling GetStaticFieldID");
@@ -150,7 +150,7 @@ namespace jvulkan
             return;
         }
 
-        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setDeviceType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPhysicalDeviceType;)V");
+        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setDeviceType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPhysicalDeviceType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDeviceType");
@@ -213,7 +213,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setLimits", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits;)V");
+        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setLimits", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceLimits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setLimits");
@@ -235,7 +235,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setSparseProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties;)V");
+        methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "setSparseProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSparseProperties");
@@ -261,7 +261,7 @@ namespace jvulkan
 
     static jobject getSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties)
     {
-        jclass sparsePropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseProperties");
+        jclass sparsePropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseProperties");
         jmethodID constructorMethod = env->GetMethodID(sparsePropertiesClass, "<init>", "()V");
         if (env->ExceptionOccurred())
         {
@@ -351,7 +351,7 @@ namespace jvulkan
 
     static jobject getdeviceLimits(JNIEnv *env, const VkPhysicalDeviceLimits *deviceLimits)
     {
-        jclass deviceLimitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceLimits");
+        jclass deviceLimitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceLimits");
         jmethodID constructorMethod = env->GetMethodID(deviceLimitsClass, "<init>", "()V");
         if (env->ExceptionOccurred())
         {

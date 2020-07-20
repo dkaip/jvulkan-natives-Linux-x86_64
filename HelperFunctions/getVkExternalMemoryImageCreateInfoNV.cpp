@@ -86,7 +86,7 @@ namespace jvulkan
         VkExternalMemoryHandleTypeFlags handleTypes = getEnumSetValue(
                 env,
 				handleTypesObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBitsNV");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBitsNV");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");

@@ -75,7 +75,7 @@ namespace jvulkan
         VkDebugUtilsMessengerCallbackDataFlagsEXT flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessengerCallbackDataFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessengerCallbackDataFlagBitsEXT");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "getMessageIdName", "()Ljava/lang/String;");

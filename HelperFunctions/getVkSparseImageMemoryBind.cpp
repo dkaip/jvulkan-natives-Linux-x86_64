@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
 		////////////////////////////////////////////////////////////////////////
-		jmethodID methodId = env->GetMethodID(theClass, "getSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresource;");
+		jmethodID methodId = env->GetMethodID(theClass, "getSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkImageSubresource;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getSubresource");
@@ -65,7 +65,7 @@ namespace jvulkan
 	    }
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "getOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset3D;");
+		methodId = env->GetMethodID(theClass, "getOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset3D;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getOffset");
@@ -91,7 +91,7 @@ namespace jvulkan
 	    }
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;");
+		methodId = env->GetMethodID(theClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getExtent");
@@ -117,7 +117,7 @@ namespace jvulkan
 	    }
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;");
+		methodId = env->GetMethodID(theClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDeviceMemory;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getMemory");
@@ -171,7 +171,7 @@ namespace jvulkan
 		VkSparseMemoryBindFlags flags = (VkSparseMemoryBindFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSparseMemoryBindFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSparseMemoryBindFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

@@ -34,7 +34,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkRect2DClass, "getOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset2D;");
+        jmethodID methodId = env->GetMethodID(vkRect2DClass, "getOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -53,7 +53,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRect2DClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
+        methodId = env->GetMethodID(vkRect2DClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
             return;

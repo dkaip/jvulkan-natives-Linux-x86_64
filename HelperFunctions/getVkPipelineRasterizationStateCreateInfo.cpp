@@ -72,7 +72,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineRasterizationStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineRasterizationStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "isDepthClampEnable", "()Z");
@@ -107,7 +107,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getPolygonMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPolygonMode;");
+        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getPolygonMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPolygonMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -144,10 +144,10 @@ namespace jvulkan
         int32_t cullModeFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCullModeFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkCullModeFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getFrontFace", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFrontFace;");
+        methodId = env->GetMethodID(vkPipelineRasterizationStateCreateInfoClass, "getFrontFace", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFrontFace;");
         if (env->ExceptionOccurred())
         {
             return;

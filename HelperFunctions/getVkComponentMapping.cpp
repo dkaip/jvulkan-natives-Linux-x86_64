@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getR", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+        jmethodID methodId = env->GetMethodID(theClass, "getR", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkComponentSwizzle;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getR");
@@ -75,7 +75,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getG", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+        methodId = env->GetMethodID(theClass, "getG", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkComponentSwizzle;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getG");
@@ -97,7 +97,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getB", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+        methodId = env->GetMethodID(theClass, "getB", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkComponentSwizzle;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getB");
@@ -119,7 +119,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getA", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkComponentSwizzle;");
+        methodId = env->GetMethodID(theClass, "getA", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkComponentSwizzle;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getA");

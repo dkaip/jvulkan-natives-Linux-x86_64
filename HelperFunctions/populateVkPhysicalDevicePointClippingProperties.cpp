@@ -42,19 +42,19 @@ namespace jvulkan
 				jVkPhysicalDevicePointClippingPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDevicePointClippingProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDevicePointClippingProperties");
 			return;
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkPointClippingBehaviorClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPointClippingBehavior");
+        jclass vkPointClippingBehaviorClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior");
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPointClippingBehavior");
+			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkPointClippingBehaviorClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPointClippingBehavior;");
+        jmethodID methodId = env->GetStaticMethodID(vkPointClippingBehaviorClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior;");
         if (env->ExceptionOccurred())
         {
 			LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -63,7 +63,7 @@ namespace jvulkan
 
         jobject vkPointClippingBehaviorEnum = env->CallStaticObjectMethod(vkPointClippingBehaviorClass, methodId, vkPhysicalDevicePointClippingProperties->pointClippingBehavior);
 
-        methodId = env->GetMethodID(theClass, "setPointClippingBehavior", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPointClippingBehavior;)V");
+        methodId = env->GetMethodID(theClass, "setPointClippingBehavior", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setPointClippingBehavior");

@@ -27,8 +27,8 @@ namespace jvulkan
 {
 	jobject createVkSampleCountFlagBitsAsEnumSet(JNIEnv *env, VkSampleCountFlags vkSampleCountFlags)
 	{
-		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits";
-		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;";
+		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits";
+		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;";
 		/*
 		 * Create the EnumSet for the flags.
 		 */

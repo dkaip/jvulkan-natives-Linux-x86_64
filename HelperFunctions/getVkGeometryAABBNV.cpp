@@ -62,7 +62,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryAABBNVClass, "getAabbData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(vkGeometryAABBNVClass, "getAabbData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;

@@ -72,10 +72,10 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineMultisampleStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineMultisampleStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineMultisampleStateCreateInfoClass, "getRasterizationSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+        methodId = env->GetMethodID(vkPipelineMultisampleStateCreateInfoClass, "getRasterizationSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;

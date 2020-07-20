@@ -87,7 +87,7 @@ namespace jvulkan
         VkMemoryAllocateFlags flags = getEnumSetValue(
                 env,
 				flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryAllocateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkMemoryAllocateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

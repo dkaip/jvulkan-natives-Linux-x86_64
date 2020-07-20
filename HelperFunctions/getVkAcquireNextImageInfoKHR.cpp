@@ -61,7 +61,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;");
+        jmethodID methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSwapchainKHR;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -93,7 +93,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getSemaphore", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSemaphore;");
+        methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getSemaphore", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSemaphore;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -112,7 +112,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getFence", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;");
+        methodId = env->GetMethodID(vkAcquireNextImageInfoKHRClass, "getFence", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkFence;");
         if (env->ExceptionOccurred())
         {
             return;

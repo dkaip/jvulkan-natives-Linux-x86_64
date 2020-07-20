@@ -27,8 +27,8 @@ namespace jvulkan
 {
 	jobject createVkSurfaceCounterFlagsEXTAsEnumSet(JNIEnv *env, VkSurfaceCounterFlagsEXT vkSurfaceCounterFlagsEXT)
 	{
-		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSurfaceCounterFlagBitsEXT";
-		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSurfaceCounterFlagBitsEXT;";
+		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkSurfaceCounterFlagBitsEXT";
+		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkSurfaceCounterFlagBitsEXT;";
 		/*
 		 * Create the EnumSet for the flags.
 		 */

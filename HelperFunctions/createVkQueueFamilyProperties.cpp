@@ -36,10 +36,10 @@ namespace jvulkan
 		}
 
 		jclass vkQueueFamilyPropertiesClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties");
             return nullptr;
         }
 
@@ -119,7 +119,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;)V");
+        methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinImageTransferGranularity");

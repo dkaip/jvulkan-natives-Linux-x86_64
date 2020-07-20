@@ -42,7 +42,7 @@ namespace jvulkan
 //				jVkSurfaceCapabilitiesFullScreenExclusiveEXTObject);
 //		if (env->ExceptionOccurred())
 //		{
-//			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceCapabilitiesFullScreenExclusiveEXT");
+//			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceCapabilitiesFullScreenExclusiveEXT");
 //			return;
 //		}
 //

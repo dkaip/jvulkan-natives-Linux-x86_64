@@ -92,7 +92,7 @@ namespace jvulkan
         VkBufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -112,11 +112,11 @@ namespace jvulkan
         VkBufferUsageFlags usage = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferUsageFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getHandleType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryHandleTypeFlagBits;");
+        methodId = env->GetMethodID(theClass, "getHandleType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method Id of getHandleType.");

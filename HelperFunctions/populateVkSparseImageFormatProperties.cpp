@@ -56,7 +56,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkSparseImageFormatPropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageFormatProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties");
             return;
         }
 
@@ -83,7 +83,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setImageGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;)V");
+        methodId = env->GetMethodID(theClass, "setImageGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageGranularity");

@@ -35,19 +35,19 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkImageViewHandleInfoNVXObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/jVkImageViewHandleInfoNVXObject");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/jVkImageViewHandleInfoNVXObject");
             return;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "setImageView", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImageView;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setImageView", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkImageView;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageView");
             return;
         }
 
-        jobject jVkImageView = createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImageView", (void *)vkImageViewHandleInfoNVX->imageView);
+        jobject jVkImageView = createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/Handles/VkImageView", (void *)vkImageViewHandleInfoNVX->imageView);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setDescriptorType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;)V");
+        methodId = env->GetMethodID(theClass, "setDescriptorType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDescriptorType");
@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
 
-    	jobject jVkDescriptorType = createEnumFromValue(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType", (int)vkImageViewHandleInfoNVX->descriptorType);
+    	jobject jVkDescriptorType = createEnumFromValue(env, "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType", (int)vkImageViewHandleInfoNVX->descriptorType);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
@@ -85,14 +85,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setSampler", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSampler;)V");
+        methodId = env->GetMethodID(theClass, "setSampler", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSampler;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSampler");
             return;
         }
 
-        jobject jVkSampler = createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSampler", (void *)vkImageViewHandleInfoNVX->sampler);
+        jobject jVkSampler = createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/Handles/VkSampler", (void *)vkImageViewHandleInfoNVX->sampler);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createVulkanHandle.");

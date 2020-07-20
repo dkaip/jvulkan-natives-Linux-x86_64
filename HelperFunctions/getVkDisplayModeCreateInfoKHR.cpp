@@ -76,10 +76,10 @@ namespace jvulkan
         VkDisplayModeCreateFlagsKHR flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulka/VulkanExtensions/VK11/Enums/VkDisplayModeCreateFlagBitsKHR");
+                "com/CIMthetics/jvulka/VulkanExtensions/Enums/VkDisplayModeCreateFlagBitsKHR");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplayModeCreateInfoKHRClass, "getParameters", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR;");
+        methodId = env->GetMethodID(vkDisplayModeCreateInfoKHRClass, "getParameters", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getParameters");

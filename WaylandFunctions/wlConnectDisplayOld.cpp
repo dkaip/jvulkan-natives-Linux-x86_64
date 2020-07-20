@@ -19,14 +19,14 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlConnectDisplay
- * Signature: (Ljava/lang/String;)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;
+ * Signature: (Ljava/lang/String;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlDisplay;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlConnectDisplay
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlConnectDisplay
   (JNIEnv *env, jobject, jstring jDisplayName)
 {
     const char *displayName = nullptr;

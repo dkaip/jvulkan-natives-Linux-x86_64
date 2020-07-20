@@ -18,7 +18,7 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -201,11 +201,11 @@ static const wl_shell_surface_listener shell_surface_listener
 	wlshellsurfaceHandlePopupDone
 };
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlShellGetShellSurface
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlShell;Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlSurface;)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlShellSurface;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlShell;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlSurface;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlShellSurface;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellGetShellSurface
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlShellGetShellSurface
   (JNIEnv *env, jobject, jobject jWlShell, jobject jWlSurface)
 {
     wl_shell *shellInterfaceHandle = (wl_shell *)jvulkan::getHandleValue(env, jWlShell);

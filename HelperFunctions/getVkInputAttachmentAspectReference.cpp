@@ -86,7 +86,7 @@ namespace jvulkan
         VkImageAspectFlags vkImageAspectFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlags");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlags");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkSparseImageMemoryRequirementsClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageMemoryRequirements");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageMemoryRequirements");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements");
             return nullptr;
         }
 
@@ -61,10 +61,10 @@ namespace jvulkan
             return nullptr;
         }
 
-        jclass vkSparseImageFormatPropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageFormatProperties");
+        jclass vkSparseImageFormatPropertiesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageFormatProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties");
             return nullptr;
         }
 
@@ -92,7 +92,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageFormatProperties;)V");
+		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFormatProperties");

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getSrcSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresourceLayers;");
+        jmethodID methodId = env->GetMethodID(theClass, "getSrcSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkImageSubresourceLayers;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find method id valueOf for getSrcSubresource");
@@ -65,7 +65,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getSrcOffset", "()[Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset3D;");
+        methodId = env->GetMethodID(theClass, "getSrcOffset", "()[Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset3D;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find method id valueOf for getSrcOffset");
@@ -91,7 +91,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getDstSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageSubresourceLayers;");
+        methodId = env->GetMethodID(theClass, "getDstSubresource", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkImageSubresourceLayers;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find method id valueOf for getDstSubresource");
@@ -117,7 +117,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getDstOffset", "()[Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkOffset3D;");
+        methodId = env->GetMethodID(theClass, "getDstOffset", "()[Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset3D;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find method id valueOf for getDstOffset");
@@ -143,7 +143,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getExtent", "()[Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;");
+        methodId = env->GetMethodID(theClass, "getExtent", "()[Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not find method id valueOf for getExtent");

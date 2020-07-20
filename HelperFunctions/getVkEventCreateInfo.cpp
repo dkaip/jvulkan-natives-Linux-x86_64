@@ -78,7 +78,7 @@ namespace jvulkan
 		VkEventCreateFlags flags = (VkEventCreateFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkEventCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkEventCreateFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

@@ -34,7 +34,7 @@ namespace jvulkan
     {
         // Locate the VkDebugUtilsMessengerCallbackDataEXT class
         jclass vkDebugUtilsLabelEXTClass = env->FindClass(
-        		"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsLabelEXT");
+        		"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsLabelEXT");
 
         // Locate the constructor
         jmethodID methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "<init>", "()V");

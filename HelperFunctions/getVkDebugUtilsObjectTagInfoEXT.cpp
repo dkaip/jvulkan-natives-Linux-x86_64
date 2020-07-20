@@ -63,7 +63,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
+        jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getObjectType methodId");
@@ -94,7 +94,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getObjectHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;");
+        methodId = env->GetMethodID(vkDebugUtilsObjectTagInfoEXTClass, "getObjectHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getObjectHandle methodId");

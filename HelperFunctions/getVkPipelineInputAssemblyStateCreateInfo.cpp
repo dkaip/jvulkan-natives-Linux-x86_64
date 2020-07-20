@@ -65,10 +65,10 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineVertexInputStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineVertexInputStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineInputAssemblyStateCreateInfoClass, "getTopology", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPrimitiveTopology;");
+        methodId = env->GetMethodID(vkPipelineInputAssemblyStateCreateInfoClass, "getTopology", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPrimitiveTopology;");
         if (env->ExceptionOccurred())
         {
             return;

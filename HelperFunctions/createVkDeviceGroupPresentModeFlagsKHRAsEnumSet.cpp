@@ -27,8 +27,8 @@ namespace jvulkan
 {
 	jobject createVkDeviceGroupPresentModeFlagsKHRAsEnumSet(JNIEnv *env, VkDeviceGroupPresentModeFlagsKHR modes)
 	{
-		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDeviceGroupPresentModeFlagBitsKHR";
-		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDeviceGroupPresentModeFlagBitsKHR;";
+		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDeviceGroupPresentModeFlagBitsKHR";
+		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDeviceGroupPresentModeFlagBitsKHR;";
 		/*
 		 * Create the EnumSet for the flags.
 		 */

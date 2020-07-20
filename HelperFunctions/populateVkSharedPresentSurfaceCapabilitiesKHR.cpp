@@ -43,7 +43,7 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkSharedPresentSurfaceCapabilitiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSharedPresentSurfaceCapabilitiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSharedPresentSurfaceCapabilitiesKHR");
 			return;
 		}
 

@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkSparseImageMemoryRequirements2CollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageMemoryRequirements2");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2");
             return;
         }
 
@@ -45,10 +45,10 @@ namespace jvulkan
             return;
         }
 
-        jclass vkSparseImageMemoryRequirements2Class = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageMemoryRequirements2;");
+        jclass vkSparseImageMemoryRequirements2Class = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSparseImageMemoryRequirements2");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2");
             return;
         }
 

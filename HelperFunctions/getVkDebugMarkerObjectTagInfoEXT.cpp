@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugReportObjectTypeEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getObjectType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugReportObjectTypeEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getObjectType");

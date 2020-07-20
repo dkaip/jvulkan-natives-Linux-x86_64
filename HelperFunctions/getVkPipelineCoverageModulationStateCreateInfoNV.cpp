@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineCoverageModulationStateCreateFlagsNV flags = (VkPipelineCoverageModulationStateCreateFlagsNV)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineCoverageModulationStateCreateFlagBitsNV");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineCoverageModulationStateCreateFlagBitsNV");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
@@ -95,7 +95,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getCoverageModulationMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCoverageModulationModeNV;");
+        methodId = env->GetMethodID(theClass, "getCoverageModulationMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkCoverageModulationModeNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getCoverageModulationMode.");

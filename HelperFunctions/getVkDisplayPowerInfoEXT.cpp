@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getPowerState", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDisplayPowerStateEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getPowerState", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDisplayPowerStateEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getPowerState");

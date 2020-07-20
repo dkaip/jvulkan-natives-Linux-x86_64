@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        jmethodID methodId = env->GetMethodID(theClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getFormat");
@@ -97,7 +97,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageType;");
+        methodId = env->GetMethodID(theClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType getType");
@@ -133,7 +133,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getTiling", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageTiling;");
+        methodId = env->GetMethodID(theClass, "getTiling", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType getTiling");
@@ -186,7 +186,7 @@ namespace jvulkan
         VkImageUsageFlags usage = (VkImageUsageFlags)getEnumSetValue(
                 env,
 				vkImageUsageFlagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
@@ -211,7 +211,7 @@ namespace jvulkan
         VkImageCreateFlags flags = (VkImageCreateFlags)getEnumSetValue(
                 env,
 				vkImageCreateFlagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageCreateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

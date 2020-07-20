@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getSampler", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSampler;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getSampler", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSampler;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getSampler.");
@@ -61,7 +61,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageView", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImageView;");
+        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageView", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkImageView;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getImageView.");
@@ -83,7 +83,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkDescriptorImageInfoClass, "getImageLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getImageLayout.");

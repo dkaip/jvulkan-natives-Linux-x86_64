@@ -27,8 +27,8 @@ namespace jvulkan
 {
 	jobject createVkSurfaceTransformFlagsKHRAsEnumSet(JNIEnv *env, VkSurfaceTransformFlagsKHR transformFlags)
 	{
-		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR";
-		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;";
+		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR";
+		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR;";
 		/*
 		 * Create the EnumSet for the flags.
 		 */

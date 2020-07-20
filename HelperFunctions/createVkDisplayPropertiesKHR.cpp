@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayPropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPropertiesKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPropertiesKHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR");
             return nullptr;
         }
 
@@ -64,7 +64,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
         jobject jVkDisplayKHR = createVulkanHandle(
         		env,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayKHR",
+				"com/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR",
 				vkDisplayPropertiesKHR->display);
         if (env->ExceptionOccurred())
         {
@@ -72,7 +72,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayKHR;)V");
+		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplay");
@@ -115,7 +115,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalDimensions", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalDimensions", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPhysicalDimensions");
@@ -139,7 +139,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalResolution", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalResolution", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPhysicalResolution");

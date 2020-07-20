@@ -20,7 +20,7 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -439,11 +439,11 @@ static const wl_seat_listener seat_listener
 
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlRegistryBind
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlRegistry;ILjava/lang/String;I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlRegistry;ILjava/lang/String;I)Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlRegistryBind
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlRegistryBind
   (JNIEnv *env, jobject, jobject jWlRegistry, jint interfaceId, jstring jTextInterfaceName, jint interfaceVersion)
 {
     wl_registry *waylandRegistryHandle = (wl_registry *)jvulkan::getHandleValue(env, jWlRegistry);
@@ -678,7 +678,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProx
 
     if (jInterfacePointer == nullptr)
     {
-    	jInterfacePointer = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle", result);
+    	jInterfacePointer = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle", result);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createVulkanHandle.");

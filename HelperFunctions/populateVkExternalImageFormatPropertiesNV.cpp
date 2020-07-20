@@ -42,7 +42,7 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkExternalImageFormatPropertiesNVObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/jVkExternalImageFormatPropertiesNVObject");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/jVkExternalImageFormatPropertiesNVObject");
 			return;
 		}
 
@@ -54,7 +54,7 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(theClass, "setImageFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageFormatProperties;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setImageFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageFormatProperties");

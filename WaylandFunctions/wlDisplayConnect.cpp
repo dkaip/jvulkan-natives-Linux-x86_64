@@ -23,7 +23,7 @@
 #include <wayland-client.h>
 
 #include "JVulkanHelperFunctions.hh"
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "slf4j.hh"
 
 
@@ -50,7 +50,7 @@ jobject globalWaylandEventQueueObject;
 //       return;
 //    }
 //
-//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/WlDisplayHandle;Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VulkanHandle;ILjava/lang/String;)V");
+//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/WlDisplayHandle;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;ILjava/lang/String;)V");
 //    if (env->ExceptionOccurred())
 //    {
 //    	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -109,7 +109,7 @@ jobject globalWaylandEventQueueObject;
 //       return;
 //    }
 //
-//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/WlDisplayHandle;I)V");
+//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/WlDisplayHandle;I)V");
 //    if (env->ExceptionOccurred())
 //    {
 //    	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -149,11 +149,11 @@ jobject globalWaylandEventQueueObject;
 //};
 //
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlDisplayConnect
  * Signature: (Ljava/lang/String;Ljava/util/concurrent/LinkedBlockingQueue;)Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayConnect
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlDisplayConnect
   (JNIEnv *env, jobject, jstring jDisplayName, jobject jWaylandEventQueueObject)
 {
 	LOGTRACE(env, "%s", "wlDisplayConnect called"); // This line is mainly here so that the logging stuff gets initialized before any errors.

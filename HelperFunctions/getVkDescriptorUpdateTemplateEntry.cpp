@@ -84,7 +84,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorUpdateTemplateEntryClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
+        methodId = env->GetMethodID(vkDescriptorUpdateTemplateEntryClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType methodId");

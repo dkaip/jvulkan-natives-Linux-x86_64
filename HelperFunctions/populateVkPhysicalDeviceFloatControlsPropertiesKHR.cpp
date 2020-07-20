@@ -44,19 +44,19 @@ namespace jvulkan
 				jVkPhysicalDeviceFloatControlsPropertiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceFloatControlsPropertiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceFloatControlsPropertiesKHR");
 			return;
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkShaderFloatControlsIndependenceKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR");
+        jclass vkShaderFloatControlsIndependenceKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShaderFloatControlsIndependenceKHR");
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShaderFloatControlsIndependenceKHR");
             return;
         }
 
-        jmethodID fromValueMethodId = env->GetStaticMethodID(vkShaderFloatControlsIndependenceKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR;");
+        jmethodID fromValueMethodId = env->GetStaticMethodID(vkShaderFloatControlsIndependenceKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShaderFloatControlsIndependenceKHR;");
         if (env->ExceptionOccurred())
         {
 			LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -65,7 +65,7 @@ namespace jvulkan
 
         jobject denormBehaviorIndependenceEnum = env->CallStaticObjectMethod(vkShaderFloatControlsIndependenceKHRClass, fromValueMethodId, vkPhysicalDeviceFloatControlsPropertiesKHR->denormBehaviorIndependence);
 
-        jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesKHRClass, "setDenormBehaviorIndependence", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR;)V");
+        jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesKHRClass, "setDenormBehaviorIndependence", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShaderFloatControlsIndependenceKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSeparateDenormSettings");
@@ -87,7 +87,7 @@ namespace jvulkan
             return;
         }
 
-        methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesKHRClass, "setRoundingModeIndependence", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShaderFloatControlsIndependenceKHR;)V");
+        methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesKHRClass, "setRoundingModeIndependence", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShaderFloatControlsIndependenceKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setRoundingModeIndependence");

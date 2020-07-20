@@ -70,7 +70,7 @@ namespace jvulkan
 //        }
 //
 //        ////////////////////////////////////////////////////////////////////////
-//        jmethodID methodId = env->GetMethodID(theClass, "getFullScreenExclusive", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkFullScreenExclusiveEXT;");
+//        jmethodID methodId = env->GetMethodID(theClass, "getFullScreenExclusive", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkFullScreenExclusiveEXT;");
 //        if (env->ExceptionOccurred())
 //        {
 //        	LOGERROR(env, "%s", "Could not find method id for getFullScreenExclusive.");

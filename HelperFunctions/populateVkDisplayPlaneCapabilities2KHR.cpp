@@ -56,7 +56,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkDisplayPlaneCapabilities2KHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPlaneCapabilities2KHR");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlaneCapabilities2KHR");
             return;
         }
 
@@ -70,7 +70,7 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(theClass, "setCapabilities", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPlaneCapabilitiesKHR;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setCapabilities", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlaneCapabilitiesKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCapabilities");

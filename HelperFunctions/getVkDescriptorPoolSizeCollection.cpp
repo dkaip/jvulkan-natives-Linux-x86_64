@@ -34,7 +34,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorPoolSizeClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorPoolSizeClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
             return;

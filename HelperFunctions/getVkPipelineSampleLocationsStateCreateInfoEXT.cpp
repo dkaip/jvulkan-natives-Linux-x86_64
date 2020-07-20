@@ -85,7 +85,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getInfo", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSampleLocationsInfoEXT;");
+        methodId = env->GetMethodID(theClass, "getInfo", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSampleLocationsInfoEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getInfo.");

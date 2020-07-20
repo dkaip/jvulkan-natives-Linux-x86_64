@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDevicePushDescriptorPropertiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDevicePushDescriptorPropertiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDevicePushDescriptorPropertiesKHR");
 			return;
 		}
 

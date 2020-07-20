@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineRasterizationStateStreamCreateFlagsEXT flags = (VkPipelineRasterizationStateStreamCreateFlagsEXT)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineRasterizationStateStreamCreateFlagsEXT");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineRasterizationStateStreamCreateFlagsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

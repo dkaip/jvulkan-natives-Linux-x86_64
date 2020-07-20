@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkDisplayModeProperties2KHRCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeProperties2KHR");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR");
             return;
         }
 
@@ -45,10 +45,10 @@ namespace jvulkan
             return;
         }
 
-        jclass vkDisplayModeProperties2KHRClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeProperties2KHR;");
+        jclass vkDisplayModeProperties2KHRClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeProperties2KHR");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR");
             return;
         }
 

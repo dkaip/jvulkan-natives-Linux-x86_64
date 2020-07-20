@@ -79,7 +79,7 @@ namespace jvulkan
 		VkDeviceQueueCreateFlags flags = (VkDeviceQueueCreateFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceQueueCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkDeviceQueueCreateFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkTimeDomainEXTCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkTimeDomainEXT");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkTimeDomainEXT");
             return;
         }
 
@@ -49,7 +49,7 @@ namespace jvulkan
         {
         	jobject jVkTimeDomainEXT = createEnumFromValue(
         			env,
-					"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkTimeDomainEXT",
+					"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkTimeDomainEXT",
 					vkTimeDomainEXTs[i]);
             if (env->ExceptionOccurred())
             {

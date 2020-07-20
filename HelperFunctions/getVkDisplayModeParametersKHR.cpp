@@ -39,7 +39,7 @@ void getVkDisplayModeParametersKHR(
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDisplayModeParametersKHRClass, "getVisibleRegion", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
+        jmethodID methodId = env->GetMethodID(vkDisplayModeParametersKHRClass, "getVisibleRegion", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getVisibleRegion");

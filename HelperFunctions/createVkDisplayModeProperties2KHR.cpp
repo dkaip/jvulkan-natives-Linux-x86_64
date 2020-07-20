@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayModeProperties2KHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeProperties2KHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeProperties2KHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR");
             return nullptr;
         }
 
@@ -68,7 +68,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkDisplayModeProperties2KHRClass, "setDisplayModeProperties", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModePropertiesKHR;)V");
+        methodId = env->GetMethodID(vkDisplayModeProperties2KHRClass, "setDisplayModeProperties", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplayModeProperties");

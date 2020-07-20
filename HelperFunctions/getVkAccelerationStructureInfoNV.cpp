@@ -61,7 +61,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkAccelerationStructureInfoNVClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkAccelerationStructureTypeNV;");
+        jmethodID methodId = env->GetMethodID(vkAccelerationStructureInfoNVClass, "getType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkAccelerationStructureTypeNV;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -98,7 +98,7 @@ namespace jvulkan
         VkBuildAccelerationStructureFlagsNV flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkBuildAccelerationStructureFlagBitsNV");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkBuildAccelerationStructureFlagBitsNV");
 
 
         ////////////////////////////////////////////////////////////////////////

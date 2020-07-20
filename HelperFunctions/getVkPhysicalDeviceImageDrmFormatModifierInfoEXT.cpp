@@ -85,7 +85,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetMethodID(theClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getSharingMode");

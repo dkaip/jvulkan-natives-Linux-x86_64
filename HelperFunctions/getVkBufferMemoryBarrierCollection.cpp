@@ -65,7 +65,7 @@ namespace jvulkan
         VkAccessFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -78,7 +78,7 @@ namespace jvulkan
         VkAccessFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkAccessFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkAccessFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getSrcQueueFamilyIndex", "()I");
@@ -107,7 +107,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        methodId = env->GetMethodID(vkBufferMemoryBarrierClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;

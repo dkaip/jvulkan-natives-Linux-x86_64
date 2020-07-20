@@ -62,7 +62,7 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
+        jmethodID methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -81,7 +81,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFramebuffer;");
+        methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkFramebuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -100,7 +100,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getRenderArea", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkRect2D;");
+        methodId = env->GetMethodID(vkRenderPassBeginInfoClass, "getRenderArea", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkRect2D;");
         if (env->ExceptionOccurred())
         {
             return;

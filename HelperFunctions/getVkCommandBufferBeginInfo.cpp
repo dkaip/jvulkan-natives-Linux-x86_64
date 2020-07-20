@@ -65,11 +65,11 @@ namespace jvulkan
         VkCommandBufferUsageFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCommandBufferUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkCommandBufferUsageFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferBeginInfoClass, "getInheritanceInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkCommandBufferInheritanceInfo;");
+        methodId = env->GetMethodID(vkCommandBufferBeginInfoClass, "getInheritanceInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkCommandBufferInheritanceInfo;");
         if (env->ExceptionOccurred())
         {
             return;

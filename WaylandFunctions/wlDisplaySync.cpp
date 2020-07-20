@@ -23,7 +23,7 @@
 #include <wayland-client.h>
 
 #include "JVulkanHelperFunctions.hh"
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "slf4j.hh"
 
 using namespace std;
@@ -49,7 +49,7 @@ using namespace std;
 //       return;
 //    }
 //
-//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/WlCallbackHandle;)V");
+//    jmethodID methodId = env->GetMethodID(javaClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/WlCallbackHandle;)V");
 //    if (env->ExceptionOccurred())
 //    {
 //    	LOGERROR(env, "%s", "Failed trying to find constructor.");
@@ -88,11 +88,11 @@ using namespace std;
 //};
 //
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlDisplaySync
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplaySync
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlDisplaySync
   (JNIEnv *env, jobject, jobject jWlDisplay)
 {
     wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);

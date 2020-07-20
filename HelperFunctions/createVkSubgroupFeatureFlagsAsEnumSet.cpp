@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkSubgroupFeatureFlagsAsEnumSet(JNIEnv *env, VkSubgroupFeatureFlags vkSubgroupFeatureFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSubgroupFeatureFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSubgroupFeatureFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSubgroupFeatureFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSubgroupFeatureFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

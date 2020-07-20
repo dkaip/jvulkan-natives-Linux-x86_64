@@ -64,7 +64,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getDisplayPrimaryRed", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkXYColorEXT;");
+        jmethodID methodId = env->GetMethodID(theClass, "getDisplayPrimaryRed", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkXYColorEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getDisplayPrimaryRed");
@@ -91,7 +91,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getDisplayPrimaryGreen", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkXYColorEXT;");
+        methodId = env->GetMethodID(theClass, "getDisplayPrimaryGreen", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkXYColorEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getDisplayPrimaryGreen");
@@ -118,7 +118,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getDisplayPrimaryBlue", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkXYColorEXT;");
+        methodId = env->GetMethodID(theClass, "getDisplayPrimaryBlue", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkXYColorEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getDisplayPrimaryBlue");
@@ -145,7 +145,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getWhitePoint", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkXYColorEXT;");
+        methodId = env->GetMethodID(theClass, "getWhitePoint", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkXYColorEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getWhitePoint");

@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getRect", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkRect2D;");
+        jmethodID methodId = env->GetMethodID(theClass, "getRect", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkRect2D;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method ID for getRect");

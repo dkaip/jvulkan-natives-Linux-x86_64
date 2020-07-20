@@ -41,7 +41,7 @@ namespace jvulkan
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkClearValueClass, "getClearColorValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkClearColorValue;");
+        jmethodID methodId = env->GetMethodID(vkClearValueClass, "getClearColorValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkClearColorValue;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -148,7 +148,7 @@ namespace jvulkan
              * Okay, we have determined that the VkClearValue is a VkClearDepthStencilValue
              * object.
              */
-            methodId = env->GetMethodID(vkClearValueClass, "getClearDepthStencilValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkClearDepthStencilValue;");
+            methodId = env->GetMethodID(vkClearValueClass, "getClearDepthStencilValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkClearDepthStencilValue;");
             if (env->ExceptionOccurred())
             {
                 return;

@@ -56,7 +56,7 @@ namespace jvulkan
 		VkPipelineCreationFeedbackFlagsEXT flags = (VkPipelineCreationFeedbackFlagsEXT)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineCreationFeedbackFlagBitsEXT");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineCreationFeedbackFlagBitsEXT");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

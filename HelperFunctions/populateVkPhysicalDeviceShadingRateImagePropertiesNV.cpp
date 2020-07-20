@@ -44,12 +44,12 @@ namespace jvulkan
 				jVkPhysicalDeviceShadingRateImagePropertiesNVObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceShadingRateImagePropertiesNV");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceShadingRateImagePropertiesNV");
 			return;
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "setShadingRateTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setShadingRateTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setShadingRateTexelSize");

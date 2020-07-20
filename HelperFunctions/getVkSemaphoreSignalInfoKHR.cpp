@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
 		////////////////////////////////////////////////////////////////////////
-		jmethodID methodId = env->GetMethodID(theClass, "getSemaphore", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSemaphore;");
+		jmethodID methodId = env->GetMethodID(theClass, "getSemaphore", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSemaphore;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getSemaphore");

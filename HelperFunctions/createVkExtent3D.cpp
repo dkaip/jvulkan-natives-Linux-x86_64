@@ -28,10 +28,10 @@ namespace jvulkan
 	jobject createVkExtent3D(JNIEnv *env, const VkExtent3D *vkExtent3D)
 	{
 		jclass vkExtent3DClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D");
             return nullptr;
         }
 

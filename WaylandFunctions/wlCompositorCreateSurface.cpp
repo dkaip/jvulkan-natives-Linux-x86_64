@@ -18,7 +18,7 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -149,11 +149,11 @@ static const wl_surface_listener surface_listener
 
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlCompositorCreateSurface
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlCompositor;)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlSurface;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlCompositor;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlSurface;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlCompositorCreateSurface
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlCompositorCreateSurface
   (JNIEnv *env, jobject, jobject jWlCompositor)
 {
     struct wl_compositor *waylandCompositorHandle = (struct wl_compositor *)jvulkan::getHandleValue(env, jWlCompositor);

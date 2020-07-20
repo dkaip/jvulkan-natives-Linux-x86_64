@@ -73,11 +73,11 @@ namespace jvulkan
         VkPipelineCreateFlags flags = (VkPipelineCreateFlags)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getStage", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/CreateInfos/VkPipelineShaderStageCreateInfo;");
+        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getStage", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkPipelineShaderStageCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -90,7 +90,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;");
+        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipelineLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -109,7 +109,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;");
+        methodId = env->GetMethodID(vkComputePipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;");
         if (env->ExceptionOccurred())
         {
             return;

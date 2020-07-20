@@ -68,7 +68,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkImage;");
+        jmethodID methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getImage", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkImage;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -87,7 +87,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;");
+        methodId = env->GetMethodID(vkBindBufferMemoryInfoClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDeviceMemory;");
         if (env->ExceptionOccurred())
         {
             return;

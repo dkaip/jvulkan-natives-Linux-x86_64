@@ -130,7 +130,7 @@ namespace jvulkan
 					return;
 				}
 
-				getPipelineBindPointMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineBindPoint;");
+				getPipelineBindPointMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getPipelineBindPoint", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineBindPoint;");
 				if (env->ExceptionOccurred())
 				{
 					return;
@@ -154,7 +154,7 @@ namespace jvulkan
 					return;
 				}
 
-				getDepthStencilAttachmentMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAttachmentReference;");
+				getDepthStencilAttachmentMethodId = env->GetMethodID(vkSubpassDescriptionClass, "getDepthStencilAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAttachmentReference;");
 				if (env->ExceptionOccurred())
 				{
 					return;
@@ -172,7 +172,7 @@ namespace jvulkan
 			int32_t flags = getEnumSetValue(
 					env,
 					flagsObject,
-					"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSubpassDescriptionFlagBits");
+					"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSubpassDescriptionFlagBits");
 
 			////////////////////////////////////////////////////////////////////////
 			jobject vkPipelineBindPointEnumObject = env->CallObjectMethod(jVkSubpassDescriptionObject, getPipelineBindPointMethodId);

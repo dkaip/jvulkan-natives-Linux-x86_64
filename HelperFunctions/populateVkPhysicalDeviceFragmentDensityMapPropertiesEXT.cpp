@@ -44,12 +44,12 @@ namespace jvulkan
 				jVkPhysicalDeviceFragmentDensityMapPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceFragmentDensityMapPropertiesEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceFragmentDensityMapPropertiesEXT");
 			return;
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFragmentDensityMapPropertiesEXTClass, "setMinFragmentDensityTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+        jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFragmentDensityMapPropertiesEXTClass, "setMinFragmentDensityTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinFragmentDensityTexelSize");
@@ -71,7 +71,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPhysicalDeviceFragmentDensityMapPropertiesEXTClass, "setMaxFragmentDensityTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+        methodId = env->GetMethodID(vkPhysicalDeviceFragmentDensityMapPropertiesEXTClass, "setMaxFragmentDensityTexelSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxFragmentDensityTexelSize");

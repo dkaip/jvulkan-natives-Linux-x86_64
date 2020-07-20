@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        jmethodID methodId = env->GetMethodID(theClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getFormat");
@@ -106,7 +106,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getYcbcrModel", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerYcbcrModelConversion;");
+        methodId = env->GetMethodID(theClass, "getYcbcrModel", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerYcbcrModelConversion;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getYcbcrModel");
@@ -143,7 +143,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getYcbcrModel", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerYcbcrRange;");
+        methodId = env->GetMethodID(theClass, "getYcbcrModel", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerYcbcrRange;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getYcbcrModel");
@@ -180,7 +180,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getComponents", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkComponentMapping;");
+        methodId = env->GetMethodID(theClass, "getComponents", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkComponentMapping;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getComponents");
@@ -206,7 +206,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getxChromaOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkChromaLocation;");
+        methodId = env->GetMethodID(theClass, "getxChromaOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkChromaLocation;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getxChromaOffset");
@@ -243,7 +243,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getyChromaOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkChromaLocation;");
+        methodId = env->GetMethodID(theClass, "getyChromaOffset", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkChromaLocation;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getyChromaOffset");
@@ -265,7 +265,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getChromaFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFilter;");
+        methodId = env->GetMethodID(theClass, "getChromaFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFilter;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getChromaFilter");

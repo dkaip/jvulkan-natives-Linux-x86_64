@@ -23,17 +23,17 @@
 #include <wayland-client.h>
 
 #include "JVulkanHelperFunctions.hh"
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "slf4j.hh"
 
 using namespace std;
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlShellSurfaceSetPopup
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlShellSurfaceHandle;Lcom/CIMthetics/jvulkan/Wayland/Objects/WlSeatHandle;ILcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;IILjava/util/EnumSet;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlShellSurfaceSetPopup
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlShellSurfaceSetPopup
   (JNIEnv *env, jobject, jobject JWlShellSurface, jobject JWlSeat, jint serialNumber, jobject JWlSurface, jint x, jint y , jobject jWlShellSurfaceTransientBehaviorEnumSet)
 {
     struct wl_shell_surface *waylandShellSurfaceHandle = (struct wl_shell_surface *)jvulkan::getHandleValue(env, JWlShellSurface);

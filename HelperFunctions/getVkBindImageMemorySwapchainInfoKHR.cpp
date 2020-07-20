@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDeviceAddress;");
+        jmethodID methodId = env->GetMethodID(theClass, "getSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDeviceAddress;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get method id for getSwapchain");

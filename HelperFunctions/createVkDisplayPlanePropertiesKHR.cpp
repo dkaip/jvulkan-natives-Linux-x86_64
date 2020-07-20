@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayPlanePropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPlanePropertiesKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlanePropertiesKHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayPlanePropertiesKHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlanePropertiesKHR");
             return nullptr;
         }
 
@@ -64,7 +64,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
         jobject jVkDisplayKHR = createVulkanHandle(
         		env,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayKHR",
+				"com/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR",
 				vkDisplayPlanePropertiesKHR->currentDisplay);
         if (env->ExceptionOccurred())
         {
@@ -72,7 +72,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlanePropertiesKHRClass, "setCurrentDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayKHR;)V");
+		methodId = env->GetMethodID(vkDisplayPlanePropertiesKHRClass, "setCurrentDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCurrentDisplay");

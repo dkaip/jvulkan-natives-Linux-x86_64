@@ -78,10 +78,10 @@ namespace jvulkan
 		int32_t flags = getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSwapchainCreateFlagBitsKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkSwapchainCreateFlagBitsKHR");
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getSurface", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getSurface", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkSurfaceKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -109,7 +109,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -136,7 +136,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageColorSpace", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkColorSpaceKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageColorSpace", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -163,7 +163,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -235,10 +235,10 @@ namespace jvulkan
 		int32_t imageUsage = getEnumSetValue(
 				env,
 				imageUsageObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getImageSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -294,7 +294,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPreTransform", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSurfaceTransformFlagBitsKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPreTransform", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -321,7 +321,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getCompositeAlpha", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompositeAlphaFlagBitsKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getCompositeAlpha", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkCompositeAlphaFlagBitsKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -348,7 +348,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPresentMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPresentModeKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getPresentMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -396,7 +396,7 @@ namespace jvulkan
 		////////////////////////////////////////////////////////////////////////
 		VkSwapchainKHR_T *oldSwapchainHandle = nullptr;
 
-		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getOldSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSwapchainKHR;");
+		methodId = env->GetMethodID(vkSwapchainCreateInfoKHRClass, "getOldSwapchain", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSwapchainKHR;");
 		if (env->ExceptionOccurred())
 		{
 			return;

@@ -35,14 +35,14 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkFramebufferMixedSamplesCombinationNVObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkFramebufferMixedSamplesCombinationNV");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkFramebufferMixedSamplesCombinationNV");
             return;
         }
 
         ///////////////////////////////////////////////////////////////////////////
         jobject theEnum = createEnumFromValue(
         		env,
-        		"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkCoverageReductionModeNV",
+        		"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkCoverageReductionModeNV",
 				vkFramebufferMixedSamplesCombinationNV->coverageReductionMode);
         if (env->ExceptionOccurred() || theEnum == nullptr)
         {
@@ -51,7 +51,7 @@ namespace jvulkan
         }
 
 
-        jmethodID methodId = env->GetMethodID(theClass, "setCoverageReductionMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkCoverageReductionModeNV;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setCoverageReductionMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkCoverageReductionModeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCoverageReductionMode");
@@ -68,7 +68,7 @@ namespace jvulkan
         ///////////////////////////////////////////////////////////////////////////
         theEnum = createEnumFromValue(
         		env,
-        		"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits",
+        		"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits",
 				vkFramebufferMixedSamplesCombinationNV->rasterizationSamples);
         if (env->ExceptionOccurred() || theEnum == nullptr)
         {
@@ -77,7 +77,7 @@ namespace jvulkan
         }
 
 
-        methodId = env->GetMethodID(theClass, "setRasterizationSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;)V");
+        methodId = env->GetMethodID(theClass, "setRasterizationSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setRasterizationSamples");

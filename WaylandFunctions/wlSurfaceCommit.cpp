@@ -23,17 +23,17 @@
 #include <wayland-client.h>
 
 #include "JVulkanHelperFunctions.hh"
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "slf4j.hh"
 
 using namespace std;
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlSurfaceCommit
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlSurfaceHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlSurfaceCommit
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlSurfaceCommit
   (JNIEnv *env, jobject, jobject jWlSurface)
 {
     struct wl_surface *waylandSurfaceHandle = (struct wl_surface *)jvulkan::getHandleValue(env, jWlSurface);

@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT");
 			return;
 		}
 

@@ -24,16 +24,16 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlDisplayReadEvents
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlDisplayHandle;)I
  */
-JNIEXPORT jint JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayReadEvents
+JNIEXPORT jint JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlDisplayReadEvents
   (JNIEnv *env, jobject, jobject jWlDisplay)
 {
     wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);

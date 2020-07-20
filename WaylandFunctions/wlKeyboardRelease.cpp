@@ -24,16 +24,16 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlKeyboardRelease
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlKeyboardHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlKeyboardRelease
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlKeyboardRelease
   (JNIEnv *env, jobject, jobject jWlKeyboard)
 {
     struct wl_keyboard *waylandKeyboardHandle = (struct wl_keyboard *)jvulkan::getHandleValue(env, jWlKeyboard);

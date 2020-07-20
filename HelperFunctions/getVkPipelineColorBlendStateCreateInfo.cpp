@@ -65,7 +65,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineMultisampleStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineMultisampleStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "isLogicOpEnable", "()Z");
@@ -81,7 +81,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "getLogicOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkLogicOp;");
+        methodId = env->GetMethodID(vkPipelineColorBlendStateCreateInfoClass, "getLogicOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkLogicOp;");
         if (env->ExceptionOccurred())
         {
             return;

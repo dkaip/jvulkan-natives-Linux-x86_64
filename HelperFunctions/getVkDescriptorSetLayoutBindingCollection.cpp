@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
+        methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -97,7 +97,7 @@ namespace jvulkan
         VkShaderStageFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorSetLayoutBindingClass, "getImmutableSamplers", "()Ljava/util/Collection;");

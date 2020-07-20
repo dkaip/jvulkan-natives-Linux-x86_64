@@ -71,7 +71,7 @@ namespace jvulkan
         VkPipelineStageFlags srcAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkMemoryBarrierClass, "getDstAccessMask", "()Ljava/util/EnumSet;");
@@ -84,7 +84,7 @@ namespace jvulkan
         VkPipelineStageFlags dstAccessMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
         vkMemoryBarrier->sType = (VkStructureType)sTypeValue;
         vkMemoryBarrier->pNext = (void *)pNext;

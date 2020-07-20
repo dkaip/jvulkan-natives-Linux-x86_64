@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceSampleLocationsPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSampleLocationsPropertiesEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSampleLocationsPropertiesEXT");
 			return;
 		}
 
@@ -71,7 +71,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setMaxSampleLocationGridSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+        methodId = env->GetMethodID(theClass, "setMaxSampleLocationGridSize", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxSampleLocationGridSize");

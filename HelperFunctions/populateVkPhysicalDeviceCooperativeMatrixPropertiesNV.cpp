@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceCooperativeMatrixPropertiesNVObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceCooperativeMatrixPropertiesNV");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceCooperativeMatrixPropertiesNV");
 			return;
 		}
 

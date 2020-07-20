@@ -44,7 +44,7 @@ namespace jvulkan
         VkImageAspectFlags aspectMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkImageSubresourceLayersClass, "getMipLevel", "()I");

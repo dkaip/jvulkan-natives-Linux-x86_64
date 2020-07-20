@@ -87,7 +87,7 @@ namespace jvulkan
 	    VkPipelineStageFlags checkpointExecutionStageMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 	    if (env->ExceptionOccurred())
 	    {
 	    	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

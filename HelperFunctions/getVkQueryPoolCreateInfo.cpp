@@ -78,7 +78,7 @@ namespace jvulkan
 		VkQueryPoolCreateFlags flags = (VkQueryPoolCreateFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryPoolCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryPoolCreateFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");
@@ -86,7 +86,7 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getQueryType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryType;");
+        methodId = env->GetMethodID(theClass, "getQueryType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getQueryType");
@@ -149,7 +149,7 @@ namespace jvulkan
 		VkQueryPipelineStatisticFlags pipelineStatistics = (VkQueryPipelineStatisticFlags)getEnumSetValue(
 				env,
 				pipelineStatisticsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryPipelineStatisticFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryPipelineStatisticFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

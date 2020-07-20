@@ -38,17 +38,17 @@ namespace jvulkan
             env->ExceptionClear();
         }
 
-        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT");
+        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
-            cout << "createVkDebugUtilsMessageSeverityFlagBitsEXT: could not find class " << "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT" << endl;
+            cout << "createVkDebugUtilsMessageSeverityFlagBitsEXT: could not find class " << "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT" << endl;
             return nullptr;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;");
+        jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;");
         if (env->ExceptionOccurred())
         {
-            cout << "createVkDebugUtilsMessageSeverityFlagBitsEXT: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;" << endl;
+            cout << "createVkDebugUtilsMessageSeverityFlagBitsEXT: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT;" << endl;
             return nullptr;
         }
 

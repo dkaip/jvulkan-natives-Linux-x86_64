@@ -72,7 +72,7 @@ namespace jvulkan
         VkDescriptorSetLayoutCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorSetLayoutCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorSetLayoutCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorSetLayoutCreateInfoClass, "getBindings", "()Ljava/util/Collection;");

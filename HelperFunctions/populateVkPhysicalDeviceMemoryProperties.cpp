@@ -20,7 +20,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMemoryPropertiesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMemoryProperties");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceMemoryProperties");
             return;
         }
 
@@ -66,17 +66,17 @@ namespace jvulkan
             return;
         }
 
-        jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryType;");
+        jclass vkMemoryTypeClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryType;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryType");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryType");
             return;
         }
 
-        jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryHeap;");
+        jclass vkMemoryHeapClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryHeap;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryHeap");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryHeap");
             return;
         }
 

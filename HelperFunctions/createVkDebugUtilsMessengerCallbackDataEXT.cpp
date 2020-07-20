@@ -42,10 +42,10 @@ namespace jvulkan
 
         // Locate the VkDebugUtilsMessengerCallbackDataEXT class
         jclass vkDebugUtilsMessengerCallbackDataEXTclass = env->FindClass(
-        		"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsMessengerCallbackDataEXT");
+        		"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsMessengerCallbackDataEXT");
         if ( vkDebugUtilsMessengerCallbackDataEXTclass == nullptr)
         {
-        	LOGERROR(env, "%s", "could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDebugUtilsMessengerCallbackDataEXT");
+        	LOGERROR(env, "%s", "could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsMessengerCallbackDataEXT");
         	return nullptr;
         }
 

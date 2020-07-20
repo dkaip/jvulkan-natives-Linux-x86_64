@@ -49,17 +49,17 @@ namespace jvulkan
 			env->ExceptionClear();
 		}
 
-		jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult");
+		jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkResult");
 		if (env->ExceptionOccurred())
 		{
-			cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult" << endl;
+			cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/Enums/VkResult" << endl;
 			return nullptr;
 		}
 
-		jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;");
+		jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;");
 		if (env->ExceptionOccurred())
 		{
-			cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkResult;" << endl;
+			cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;" << endl;
 			return nullptr;
 		}
 

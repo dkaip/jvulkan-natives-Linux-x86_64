@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getOverallocationBehavior", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkMemoryOverallocationBehaviorAMD;");
+        jmethodID methodId = env->GetMethodID(theClass, "getOverallocationBehavior", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkMemoryOverallocationBehaviorAMD;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getOverallocationBehavior.");

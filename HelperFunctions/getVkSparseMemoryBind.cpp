@@ -69,7 +69,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDeviceMemory;");
+		methodId = env->GetMethodID(theClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDeviceMemory;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id for getMemory");
@@ -123,7 +123,7 @@ namespace jvulkan
 		VkSparseMemoryBindFlags flags = (VkSparseMemoryBindFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSparseMemoryBindFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSparseMemoryBindFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

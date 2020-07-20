@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkPhysicalDeviceSparseImageFormatInfo2Class = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
             return nullptr;
         }
 
@@ -64,7 +64,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
     	jobject jVkFormat = createEnumFromValue(
     			env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat",
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat",
 				vkPhysicalDeviceSparseImageFormatInfo2->format);
         if (env->ExceptionOccurred())
         {
@@ -72,7 +72,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setFormat", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;)V");
+		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setFormat", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFormat");
@@ -89,7 +89,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
     	jobject jVkImageType = createEnumFromValue(
     			env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageType",
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType",
 				vkPhysicalDeviceSparseImageFormatInfo2->type);
         if (env->ExceptionOccurred())
         {
@@ -97,7 +97,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageType;)V");
+		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setType");
@@ -114,7 +114,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
     	jobject jVkSampleCountFlagBits = createEnumFromValue(
     			env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits",
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits",
 				vkPhysicalDeviceSparseImageFormatInfo2->samples);
         if (env->ExceptionOccurred())
         {
@@ -122,7 +122,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;)V");
+		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSamples");
@@ -163,7 +163,7 @@ namespace jvulkan
         ////////////////////////////////////////////////////////////////////////
     	jobject jVkImageTiling = createEnumFromValue(
     			env,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageTiling",
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling",
 				vkPhysicalDeviceSparseImageFormatInfo2->tiling);
         if (env->ExceptionOccurred())
         {
@@ -171,7 +171,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setTiling", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageTiling;)V");
+		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setTiling", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setTiling");

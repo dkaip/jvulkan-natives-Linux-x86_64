@@ -81,7 +81,7 @@ namespace jvulkan
         VkInstanceCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkInstanceCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkInstanceCreateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");
@@ -92,7 +92,7 @@ namespace jvulkan
         VkApplicationInfo *vkApplicationInfo = (VkApplicationInfo *)calloc(1, sizeof(VkApplicationInfo));
         memoryToFree->push_back(vkApplicationInfo);
 
-        methodId = env->GetMethodID(vkInstanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkApplicationInfo;");
+        methodId = env->GetMethodID(vkInstanceCreateInfoClass, "getApplicationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkApplicationInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getApplicationInfo.");

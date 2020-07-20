@@ -65,7 +65,7 @@ namespace jvulkan
         VkRenderPassCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRenderPassCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkRenderPassCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkRenderPassCreateInfo2KHRClass, "getAttachments", "()Ljava/util/Collection;");

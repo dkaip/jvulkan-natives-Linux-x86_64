@@ -57,7 +57,7 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkPhysicalDeviceImageDrmFormatModifierInfoEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceImageDrmFormatModifierInfoEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceImageDrmFormatModifierInfoEXT");
 			return;
 		}
 
@@ -77,14 +77,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkSharingModeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode");
+        jclass vkSharingModeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode");
             return;
         }
 
-        methodId = env->GetStaticMethodID(vkSharingModeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetStaticMethodID(vkSharingModeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -98,7 +98,7 @@ namespace jvulkan
             return;
         }
 
-        methodId = env->GetMethodID(theClass, "setSharingMode", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;)V");
+        methodId = env->GetMethodID(theClass, "setSharingMode", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSharingMode");

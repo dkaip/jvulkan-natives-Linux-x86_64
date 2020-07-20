@@ -103,7 +103,7 @@ namespace jvulkan
             VkPipelineStageFlags flags = getEnumSetValue(
                     env,
                     jVkPipelineStageFlagsObject,
-                    "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits");
+                    "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
             (*vkPipelineStageFlags)[i] = flags;
 

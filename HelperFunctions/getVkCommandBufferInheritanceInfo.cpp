@@ -55,7 +55,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
+        jmethodID methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -87,7 +87,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFramebuffer;");
+        methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkFramebuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -129,7 +129,7 @@ namespace jvulkan
         VkQueryControlFlags vkQueryControlFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryControlFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryControlFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ namespace jvulkan
         VkQueryPipelineStatisticFlags vkQueryPipelineStatisticFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkQueryPipelineStatisticFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryPipelineStatisticFlagBits");
 
         vkCommandBufferInheritanceInfo->sType = (VkStructureType)sTypeValue;
         vkCommandBufferInheritanceInfo->pNext = (void *)pNext;

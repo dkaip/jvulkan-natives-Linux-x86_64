@@ -65,7 +65,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineDepthStencilStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineDepthStencilStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "isDepthTestEnable", "()Z");
@@ -94,7 +94,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getDepthCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompareOp;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getDepthCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkCompareOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -147,7 +147,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getFront", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkStencilOpState;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getFront", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkStencilOpState;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -174,7 +174,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getBack", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkStencilOpState;");
+        methodId = env->GetMethodID(vkPipelineDepthStencilStateCreateInfoClass, "getBack", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkStencilOpState;");
         if (env->ExceptionOccurred())
         {
             return;

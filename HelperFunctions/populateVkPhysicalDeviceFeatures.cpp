@@ -31,7 +31,7 @@ namespace jvulkan
 		const VkPhysicalDeviceFeatures *vkPhysicalDeviceFeatures,
 		std::vector<void *> *memoryToFree)
 	{
-		jclass physicalDeviceFeaturesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures");
+		jclass physicalDeviceFeaturesClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures");
 	    if (env->ExceptionOccurred())
 	    {
 	        return;

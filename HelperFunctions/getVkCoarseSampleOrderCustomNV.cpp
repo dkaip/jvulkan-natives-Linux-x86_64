@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getShadingRate", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkShadingRatePaletteEntryNV;");
+        jmethodID methodId = env->GetMethodID(theClass, "getShadingRate", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkShadingRatePaletteEntryNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType getShadingRate");

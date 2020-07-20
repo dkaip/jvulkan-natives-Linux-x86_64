@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkImageAspectFlagsAsEnumSet(JNIEnv *env, VkImageAspectFlags vkImageAspectFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

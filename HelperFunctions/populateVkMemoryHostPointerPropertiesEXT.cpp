@@ -56,7 +56,7 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkMemoryHostPointerPropertiesEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/jVkMemoryHostPointerPropertiesEXTObject");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/jVkMemoryHostPointerPropertiesEXTObject");
 			return;
 		}
 

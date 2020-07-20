@@ -87,7 +87,7 @@ namespace jvulkan
         VkDeviceGroupPresentModeFlagsKHR surfaceCounters = (VkDeviceGroupPresentModeFlagsKHR)getEnumSetValue(
                 env,
 				surfaceCountersObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSurfaceCounterFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkSurfaceCounterFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

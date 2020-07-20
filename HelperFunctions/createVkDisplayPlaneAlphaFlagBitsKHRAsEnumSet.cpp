@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkDisplayPlaneAlphaFlagBitsKHRAsEnumSet(JNIEnv *env, VkDisplayPlaneAlphaFlagsKHR vkDisplayPlaneAlphaFlagsKHR)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDisplayPlaneAlphaFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDisplayPlaneAlphaFlagBitsKHR;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDisplayPlaneAlphaFlagBitsKHR";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDisplayPlaneAlphaFlagBitsKHR;";
 
         /*
          * Create the EnumSet for the flags.

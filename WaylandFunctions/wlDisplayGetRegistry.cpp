@@ -19,7 +19,7 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -139,11 +139,11 @@ static const wl_registry_listener registry_listener
 };
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlDisplayGetRegistry
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlDisplay;)Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/WlRegistry;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlDisplay;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/WlRegistry;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlDisplayGetRegistry
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlDisplayGetRegistry
   (JNIEnv *env , jobject, jobject jWlDisplay)
 {
     wl_display *waylandDisplayHandle = (wl_display *)jvulkan::getHandleValue(env, jWlDisplay);

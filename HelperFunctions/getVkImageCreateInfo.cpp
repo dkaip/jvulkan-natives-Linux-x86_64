@@ -72,11 +72,11 @@ namespace jvulkan
         VkImageCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getImageType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageType;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getImageType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -103,7 +103,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -130,7 +130,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -175,7 +175,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getSamples", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -202,7 +202,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getTiling", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageTiling;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getTiling", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -239,10 +239,10 @@ namespace jvulkan
         VkImageUsageFlags imageUsageFlags = getEnumSetValue(
                 env,
                 usageFlagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -298,7 +298,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkImageCreateInfoClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkImageCreateInfoClass, "getInitialLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;

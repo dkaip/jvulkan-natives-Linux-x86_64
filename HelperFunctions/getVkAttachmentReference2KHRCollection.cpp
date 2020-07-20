@@ -70,7 +70,7 @@ namespace jvulkan
         uint32_t attachment = (uint32_t)jAttachment;
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageLayout;");
+        methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageLayout;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -97,7 +97,7 @@ namespace jvulkan
         }
 
          ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getAspectMask", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits;");
+        methodId = env->GetMethodID(vkAttachmentReference2KHRClass, "getAspectMask", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;

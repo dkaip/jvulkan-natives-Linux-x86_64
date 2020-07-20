@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getSurface", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkSurfaceKHR;");
+        jmethodID methodId = env->GetMethodID(theClass, "getSurface", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkSurfaceKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get method if for getSurface");

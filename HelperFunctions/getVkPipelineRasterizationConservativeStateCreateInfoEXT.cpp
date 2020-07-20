@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineRasterizationConservativeStateCreateFlagsEXT flags = (VkPipelineRasterizationConservativeStateCreateFlagsEXT)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineRasterizationConservativeStateCreateFlagBitsEXT");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineRasterizationConservativeStateCreateFlagBitsEXT");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
@@ -95,7 +95,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getConservativeRasterizationMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkConservativeRasterizationModeEXT;");
+        methodId = env->GetMethodID(theClass, "getConservativeRasterizationMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkConservativeRasterizationModeEXT;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getConservativeRasterizationMode.");

@@ -23,8 +23,8 @@ namespace jvulkan
 {
     jobject createVkMemoryPropertyFlagsAsEnumSet(JNIEnv *env, VkMemoryPropertyFlags memoryPropertyFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkMemoryPropertyFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkMemoryPropertyFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkMemoryPropertyFlagBits;";
         /*
          * Create the EnumSet for the flags.
          */

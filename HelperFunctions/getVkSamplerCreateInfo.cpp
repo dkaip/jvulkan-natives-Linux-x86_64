@@ -72,11 +72,11 @@ namespace jvulkan
         VkSamplerCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMagFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFilter;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMagFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFilter;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -103,7 +103,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMinFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFilter;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMinFilter", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFilter;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -128,7 +128,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMipmapMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerMipmapMode;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getMipmapMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerMipmapMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -155,7 +155,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeU", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerAddressMode;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeU", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerAddressMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -182,7 +182,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeV", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerAddressMode;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeV", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerAddressMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -207,7 +207,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeW", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSamplerAddressMode;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getAddressModeW", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSamplerAddressMode;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -284,7 +284,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCompareOp;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getCompareOp", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkCompareOp;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -337,7 +337,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getBorderColor", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBorderColor;");
+        methodId = env->GetMethodID(vkSamplerCreateInfoClass, "getBorderColor", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkBorderColor;");
         if (env->ExceptionOccurred())
         {
             return;

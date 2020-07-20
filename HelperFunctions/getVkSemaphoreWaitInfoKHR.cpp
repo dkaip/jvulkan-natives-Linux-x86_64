@@ -79,7 +79,7 @@ namespace jvulkan
 		VkSemaphoreWaitFlagsKHR flags = (VkSemaphoreWaitFlagsKHR)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkSemaphoreWaitFlagBitsKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkSemaphoreWaitFlagBitsKHR");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

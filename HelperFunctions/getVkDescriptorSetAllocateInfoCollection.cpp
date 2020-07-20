@@ -55,7 +55,7 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkDescriptorSetAllocateInfoClass, "getDescriptorPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorPool;");
+        jmethodID methodId = env->GetMethodID(vkDescriptorSetAllocateInfoClass, "getDescriptorPool", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDescriptorPool;");
         if (env->ExceptionOccurred())
         {
             return;

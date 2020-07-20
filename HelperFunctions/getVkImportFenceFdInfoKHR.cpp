@@ -62,7 +62,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getFence", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkFence;");
+        jmethodID methodId = env->GetMethodID(theClass, "getFence", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkFence;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getFence");
@@ -95,10 +95,10 @@ namespace jvulkan
         VkFenceImportFlags flags = (VkFenceImportFlags)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFenceImportFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkFenceImportFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getHandleType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalFenceHandleTypeFlagBits;");
+        methodId = env->GetMethodID(theClass, "getHandleType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalFenceHandleTypeFlagBits;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to find method id for getHandleType");

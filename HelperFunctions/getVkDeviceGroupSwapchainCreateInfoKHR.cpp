@@ -87,7 +87,7 @@ namespace jvulkan
         VkDeviceGroupPresentModeFlagsKHR modes = (VkDeviceGroupPresentModeFlagsKHR)getEnumSetValue(
                 env,
 				modesObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDeviceGroupPresentModeFlagBitsKHR");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDeviceGroupPresentModeFlagBitsKHR");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

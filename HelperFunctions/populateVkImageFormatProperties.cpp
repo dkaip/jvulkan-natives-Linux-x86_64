@@ -58,12 +58,12 @@ namespace jvulkan
 				jVkImageFormatPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageFormatProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties");
 			return;
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "setMaxExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setMaxExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxExtent");

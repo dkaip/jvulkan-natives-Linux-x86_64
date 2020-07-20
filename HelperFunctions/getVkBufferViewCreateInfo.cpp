@@ -73,10 +73,10 @@ namespace jvulkan
         VkBufferViewCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferViewCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferViewCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferViewCreateInfoClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkBuffer;");
+        methodId = env->GetMethodID(vkBufferViewCreateInfoClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -95,7 +95,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferViewCreateInfoClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormat;");
+        methodId = env->GetMethodID(vkBufferViewCreateInfoClass, "getFormat", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
         if (env->ExceptionOccurred())
         {
             return;

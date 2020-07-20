@@ -34,10 +34,10 @@ namespace jvulkan
 		}
 
 		jclass vkExtent2DClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D");
             return nullptr;
         }
 

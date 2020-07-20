@@ -65,10 +65,10 @@ namespace jvulkan
         VkFramebufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFramebufferCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkFramebufferCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkFramebufferCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
+        methodId = env->GetMethodID(vkFramebufferCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
             return;

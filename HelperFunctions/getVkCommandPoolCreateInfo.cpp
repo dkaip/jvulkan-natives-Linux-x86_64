@@ -65,7 +65,7 @@ namespace jvulkan
         VkCommandPoolCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkCommandPoolCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkCommandPoolCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////

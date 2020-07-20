@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getFragmentDensityMapAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkAttachmentReference;");
+        jmethodID methodId = env->GetMethodID(theClass, "getFragmentDensityMapAttachment", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAttachmentReference;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getFragmentDensityMapAttachment");

@@ -36,10 +36,10 @@ namespace jvulkan
 		}
 
 		jclass vkPastPresentationTimingGOOGLEClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPastPresentationTimingGOOGLE");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPastPresentationTimingGOOGLE");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPastPresentationTimingGOOGLE");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPastPresentationTimingGOOGLE");
             return nullptr;
         }
 

@@ -70,7 +70,7 @@ namespace jvulkan
         VkPipelineTessellationStateCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineTessellationStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineTessellationStateCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkPipelineTessellationStateCreateInfoClass, "getPatchControlPoints", "()I");

@@ -56,15 +56,15 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkMemoryRequirements2Object);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkMemoryRequirements2");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkMemoryRequirements2");
             return;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkMemoryRequirementsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryRequirements");
+        jclass vkMemoryRequirementsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryRequirements");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryRequirements");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryRequirements");
             return;
         }
 
@@ -92,7 +92,7 @@ namespace jvulkan
             return;
         }
 
-        methodId =env->GetMethodID(theClass, "setMemoryRequirements", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkMemoryRequirements;)V");
+        methodId =env->GetMethodID(theClass, "setMemoryRequirements", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryRequirements;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMemoryRequirements");

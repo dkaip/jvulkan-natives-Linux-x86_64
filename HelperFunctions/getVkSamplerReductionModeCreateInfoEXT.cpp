@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getReductionMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkObjectType;");
+        jmethodID methodId = env->GetMethodID(theClass, "getReductionMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getReductionMode method Id");

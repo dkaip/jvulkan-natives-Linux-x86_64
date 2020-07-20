@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 #include "JVulkanHelperFunctions.hh"
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "slf4j.hh"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    pushDataToVirtualMemory
- * Signature: ([BLcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/MappedMemoryPointer;)V
+ * Signature: ([BLcom/CIMthetics/jvulkan/VulkanCore/Handles/MappedMemoryPointer;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_pushDataToVirtualMemory___3BLcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_MappedMemoryPointer_2
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_pushDataToVirtualMemory___3BLcom_CIMthetics_jvulkan_VulkanCore_Handles_MappedMemoryPointer_2
   (JNIEnv *env , jobject, jbyteArray jDataToCopyArray, jobject jVoidPointer)
 {
     signed char *destinationMemoryHandle = (signed char *)jvulkan::getHandleValue(env, jVoidPointer);
@@ -50,11 +50,11 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 }
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    pushDataToVirtualMemory
- * Signature: ([FLcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/MappedMemoryPointer;)V
+ * Signature: ([FLcom/CIMthetics/jvulkan/VulkanCore/Handles/MappedMemoryPointer;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_pushDataToVirtualMemory___3FLcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_MappedMemoryPointer_2
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_pushDataToVirtualMemory___3FLcom_CIMthetics_jvulkan_VulkanCore_Handles_MappedMemoryPointer_2
   (JNIEnv *env, jobject, jfloatArray jDataToCopyArray, jobject jVoidPointer)
 {
     float *destinationMemoryHandle = (float *)jvulkan::getHandleValue(env, jVoidPointer);
@@ -82,11 +82,11 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
 }
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    pushDataToVirtualMemory
- * Signature: ([ILcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/MappedMemoryPointer;)V
+ * Signature: ([ILcom/CIMthetics/jvulkan/VulkanCore/Handles/MappedMemoryPointer;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_pushDataToVirtualMemory___3ILcom_CIMthetics_jvulkan_VulkanCore_VK11_Handles_MappedMemoryPointer_2
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_pushDataToVirtualMemory___3ILcom_CIMthetics_jvulkan_VulkanCore_Handles_MappedMemoryPointer_2
   (JNIEnv *env, jobject, jintArray jDataToCopyArray, jobject jVoidPointer)
 {
     int *destinationMemoryHandle = (int *)jvulkan::getHandleValue(env, jVoidPointer);

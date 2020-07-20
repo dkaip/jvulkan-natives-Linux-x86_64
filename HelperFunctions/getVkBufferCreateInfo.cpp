@@ -72,7 +72,7 @@ namespace jvulkan
         VkBufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -99,11 +99,11 @@ namespace jvulkan
         VkBufferUsageFlags bufferUsageFlags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkBufferUsageFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferUsageFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSharingMode;");
+        methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
             return;

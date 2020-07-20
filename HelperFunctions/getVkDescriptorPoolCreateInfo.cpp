@@ -65,7 +65,7 @@ namespace jvulkan
         VkDescriptorPoolCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorPoolCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorPoolCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkDescriptorPoolCreateInfoClass, "getMaxSets", "()I");

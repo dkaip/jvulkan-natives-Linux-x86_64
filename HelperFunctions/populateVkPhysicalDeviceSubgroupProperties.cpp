@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceSubgroupPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceSubgroupProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSubgroupProperties");
 			return;
 		}
 

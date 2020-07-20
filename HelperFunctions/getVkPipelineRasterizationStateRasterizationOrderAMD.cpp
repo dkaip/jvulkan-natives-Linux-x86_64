@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getRasterizationOrder", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkRasterizationOrderAMD;");
+        jmethodID methodId = env->GetMethodID(theClass, "getRasterizationOrder", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkRasterizationOrderAMD;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getRasterizationOrder.");

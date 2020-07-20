@@ -113,7 +113,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDeviceGroupPresentModeFlagBitsKHR;");
+        methodId = env->GetMethodID(theClass, "getMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDeviceGroupPresentModeFlagBitsKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getMode.");

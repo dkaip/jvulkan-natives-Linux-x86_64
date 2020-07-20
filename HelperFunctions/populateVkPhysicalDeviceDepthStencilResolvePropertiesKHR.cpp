@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceDepthStencilResolvePropertiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceDepthStencilResolvePropertiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceDepthStencilResolvePropertiesKHR");
 			return;
 		}
 

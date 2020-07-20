@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkSparseImageFormatFlagsAsEnumSet(JNIEnv *env, VkSparseImageFormatFlags vkSparseImageFormatFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSparseImageFormatFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSparseImageFormatFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSparseImageFormatFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSparseImageFormatFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

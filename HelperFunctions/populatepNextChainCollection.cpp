@@ -122,7 +122,7 @@ namespace jvulkan
                 break;
             }
 
-            jmethodID getpNextMethodId = env->GetMethodID(jObjectClass, "getpNext", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure;");
+            jmethodID getpNextMethodId = env->GetMethodID(jObjectClass, "getpNext", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure;");
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Could not find method id getpNext");

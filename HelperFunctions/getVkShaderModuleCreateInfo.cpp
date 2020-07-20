@@ -74,7 +74,7 @@ namespace jvulkan
 		int32_t flags = getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderModuleCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderModuleCreateFlagBits");
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(vkShaderModuleCreateInfoClass, "getCodeSize", "()J");

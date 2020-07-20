@@ -55,7 +55,7 @@ namespace jvulkan
         VkImageAspectFlags aspectMask = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageAspectFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageAspectFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getClearValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkClearValue;");
+        methodId = env->GetMethodID(theClass, "getClearValue", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkClearValue;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method ID for getClearValue");

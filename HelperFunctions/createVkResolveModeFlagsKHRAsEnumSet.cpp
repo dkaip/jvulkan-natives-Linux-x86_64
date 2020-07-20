@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkResolveModeFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkResolveModeFlagBitsKHR;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkResolveModeFlagBitsKHR";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkResolveModeFlagBitsKHR;";
 
         /*
          * Create the EnumSet for the flags.

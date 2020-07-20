@@ -289,10 +289,10 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineShaderStageCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineShaderStageCreateFlagBits");
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getStage", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkShaderStageFlagBits;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getStage", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderStageFlagBits;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -319,7 +319,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getModule", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkShaderModule;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getModule", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkShaderModule;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -359,7 +359,7 @@ namespace jvulkan
         env->ReleaseStringUTFChars(jTheName, tempString);
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getSpecializationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkSpecializationInfo;");
+        methodId = env->GetMethodID(vkPipelineShaderStageCreateInfoClass, "getSpecializationInfo", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSpecializationInfo;");
         if (env->ExceptionOccurred())
         {
             return;

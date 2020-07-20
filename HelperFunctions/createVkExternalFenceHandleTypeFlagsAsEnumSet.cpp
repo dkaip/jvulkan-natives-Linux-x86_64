@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkExternalFenceHandleTypeFlagsAsEnumSet(JNIEnv *env, VkExternalFenceHandleTypeFlags vkExternalFenceHandleTypeFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalFenceHandleTypeFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalFenceHandleTypeFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalFenceHandleTypeFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalFenceHandleTypeFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

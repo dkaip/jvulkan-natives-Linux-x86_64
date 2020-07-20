@@ -78,7 +78,7 @@ namespace jvulkan
 		VkPipelineCacheCreateFlags flags = (VkPipelineCacheCreateFlags)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineCacheCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineCacheCreateFlagBits");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");
@@ -101,7 +101,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getInitialData", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineCache;");
+        methodId = env->GetMethodID(theClass, "getInitialData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipelineCache;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getInitialData");

@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Handles/VkDisplayModeKHR;");
+        jmethodID methodId = env->GetMethodID(theClass, "getMode", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find methodId for getMode");

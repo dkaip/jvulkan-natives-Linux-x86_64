@@ -58,7 +58,7 @@ namespace jvulkan
 				jVkPhysicalDeviceMaintenance3PropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMaintenance3Properties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceMaintenance3Properties");
 			return;
 		}
 

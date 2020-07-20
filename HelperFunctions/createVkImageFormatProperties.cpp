@@ -29,7 +29,7 @@ namespace jvulkan
 	{
 		// Locate the VkImageFormatProperties class
 		jclass theClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkImageFormatProperties");
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties");
 
 		// Locate the constructor
 		jmethodID methodId = env->GetMethodID(theClass, "<init>", "()V");

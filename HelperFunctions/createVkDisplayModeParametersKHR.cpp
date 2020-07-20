@@ -38,10 +38,10 @@ namespace jvulkan
 		}
 
 		jclass vkDisplayModeParametersKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkDisplayModeParametersKHR");
+        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR");
             return nullptr;
         }
 
@@ -70,7 +70,7 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayModeParametersKHRClass, "setVisibleRegion", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(vkDisplayModeParametersKHRClass, "setVisibleRegion", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setVisibleRegion");

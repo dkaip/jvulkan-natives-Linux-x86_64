@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getSampleOrderType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkCoarseSampleOrderTypeNV;");
+        jmethodID methodId = env->GetMethodID(theClass, "getSampleOrderType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkCoarseSampleOrderTypeNV;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get getTemplateType getSampleOrderType");

@@ -34,7 +34,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkQueueFamilyProperties2CollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties2");
+        	LOGERROR(env, "%s", "Could not find class for a Collecion of com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
             return;
         }
 
@@ -45,10 +45,10 @@ namespace jvulkan
             return;
         }
 
-        jclass vkQueueFamilyProperties2Class = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties2;");
+        jclass vkQueueFamilyProperties2Class = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkQueueFamilyProperties2");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
             return;
         }
 

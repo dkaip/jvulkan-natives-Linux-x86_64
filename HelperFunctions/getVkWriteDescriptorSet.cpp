@@ -71,7 +71,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkDescriptorSet;");
+        jmethodID methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDstSet", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDescriptorSet;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getDstSet.");
@@ -127,7 +127,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDescriptorType;");
+        methodId = env->GetMethodID(vkWriteDescriptorSetClass, "getDescriptorType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDescriptorType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getDescriptorType.");

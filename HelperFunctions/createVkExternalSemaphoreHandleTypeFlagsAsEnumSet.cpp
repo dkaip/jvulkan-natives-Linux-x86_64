@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkExternalSemaphoreHandleTypeFlagsAsEnumSet(JNIEnv *env, VkExternalSemaphoreHandleTypeFlags vkExternalSemaphoreHandleTypeFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalSemaphoreHandleTypeFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalSemaphoreHandleTypeFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalSemaphoreHandleTypeFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalSemaphoreHandleTypeFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

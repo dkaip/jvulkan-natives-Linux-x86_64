@@ -27,8 +27,8 @@ namespace jvulkan
 {
     void setVkPeerMemoryFeatureFlagsEnumSet(JNIEnv *env, jobject jVkPeerMemoryFeatureFlagsObject, VkPeerMemoryFeatureFlags vkPeerMemoryFeatureFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPeerMemoryFeatureFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPeerMemoryFeatureFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPeerMemoryFeatureFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPeerMemoryFeatureFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

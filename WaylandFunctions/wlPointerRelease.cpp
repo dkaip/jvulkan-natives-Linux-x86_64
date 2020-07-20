@@ -24,16 +24,16 @@
 
 using namespace std;
 
-#include "com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies.h"
+#include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 /*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies
+ * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    wlPointerRelease
  * Signature: (Lcom/CIMthetics/jvulkan/Wayland/Handles/WlPointerHandle;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_VK11_NativeProxies_wlPointerRelease
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_wlPointerRelease
   (JNIEnv *env, jobject, jobject jWlPointer)
 {
     struct wl_pointer *waylandPointerHandle = (struct wl_pointer *)jvulkan::getHandleValue(env, jWlPointer);

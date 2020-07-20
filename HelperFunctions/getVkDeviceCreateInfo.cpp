@@ -81,7 +81,7 @@ namespace jvulkan
 		int32_t flags = getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkDeviceCreateFlagBits");
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkDeviceCreateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
@@ -177,7 +177,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceFeatures;");
+		methodId = env->GetMethodID(vkDeviceCreateInfoClass, "getEnabledFeatures", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures;");
 		if (env->ExceptionOccurred())
 		{
         	LOGERROR(env, "%s", "Could not find method id getEnabledFeatures.");

@@ -27,8 +27,8 @@ namespace jvulkan
 {
 	jobject getVkFormatFeatureFlagsEnumSet(JNIEnv *env, VkFormatFeatureFlags flags)
 	{
-		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits";
-		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkFormatFeatureFlagBits;";
+		char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormatFeatureFlagBits";
+		char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormatFeatureFlagBits;";
 
 		/*
 		 * Create the EnumSet for the flags.

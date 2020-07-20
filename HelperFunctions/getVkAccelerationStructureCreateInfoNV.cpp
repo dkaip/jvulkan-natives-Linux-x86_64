@@ -68,7 +68,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkAccelerationStructureCreateInfoNVClass, "getInfo", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/CreateInfos/VkAccelerationStructureCreateInfoNV;");
+        methodId = env->GetMethodID(vkAccelerationStructureCreateInfoNVClass, "getInfo", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkAccelerationStructureCreateInfoNV;");
         if (env->ExceptionOccurred())
         {
             return;

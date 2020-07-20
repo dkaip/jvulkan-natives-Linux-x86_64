@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkPipelineStageFlagsAsEnumSet(JNIEnv *env, VkPipelineStageFlags vkPipelineStageFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineStageFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

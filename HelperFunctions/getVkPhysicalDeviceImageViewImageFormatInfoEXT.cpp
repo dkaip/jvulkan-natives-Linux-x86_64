@@ -84,7 +84,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getImageViewType", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType;");
+        jmethodID methodId = env->GetMethodID(theClass, "getImageViewType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getImageViewType");

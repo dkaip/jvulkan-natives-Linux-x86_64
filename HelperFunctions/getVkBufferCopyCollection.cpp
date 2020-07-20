@@ -80,7 +80,7 @@ namespace jvulkan
             return;
         }
 
-        jclass vkBufferCopyClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkBufferCopy");
+        jclass vkBufferCopyClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkBufferCopy");
         if (env->ExceptionOccurred())
         {
             return;

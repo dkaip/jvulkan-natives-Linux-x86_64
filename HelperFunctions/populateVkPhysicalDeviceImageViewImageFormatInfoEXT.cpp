@@ -57,19 +57,19 @@ namespace jvulkan
 		jclass theClass = env->GetObjectClass(jVkPhysicalDeviceImageViewImageFormatInfoEXTObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPhysicalDeviceImageViewImageFormatInfoEXT");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPhysicalDeviceImageViewImageFormatInfoEXT");
 			return;
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkImageViewTypeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType");
+        jclass vkImageViewTypeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkImageViewTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType;");
+        jmethodID methodId = env->GetStaticMethodID(vkImageViewTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find static method id fromValue");
@@ -83,7 +83,7 @@ namespace jvulkan
             return;
         }
 
-        methodId = env->GetMethodID(theClass, "setImageViewType", "(Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkImageViewType;)V");
+        methodId = env->GetMethodID(theClass, "setImageViewType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageViewType");

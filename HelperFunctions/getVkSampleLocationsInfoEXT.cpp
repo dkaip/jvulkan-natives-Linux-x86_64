@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getSampleLocationsPerPixel", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits;");
+        jmethodID methodId = env->GetMethodID(theClass, "getSampleLocationsPerPixel", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getSampleLocationsPerPixel");
@@ -106,7 +106,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "getSampleLocationGridSize", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent2D;");
+        methodId = env->GetMethodID(theClass, "getSampleLocationGridSize", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getSampleLocationGridSize");

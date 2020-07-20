@@ -31,8 +31,8 @@ namespace jvulkan
 {
     jobject createVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessageTypeFlagsEXT messageTypes)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageTypeFlagBitsEXT";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkDebugUtilsMessageTypeFlagBitsEXT;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageTypeFlagBitsEXT";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageTypeFlagBitsEXT;";
         /*
          * Create the EnumSet for the flags.
          */

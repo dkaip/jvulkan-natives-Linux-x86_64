@@ -70,7 +70,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getConversion", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkSamplerYcbcrConversion;");
+        jmethodID methodId = env->GetMethodID(theClass, "getConversion", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSamplerYcbcrConversion;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to get method if for getConversion");

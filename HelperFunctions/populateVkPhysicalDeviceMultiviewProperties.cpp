@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkPhysicalDeviceMultiviewPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkPhysicalDeviceMultiviewProperties");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceMultiviewProperties");
 			return;
 		}
 

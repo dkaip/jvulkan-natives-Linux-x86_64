@@ -65,7 +65,7 @@ namespace jvulkan
         VkPipelineDynamicStateCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineDynamicStateCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineDynamicStateCreateFlagBits");
 
 
         ////////////////////////////////////////////////////////////////////////

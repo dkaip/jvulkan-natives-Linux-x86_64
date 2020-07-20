@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineCoverageToColorStateCreateFlagsNV flags = (VkPipelineCoverageToColorStateCreateFlagsNV)getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineCoverageToColorStateCreateFlagBitsNV");
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineCoverageToColorStateCreateFlagBitsNV");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

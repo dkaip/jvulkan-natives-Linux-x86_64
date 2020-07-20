@@ -35,7 +35,7 @@ namespace jvulkan
         jclass theClass = env->GetObjectClass(jVkPipelineExecutablePropertiesKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkPipelineExecutablePropertiesKHR");
+        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPipelineExecutablePropertiesKHR");
             return;
         }
 

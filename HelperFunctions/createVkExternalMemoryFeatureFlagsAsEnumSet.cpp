@@ -27,8 +27,8 @@ namespace jvulkan
 {
     jobject createVkExternalMemoryFeatureFlagsAsEnumSet(JNIEnv *env, VkExternalMemoryFeatureFlags vkExternalMemoryFeatureFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryFeatureFlagBits";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalMemoryFeatureFlagBits;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryFeatureFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryFeatureFlagBits;";
 
         /*
          * Create the EnumSet for the flags.

@@ -44,7 +44,7 @@ namespace jvulkan
 				jVkSurfaceProtectedCapabilitiesKHRObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkSurfaceProtectedCapabilitiesKHR");
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceProtectedCapabilitiesKHR");
 			return;
 		}
 

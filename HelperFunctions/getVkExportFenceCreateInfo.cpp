@@ -86,7 +86,7 @@ namespace jvulkan
         VkExternalFenceHandleTypeFlags handleTypes = getEnumSetValue(
                 env,
 				handleTypesObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkExternalFenceHandleTypeFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalFenceHandleTypeFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");

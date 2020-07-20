@@ -53,7 +53,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getMaxExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/VkExtent3D;");
+        jmethodID methodId = env->GetMethodID(theClass, "getMaxExtent", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getMaxExtent.");
@@ -126,7 +126,7 @@ namespace jvulkan
         VkSampleCountFlags vkSampleCountFlags = (VkSampleCountFlags)getEnumSetValue(
                 env,
 				surfaceCountersObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkSampleCountFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");

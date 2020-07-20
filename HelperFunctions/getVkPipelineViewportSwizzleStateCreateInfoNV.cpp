@@ -87,7 +87,7 @@ namespace jvulkan
         VkPipelineViewportSwizzleStateCreateFlagsNV flags = (VkPipelineViewportSwizzleStateCreateFlagsNV)getEnumSetValue(
 				env,
 				flagsObject,
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Enums/VkPipelineViewportSwizzleStateCreateFlagBitsNV");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineViewportSwizzleStateCreateFlagBitsNV");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue");

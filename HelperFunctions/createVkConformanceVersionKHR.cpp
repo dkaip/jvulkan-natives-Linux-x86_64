@@ -31,7 +31,7 @@ namespace jvulkan
 	{
 		// Locate the VkConformanceVersionKHR class
 		jclass vkConformanceVersionKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/VK11/Structures/VkConformanceVersionKHR");
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkConformanceVersionKHR");
 
 		// Locate the constructor
 		jmethodID methodId = env->GetMethodID(vkConformanceVersionKHRClass, "<init>", "()V");

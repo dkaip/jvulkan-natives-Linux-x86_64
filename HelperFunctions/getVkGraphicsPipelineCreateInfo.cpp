@@ -88,7 +88,7 @@ namespace jvulkan
         int32_t flags = getEnumSetValue(
                 env,
                 flagsObject,
-                "com/CIMthetics/jvulkan/VulkanCore/VK11/Enums/VkPipelineCreateFlagBits");
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineCreateFlagBits");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
@@ -129,7 +129,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getVertexInputState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineVertexInputStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getVertexInputState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineVertexInputStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getVertexInputState.");
@@ -169,7 +169,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getInputAssemblyState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineInputAssemblyStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getInputAssemblyState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineInputAssemblyStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getInputAssemblyState.");
@@ -209,7 +209,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getTessellationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineTessellationStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getTessellationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineTessellationStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getTessellationState.");
@@ -249,7 +249,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getViewportState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineViewportStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getViewportState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineViewportStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getViewportState.");
@@ -289,7 +289,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRasterizationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineRasterizationStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRasterizationState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineRasterizationStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getRasterizationState.");
@@ -329,7 +329,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getMultisampleState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineMultisampleStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getMultisampleState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineMultisampleStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
             return;
@@ -368,7 +368,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDepthStencilState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDepthStencilStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDepthStencilState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineDepthStencilStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getDepthStencilState.");
@@ -408,7 +408,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getColorBlendState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineColorBlendStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getColorBlendState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineColorBlendStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getColorBlendState.");
@@ -448,7 +448,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDynamicState", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VkPipelineDynamicStateCreateInfo;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getDynamicState", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkPipelineDynamicStateCreateInfo;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getDynamicState.");
@@ -488,7 +488,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipelineLayout;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getLayout", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipelineLayout;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getLayout.");
@@ -510,7 +510,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkRenderPass;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getRenderPass.");
@@ -547,7 +547,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Handles/VkPipeline;");
+        methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getBasePipelineHandle", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not get method id for getBasePipelineHandle.");

@@ -30,14 +30,14 @@ namespace jvulkan
         const jobject jVulkanCreateInfoStructureObject)
     {
         ////////////////////////////////////////////////////////////////////////
-        jclass vulkanCreateInfoStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
+        jclass vulkanCreateInfoStructureClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "Could not find class:%s", "com/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure");
+        	LOGERROR(env, "Could not find class:%s", "com/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure");
             return nullptr;
         }
 
-        jmethodID methodId = env->GetMethodID(vulkanCreateInfoStructureClass, "getpNext", "()Lcom/CIMthetics/jvulkan/VulkanCore/VK11/Structures/CreateInfos/VulkanCreateInfoStructure;");
+        jmethodID methodId = env->GetMethodID(vulkanCreateInfoStructureClass, "getpNext", "()Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id for getpNext");
