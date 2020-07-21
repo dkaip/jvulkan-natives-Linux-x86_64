@@ -49,30 +49,30 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkDriverIdKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR");
+        jclass vkDriverIdClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId");
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR");
+			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkDriverIdKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR;");
+        jmethodID methodId = env->GetStaticMethodID(vkDriverIdClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId;");
         if (env->ExceptionOccurred())
         {
 			LOGERROR(env, "%s", "Could not find static method id fromValue");
             return;
         }
 
-        jobject vkDriverIdKHREnum = env->CallStaticObjectMethod(vkDriverIdKHRClass, methodId, vkPhysicalDeviceDriverPropertiesKHR->driverID);
+        jobject vkDriverIdEnum = env->CallStaticObjectMethod(vkDriverIdClass, methodId, vkPhysicalDeviceDriverPropertiesKHR->driverID);
 
-        methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDriverIdKHR;)V");
+        methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setDriverId");
             return;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceDriverPropertiesKHRObject, methodId, vkDriverIdKHREnum);
+        env->CallVoidMethod(jVkPhysicalDeviceDriverPropertiesKHRObject, methodId, vkDriverIdEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setDriverId");
