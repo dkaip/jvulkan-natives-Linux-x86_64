@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkImageFormatListCreateInfo.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkImageFormatListCreateInfo(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkImageFormatListCreateInfoObject,
+			VkImageFormatListCreateInfo *vkImageFormatListCreateInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkImageFormatListCreateInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageFormatListCreateInfoKHRObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkImageFormatListCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkImageFormatListCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -69,40 +69,40 @@ namespace jvulkan
             }
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
-            return;
-        }
-
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
-            return;
-        }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getViewFormats", "()Ljava/util/Collection;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
+        	LOGERROR(env, "%s", "Could not find method id for getViewFormats");
             return;
         }
 
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jobject jViewFormats = env->CallObjectMethod(jVkImageFormatListCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
+        int viewFormatCount = 0;
+        VkFormat *vkFormats = nullptr;
+        getVkFormatCollection(
+                env,
+				jViewFormats,
+                &vkFormats,
+                &viewFormatCount,
+                memoryToFree);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getVkFormatCollection");
             return;
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkImageFormatListCreateInfo->sType = sTypeValue;
+        vkImageFormatListCreateInfo->pNext = pNext;
+        vkImageFormatListCreateInfo->viewFormatCount = viewFormatCount;
+        vkImageFormatListCreateInfo->pViewFormats = vkFormats;
     }
 }

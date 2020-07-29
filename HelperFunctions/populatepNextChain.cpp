@@ -111,29 +111,29 @@ namespace jvulkan
 					return;
 				}
 				break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR:
-				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR");
-				populateVkPhysicalDeviceDepthStencilResolvePropertiesKHR(
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES");
+				populateVkPhysicalDeviceDepthStencilResolveProperties(
 						env,
 						jVulkanCreateInfoStructureObject,
-						(VkPhysicalDeviceDepthStencilResolvePropertiesKHR *)headOfpNextChain,
+						(VkPhysicalDeviceDepthStencilResolveProperties *)headOfpNextChain,
 						memoryToFree);
 				if (env->ExceptionOccurred())
 				{
-					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDepthStencilResolvePropertiesKHR.");
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDepthStencilResolveProperties.");
 					return;
 				}
 				break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT:
-				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT");
-				populateVkPhysicalDeviceDescriptorIndexingPropertiesEXT(
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES");
+				populateVkPhysicalDeviceDescriptorIndexingProperties(
 						env,
 						jVulkanCreateInfoStructureObject,
-						(VkPhysicalDeviceDescriptorIndexingPropertiesEXT *)headOfpNextChain,
+						(VkPhysicalDeviceDescriptorIndexingProperties *)headOfpNextChain,
 						memoryToFree);
 				if (env->ExceptionOccurred())
 				{
-					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDepthStencilResolvePropertiesKHR.");
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDepthStencilResolveProperties.");
 					return;
 				}
 				break;
@@ -150,16 +150,16 @@ namespace jvulkan
 					return;
 				}
 				break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR:
-				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR");
-				populateVkPhysicalDeviceDriverPropertiesKHR(
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES");
+				populateVkPhysicalDeviceDriverProperties(
 						env,
 						jVulkanCreateInfoStructureObject,
-						(VkPhysicalDeviceDriverPropertiesKHR *)headOfpNextChain,
+						(VkPhysicalDeviceDriverProperties *)headOfpNextChain,
 						memoryToFree);
 				if (env->ExceptionOccurred())
 				{
-					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDriverPropertiesKHR.");
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDriverProperties.");
 					return;
 				}
 				break;
@@ -176,16 +176,16 @@ namespace jvulkan
 					return;
 				}
 				break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR:
-				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR");
-				populateVkPhysicalDeviceFloatControlsPropertiesKHR(
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES");
+				populateVkPhysicalDeviceFloatControlsProperties(
 						env,
 						jVulkanCreateInfoStructureObject,
-						(VkPhysicalDeviceFloatControlsPropertiesKHR *)headOfpNextChain,
+						(VkPhysicalDeviceFloatControlsProperties *)headOfpNextChain,
 						memoryToFree);
 				if (env->ExceptionOccurred())
 				{
-					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceFloatControlsPropertiesKHR.");
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceFloatControlsProperties.");
 					return;
 				}
 				break;
@@ -345,16 +345,16 @@ namespace jvulkan
 					return;
 				}
 				break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT:
-				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT");
-				populateVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES");
+				populateVkPhysicalDeviceSamplerFilterMinmaxProperties(
 						env,
 						jVulkanCreateInfoStructureObject,
-						(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT *)headOfpNextChain,
+						(VkPhysicalDeviceSamplerFilterMinmaxProperties *)headOfpNextChain,
 						memoryToFree);
 				if (env->ExceptionOccurred())
 				{
-					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT.");
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceSamplerFilterMinmaxProperties.");
 					return;
 				}
 				break;

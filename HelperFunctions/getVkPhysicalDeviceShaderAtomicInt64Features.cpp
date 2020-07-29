@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkPhysicalDeviceShaderAtomicInt64Features.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 19, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkPhysicalDeviceShaderAtomicInt64Features(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkPhysicalDeviceShaderAtomicInt64FeaturesObject,
+			VkPhysicalDeviceShaderAtomicInt64Features *vkPhysicalDeviceShaderAtomicInt64Features,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceShaderAtomicInt64FeaturesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceShaderAtomicInt64FeaturesObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceShaderAtomicInt64FeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceShaderAtomicInt64FeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,14 +70,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "isShaderBufferInt64Atomics", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
+        	LOGERROR(env, "%s", "Could not find method id for isShaderBufferInt64Atomics");
             return;
         }
 
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jboolean shaderBufferInt64Atomics = env->CallBooleanMethod(jVkPhysicalDeviceShaderAtomicInt64FeaturesObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -85,14 +85,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
+        methodId = env->GetMethodID(theClass, "isShaderSharedInt64Atomics", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
+        	LOGERROR(env, "%s", "Could not find method id for isShaderSharedInt64Atomics");
             return;
         }
 
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jboolean shaderSharedInt64Atomics = env->CallBooleanMethod(jVkPhysicalDeviceShaderAtomicInt64FeaturesObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -100,9 +100,9 @@ namespace jvulkan
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkPhysicalDeviceShaderAtomicInt64Features->sType = sTypeValue;
+        vkPhysicalDeviceShaderAtomicInt64Features->pNext = pNext;
+        vkPhysicalDeviceShaderAtomicInt64Features->shaderBufferInt64Atomics = shaderBufferInt64Atomics;
+        vkPhysicalDeviceShaderAtomicInt64Features->shaderSharedInt64Atomics = shaderSharedInt64Atomics;
     }
 }

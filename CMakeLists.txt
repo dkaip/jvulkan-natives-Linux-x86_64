@@ -4,12 +4,12 @@ cmake_minimum_required(VERSION 3.8)
 # that are appropriate for your development environment.
 set(NormalSystemLibraries "/usr/lib64")
 set(WaylandLibraries "/usr/lib64")
-set(VulkanSDKLibraries "/home/dkaip/Downloads/VulkanSDK/1.1.126.0/x86_64/lib")
+set(VulkanSDKLibraries "/home/dkaip/Downloads/VulkanSDK/1.2.141.2/x86_64/lib")
 
 set(JNIHeaders1 "/usr/lib/jvm/java-1.8.0/include/linux")
 set(JNIHeaders2 "/usr/lib/jvm/java-1.8.0/include")
 
-set(VulkanSDKHeaders "/home/dkaip/Downloads/VulkanSDK/1.1.126.0/x86_64/include")
+set(VulkanSDKHeaders "/home/dkaip/Downloads/VulkanSDK/1.2.141.2/x86_64/include")
 
 set(WaylandHeaders "/home/dkaip/wayland/wayland-1.16.92/src")
 

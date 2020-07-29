@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkImageStencilUsageCreateInfo.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 27, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkImageStencilUsageCreateInfo(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkImageStencilUsageCreateInfoObject,
+			VkImageStencilUsageCreateInfo *vkImageStencilUsageCreateInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkImageStencilUsageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkImageStencilUsageCreateInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkImageStencilUsageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkImageStencilUsageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,39 +70,33 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getStencilUsage", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
+        	LOGERROR(env, "%s", "Could not find method id for getStencilUsage.");
             return;
         }
 
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jobject flagsObject = env->CallObjectMethod(jVkImageStencilUsageCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
+        VkImageUsageFlags stencilUsageFlags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageUsageFlagBits");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
-            return;
-        }
-
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Call to getEnumSetValue failed for VkImageUsageFlagBits.");
             return;
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkImageStencilUsageCreateInfo->sType = sTypeValue;
+        vkImageStencilUsageCreateInfo->pNext = pNext;
+        vkImageStencilUsageCreateInfo->stencilUsage = stencilUsageFlags;
     }
 }

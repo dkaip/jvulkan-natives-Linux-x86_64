@@ -38,7 +38,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     int numberOfBindAccelerationStructureMemoryInfos = 0;
     VkBindAccelerationStructureMemoryInfoNV *vkBindAccelerationStructureMemoryInfos = nullptr;
 
-    jvulkan::getVkBindAccelerationStructureMemoryInfoNVCollection(
+    jvulkan::getVkBindAccelerationStructureMemoryInfoKHRCollection(
             env,
             jVkBindAccelerationStructureMemoryInfoNVCollection,
             &vkBindAccelerationStructureMemoryInfos,

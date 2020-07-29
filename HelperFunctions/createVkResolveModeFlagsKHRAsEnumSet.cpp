@@ -25,10 +25,10 @@
 
 namespace jvulkan
 {
-    jobject createVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR)
+    jobject createVkResolveModeFlagsAsEnumSet(JNIEnv *env, VkResolveModeFlags vkResolveModeFlags)
     {
-        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkResolveModeFlagBitsKHR";
-        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkResolveModeFlagBitsKHR;";
+        char const *enumClassString = "com/CIMthetics/jvulkan/VulkanCore/Enums/VkResolveModeFlagBits";
+        char const *enumObjectString = "Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResolveModeFlagBits;";
 
         /*
          * Create the EnumSet for the flags.
@@ -74,78 +74,78 @@ namespace jvulkan
          * Make sure that flags does not have an unexpected value.  This would
          * indicate that this code is out of sync with the LunarG Vulkan SDK.
          */
-        if ((vkResolveModeFlagsKHR &
-             !(VK_RESOLVE_MODE_NONE_KHR |
-			   VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR |
-			   VK_RESOLVE_MODE_AVERAGE_BIT_KHR |
-			   VK_RESOLVE_MODE_MIN_BIT_KHR |
-			   VK_RESOLVE_MODE_MAX_BIT_KHR)) != 0)
+        if ((vkResolveModeFlags &
+             !(VK_RESOLVE_MODE_NONE |
+			   VK_RESOLVE_MODE_SAMPLE_ZERO_BIT |
+			   VK_RESOLVE_MODE_AVERAGE_BIT |
+			   VK_RESOLVE_MODE_MIN_BIT |
+			   VK_RESOLVE_MODE_MAX_BIT)) != 0)
         {
-        	LOGERROR(env, "Unhandled case for vkResolveModeFlagsKHR...value is %x", vkResolveModeFlagsKHR);
+        	LOGERROR(env, "Unhandled case for vkResolveModeFlags...value is %x", vkResolveModeFlags);
             return nullptr;
         }
 
-        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_NONE_KHR)
+        if (vkResolveModeFlags & VK_RESOLVE_MODE_NONE)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_NONE_KHR", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_NONE", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_NONE_KHR to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_NONE to EnumSet");
                 return nullptr;
             }
         }
 
-        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR)
+        if (vkResolveModeFlags & VK_RESOLVE_MODE_SAMPLE_ZERO_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_SAMPLE_ZERO_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_SAMPLE_ZERO_BIT_KHR to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_SAMPLE_ZERO_BIT to EnumSet");
                 return nullptr;
             }
         }
 
-        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_AVERAGE_BIT_KHR)
+        if (vkResolveModeFlags & VK_RESOLVE_MODE_AVERAGE_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_AVERAGE_BIT_KHR", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_AVERAGE_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_AVERAGE_BIT_KHR to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_AVERAGE_BIT to EnumSet");
                 return nullptr;
             }
         }
 
-        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_MIN_BIT_KHR)
+        if (vkResolveModeFlags & VK_RESOLVE_MODE_MIN_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MIN_BIT_KHR", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MIN_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_MIN_BIT_KHR to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_MIN_BIT to EnumSet");
                 return nullptr;
             }
         }
 
-        if (vkResolveModeFlagsKHR & VK_RESOLVE_MODE_MAX_BIT_KHR)
+        if (vkResolveModeFlags & VK_RESOLVE_MODE_MAX_BIT)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MAX_BIT_KHR", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_RESOLVE_MODE_MAX_BIT", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_MAX_BIT_KHR to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_RESOLVE_MODE_MAX_BIT to EnumSet");
                 return nullptr;
             }
         }

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkPhysicalDeviceScalarBlockLayoutFeatures.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 19, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkPhysicalDeviceScalarBlockLayoutFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkPhysicalDeviceScalarBlockLayoutFeaturesObject,
+			VkPhysicalDeviceScalarBlockLayoutFeatures *vkPhysicalDeviceScalarBlockLayoutFeatures,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceScalarBlockLayoutFeaturesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceScalarBlockLayoutFeaturesObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceScalarBlockLayoutFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceScalarBlockLayoutFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,29 +70,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "isScalarBlockLayout", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
+        	LOGERROR(env, "%s", "Could not find method id for isScalarBlockLayout");
             return;
         }
 
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
-            return;
-        }
-
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jboolean scalarBlockLayout = env->CallBooleanMethod(jVkPhysicalDeviceScalarBlockLayoutFeaturesObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -100,9 +85,8 @@ namespace jvulkan
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkPhysicalDeviceScalarBlockLayoutFeatures->sType = sTypeValue;
+        vkPhysicalDeviceScalarBlockLayoutFeatures->pNext = pNext;
+        vkPhysicalDeviceScalarBlockLayoutFeatures->scalarBlockLayout = scalarBlockLayout;
     }
 }

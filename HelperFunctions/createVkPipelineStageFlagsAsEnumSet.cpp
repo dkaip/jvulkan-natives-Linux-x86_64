@@ -92,15 +92,16 @@ namespace jvulkan
 			   VK_PIPELINE_STAGE_HOST_BIT |
 			   VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT |
 			   VK_PIPELINE_STAGE_ALL_COMMANDS_BIT |
-			   VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX |
+
+			   VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT |
 			   VK_PIPELINE_STAGE_CONDITIONAL_RENDERING_BIT_EXT |
+			   VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR |
+			   VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR |
+			   VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV |
 			   VK_PIPELINE_STAGE_TASK_SHADER_BIT_NV |
 			   VK_PIPELINE_STAGE_MESH_SHADER_BIT_NV |
-			   VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_NV |
-			   VK_PIPELINE_STAGE_SHADING_RATE_IMAGE_BIT_NV |
 			   VK_PIPELINE_STAGE_FRAGMENT_DENSITY_PROCESS_BIT_EXT |
-			   VK_PIPELINE_STAGE_TRANSFORM_FEEDBACK_BIT_EXT |
-			   VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV)) != 0)
+			   VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV)) != 0)
         {
         	LOGERROR(env, "Unhandled case for vkPipelineStageFlags...value is %x", vkPipelineStageFlags);
             return nullptr;
@@ -327,15 +328,15 @@ namespace jvulkan
             }
         }
 
-        if (vkPipelineStageFlags & VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX)
+        if (vkPipelineStageFlags & VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV)
         {
-            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX", enumObjectString);
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV", enumObjectString);
             jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
 
             bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
             if (addResult == false)
             {
-            	LOGERROR(env, "%s", "Could not add VK_PIPELINE_STAGE_COMMAND_PROCESS_BIT_NVX to EnumSet");
+            	LOGERROR(env, "%s", "Could not add VK_PIPELINE_STAGE_COMMAND_PREPROCESS_BIT_NV to EnumSet");
                 return nullptr;
             }
         }
@@ -440,6 +441,32 @@ namespace jvulkan
             if (addResult == false)
             {
             	LOGERROR(env, "%s", "Could not add VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_NV to EnumSet");
+                return nullptr;
+            }
+        }
+
+        if (vkPipelineStageFlags & VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR)
+        {
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR", enumObjectString);
+            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+
+            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+            if (addResult == false)
+            {
+            	LOGERROR(env, "%s", "Could not add VK_PIPELINE_STAGE_RAY_TRACING_SHADER_BIT_KHR to EnumSet");
+                return nullptr;
+            }
+        }
+
+        if (vkPipelineStageFlags & VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR)
+        {
+            jfieldID fieldId = env->GetStaticFieldID(enumClass, "VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR", enumObjectString);
+            jobject theEnum = env->GetStaticObjectField(enumClass, fieldId);
+
+            bool addResult = env->CallBooleanMethod(enumSetObject, setAddMethod, theEnum);
+            if (addResult == false)
+            {
+            	LOGERROR(env, "%s", "Could not add VK_PIPELINE_STAGE_ACCELERATION_STRUCTURE_BUILD_BIT_KHR to EnumSet");
                 return nullptr;
             }
         }

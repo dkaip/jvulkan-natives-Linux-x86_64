@@ -737,56 +737,56 @@ namespace jvulkan
 
     jobject getVkFormatFeatureFlagsEnumSet(JNIEnv *env, VkFormatFeatureFlags alphaFlags);
 
-    void getVkAttachmentDescription2KHR(
+    void getVkAttachmentDescription2(
             JNIEnv *env,
-            const jobject jVkAttachmentDescription2KHRObject,
-            VkAttachmentDescription2KHR *vkAttachmentDescription2KHR,
+            const jobject jVkAttachmentDescription2Object,
+            VkAttachmentDescription2KHR *vkAttachmentDescription2,
             std::vector<void *> *memoryToFree);
 
-    void getVkAttachmentDescription2KHRCollection(
+    void getVkAttachmentDescription2Collection(
             JNIEnv *env,
-            const jobject jVkAttachmentDescription2KHRCollectionObject,
-            VkAttachmentDescription2KHR **vkAttachmentDescription2KHRs,
-            int *numberOfVkAttachmentDescription2KHRs,
+            const jobject jVkAttachmentDescription2CollectionObject,
+            VkAttachmentDescription2 **vkAttachmentDescription2s,
+            int *numberOfVkAttachmentDescription2s,
             std::vector<void *> *memoryToFree);
 
-    void getVkSubpassDescription2KHR(
+    void getVkSubpassDescription2(
             JNIEnv *env,
-            const jobject jVkSubpassDescription2KHRObject,
-            VkSubpassDescription2KHR *vkSubpassDescription2KHR,
+            const jobject jVkSubpassDescription2Object,
+            VkSubpassDescription2 *vkSubpassDescription2,
             std::vector<void *> *memoryToFree);
 
-    void getVkSubpassDescription2KHRCollection(
+    void getVkSubpassDescription2Collection(
             JNIEnv *env,
-            const jobject jVkSubpassDescription2KHRCollectionObject,
-            VkSubpassDescription2KHR **vkSubpassDescription2KHRs,
-            int *numberOfVkSubpassDescription2KHRs,
+            const jobject jVkSubpassDescription2CollectionObject,
+            VkSubpassDescription2 **vkSubpassDescription2s,
+            int *numberOfVkSubpassDescription2s,
             std::vector<void *> *memoryToFree);
 
-    void getVkAttachmentReference2KHR(
+    void getVkAttachmentReference2(
             JNIEnv *env,
-            const jobject jVkAttachmentReference2KHRObject,
-            VkAttachmentReference2KHR *vkAttachmentReference2KHR,
+            const jobject jVkAttachmentReference2Object,
+            VkAttachmentReference2 *vkAttachmentReference2,
             std::vector<void *> *memoryToFree);
 
-    void getVkAttachmentReference2KHRCollection(
+    void getVkAttachmentReference2Collection(
             JNIEnv *env,
-            const jobject jVkAttachmentReference2KHRCollectionObject,
-            VkAttachmentReference2KHR **vkAttachmentReference2KHRs,
-            int *numberOfVkAttachmentReference2KHRs,
+            const jobject jVkAttachmentReference2CollectionObject,
+            VkAttachmentReference2 **vkAttachmentReference2s,
+            int *numberOfVkAttachmentReference2s,
             std::vector<void *> *memoryToFree);
 
-    void getVkSubpassDependency2KHR(
+    void getVkSubpassDependency2(
             JNIEnv *env,
-            const jobject jVkSubpassDependency2KHRObject,
-            VkSubpassDependency2KHR *vkSubpassDependency2KHR,
+            const jobject jVkSubpassDependency2Object,
+            VkSubpassDependency2 *vkSubpassDependency2,
             std::vector<void *> *memoryToFree);
 
-    void getVkSubpassDependency2KHRCollection(
+    void getVkSubpassDependency2Collection(
             JNIEnv *env,
-            const jobject jVkSubpassDependency2KHRCollectionObject,
-            VkSubpassDependency2KHR **vkSubpassDependency2KHRs,
-            int *numberOfVkSubpassDependency2KHRs,
+            const jobject jVkSubpassDependency2CollectionObject,
+            VkSubpassDependency2 **vkSubpassDependency2s,
+            int *numberOfVkSubpassDependency2s,
             std::vector<void *> *memoryToFree);
 
     void getBitSetCollection(
@@ -796,10 +796,10 @@ namespace jvulkan
             int *numberOfOutputBitMasks,
             std::vector<void *> *memoryToFree);
 
-    void getVkRenderPassCreateInfo2KHR(
+    void getVkRenderPassCreateInfo2(
             JNIEnv *env,
-            jobject jVkRenderPassCreateInfo2KHRObject,
-            VkRenderPassCreateInfo2KHR *vkRenderPassCreateInfo2KHR,
+            jobject jVkRenderPassCreateInfo2Object,
+            VkRenderPassCreateInfo2 *vkRenderPassCreateInfo2,
             std::vector<void *> *memoryToFree);
 
     void getVkAcquireNextImageInfoKHR(
@@ -834,17 +834,17 @@ namespace jvulkan
             int *numberOfVkBindImageMemoryInfos,
             std::vector<void *> *memoryToFree);
 
-    void getVkBindAccelerationStructureMemoryInfoNV(
+    void getVkBindAccelerationStructureMemoryInfoKHR(
             JNIEnv *env,
-            const jobject jVkBindAccelerationStructureMemoryInfoNVObject,
-            VkBindAccelerationStructureMemoryInfoNV *vkBindAccelerationStructureMemoryInfoNV,
+            const jobject jVkBindAccelerationStructureMemoryInfoKHRObject,
+            VkBindAccelerationStructureMemoryInfoKHR *vkBindAccelerationStructureMemoryInfoKHR,
             std::vector<void *> *memoryToFree);
 
-    void getVkBindAccelerationStructureMemoryInfoNVCollection(
+    void getVkBindAccelerationStructureMemoryInfoKHRCollection(
             JNIEnv *env,
-            const jobject jVkBindAccelerationStructureMemoryInfoNVCollectionObject,
-            VkBindAccelerationStructureMemoryInfoNV **vkBindAccelerationStructureMemoryInfoNVs,
-            int *numberOfVkBindAccelerationStructureMemoryInfoNVs,
+            const jobject jVkBindAccelerationStructureMemoryInfoKHRCollectionObject,
+            VkBindAccelerationStructureMemoryInfoKHR **vkBindAccelerationStructureMemoryInfoKHRs,
+            int *numberOfVkBindAccelerationStructureMemoryInfoKHRs,
             std::vector<void *> *memoryToFree);
 
     void getVkAccelerationStructureCreateInfoNV(
@@ -1113,16 +1113,16 @@ namespace jvulkan
 			const VkPhysicalDeviceCooperativeMatrixPropertiesNV* vkPhysicalDeviceCooperativeMatrixPropertiesNV,
 			std::vector<void *> *memoryToFree);
 
-	void populateVkPhysicalDeviceDepthStencilResolvePropertiesKHR(
+	void populateVkPhysicalDeviceDepthStencilResolveProperties(
 			JNIEnv *env,
-			jobject jVkPhysicalDeviceDepthStencilResolvePropertiesKHRObject,
-			const VkPhysicalDeviceDepthStencilResolvePropertiesKHR *vkPhysicalDeviceDepthStencilResolvePropertiesKHR,
+			jobject jVkPhysicalDeviceDepthStencilResolvePropertiesObject,
+			const VkPhysicalDeviceDepthStencilResolveProperties *vkPhysicalDeviceDepthStencilResolveProperties,
 			std::vector<void *> *memoryToFree);
 
-	void populateVkPhysicalDeviceDescriptorIndexingPropertiesEXT(
+	void populateVkPhysicalDeviceDescriptorIndexingProperties(
 			JNIEnv *env,
-			jobject jVkPhysicalDeviceDescriptorIndexingPropertiesEXTObject,
-			const VkPhysicalDeviceDescriptorIndexingPropertiesEXT *vkPhysicalDeviceDescriptorIndexingPropertiesEXT,
+			jobject jVkPhysicalDeviceDescriptorIndexingPropertiesObject,
+			const VkPhysicalDeviceDescriptorIndexingProperties *vkPhysicalDeviceDescriptorIndexingProperties,
 			std::vector<void *> *memoryToFree);
 
 	void populateVkPhysicalDeviceDiscardRectanglePropertiesEXT(
@@ -1131,10 +1131,10 @@ namespace jvulkan
 			const VkPhysicalDeviceDiscardRectanglePropertiesEXT *vkPhysicalDeviceDiscardRectanglePropertiesEXT,
 			std::vector<void *> *memoryToFree);
 
-	void populateVkPhysicalDeviceDriverPropertiesKHR(
+	void populateVkPhysicalDeviceDriverProperties(
 			JNIEnv *env,
-			jobject jVkPhysicalDeviceDriverPropertiesKHRObject,
-			const VkPhysicalDeviceDriverPropertiesKHR *vkPhysicalDeviceDriverPropertiesKHR,
+			jobject jVkPhysicalDeviceDriverPropertiesObject,
+			const VkPhysicalDeviceDriverProperties *vkPhysicalDeviceDriverProperties,
 			std::vector<void *> *memoryToFree);
 
 	void populateVkPhysicalDeviceExternalMemoryHostPropertiesEXT(
@@ -1143,10 +1143,10 @@ namespace jvulkan
 			const VkPhysicalDeviceExternalMemoryHostPropertiesEXT *vkPhysicalDeviceExternalMemoryHostPropertiesEXT,
 			std::vector<void *> *memoryToFree);
 
-	void populateVkPhysicalDeviceFloatControlsPropertiesKHR(
+	void populateVkPhysicalDeviceFloatControlsProperties(
 			JNIEnv *env,
-			jobject jVkPhysicalDeviceFloatControlsPropertiesKHRObject,
-			const VkPhysicalDeviceFloatControlsPropertiesKHR *vkPhysicalDeviceFloatControlsPropertiesKHR,
+			jobject jVkPhysicalDeviceFloatControlsPropertiesObject,
+			const VkPhysicalDeviceFloatControlsProperties *vkPhysicalDeviceFloatControlsProperties,
 			std::vector<void *> *memoryToFree);
 
 	void populateVkPhysicalDeviceFragmentDensityMapPropertiesEXT(
@@ -1221,10 +1221,10 @@ namespace jvulkan
 			const VkPhysicalDeviceSampleLocationsPropertiesEXT *vkPhysicalDeviceSampleLocationsPropertiesEXT,
 			std::vector<void *> *memoryToFree);
 
-	void populateVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(
+	void populateVkPhysicalDeviceSamplerFilterMinmaxProperties(
 			JNIEnv *env,
-			jobject jVkPhysicalDeviceSamplerFilterMinmaxPropertiesEXTObject,
-			const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT *vkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT,
+			jobject jVkPhysicalDeviceSamplerFilterMinmaxPropertiesObject,
+			const VkPhysicalDeviceSamplerFilterMinmaxProperties *vkPhysicalDeviceSamplerFilterMinmaxProperties,
 			std::vector<void *> *memoryToFree);
 
 	void populateVkPhysicalDeviceShadingRateImagePropertiesNV(
@@ -1259,9 +1259,9 @@ namespace jvulkan
 
 	jobject createVkShaderStageFlagsAsEnumSet(JNIEnv *env, VkShaderStageFlags vkShaderStageFlags);
 
-    jobject createVkResolveModeFlagsKHRAsEnumSet(JNIEnv *env, VkResolveModeFlagsKHR vkResolveModeFlagsKHR);
+    jobject createVkResolveModeFlagsAsEnumSet(JNIEnv *env, VkResolveModeFlags vkResolveModeFlags);
 
-	jobject createVkConformanceVersionKHR(JNIEnv *env, const VkConformanceVersionKHR *vkConformanceVersionKHR);
+	jobject createVkConformanceVersion(JNIEnv *env, const VkConformanceVersion *vkConformanceVersion);
 
 	jobject createVkExtent2D(JNIEnv *env, const VkExtent2D *vkExtent2D);
 
@@ -1294,10 +1294,10 @@ namespace jvulkan
 			VkPhysicalDevice16BitStorageFeatures *vkPhysicalDevice16BitStorageFeatures,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDevice8BitStorageFeaturesKHR(
+    void getVkPhysicalDevice8BitStorageFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDevice8BitStorageFeaturesKHRObject,
-			VkPhysicalDevice8BitStorageFeaturesKHR *vkPhysicalDevice8BitStorageFeaturesKHR,
+            const jobject jVkPhysicalDevice8BitStorageFeaturesObject,
+			VkPhysicalDevice8BitStorageFeatures *vkPhysicalDevice8BitStorageFeatures,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceASTCDecodeFeaturesEXT(
@@ -1312,10 +1312,10 @@ namespace jvulkan
 			VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT *vkPhysicalDeviceBlendOperationAdvancedFeaturesEXT,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
+    void getVkPhysicalDeviceBufferDeviceAddressFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceBufferDeviceAddressFeaturesEXTObject,
-			VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *vkPhysicalDeviceBufferDeviceAddressFeaturesEXT,
+            const jobject jVkPhysicalDeviceBufferDeviceAddressFeaturesObject,
+			VkPhysicalDeviceBufferDeviceAddressFeatures *vkPhysicalDeviceBufferDeviceAddressFeatures,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
@@ -1354,10 +1354,10 @@ namespace jvulkan
 			VkPhysicalDeviceDepthClipEnableFeaturesEXT *vkPhysicalDeviceDepthClipEnableFeaturesEXT,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceDescriptorIndexingFeaturesEXT(
+    void getVkPhysicalDeviceDescriptorIndexingFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceDescriptorIndexingFeaturesEXTObject,
-			VkPhysicalDeviceDescriptorIndexingFeaturesEXT *vkPhysicalDeviceDescriptorIndexingFeaturesEXT,
+            const jobject jVkPhysicalDeviceDescriptorIndexingFeaturesObject,
+			VkPhysicalDeviceDescriptorIndexingFeatures *vkPhysicalDeviceDescriptorIndexingFeatures,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceExclusiveScissorFeaturesNV(
@@ -1390,10 +1390,10 @@ namespace jvulkan
 			VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV *vkPhysicalDeviceFragmentShaderBarycentricFeaturesNV,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceHostQueryResetFeaturesEXT(
+    void getVkPhysicalDeviceHostQueryResetFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceHostQueryResetFeaturesEXTObject,
-			VkPhysicalDeviceHostQueryResetFeaturesEXT *vkPhysicalDeviceHostQueryResetFeaturesEXT,
+            const jobject jVkPhysicalDeviceHostQueryResetFeaturesObject,
+			VkPhysicalDeviceHostQueryResetFeatures *vkPhysicalDeviceHostQueryResetFeatures,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceInlineUniformBlockFeaturesEXT(
@@ -1438,16 +1438,16 @@ namespace jvulkan
 			VkPhysicalDeviceSamplerYcbcrConversionFeatures *vkPhysicalDeviceSamplerYcbcrConversionFeatures,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
+    void getVkPhysicalDeviceScalarBlockLayoutFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceScalarBlockLayoutFeaturesEXTObject,
-			VkPhysicalDeviceScalarBlockLayoutFeaturesEXT *vkPhysicalDeviceScalarBlockLayoutFeaturesEXT,
+            const jobject jVkPhysicalDeviceScalarBlockLayoutFeaturesObject,
+			VkPhysicalDeviceScalarBlockLayoutFeatures *vkPhysicalDeviceScalarBlockLayoutFeatures,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceShaderAtomicInt64FeaturesKHR(
+    void getVkPhysicalDeviceShaderAtomicInt64Features(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceShaderAtomicInt64FeaturesKHRObject,
-			VkPhysicalDeviceShaderAtomicInt64FeaturesKHR *vkPhysicalDeviceShaderAtomicInt64FeaturesKHR,
+            const jobject jVkPhysicalDeviceShaderAtomicInt64FeaturesObject,
+			VkPhysicalDeviceShaderAtomicInt64Features *vkPhysicalDeviceShaderAtomicInt64Features,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceShaderDrawParametersFeatures(
@@ -1486,10 +1486,10 @@ namespace jvulkan
 			VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT *vkPhysicalDeviceVertexAttributeDivisorFeaturesEXT,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceVulkanMemoryModelFeaturesKHR(
+    void getVkPhysicalDeviceVulkanMemoryModelFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceVulkanMemoryModelFeaturesKHRObject,
-			VkPhysicalDeviceVulkanMemoryModelFeaturesKHR *vkPhysicalDeviceVulkanMemoryModelFeaturesKHR,
+            const jobject jVkPhysicalDeviceVulkanMemoryModelFeaturesObject,
+			VkPhysicalDeviceVulkanMemoryModelFeatures *vkPhysicalDeviceVulkanMemoryModelFeatures,
             std::vector<void *> *memoryToFree);
 
     void getVkPhysicalDeviceYcbcrImageArraysFeaturesEXT(
@@ -1821,16 +1821,16 @@ namespace jvulkan
             int *numberOfVkFormats,
             std::vector<void *> *memoryToFree);
 
-    void getVkImageFormatListCreateInfoKHR(
+    void getVkImageFormatListCreateInfo(
             JNIEnv *env,
-            const jobject jVkImageFormatListCreateInfoKHRObject,
-			VkImageFormatListCreateInfoKHR *vkImageFormatListCreateInfoKHR,
+            const jobject jVkImageFormatListCreateInfoObject,
+			VkImageFormatListCreateInfo *vkImageFormatListCreateInfo,
             std::vector<void *> *memoryToFree);
 
-    void getVkImageStencilUsageCreateInfoEXT(
+    void getVkImageStencilUsageCreateInfo(
             JNIEnv *env,
-            const jobject jVkImageStencilUsageCreateInfoEXTObject,
-			VkImageStencilUsageCreateInfoEXT *vkImageStencilUsageCreateInfoEXT,
+            const jobject jVkImageStencilUsageCreateInfoObject,
+			VkImageStencilUsageCreateInfo *vkImageStencilUsageCreateInfo,
             std::vector<void *> *memoryToFree);
 
     void getVkImageSwapchainCreateInfoKHR(
@@ -1875,10 +1875,10 @@ namespace jvulkan
 			VkBindImagePlaneMemoryInfo *vkBindImagePlaneMemoryInfo,
             std::vector<void *> *memoryToFree);
 
-    void getVkSamplerReductionModeCreateInfoEXT(
+    void getVkSamplerReductionModeCreateInfo(
             JNIEnv *env,
-            const jobject jVkSamplerReductionModeCreateInfoEXTObject,
-			VkSamplerReductionModeCreateInfoEXT *vkSamplerReductionModeCreateInfoEXT,
+            const jobject jVkSamplerReductionModeCreateInfoObject,
+			VkSamplerReductionModeCreateInfo *vkSamplerReductionModeCreateInfo,
             std::vector<void *> *memoryToFree);
 
     void getVkAccelerationStructureNVCollection(
@@ -2756,13 +2756,13 @@ namespace jvulkan
             int *numberOfVkCalibratedTimestampInfoEXTs,
             std::vector<void *> *memoryToFree);
 
-    void getVkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
+    void getVkDescriptorSetLayoutBindingFlagsCreateInfo(
             JNIEnv *env,
-            jobject jVkDescriptorSetLayoutBindingFlagsCreateInfoEXTObject,
-			VkDescriptorSetLayoutBindingFlagsCreateInfoEXT *vkDescriptorSetLayoutBindingFlagsCreateInfoEXT,
+            jobject jVkDescriptorSetLayoutBindingFlagsCreateInfoObject,
+			VkDescriptorSetLayoutBindingFlagsCreateInfo *vkDescriptorSetLayoutBindingFlagsCreateInfo,
             std::vector<void *> *memoryToFree);
 
-    void getVkDescriptorBindingFlagsEXTCollection(
+    void getVkDescriptorBindingFlagsCollection(
             JNIEnv *env,
             const jobject jVkDescriptorBindingFlagsEXTCollectionObject,
 			VkDescriptorBindingFlagsEXT **vkDescriptorBindingFlagsEXTs,
@@ -3056,10 +3056,10 @@ namespace jvulkan
 
     jobject createVkPipelineStageFlagsAsEnumSet(JNIEnv *env, VkPipelineStageFlags vkPipelineStageFlags);
 
-    void getVkBufferDeviceAddressInfoEXT(
+    void getVkBufferDeviceAddressInfo(
             JNIEnv *env,
-            const jobject jVkBufferDeviceAddressInfoEXTObject,
-			VkBufferDeviceAddressInfoEXT *vkBufferDeviceAddressInfoEXT,
+            const jobject jVkBufferDeviceAddressInfoObject,
+			VkBufferDeviceAddressInfo *vkBufferDeviceAddressInfo,
             std::vector<void *> *memoryToFree);
 
 	void populateVkSparseImageFormatPropertiesCollection(
@@ -3129,16 +3129,16 @@ namespace jvulkan
 
     jobject createVkQueueFlagsKHRAsEnumSet(JNIEnv *env, VkQueueFlags vkQueueFlags);
 
-    void getVkSemaphoreWaitInfoKHR(
+    void getVkSemaphoreWaitInfo(
             JNIEnv *env,
-            jobject jVkSemaphoreWaitInfoKHR,
-			VkSemaphoreWaitInfoKHR *vkSemaphoreWaitInfoKHR,
+            jobject jVkSemaphoreWaitInfo,
+			VkSemaphoreWaitInfo *vkSemaphoreWaitInfo,
             std::vector<void *> *memoryToFree);
 
-    void getVkSemaphoreSignalInfoKHR(
+    void getVkSemaphoreSignalInfo(
             JNIEnv *env,
-            jobject jVkSemaphoreSignalInfoKHR,
-			VkSemaphoreSignalInfoKHR *vkSemaphoreSignalInfoKHR,
+            jobject jVkSemaphoreSignalInfo,
+			VkSemaphoreSignalInfo *vkSemaphoreSignalInfo,
             std::vector<void *> *memoryToFree);
 
     /*

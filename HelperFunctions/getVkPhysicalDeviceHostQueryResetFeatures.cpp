@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkPhysicalDeviceHostQueryResetFeatures.cpp
  *
  *  Created on: May 17, 2019
  *      Author: Douglas Kaip
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkPhysicalDeviceHostQueryResetFeatures(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkPhysicalDeviceHostQueryResetFeaturesObject,
+			VkPhysicalDeviceHostQueryResetFeatures *vkPhysicalDeviceHostQueryResetFeatures,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceHostQueryResetFeaturesObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceHostQueryResetFeaturesObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceHostQueryResetFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceHostQueryResetFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,29 +70,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "isHostQueryReset", "()Z");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
+        	LOGERROR(env, "%s", "Could not find method id for isHostQueryReset");
             return;
         }
 
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
-            return;
-        }
-
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jboolean hostQueryReset = env->CallBooleanMethod(jVkPhysicalDeviceHostQueryResetFeaturesObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
@@ -100,9 +85,8 @@ namespace jvulkan
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkPhysicalDeviceHostQueryResetFeatures->sType = sTypeValue;
+        vkPhysicalDeviceHostQueryResetFeatures->pNext = pNext;
+        vkPhysicalDeviceHostQueryResetFeatures->hostQueryReset = hostQueryReset;
     }
 }

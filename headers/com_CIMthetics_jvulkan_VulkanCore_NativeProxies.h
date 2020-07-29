@@ -161,10 +161,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdBeginRenderPass2KHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkRenderPassBeginInfo;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfoKHR;)V
+ * Method:    vkCmdBeginRenderPass2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkRenderPassBeginInfo;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfo;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBeginRenderPass2KHR
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBeginRenderPass2
   (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
@@ -234,7 +234,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkCmdBuildAccelerationStructureNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkAccelerationStructureInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JZLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;J)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkAccelerationStructureInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JZLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;J)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBuildAccelerationStructureNV
   (JNIEnv *, jobject, jobject, jobject, jobject, jlong, jboolean, jobject, jobject, jobject, jlong);
@@ -250,7 +250,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkCmdCopyAccelerationStructureNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkCopyAccelerationStructureModeNV;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkCopyAccelerationStructureModeKHR;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdCopyAccelerationStructureNV
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
@@ -385,10 +385,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdDrawIndexedIndirectCountKHR
+ * Method:    vkCmdDrawIndexedIndirectCount
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JLcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JII)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdDrawIndexedIndirectCountKHR
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdDrawIndexedIndirectCount
   (JNIEnv *, jobject, jobject, jobject, jlong, jobject, jlong, jint, jint);
 
 /*
@@ -409,10 +409,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdDrawIndirectCountKHR
+ * Method:    vkCmdDrawIndirectCount
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JLcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;JII)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdDrawIndirectCountKHR
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdDrawIndirectCount
   (JNIEnv *, jobject, jobject, jobject, jlong, jobject, jlong, jint, jint);
 
 /*
@@ -481,10 +481,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdEndRenderPass2KHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfoKHR;)V
+ * Method:    vkCmdEndRenderPass2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfo;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdEndRenderPass2KHR
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdEndRenderPass2
   (JNIEnv *, jobject, jobject, jobject);
 
 /*
@@ -529,10 +529,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdNextSubpass2KHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfoKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfoKHR;)V
+ * Method:    vkCmdNextSubpass2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfo;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfo;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdNextSubpass2KHR
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdNextSubpass2
   (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
@@ -542,14 +542,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdPipelineBarrier
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject, jobject, jobject, jobject);
-
-/*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdProcessCommandsNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCmdProcessCommandsInfoNVX;)V
- */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdProcessCommandsNVX
-  (JNIEnv *, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -858,7 +850,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkCreateAccelerationStructureNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkAccelerationStructureCreateInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkAccelerationStructureCreateInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateAccelerationStructureNV
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
@@ -1026,7 +1018,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkCreateIndirectCommandsLayoutNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkIndirectCommandsLayoutCreateInfoNVX;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNVX;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkIndirectCommandsLayoutCreateInfoNVX;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNV;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateIndirectCommandsLayoutNVX
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
@@ -1089,10 +1081,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCreateRenderPass2KHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkRenderPassCreateInfo2KHR;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkCreateRenderPass2
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkRenderPassCreateInfo2;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateRenderPass2KHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateRenderPass2
   (JNIEnv *, jobject, jobject, jobject, jobject, jobject);
 
 /*
@@ -1186,7 +1178,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDe
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkDestroyAccelerationStructureNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyAccelerationStructureNV
   (JNIEnv *, jobject, jobject, jobject, jobject);
@@ -1305,10 +1297,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDe
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkDestroyIndirectCommandsLayoutNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNVX;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
+ * Method:    vkDestroyIndirectCommandsLayoutNV
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyIndirectCommandsLayoutNVX
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyIndirectCommandsLayoutNV
   (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
@@ -1318,14 +1310,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDe
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyInstance
   (JNIEnv *, jobject, jobject, jobject);
-
-/*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkDestroyObjectTableNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkObjectTableNVX;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
- */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyObjectTableNVX
-  (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -1538,7 +1522,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkFr
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetAccelerationStructureHandleNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureNV;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetAccelerationStructureHandleNV
   (JNIEnv *, jobject, jobject, jobject, jobject);
@@ -1561,10 +1545,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkGetBufferDeviceAddressEXT
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkBufferDeviceAddressInfoEXT;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDeviceAddress;
+ * Method:    vkGetBufferDeviceAddress
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkBufferDeviceAddressInfo;)Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDeviceAddress;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetBufferDeviceAddressEXT
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetBufferDeviceAddress
   (JNIEnv *, jobject, jobject, jobject);
 
 /*
@@ -1745,10 +1729,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkGetSemaphoreCounterValueKHR
+ * Method:    vkGetSemaphoreCounterValue
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSemaphore;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/LongReturnValue;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetSemaphoreCounterValueKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetSemaphoreCounterValue
   (JNIEnv *, jobject, jobject, jobject, jobject);
 
 /*
@@ -1818,7 +1802,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetPerformanceParameterINTEL
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceParameterTypeINTEL;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkPerformanceValueINTEL;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPerformanceParameterTypeINTEL;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkPerformanceValueINTEL;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetPerformanceParameterINTEL
   (JNIEnv *, jobject, jobject, jobject, jobject);
@@ -2449,10 +2433,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkRe
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkResetQueryPoolEXT
+ * Method:    vkResetQueryPool
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkQueryPool;II)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkResetQueryPoolEXT
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkResetQueryPool
   (JNIEnv *, jobject, jobject, jobject, jint, jint);
 
 /*
@@ -2497,10 +2481,10 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkSe
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkSignalSemaphoreKHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSemaphoreSignalInfoKHR;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkSignalSemaphore
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSemaphoreSignalInfo;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkSignalSemaphoreKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkSignalSemaphore
   (JNIEnv *, jobject, jobject, jobject);
 
 /*
@@ -2569,10 +2553,10 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkWaitSemaphoresKHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSemaphoreWaitInfoKHR;J)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkWaitSemaphores
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSemaphoreWaitInfo;J)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkWaitSemaphoresKHR
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkWaitSemaphores
   (JNIEnv *, jobject, jobject, jobject, jlong);
 
 /*

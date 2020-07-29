@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceMeshShaderFeaturesNV.cpp
+ * getVkSamplerReductionModeCreateInfo.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: May 28, 2019
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceMeshShaderFeaturesNV(
+    void getVkSamplerReductionModeCreateInfo(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceMeshShaderFeaturesNVObject,
-			VkPhysicalDeviceMeshShaderFeaturesNV *vkPhysicalDeviceMeshShaderFeaturesNV,
+            const jobject jVkSamplerReductionModeCreateInfoObject,
+			VkSamplerReductionModeCreateInfo *vkSamplerReductionModeCreateInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jclass theClass = env->GetObjectClass(jVkSamplerReductionModeCreateInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceMeshShaderFeaturesNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkSamplerReductionModeCreateInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkSamplerReductionModeCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceMeshShaderFeaturesNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkSamplerReductionModeCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,39 +70,39 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isTaskShader", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getReductionMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isTaskShader");
+        	LOGERROR(env, "%s", "Error trying to get getReductionMode method Id");
             return;
         }
 
-        jboolean taskShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        jobject jVkSamplerReductionModeObject = env->CallObjectMethod(jVkSamplerReductionModeCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod for objectType");
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isMeshShader", "()Z");
+        jclass vkSamplerReductionModeEnumClass = env->GetObjectClass(jVkSamplerReductionModeObject);
+
+        jmethodID valueOfMethodId = env->GetMethodID(vkSamplerReductionModeEnumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isMeshShader");
+        	LOGERROR(env, "%s", "Error trying to get valueOf methodId");
             return;
         }
 
-        jboolean meshShader = env->CallBooleanMethod(jVkPhysicalDeviceMeshShaderFeaturesNVObject, methodId);
+        VkSamplerReductionMode vkSamplerReductionModeEnumValue = (VkSamplerReductionMode)env->CallIntMethod(jVkSamplerReductionModeObject, valueOfMethodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallIntMethod for objectType enum value");
             return;
         }
 
 
-        vkPhysicalDeviceMeshShaderFeaturesNV->sType = sTypeValue;
-        vkPhysicalDeviceMeshShaderFeaturesNV->pNext = pNext;
-        vkPhysicalDeviceMeshShaderFeaturesNV->taskShader = taskShader;
-        vkPhysicalDeviceMeshShaderFeaturesNV->meshShader = meshShader;
+        vkSamplerReductionModeCreateInfo->sType = sTypeValue;
+        vkSamplerReductionModeCreateInfo->pNext = pNext;
+        vkSamplerReductionModeCreateInfo->reductionMode = vkSamplerReductionModeEnumValue;
     }
 }
