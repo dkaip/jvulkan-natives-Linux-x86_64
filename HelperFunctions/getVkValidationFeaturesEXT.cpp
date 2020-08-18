@@ -135,12 +135,11 @@ namespace jvulkan
             }
         }
 
-
-        vkValidationFeaturesEXT->sType 							= sTypeValue;
-        vkValidationFeaturesEXT->pNext							= pNext;
-        vkValidationFeaturesEXT->enabledValidationFeatureCount 	= numberOfEnabledValidationFeatures;
-		vkValidationFeaturesEXT->pEnabledValidationFeatures 	= enabledValidationFeatures;
+        vkValidationFeaturesEXT->sType                          = sTypeValue;
+        vkValidationFeaturesEXT->pNext                          = pNext;
+        vkValidationFeaturesEXT->enabledValidationFeatureCount  = numberOfEnabledValidationFeatures;
+		vkValidationFeaturesEXT->pEnabledValidationFeatures     = enabledValidationFeatures;
 		vkValidationFeaturesEXT->disabledValidationFeatureCount = numberOfDisabledValidationFeatures;
-		vkValidationFeaturesEXT->pDisabledValidationFeatures 	= disabledValidationFeatures;
+		vkValidationFeaturesEXT->pDisabledValidationFeatures    = disabledValidationFeatures;
 	}
 }

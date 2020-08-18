@@ -40,30 +40,23 @@ namespace jvulkan
 			env->ExceptionClear();
 		}
 
-		jclass vkPhysicalDeviceFloatControlsPropertiesClass = env->GetObjectClass(
-				jVkPhysicalDeviceFloatControlsPropertiesObject);
+		jclass vkPhysicalDeviceFloatControlsPropertiesClass = env->GetObjectClass(jVkPhysicalDeviceFloatControlsPropertiesObject);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFloatControlsProperties");
+			LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceFloatControlsPropertiesObject");
 			return;
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkShaderFloatControlsIndependenceClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence");
-        if (env->ExceptionOccurred())
+        jobject theEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence",
+				vkPhysicalDeviceFloatControlsProperties->denormBehaviorIndependence);
+        if (env->ExceptionOccurred() || theEnum == nullptr)
         {
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue");
             return;
         }
-
-        jmethodID fromValueMethodId = env->GetStaticMethodID(vkShaderFloatControlsIndependenceClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence;");
-        if (env->ExceptionOccurred())
-        {
-			LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject denormBehaviorIndependenceEnum = env->CallStaticObjectMethod(vkShaderFloatControlsIndependenceClass, fromValueMethodId, vkPhysicalDeviceFloatControlsProperties->denormBehaviorIndependence);
 
         jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFloatControlsPropertiesClass, "setDenormBehaviorIndependence", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence;)V");
         if (env->ExceptionOccurred())
@@ -72,7 +65,7 @@ namespace jvulkan
             return;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceFloatControlsPropertiesObject, methodId, denormBehaviorIndependenceEnum);
+        env->CallVoidMethod(jVkPhysicalDeviceFloatControlsPropertiesObject, methodId, theEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setDriverId");
@@ -80,10 +73,13 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject roundingModeIndependenceEnum = env->CallStaticObjectMethod(vkShaderFloatControlsIndependenceClass, fromValueMethodId, vkPhysicalDeviceFloatControlsProperties->roundingModeIndependence);
-        if (env->ExceptionOccurred())
+        theEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkShaderFloatControlsIndependence",
+				vkPhysicalDeviceFloatControlsProperties->roundingModeIndependence);
+        if (env->ExceptionOccurred() || theEnum == nullptr)
         {
-        	LOGERROR(env, "%s", "failed executing method CallStaticObjectMethod");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue");
             return;
         }
 
@@ -94,7 +90,7 @@ namespace jvulkan
             return;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceFloatControlsPropertiesObject, methodId, roundingModeIndependenceEnum);
+        env->CallVoidMethod(jVkPhysicalDeviceFloatControlsPropertiesObject, methodId, theEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setDriverId");

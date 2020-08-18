@@ -48,7 +48,7 @@ namespace jvulkan
 		jclass vkResultClass = env->FindClass(enumClassString);
 		if (env->ExceptionOccurred())
 		{
-			LOGERROR(env, "Could not find class %s.", enumClassString);
+			LOGERROR(env, "Could not find class \"%s\".", enumClassString);
 			free(fromValueSignature);
 			return nullptr;
 		}

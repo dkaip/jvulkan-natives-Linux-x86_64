@@ -2,14 +2,15 @@ cmake_minimum_required(VERSION 3.8)
 
 # This batch of set statements will need their values changed to values
 # that are appropriate for your development environment.
+set(VulkanSDK "/home/dkaip/Downloads/VulkanSDK/1.2.148.1")
 set(NormalSystemLibraries "/usr/lib64")
 set(WaylandLibraries "/usr/lib64")
-set(VulkanSDKLibraries "/home/dkaip/Downloads/VulkanSDK/1.2.141.2/x86_64/lib")
+set(VulkanSDKLibraries "${VulkanSDK}/x86_64/lib")
 
 set(JNIHeaders1 "/usr/lib/jvm/java-1.8.0/include/linux")
 set(JNIHeaders2 "/usr/lib/jvm/java-1.8.0/include")
 
-set(VulkanSDKHeaders "/home/dkaip/Downloads/VulkanSDK/1.2.141.2/x86_64/include")
+set(VulkanSDKHeaders "${VulkanSDK}/x86_64/include")
 
 set(WaylandHeaders "/home/dkaip/wayland/wayland-1.16.92/src")
 
@@ -17,13 +18,9 @@ set(WaylandHeaders "/home/dkaip/wayland/wayland-1.16.92/src")
 project(jvulkan-natives-Linux-x86_64)
 
 find_library(VULKAN_SDK_NATIVE_LIBRARIES
-	NAMES 	vulkan
-		VkLayer_starter_layer
-		VkLayer_vktrace_layer
-		VkLayer_khronos_validation 
-		VkLayer_monitor 
-		VkLayer_api_dump 
-		VkLayer_screenshot PATHS ${VulkanSDKLibraries} NO_DEFAULT_PATH)
+	NAMES 
+		vulkan
+		 PATHS ${VulkanSDKLibraries} NO_DEFAULT_PATH)
 
 find_library(WAYLAND_LIBRARIES NAMES wayland-client PATHS ${WaylandLibraries})
 

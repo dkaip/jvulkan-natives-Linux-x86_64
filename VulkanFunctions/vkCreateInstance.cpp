@@ -61,7 +61,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     }
 
     VkInstance instance = nullptr;
-
     VkResult result = vkCreateInstance(&vkInstanceCreateInfo, allocatorCallbacks, &instance);
 
     // Free up the allocator callback structure if created.
@@ -79,8 +78,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 		vkCmdPushDescriptorSetKHRFunc =
 					(PFN_vkCmdPushDescriptorSetKHR)vkGetInstanceProcAddr(instance, "vkCmdPushDescriptorSetKHR");
 	}
-
-
 
     return jvulkan::createVkResult(env, result);
 }

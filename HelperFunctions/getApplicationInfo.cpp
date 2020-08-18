@@ -77,10 +77,15 @@ namespace jvulkan
         }
 
         const char *theCString = env->GetStringUTFChars(theJavaString, nullptr);
-        char *applicationName = (char *)calloc(strlen(theCString) + 1, sizeof( char));
+        char *applicationName = (char *)calloc(strlen(theCString) + 1, sizeof(char));
         memoryToFree->push_back(applicationName);
         strcpy(applicationName, theCString);
         env->ReleaseStringUTFChars(theJavaString, theCString);
+        if (env->ExceptionOccurred())
+        {
+			LOGERROR(env, "%s", "Error calling ReleaseStringUTFChars.");
+            return;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkApplicationInfoClass, "getApplicationVersion", "()I");
@@ -113,10 +118,16 @@ namespace jvulkan
         }
 
         theCString = env->GetStringUTFChars(theJavaString, nullptr);
-        char *engineName = (char *)calloc(strlen(theCString) + 1, sizeof( char));
+        char *engineName = (char *)calloc(strlen(theCString) + 1, sizeof(char));
         memoryToFree->push_back(engineName);
         strcpy(engineName, theCString);
         env->ReleaseStringUTFChars(theJavaString, theCString);
+        if (env->ExceptionOccurred())
+        {
+			LOGERROR(env, "%s", "Error calling ReleaseStringUTFChars.");
+            return;
+        }
+
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkApplicationInfoClass, "getEngineVersion", "()I");
