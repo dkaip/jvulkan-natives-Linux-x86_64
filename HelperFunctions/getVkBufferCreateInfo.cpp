@@ -28,13 +28,15 @@ namespace jvulkan
         jclass vkBufferCreateInfoClass = env->GetObjectClass(jVkBufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class for jVkBufferCreateInfoObject.");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkBufferCreateInfoObject);
+        VkStructureType sTypeValue = getSTypeAsInt(env, jVkBufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getSTypeAsInt");
             return;
         }
 
@@ -65,26 +67,40 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkBufferCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getFlags");
             return;
         }
 
         jobject flagsObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
         VkBufferCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferCreateFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue");
+            return;
+        }
 
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSize", "()J");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getSize");
             return;
         }
 
         jlong jBufferSize = env->CallLongMethod(jVkBufferCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallLongMethod");
             return;
         }
 
@@ -92,26 +108,40 @@ namespace jvulkan
         methodId = env->GetMethodID(vkBufferCreateInfoClass, "getUsage", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getUsage");
             return;
         }
 
         flagsObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
         VkBufferUsageFlags bufferUsageFlags = getEnumSetValue(
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/Enums/VkBufferUsageFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue");
+            return;
+        }
 
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkBufferCreateInfoClass, "getSharingMode", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getSharingMode");
             return;
         }
 
         jobject jVkSharingModeObject = env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
@@ -120,12 +150,14 @@ namespace jvulkan
         jmethodID valueOfMethodId = env->GetMethodID(vkSharingModeEnumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for valueOf");
             return;
         }
 
         VkSharingMode vkSharingModeEnumValue = (VkSharingMode)env->CallIntMethod(jVkSharingModeObject, valueOfMethodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod");
             return;
         }
 
@@ -133,12 +165,14 @@ namespace jvulkan
         methodId = env->GetMethodID(vkBufferCreateInfoClass, "getQueueFamilyIndices", "()[I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getQueueFamilyIndices");
             return;
         }
 
         jintArray jQueueFamilyIndices = (jintArray)env->CallObjectMethod(jVkBufferCreateInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
             return;
         }
 
@@ -147,18 +181,29 @@ namespace jvulkan
         if (jQueueFamilyIndices != nullptr)
         {
             arrayLength = env->GetArrayLength(jQueueFamilyIndices);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling GetArrayLength");
+                return;
+            }
 
             queueFamilyIndicesArray = (int *)calloc(arrayLength, sizeof(int));
+            if (queueFamilyIndicesArray == nullptr)
+            {
+            	LOGERROR(env, "%s", "Error trying to allocate memory for queueFamilyIndicesArray.");
+            	return;
+            }
             memoryToFree->push_back(queueFamilyIndicesArray);
 
             env->GetIntArrayRegion(jQueueFamilyIndices, 0, arrayLength, queueFamilyIndicesArray);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling GetIntArrayRegion");
                 return;
             }
         }
 
-        vkBufferCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkBufferCreateInfo->sType = sTypeValue;
         vkBufferCreateInfo->pNext = (void *)pNext;
         vkBufferCreateInfo->flags = flags;
         vkBufferCreateInfo->size = jBufferSize;

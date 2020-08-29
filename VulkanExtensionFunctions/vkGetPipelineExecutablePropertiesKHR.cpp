@@ -91,6 +91,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     if (result != VK_SUCCESS)
     {
     	LOGERROR(env, "%s", "Error calling populateVkPipelineExecutablePropertiesKHRCollection");
+        free(vkPipelineExecutablePropertiesKHR);
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 

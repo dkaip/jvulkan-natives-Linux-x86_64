@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkCreateIndirectCommandsLayoutNVX.cpp
+ * vkDestroyPrivateDataSlotEXT.cpp
  *
- *  Created on: Oct 24, 2019
+ *  Created on: Aug 19, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,17 +26,17 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCreateIndirectCommandsLayoutNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkIndirectCommandsLayoutCreateInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNV;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkDestroyPrivateDataSlotEXT
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateIndirectCommandsLayoutNVX
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jobject jAlternateAllocator, jobject)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyPrivateDataSlotEXT
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jAlternateAllocator, jobject jVkPrivateDataSlotEXTHandle)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
+        return;
     }
 
     VkAllocationCallbacks *allocatorCallbacks = nullptr;
@@ -46,6 +46,14 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+//    VkPrivateDataSlotEXT *privateDataSlotHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkPrivateDataSlotEXTHandle);
+//    if (env->ExceptionOccurred())
+//    {
+//    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
+//        return;
+//    }
+//
+	LOGERROR(env, "%s", "Not implemented yet.");
 }
+
+

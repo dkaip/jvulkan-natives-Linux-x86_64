@@ -35,14 +35,14 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
   VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
   if (env->ExceptionOccurred())
   {
-  	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+	  LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
       return;
   }
 
   VkQueryPool_T *queryPoolHandle = (VkQueryPool_T *)jvulkan::getHandleValue(env, jVkQueryPool);
   if (env->ExceptionOccurred())
   {
-  	LOGERROR(env, "%s", "Could not retrieve VkQueryPool handle");
+	  LOGERROR(env, "%s", "Could not retrieve VkQueryPool handle");
       return;
   }
 
@@ -52,7 +52,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
           "com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryControlFlagBits");
   if (env->ExceptionOccurred())
   {
-  	LOGERROR(env, "%s", "Error calling getEnumSetValue");
+	  LOGERROR(env, "%s", "Error calling getEnumSetValue");
       return;
   }
 

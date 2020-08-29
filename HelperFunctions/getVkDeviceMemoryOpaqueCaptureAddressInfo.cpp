@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkBufferDeviceAddressInfo.cpp
+ * getVkDeviceMemoryOpaqueCaptureAddressInfo.cpp
  *
- *  Created on: Nov 6, 2019
+ *  Created on: Aug 18, 2020
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkBufferDeviceAddressInfo(
+    void getVkDeviceMemoryOpaqueCaptureAddressInfo(
             JNIEnv *env,
-            const jobject jVkBufferDeviceAddressInfoObject,
-			VkBufferDeviceAddressInfo *vkBufferDeviceAddressInfo,
+            const jobject jVkDeviceMemoryOpaqueCaptureAddressInfoObject,
+			VkDeviceMemoryOpaqueCaptureAddressInfo *vkDeviceMemoryOpaqueCaptureAddressInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkBufferDeviceAddressInfoObject);
+        jclass theClass = env->GetObjectClass(jVkDeviceMemoryOpaqueCaptureAddressInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkBufferDeviceAddressInfoObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkDeviceMemoryOpaqueCaptureAddressInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkBufferDeviceAddressInfoObject);
+        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDeviceMemoryOpaqueCaptureAddressInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkBufferDeviceAddressInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkDeviceMemoryOpaqueCaptureAddressInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -62,30 +62,30 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "getBuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(theClass, "getMemory", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDeviceMemory;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find methodId for getBuffer");
+        	LOGERROR(env, "%s", "Could not find methodId for getMemory");
             return;
         }
 
-        jobject jVkBufferHandle = env->CallObjectMethod(jVkBufferDeviceAddressInfoObject, methodId);
+        jobject jVkDeviceMemoryHandle = env->CallObjectMethod(jVkDeviceMemoryOpaqueCaptureAddressInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
-        VkBuffer_T *bufferHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferHandle);
+        VkDeviceMemory_T *memoryHandle = (VkDeviceMemory_T *)jvulkan::getHandleValue(env, jVkDeviceMemoryHandle);
     	if (env->ExceptionOccurred())
     	{
-    		LOGERROR(env, "%s", "Could not retrieve VkBuffer handle");
+    		LOGERROR(env, "%s", "Could not retrieve VkDeviceMemory handle");
     		return;
     	}
 
 
-    	vkBufferDeviceAddressInfo->sType 		= sTypeValue;
-    	vkBufferDeviceAddressInfo->pNext 		= pNext;
-    	vkBufferDeviceAddressInfo->buffer		= bufferHandle;
+    	vkDeviceMemoryOpaqueCaptureAddressInfo->sType 		= sTypeValue;
+    	vkDeviceMemoryOpaqueCaptureAddressInfo->pNext 		= pNext;
+    	vkDeviceMemoryOpaqueCaptureAddressInfo->memory		= memoryHandle;
     }
 }

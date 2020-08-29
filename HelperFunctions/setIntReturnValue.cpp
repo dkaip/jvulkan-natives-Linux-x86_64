@@ -32,14 +32,14 @@ namespace jvulkan
         jclass handleClass = env->GetObjectClass(jReturnValue);
         if (env->ExceptionOccurred())
         {
-            cout << "setHandleValue: could not find class "<< endl;
+        	LOGERROR(env, "%s", "Could not find class for jReturnValue...should be IntReturnValue.");
             return;
         }
 
         jmethodID methodId = env->GetMethodID(handleClass, "setValue", "(I)V");
         if (env->ExceptionOccurred())
         {
-            cout << "setIntReturnValue: could not find method setValue (I)V" << endl;
+        	LOGERROR(env, "%s", "Could not find method id for setValue.");
             return;
         }
 

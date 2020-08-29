@@ -109,7 +109,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jobject VkExternalFenceFeatureFlags = createVkExternalFenceFeatureFlagsAsEnumSet(
+        jobject jVkExternalFenceFeatureFlags = createVkExternalFenceFeatureFlagsAsEnumSet(
         		env,
 				vkExternalFenceProperties->externalFenceFeatures);
         if (env->ExceptionOccurred())
@@ -125,7 +125,7 @@ namespace jvulkan
             return;
         }
 
-        env->CallVoidMethod(jVkExternalFencePropertiesObject, methodId, VkExternalFenceFeatureFlags);
+        env->CallVoidMethod(jVkExternalFencePropertiesObject, methodId, jVkExternalFenceFeatureFlags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);

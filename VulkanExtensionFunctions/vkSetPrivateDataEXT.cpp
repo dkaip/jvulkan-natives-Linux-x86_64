@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkCreateIndirectCommandsLayoutNVX.cpp
+ * vkSetPrivateDataEXT.cpp
  *
- *  Created on: Oct 24, 2019
+ *  Created on: Aug 19, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,26 +26,20 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCreateIndirectCommandsLayoutNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkIndirectCommandsLayoutCreateInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNV;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkSetPrivateDataEXT
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;JLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;J)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateIndirectCommandsLayoutNVX
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jobject jAlternateAllocator, jobject)
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkSetPrivateDataEXT
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jlong, jobject, jlong)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkAllocationCallbacks *allocatorCallbacks = nullptr;
-    if (jAlternateAllocator != nullptr)
-    {
-        allocatorCallbacks = new VkAllocationCallbacks();
-        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
-    }
+	LOGERROR(env, "%s", "Not implemented yet.");
 
-    LOGERROR(env, "%s", "Not implemented yet.");
     return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }

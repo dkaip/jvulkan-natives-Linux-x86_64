@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkCreateObjectTableNVX.cpp
+ * vkGetRayTracingShaderGroupHandlesKHR.cpp
  *
- *  Created on: Oct 24, 2019
+ *  Created on: Aug 25, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,27 +26,26 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCreateObjectTableNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkObjectTableCreateInfoNVX;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkObjectTableNVX;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkGetRayTracingShaderGroupHandlesKHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IIJ[B)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateObjectTableNVX
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jobject jAlternateAllocator, jobject)
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesKHR
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipeline, jint firstGroup, jint groupCount, jlong, jbyteArray)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
+    	LOGERROR(env, "%s", "getHandleValue failed for jVkDevice");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkAllocationCallbacks *allocatorCallbacks = nullptr;
-    if (jAlternateAllocator != nullptr)
+    VkPipeline_T *pipelineHandle = (VkPipeline_T *)jvulkan::getHandleValue(env, jVkPipeline);
+    if (env->ExceptionOccurred())
     {
-        allocatorCallbacks = new VkAllocationCallbacks();
-        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+    	LOGERROR(env, "%s", "getHandleValue failed for VkPipeline");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
+	LOGERROR(env, "%s", "Not Implemented Yet.");
     return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-
 }

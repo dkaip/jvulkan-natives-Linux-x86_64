@@ -74,6 +74,8 @@ namespace jvulkan
 
     void setBooleanReturnValue(JNIEnv *env, jobject jReturnValue, jboolean value);
 
+    int getIntReturnValue(JNIEnv *env, jobject jIntReturnValueObject);
+
     void setIntReturnValue(JNIEnv *env, jobject jReturnValue, jint value);
 
     void setLongReturnValue(JNIEnv *env, jobject jReturnValue, jlong value);
@@ -3140,6 +3142,55 @@ namespace jvulkan
             jobject jVkSemaphoreSignalInfo,
 			VkSemaphoreSignalInfo *vkSemaphoreSignalInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkDeviceMemoryOpaqueCaptureAddressInfo(
+            JNIEnv *env,
+            const jobject jVkDeviceMemoryOpaqueCaptureAddressInfoObject,
+			VkDeviceMemoryOpaqueCaptureAddressInfo *vkDeviceMemoryOpaqueCaptureAddressInfo,
+            std::vector<void *> *memoryToFree);
+
+	jobject createVkPerformanceCounterKHR(JNIEnv *env, const VkPerformanceCounterKHR *vkPerformanceCounterKHR);
+
+	void populateVkPerformanceCounterKHRCollection(
+			JNIEnv *env,
+			jobject jCountersCollectionObject,
+			VkPerformanceCounterKHR const *vkPerformanceCounterKHRs,
+			int numberOfVkPerformanceCounterKHRs);
+
+	jobject createVkPerformanceCounterDescriptionKHR(JNIEnv *env, const VkPerformanceCounterDescriptionKHR *vkPerformanceCounterDescriptionKHR);
+
+	void populateVkPerformanceCounterDescriptionKHRCollection(
+			JNIEnv *env,
+			jobject jCounterDescriptionsCollectionObject,
+			VkPerformanceCounterDescriptionKHR const *vkPerformanceCounterDescriptionKHRs,
+			int numberOfVkPerformanceCounterDescriptionKHRs);
+
+    jobject createVkPerformanceCounterDescriptionFlagsKHRAsEnumSet(JNIEnv *env, VkPerformanceCounterDescriptionFlagsKHR vkPerformanceCounterDescriptionFlagsKHR);
+
+    void getVkQueryPoolPerformanceCreateInfoKHR(
+            JNIEnv *env,
+            const jobject jVkQueryPoolPerformanceCreateInfoKHRObject,
+			VkQueryPoolPerformanceCreateInfoKHR *vkQueryPoolPerformanceCreateInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkAcquireProfilingLockInfoKHR(
+            JNIEnv *env,
+            const jobject jVkAcquireProfilingLockInfoKHRObject,
+			VkAcquireProfilingLockInfoKHR *vkAcquireProfilingLockInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceToolPropertiesEXTCollection(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceToolPropertiesEXTCollectionObject,
+			VkPhysicalDeviceToolPropertiesEXT const *vkPhysicalDeviceToolPropertiesEXT,
+			int numberOfVkPhysicalDeviceToolPropertiesEXT);
+
+	void populateVkPhysicalDeviceToolPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceToolPropertiesEXTObject,
+			VkPhysicalDeviceToolPropertiesEXT const *vkPhysicalDeviceToolPropertiesEXT);
+
+    jobject createVkToolPurposeFlagsEXTAsEnumSet(JNIEnv *env, VkToolPurposeFlagsEXT vkToolPurposeFlagsEXT);
 
     /*
 	 * Make sure you free() the resulting string.

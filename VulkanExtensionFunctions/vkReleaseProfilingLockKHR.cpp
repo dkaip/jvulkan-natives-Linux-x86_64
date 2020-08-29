@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkCmdReserveSpaceForCommandsNVX.cpp
+ * vkReleaseProfilingLockKHR.cpp
  *
- *  Created on: Oct 23, 2019
+ *  Created on: Aug 19, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,18 +26,18 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCmdReserveSpaceForCommandsNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCmdReserveSpaceForCommandsInfoNVX;)V
+ * Method:    vkReleaseProfilingLockKHR
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdReserveSpaceForCommandsNVX
-  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkCmdReserveSpaceForCommandsInfoNVX)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkReleaseProfilingLockKHR
+  (JNIEnv *env, jobject, jobject jVkDevice)
 {
-    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+    	LOGERROR(env, "%s", "Could not get jVkDevice");
         return;
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
+    vkReleaseProfilingLockKHR(logicalDeviceHandle);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/*
+ * vkBindAccelerationStructureMemoryKHR.cpp
+ *
+ *  Created on: Aug 25, 2020
+ *      Author: Douglas Kaip
+ */
 
 using namespace std;
 
@@ -21,10 +27,10 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkBindAccelerationStructureMemoryNV
+ * Method:    vkBindAccelerationStructureMemoryKHR
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkBindAccelerationStructureMemoryNV
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkBindAccelerationStructureMemoryKHR
   (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkBindAccelerationStructureMemoryInfoKHRCollection)
 {
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
@@ -48,7 +54,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    int result = vkBindAccelerationStructureMemoryNV(
+    int result = vkBindAccelerationStructureMemoryKHR(
             logicalDeviceHandle,
             numberOfBindAccelerationStructureMemoryInfos,
             vkBindAccelerationStructureMemoryInfos);

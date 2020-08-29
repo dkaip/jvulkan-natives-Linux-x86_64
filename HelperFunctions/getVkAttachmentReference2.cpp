@@ -18,7 +18,7 @@
  * getVkAttachmentReference2.cpp
  *
  *  Created on: Jul 22, 2020
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 
 

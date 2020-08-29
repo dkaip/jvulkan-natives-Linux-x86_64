@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkUnregisterObjectsNVX.cpp
+ * vkGetPrivateDataEXT.cpp
  *
- *  Created on: Oct 28, 2019
+ *  Created on: Aug 19, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,19 +26,18 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkUnregisterObjectsNVX
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkObjectTableNVX;Ljava/util/Collection;[I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkGetPrivateDataEXT
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;JLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/LongReturnValue;)V
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkUnregisterObjectsNVX
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkObjectTableNVX, jobject jVkObjectEntryTypeNVXCollection, jintArray jObjectIndices)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetPrivateDataEXT
+  (JNIEnv *env , jobject, jobject jVkDevice, jobject, jlong, jobject, jobject)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
+        return;
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	LOGERROR(env, "%s", "Not implemented yet.");
 }

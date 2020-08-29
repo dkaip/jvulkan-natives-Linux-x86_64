@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
+/*
+ * vkCmdBindPipelineShaderGroupNV.cpp
+ *
+ *  Created on: Aug 29, 2020
+ *      Author: Douglas Kaip
+ */
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkGetAccelerationStructureHandleNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkCmdBindPipelineShaderGroupNV
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineBindPoint;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;I)V
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetAccelerationStructureHandleNV
-  (JNIEnv *env, jobject, jobject, jobject, jobject)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBindPipelineShaderGroupNV
+  (JNIEnv *env, jobject, jobject, jobject, jobject, jint)
 {
-    std::cerr << "Not implemented yet." << std::endl;
-
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	LOGERROR(env, "%s", "Not implemented yet.");
 }

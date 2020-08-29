@@ -17,7 +17,7 @@
  * populateVkDeviceGroupPresentModeFlagsKHR.cpp
  *
  *  Created on: Nov 6, 2019
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"

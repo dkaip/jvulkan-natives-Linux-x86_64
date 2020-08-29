@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * vkGetRayTracingShaderGroupHandlesNV.cpp
+ * vkGetImageViewAddressNVX.cpp
  *
- *  Created on: Oct 29, 2019
+ *  Created on: Aug 19, 2020
  *      Author: Douglas Kaip
  */
 
@@ -26,26 +26,26 @@
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkGetRayTracingShaderGroupHandlesNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IIJ[B)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Method:    vkGetImageViewAddressNVX
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkImageView;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkImageViewAddressPropertiesNVX;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesNV
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipeline, jint firstGroup, jint groupCount, jlong, jbyteArray)
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetImageViewAddressNVX
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkImageView, jobject jVkImageViewAddressPropertiesNVXObject)
 {
-	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
+    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "getHandleValue failed for jVkDevice");
+    	LOGERROR(env, "%s", "Could not get jVkDevice");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkPipeline_T *pipelineHandle = (VkPipeline_T *)jvulkan::getHandleValue(env, jVkPipeline);
+    VkImageView_T *imageViewHandle = (VkImageView_T *)jvulkan::getHandleValue(env, jVkImageView);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "getHandleValue failed for VkPipeline");
+    	LOGERROR(env, "%s", "Could not get jVkImageView");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
+	LOGERROR(env, "%s", "Not implemented yet.");
     return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }

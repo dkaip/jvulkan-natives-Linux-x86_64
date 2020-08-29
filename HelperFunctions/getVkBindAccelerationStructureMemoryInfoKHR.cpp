@@ -17,7 +17,7 @@
  * getVkBindAccelerationStructureMemoryInfoKHR.cpp
  *
  *  Created on: Jul 29, 2020
- *      Author: dkaip
+ *      Author: Douglas Kaip
  */
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkBindAccelerationStructureMemoryInfoKHRObject);
+        VkStructureType sTypeValue = getSTypeAsInt(env, jVkBindAccelerationStructureMemoryInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");
@@ -157,8 +157,8 @@ namespace jvulkan
             env->ReleaseIntArrayElements(jDeviceIndexArray, data, JNI_ABORT);
         }
 
-        vkBindAccelerationStructureMemoryInfoKHR->sType = (VkStructureType)sTypeValue;
-        vkBindAccelerationStructureMemoryInfoKHR->pNext = (void *)pNext;
+        vkBindAccelerationStructureMemoryInfoKHR->sType = sTypeValue;
+        vkBindAccelerationStructureMemoryInfoKHR->pNext = pNext;
         vkBindAccelerationStructureMemoryInfoKHR->accelerationStructure = vkAccelerationStructureKHRHandle;
         vkBindAccelerationStructureMemoryInfoKHR->memory = vkDeviceMemoryHandle;
         vkBindAccelerationStructureMemoryInfoKHR->memoryOffset = offset;
@@ -166,6 +166,3 @@ namespace jvulkan
         vkBindAccelerationStructureMemoryInfoKHR->pDeviceIndices = (uint32_t *)deviceIndicesArray;
     }
 }
-
-
-

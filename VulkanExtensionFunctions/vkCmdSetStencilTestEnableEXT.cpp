@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
-
-using namespace std;
+/*
+ * vkCmdSetStencilTestEnableEXT.cpp
+ *
+ *  Created on: Aug 29, 2020
+ *      Author: Douglas Kaip
+ */
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
@@ -23,18 +26,24 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkDestroyAccelerationStructureNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
+ * Method:    vkCmdSetStencilTestEnableEXT
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Z)V
  */
-JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyAccelerationStructureNV
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jobject)
+JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdSetStencilTestEnableEXT
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jboolean jStencilTestEnable)
 {
-    VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Error trying to get jVkDevice.");
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
         return;
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
+    VkBool32 stencilTestEnable = false;
+    if (jStencilTestEnable != 0)
+    {
+    	stencilTestEnable = true;
+    }
+
+    vkCmdSetStencilTestEnableEXT(commandBufferHandle, stencilTestEnable);
 }
