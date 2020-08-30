@@ -44,6 +44,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
             &memoryToFree);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Error calling getVkConditionalRenderingBeginInfoEXT.");
         return;
     }
 
