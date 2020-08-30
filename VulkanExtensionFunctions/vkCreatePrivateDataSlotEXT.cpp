@@ -47,8 +47,42 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    jvulkan::setHandleValue(env, jVkPrivateDataSlotEXTObject, nullptr);
+    std::vector<void *> memoryToFree(5);
+    VkPrivateDataSlotCreateInfoEXT vkPrivateDataSlotCreateInfoEXT = {};
+    jvulkan::getVkPrivateDataSlotCreateInfoEXT(
+            env,
+			jVkPrivateDataSlotCreateInfoEXTObject,
+			&vkPrivateDataSlotCreateInfoEXT,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkPrivateDataSlotCreateInfoEXT.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkPrivateDataSlotEXT_T *privateDataSlot = nullptr;
+    VkResult result = vkCreatePrivateDataSlotEXT(
+    		deviceHandle,
+			&vkPrivateDataSlotCreateInfoEXT,
+			allocatorCallbacks,
+			&privateDataSlot);
+
+    if (result != VK_SUCCESS)
+    {
+    	jvulkan::freeMemory(&memoryToFree);
+    	LOGERROR(env, "%s", "Error calling vkCreatePrivateDataSlotEXT.");
+        return jvulkan::createVkResult(env, result);
+    }
+
+    jvulkan::setHandleValue(env, jVkPrivateDataSlotEXTObject, privateDataSlot);
+    if (env->ExceptionOccurred())
+    {
+    	jvulkan::freeMemory(&memoryToFree);
+    	LOGERROR(env, "%s", "Error calling setHandleValue.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+	jvulkan::freeMemory(&memoryToFree);
+
+	return jvulkan::createVkResult(env, result);
 }

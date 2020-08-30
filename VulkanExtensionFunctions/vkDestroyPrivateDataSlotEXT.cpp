@@ -30,12 +30,19 @@
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyPrivateDataSlotEXT
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jAlternateAllocator, jobject jVkPrivateDataSlotEXTHandle)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPrivateDataSlotEXTHandle, jobject jAlternateAllocator)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
+        return;
+    }
+
+    VkPrivateDataSlotEXT_T *privateDataSlotHandle = (VkPrivateDataSlotEXT_T *)jvulkan::getHandleValue(env, jVkPrivateDataSlotEXTHandle);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve jVkPrivateDataSlotEXTHandle handle.");
         return;
     }
 
@@ -46,14 +53,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDe
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-//    VkPrivateDataSlotEXT *privateDataSlotHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkPrivateDataSlotEXTHandle);
-//    if (env->ExceptionOccurred())
-//    {
-//    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle.");
-//        return;
-//    }
-//
-	LOGERROR(env, "%s", "Not implemented yet.");
+    vkDestroyPrivateDataSlotEXT(deviceHandle, privateDataSlotHandle, allocatorCallbacks);
 }
 
 
