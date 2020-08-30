@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,30 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkConditionalRenderingBeginInfoEXT;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBeginConditionalRenderingEXT
-  (JNIEnv *, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkConditionalRenderingBeginInfoEXTObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkConditionalRenderingBeginInfoEXT vkConditionalRenderingBeginInfoEXT = {};
+    jvulkan::getVkConditionalRenderingBeginInfoEXT(
+            env,
+            jVkConditionalRenderingBeginInfoEXTObject,
+			&vkConditionalRenderingBeginInfoEXT,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+        return;
+    }
+
+    vkCmdBeginConditionalRenderingEXT(
+    		commandBufferHandle,
+			&vkConditionalRenderingBeginInfoEXT);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

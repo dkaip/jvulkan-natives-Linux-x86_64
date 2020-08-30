@@ -3192,6 +3192,12 @@ namespace jvulkan
 
     jobject createVkToolPurposeFlagsEXTAsEnumSet(JNIEnv *env, VkToolPurposeFlagsEXT vkToolPurposeFlagsEXT);
 
+    void getVkConditionalRenderingBeginInfoEXT(
+            JNIEnv *env,
+            jobject jVkConditionalRenderingBeginInfoEXTObject,
+			VkConditionalRenderingBeginInfoEXT *vkConditionalRenderingBeginInfoEXT,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
