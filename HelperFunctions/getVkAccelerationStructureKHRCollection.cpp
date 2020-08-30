@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getVkAccelerationStructureNVCollection.cpp
+ * getVkAccelerationStructureKHRCollection.cpp
  *
  *  Created on: May 28, 2019
  *      Author: Douglas Kaip

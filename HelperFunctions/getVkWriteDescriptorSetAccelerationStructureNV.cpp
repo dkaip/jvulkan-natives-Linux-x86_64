@@ -86,7 +86,7 @@ namespace jvulkan
         VkAccelerationStructureNV *vkAccelerationStructureNVHandles = nullptr;
         if (jVkAccelerationStructureNVCollection != nullptr)
         {
-            getVkAccelerationStructureNVCollection(
+            getVkAccelerationStructureKHRCollection(
                     env,
 					jVkAccelerationStructureNVCollection,
                     &vkAccelerationStructureNVHandles,

@@ -31,7 +31,69 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Ljava/util/Collection;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryType;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkQueryPool;I)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdWriteAccelerationStructuresPropertiesNV
-  (JNIEnv *env, jobject, jobject, jobject, jobject, jobject, jint)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkAccelerationStructureKHRCollectionObject, jobject jVkQueryTypeObject, jobject jVkQueryPoolObject, jint jQueryPoolIndex)
 {
-	LOGERROR(env, "%s", "Not implemented yet.");
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    int numberOfVkAccelerationStructureKHRs = 0;
+    VkAccelerationStructureKHR *vkAccelerationStructureKHRs = nullptr;
+
+    jvulkan::getVkAccelerationStructureKHRCollection(
+            env,
+			jVkAccelerationStructureKHRCollectionObject,
+            &vkAccelerationStructureKHRs,
+            &numberOfVkAccelerationStructureKHRs,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkAccelerationStructureKHRCollection.");
+        return;
+    }
+
+
+    jclass vkQueryTypeEnumClass = env->GetObjectClass(jVkQueryTypeObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling GetObjectClass for jVkQueryTypeObject.");
+        return;
+    }
+
+    jmethodID valueOfMethodId = env->GetMethodID(vkQueryTypeEnumClass, "valueOf", "()I");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not get method id for valueOf.");
+        return;
+    }
+
+    VkQueryType vkQueryType = (VkQueryType)env->CallIntMethod(jVkQueryTypeObject, valueOfMethodId);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling CallIntMethod.");
+        return;
+    }
+
+    VkQueryPool_T *queryPoolHandle = (VkQueryPool_T *)jvulkan::getHandleValue(env, jVkQueryPoolObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve jVkQueryPoolObject handle");
+        return;
+    }
+
+	uint32_t firstQuery = (uint32_t)jQueryPoolIndex;
+
+	vkCmdWriteAccelerationStructuresPropertiesNV(
+			commandBufferHandle,
+			numberOfVkAccelerationStructureKHRs,
+			vkAccelerationStructureKHRs,
+			vkQueryType,
+			queryPoolHandle,
+			firstQuery);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

@@ -1883,7 +1883,7 @@ namespace jvulkan
 			VkSamplerReductionModeCreateInfo *vkSamplerReductionModeCreateInfo,
             std::vector<void *> *memoryToFree);
 
-    void getVkAccelerationStructureNVCollection(
+    void getVkAccelerationStructureKHRCollection(
             JNIEnv *env,
             const jobject jVkAccelerationStructureNVCollectionObject,
 			VkAccelerationStructureNV **vkAccelerationStructureNVs,

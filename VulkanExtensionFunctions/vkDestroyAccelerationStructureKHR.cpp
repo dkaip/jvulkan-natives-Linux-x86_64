@@ -32,7 +32,7 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDestroyAccelerationStructureKHR
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkAccelerationStructureKHRObject, jobject jAlternateAllocator)
 {
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
@@ -41,5 +41,22 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkDe
         return;
     }
 
-    LOGERROR(env, "%s", "Not implemented yet.");
+    VkAccelerationStructureKHR_T *accelerationStructureHandle = (VkAccelerationStructureKHR_T *)jvulkan::getHandleValue(env, jVkAccelerationStructureKHRObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error trying to get jVkAccelerationStructureKHRObject.");
+        return;
+    }
+
+    VkAllocationCallbacks *allocatorCallbacks = nullptr;
+    if (jAlternateAllocator != nullptr)
+    {
+        allocatorCallbacks = new VkAllocationCallbacks();
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+    }
+
+    vkDestroyAccelerationStructureKHR(
+    		logicalDeviceHandle,
+			accelerationStructureHandle,
+			allocatorCallbacks);
 }
