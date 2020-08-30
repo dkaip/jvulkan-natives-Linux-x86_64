@@ -87,6 +87,7 @@ namespace jvulkan
         VkDeviceAddress *deviceAddressHandle = (VkDeviceAddress *)jvulkan::getHandleValue(env, jVkDeviceAddressObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Error calling getHandleValue for jVkDeviceAddressObject");
             return;
         }
 
