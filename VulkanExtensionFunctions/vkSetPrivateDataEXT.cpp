@@ -43,7 +43,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 	if (env->ExceptionOccurred())
 	{
 		LOGERROR(env, "%s", "Could not find class for jVkObjectTypeObject");
-		return;
+		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 	}
 
 	jmethodID valueOfMethodId = env->GetMethodID(vkObjectTypeEnumClass, "valueOf", "()I");
