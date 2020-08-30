@@ -3216,6 +3216,12 @@ namespace jvulkan
 			VkSubpassEndInfo *vkSubpassEndInfo,
             std::vector<void *> *memoryToFree);
 
+    void getVkAccelerationStructureMemoryRequirementsInfoNV(
+            JNIEnv *env,
+            jobject jVkAccelerationStructureMemoryRequirementsInfoNVObject,
+			VkAccelerationStructureMemoryRequirementsInfoNV *vkAccelerationStructureMemoryRequirementsInfoNV,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
