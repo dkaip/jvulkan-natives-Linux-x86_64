@@ -30,7 +30,7 @@
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;JLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/LongReturnValue;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetPrivateDataEXT
-  (JNIEnv *env , jobject, jobject jVkDevice, jobject, jlong, jobject, jobject)
+  (JNIEnv *env , jobject, jobject jVkDevice, jobject jVkObjectTypeObject, jlong jObjectHandle, jobject jVkPrivateDataSlotEXTObject, jobject jDataReturnValueObject)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
@@ -39,5 +39,43 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
         return;
     }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
+	jclass vkObjectTypeEnumClass = env->GetObjectClass(jVkObjectTypeObject);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not find class for jVkObjectTypeObject");
+		return;
+	}
+
+	jmethodID valueOfMethodId = env->GetMethodID(vkObjectTypeEnumClass, "valueOf", "()I");
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not find method id for valueOf.");
+		return;
+	}
+
+	VkObjectType vkObjectTypetEnumValue = (VkObjectType)env->CallIntMethod(jVkObjectTypeObject, valueOfMethodId);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error calling CallIntMethod");
+		return;
+	}
+
+	uint64_t objectHandle = (uint64_t)jObjectHandle;
+
+	VkPrivateDataSlotEXT_T *privateDataSlotHandle = (VkPrivateDataSlotEXT_T *)jvulkan::getHandleValue(env, jVkPrivateDataSlotEXTObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve jVkPrivateDataSlotEXTObject handle.");
+        return;
+    }
+
+    uint64_t data = 0;
+    vkGetPrivateDataEXT(
+    		deviceHandle,
+			vkObjectTypetEnumValue,
+			objectHandle,
+			privateDataSlotHandle,
+			&data);
+
+    jvulkan::setLongReturnValue(env, jDataReturnValueObject, data);
 }
