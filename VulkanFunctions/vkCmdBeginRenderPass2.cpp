@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,44 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkRenderPassBeginInfo;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfo;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBeginRenderPass2
-  (JNIEnv *env, jobject, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkRenderPassBeginInfoObject, jobject jVkSubpassBeginInfoObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkRenderPassBeginInfo vkRenderPassBeginInfo = {};
+    jvulkan::getVkRenderPassBeginInfo(
+            env,
+			jVkRenderPassBeginInfoObject,
+			&vkRenderPassBeginInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkRenderPassBeginInfo.");
+        return;
+    }
+
+    VkSubpassBeginInfo vkSubpassBeginInfo = {};
+    jvulkan::getVkSubpassBeginInfo(
+            env,
+			jVkSubpassBeginInfoObject,
+			&vkSubpassBeginInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkSubpassBeginInfo.");
+        return;
+    }
+
+    vkCmdBeginRenderPass2(
+    		commandBufferHandle,
+			&vkRenderPassBeginInfo,
+			&vkSubpassBeginInfo);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

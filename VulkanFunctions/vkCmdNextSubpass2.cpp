@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,44 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassBeginInfo;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfo;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdNextSubpass2
-  (JNIEnv *, jobject, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkSubpassBeginInfoObject, jobject jVkSubpassEndInfoObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkSubpassBeginInfo vkSubpassBeginInfo = {};
+    jvulkan::getVkSubpassBeginInfo(
+            env,
+			jVkSubpassBeginInfoObject,
+			&vkSubpassBeginInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkSubpassBeginInfo.");
+        return;
+    }
+
+    VkSubpassEndInfo vkSubpassEndInfo = {};
+    jvulkan::getVkSubpassEndInfo(
+            env,
+			jVkSubpassEndInfoObject,
+			&vkSubpassEndInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkSubpassEndInfo.");
+        return;
+    }
+
+    vkCmdNextSubpass2(
+    		commandBufferHandle,
+			&vkSubpassBeginInfo,
+			&vkSubpassEndInfo);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

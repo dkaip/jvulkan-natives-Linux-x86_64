@@ -13,20 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
-
+#include "slf4j.hh"
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkCmdEndRenderPass2
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VkSubpassEndInfo;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdEndRenderPass2
-  (JNIEnv *, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkSubpassEndInfoObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkSubpassEndInfo vkSubpassEndInfo = {};
+    jvulkan::getVkSubpassEndInfo(
+            env,
+			jVkSubpassEndInfoObject,
+			&vkSubpassEndInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkSubpassEndInfo.");
+        return;
+    }
+
+    vkCmdEndRenderPass2(
+    		commandBufferHandle,
+			&vkSubpassEndInfo);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

@@ -3204,6 +3204,18 @@ namespace jvulkan
 			VkPrivateDataSlotCreateInfoEXT *vkPrivateDataSlotCreateInfoEXT,
             std::vector<void *> *memoryToFree);
 
+    void getVkSubpassBeginInfo(
+            JNIEnv *env,
+            jobject jVkSubpassBeginInfoObject,
+			VkSubpassBeginInfo *vkSubpassBeginInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSubpassEndInfo(
+            JNIEnv *env,
+            jobject jVkSubpassEndInfoObject,
+			VkSubpassEndInfo *vkSubpassEndInfo,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
