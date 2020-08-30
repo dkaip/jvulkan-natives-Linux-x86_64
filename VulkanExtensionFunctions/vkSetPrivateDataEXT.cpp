@@ -30,7 +30,7 @@
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;JLcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkPrivateDataSlotEXT;J)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkSetPrivateDataEXT
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject, jlong, jobject, jlong)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkObjectTypeObject, jlong jObjectHandle, jobject jVkPrivateDataSlotEXTObject, jlong jData)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
@@ -39,7 +39,44 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
+	jclass vkObjectTypeEnumClass = env->GetObjectClass(jVkObjectTypeObject);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not find class for jVkObjectTypeObject");
+		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	}
+
+	jmethodID valueOfMethodId = env->GetMethodID(vkObjectTypeEnumClass, "valueOf", "()I");
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not find method id for valueOf.");
+		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	}
+
+	VkObjectType vkObjectTypetEnumValue = (VkObjectType)env->CallIntMethod(jVkObjectTypeObject, valueOfMethodId);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error calling CallIntMethod");
+		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	}
+
+	uint64_t objectHandle = (uint64_t)jObjectHandle;
+
+	VkPrivateDataSlotEXT_T *privateDataSlotHandle = (VkPrivateDataSlotEXT_T *)jvulkan::getHandleValue(env, jVkPrivateDataSlotEXTObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve jVkPrivateDataSlotEXTObject handle.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+	uint64_t data = (uint64_t)jData;
+
+	VkResult result = vkSetPrivateDataEXT(
+			deviceHandle,
+			vkObjectTypetEnumValue,
+			objectHandle,
+			privateDataSlotHandle,
+			data);
 
     return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }

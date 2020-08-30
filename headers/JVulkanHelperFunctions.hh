@@ -3198,6 +3198,12 @@ namespace jvulkan
 			VkConditionalRenderingBeginInfoEXT *vkConditionalRenderingBeginInfoEXT,
             std::vector<void *> *memoryToFree);
 
+    void getVkPrivateDataSlotCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkPrivateDataSlotCreateInfoEXTObject,
+			VkPrivateDataSlotCreateInfoEXT *vkPrivateDataSlotCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
