@@ -28,6 +28,7 @@ namespace jvulkan
         jclass vkCommandBufferInheritanceInfoClass = env->GetObjectClass(jVkCommandBufferInheritanceInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not get class for jVkCommandBufferInheritanceInfoObject.");
             return;
         }
 
@@ -35,6 +36,7 @@ namespace jvulkan
         int sTypeValue = getSTypeAsInt(env, jVkCommandBufferInheritanceInfoObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
             return;
         }
 
@@ -58,18 +60,21 @@ namespace jvulkan
         jmethodID methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getRenderPass.");
             return;
         }
 
         jobject jVkRenderPassObject = env->CallObjectMethod(jVkCommandBufferInheritanceInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
             return;
         }
 
         VkRenderPass_T *renderPassHandle = (VkRenderPass_T *)jvulkan::getHandleValue(env, jVkRenderPassObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getHandleValue failed.");
             return;
         }
 
@@ -77,12 +82,14 @@ namespace jvulkan
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getSubpass", "()I");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getSubpass.");
             return;
         }
 
         jint jsubpass = env->CallIntMethod(jVkCommandBufferInheritanceInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to CallIntMethod failed.");
             return;
         }
 
@@ -90,18 +97,21 @@ namespace jvulkan
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getFramebuffer", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkFramebuffer;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getFramebuffer.");
             return;
         }
 
         jobject jVkFramebufferObject = env->CallObjectMethod(jVkCommandBufferInheritanceInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
             return;
         }
 
         VkFramebuffer_T *framebufferHandle = (VkFramebuffer_T *)jvulkan::getHandleValue(env, jVkFramebufferObject);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to getHandleValue failed.");
             return;
         }
 
@@ -109,12 +119,14 @@ namespace jvulkan
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "isOcclusionQueryEnable", "()Z");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for isOcclusionQueryEnable.");
             return;
         }
 
         jboolean jOcclusionQueryEnable = env->CallBooleanMethod(jVkCommandBufferInheritanceInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Call to CallBooleanMethod failed.");
             return;
         }
 
@@ -122,28 +134,53 @@ namespace jvulkan
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getQueryFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getQueryFlags.");
             return;
         }
 
         jobject flagsObject = env->CallObjectMethod(jVkCommandBufferInheritanceInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
+            return;
+        }
+
         VkQueryControlFlags vkQueryControlFlags = getEnumSetValue(
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryControlFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
+            return;
+        }
 
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getPipelineStatistics", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", "Could not find method id for getPipelineStatistics.");
             return;
         }
 
         flagsObject = env->CallObjectMethod(jVkCommandBufferInheritanceInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to CallObjectMethod failed.");
+            return;
+        }
+
         VkQueryPipelineStatisticFlags vkQueryPipelineStatisticFlags = getEnumSetValue(
                 env,
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/Enums/VkQueryPipelineStatisticFlagBits");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
+            return;
+        }
+
 
         vkCommandBufferInheritanceInfo->sType = (VkStructureType)sTypeValue;
         vkCommandBufferInheritanceInfo->pNext = (void *)pNext;
