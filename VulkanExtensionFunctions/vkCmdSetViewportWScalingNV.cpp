@@ -30,7 +30,7 @@
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;ILjava/util/Collection;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdSetViewportWScalingNV
-  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jint firstViewport, jobject jVkViewportWScalingNVCollection)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jint jFirstViewport, jobject jVkViewportWScalingNVCollection)
 {
     VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
     if (env->ExceptionOccurred())
@@ -39,6 +39,28 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
         return;
     }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
+    uint32_t firstViewport = (uint32_t)jFirstViewport;
 
+    std::vector<void *> memoryToFree(5);
+    int numberOfVkViewportWScalingNVs = 0;
+    VkViewportWScalingNV *vkViewportWScalingNVs = nullptr;
+	jvulkan::getVkViewportWScalingNVCollection(
+			env,
+			jVkViewportWScalingNVCollection,
+			&vkViewportWScalingNVs,
+			&numberOfVkViewportWScalingNVs,
+			&memoryToFree);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Error calling getVkViewportWScalingNVCollection");
+		return;
+	}
+
+	vkCmdSetViewportWScalingNV(
+			commandBufferHandle,
+			firstViewport,
+			numberOfVkViewportWScalingNVs,
+			vkViewportWScalingNVs);
+
+	jvulkan::freeMemory(&memoryToFree);
 }
