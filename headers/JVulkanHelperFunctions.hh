@@ -3241,6 +3241,12 @@ namespace jvulkan
             int *numberOfVkIndirectCommandsStreamNVs,
             std::vector<void *> *memoryToFree);
 
+    void getVkGeneratedCommandsMemoryRequirementsInfoNV(
+            JNIEnv *env,
+            jobject jVkGeneratedCommandsMemoryRequirementsInfoNVObject,
+			VkGeneratedCommandsMemoryRequirementsInfoNV *vkGeneratedCommandsMemoryRequirementsInfoNV,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
