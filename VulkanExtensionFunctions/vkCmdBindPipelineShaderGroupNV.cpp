@@ -32,7 +32,48 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineBindPoint;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;I)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdBindPipelineShaderGroupNV
-  (JNIEnv *env, jobject, jobject, jobject, jobject, jint)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jVkPipelineBindPointObject, jobject jVkPipelineObject, jint jGroupIndex)
 {
-	LOGERROR(env, "%s", "Not implemented yet.");
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    jclass vkPipelineBindPointEnumClass = env->GetObjectClass(jVkPipelineBindPointObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling GetObjectClass for jVkPipelineBindPointObject.");
+        return;
+    }
+
+    jmethodID valueOfMethodId = env->GetMethodID(vkPipelineBindPointEnumClass, "valueOf", "()I");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not get method id for valueOf.");
+        return;
+    }
+
+    VkPipelineBindPoint pipelineBindPoint = (VkPipelineBindPoint)env->CallIntMethod(jVkPipelineBindPointObject, valueOfMethodId);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling CallIntMethod.");
+        return;
+    }
+
+    VkPipeline_T *pipelineHandle = (VkPipeline_T *)jvulkan::getHandleValue(env, jVkPipelineObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkPipeline handle");
+        return;
+    }
+
+    uint32_t groupIndex = (uint32_t)jGroupIndex;
+
+    vkCmdBindPipelineShaderGroupNV(
+    		commandBufferHandle,
+			pipelineBindPoint,
+			pipelineHandle,
+			groupIndex);
 }
