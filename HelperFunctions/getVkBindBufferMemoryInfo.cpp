@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getVkBindBufferMemoryInfoCollection.cpp
+ * getVkBindBufferMemoryInfo.cpp
  *
  *  Created on: Mar 22, 2019
  *      Author: Douglas Kaip
