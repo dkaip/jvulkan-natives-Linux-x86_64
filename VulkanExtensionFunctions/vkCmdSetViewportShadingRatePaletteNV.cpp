@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,39 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;ILjava/util/Collection;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdSetViewportShadingRatePaletteNV
-  (JNIEnv *, jobject, jobject, jint, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jint jFirstViewport, jobject jVkShadingRatePaletteNVCollectionObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    uint32_t firstViewport = (uint32_t)jFirstViewport;
+
+    std::vector<void *> memoryToFree(5);
+    int numberOfVkShadingRatePaletteNVs = 0;
+    VkShadingRatePaletteNV *vkShadingRatePaletteNVs = nullptr;
+
+    jvulkan::getVkShadingRatePaletteNVCollection(
+            env,
+			jVkShadingRatePaletteNVCollectionObject,
+            &vkShadingRatePaletteNVs,
+            &numberOfVkShadingRatePaletteNVs,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getvkCmdSetViewportShadingRatePaletteNVCollection.");
+        return;
+    }
+
+    vkCmdSetViewportShadingRatePaletteNV(
+    		commandBufferHandle,
+			firstViewport,
+			numberOfVkShadingRatePaletteNVs,
+			vkShadingRatePaletteNVs);
+
+    jvulkan::freeMemory(&memoryToFree);
+
 }
