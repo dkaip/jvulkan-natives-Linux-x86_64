@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,38 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;ILjava/util/Collection;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdSetExclusiveScissorNV
-  (JNIEnv *, jobject, jobject, jint, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jint jFirstExclusiveScissor, jobject jVkRect2DCollectionObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    uint32_t firstExclusiveScissor = (uint32_t)jFirstExclusiveScissor;
+
+    std::vector<void *> memoryToFree(5);
+    int numberOfVkRect2Ds = 0;
+    VkRect2D *vkRect2Ds = nullptr;
+
+    jvulkan::getVkRect2DCollection(
+            env,
+			jVkRect2DCollectionObject,
+            &vkRect2Ds,
+            &numberOfVkRect2Ds,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkRect2DCollection.");
+        return;
+    }
+
+    vkCmdSetExclusiveScissorNV(
+    		commandBufferHandle,
+			firstExclusiveScissor,
+			numberOfVkRect2Ds,
+			vkRect2Ds);
+
+    jvulkan::freeMemory(&memoryToFree);
 }
