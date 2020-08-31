@@ -3247,6 +3247,11 @@ namespace jvulkan
 			VkGeneratedCommandsMemoryRequirementsInfoNV *vkGeneratedCommandsMemoryRequirementsInfoNV,
             std::vector<void *> *memoryToFree);
 
+    void populateVkImageViewAddressPropertiesNVX(
+    		JNIEnv *env,
+			jobject jVkImageViewAddressPropertiesNVXObject,
+			const VkImageViewAddressPropertiesNVX *vkImageViewAddressPropertiesNVX);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */

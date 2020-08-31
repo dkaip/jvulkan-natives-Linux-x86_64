@@ -46,6 +46,30 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkImageViewAddressPropertiesNVX vkImageViewAddressPropertiesNVX = {};
+    vkImageViewAddressPropertiesNVX.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX;
+    vkImageViewAddressPropertiesNVX.pNext = nullptr;
+
+    VkResult result = vkGetImageViewAddressNVX(
+    		logicalDeviceHandle,
+			imageViewHandle,
+			&vkImageViewAddressPropertiesNVX);
+
+    if (result != VK_SUCCESS)
+    {
+    	LOGERROR(env, "%s", "Error calling vkGetImageViewAddressNVX");
+        return jvulkan::createVkResult(env, result);
+    }
+
+    jvulkan::populateVkImageViewAddressPropertiesNVX(
+    		env,
+			jVkImageViewAddressPropertiesNVXObject,
+			&vkImageViewAddressPropertiesNVX);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling populateVkImageViewAddressPropertiesNVX");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    return jvulkan::createVkResult(env, result);
 }
