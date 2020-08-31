@@ -32,7 +32,35 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;ZLcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeneratedCommandsInfoNV;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdExecuteGeneratedCommandsNV
-  (JNIEnv *env, jobject, jobject, jboolean, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jboolean jIsPreprocessed, jobject jVkGeneratedCommandsInfoNVObject)
 {
-	LOGERROR(env, "%s", "Not implemented yet.");
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    VkBool32 isPreprocessed = (VkBool32) jIsPreprocessed;
+
+    std::vector<void *> memoryToFree(5);
+    VkGeneratedCommandsInfoNV vkGeneratedCommandsInfoNV = {};
+
+    jvulkan::getVkGeneratedCommandsInfoNV(
+            env,
+			jVkGeneratedCommandsInfoNVObject,
+            &vkGeneratedCommandsInfoNV,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkGeneratedCommandsInfoNV.");
+        return;
+    }
+
+    vkCmdExecuteGeneratedCommandsNV(
+    		commandBufferHandle,
+			isPreprocessed,
+			&vkGeneratedCommandsInfoNV);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

@@ -1,0 +1,137 @@
+/*
+ * Copyright 2020 Douglas Kaip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/*
+ * getVkIndirectCommandsStreamNVCollection.cpp
+ *
+ *  Created on: Aug 30, 2020
+ *      Author: Douglas Kaip
+ */
+
+#include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
+
+namespace jvulkan
+{
+    void getVkIndirectCommandsStreamNVCollection(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsStreamNVCollectionObject,
+			VkIndirectCommandsStreamNV **vkIndirectCommandsStreamNVs,
+            int *numberOfVkIndirectCommandsStreamNVs,
+            std::vector<void *> *memoryToFree)
+    {
+        jclass theClass = env->GetObjectClass(jVkIndirectCommandsStreamNVCollectionObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find class for jVkIndirectCommandsStreamNVCollectionObject.");
+            return;
+        }
+
+        jmethodID methodId = env->GetMethodID(theClass, "size", "()I");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id for size");
+            return;
+        }
+
+        jint numberOfElements = env->CallIntMethod(jVkIndirectCommandsStreamNVCollectionObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod");
+            return;
+        }
+
+        *numberOfVkIndirectCommandsStreamNVs = numberOfElements;
+        *vkIndirectCommandsStreamNVs = (VkIndirectCommandsStreamNV *)calloc(numberOfElements, sizeof(VkIndirectCommandsStreamNV));
+        if (*vkIndirectCommandsStreamNVs == nullptr)
+        {
+        	LOGERROR(env, "%s", "Error trying to allocate memory for *vkIndirectCommandsStreamNVs");
+            return;
+        }
+
+        memoryToFree->push_back(*vkIndirectCommandsStreamNVs);
+
+        jmethodID iteratorMethodId = env->GetMethodID(theClass, "iterator", "()Ljava/util/Iterator;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id for iterator");
+            return;
+        }
+
+        jobject iteratorObject = env->CallObjectMethod(jVkIndirectCommandsStreamNVCollectionObject, iteratorMethodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+            return;
+        }
+
+        jclass iteratorClass = env->GetObjectClass(iteratorObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find class for iteratorObject.");
+            return;
+        }
+
+        jmethodID hasNextMethodId = env->GetMethodID(iteratorClass, "hasNext", "()Z");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id for hasNext");
+            return;
+        }
+
+        jmethodID nextMethod = env->GetMethodID(iteratorClass, "next", "()Ljava/lang/Object;");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id for next");
+            return;
+        }
+
+        int i = 0;
+        do
+        {
+            jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+                break;
+            }
+
+            if (hasNext == false)
+            {
+                break;
+            }
+
+            jobject jVkIndirectCommandsStreamNVObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod");
+                break;
+            }
+
+            getVkIndirectCommandsStreamNV(
+                    env,
+					jVkIndirectCommandsStreamNVObject,
+                    &((*vkIndirectCommandsStreamNVs)[i]),
+                    memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling method getVkIndirectCommandsStreamNV");
+                break;
+            }
+
+            i++;
+        } while(true);
+    }
+}

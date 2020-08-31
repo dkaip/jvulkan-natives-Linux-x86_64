@@ -3222,6 +3222,25 @@ namespace jvulkan
 			VkAccelerationStructureMemoryRequirementsInfoNV *vkAccelerationStructureMemoryRequirementsInfoNV,
             std::vector<void *> *memoryToFree);
 
+    void getVkGeneratedCommandsInfoNV(
+            JNIEnv *env,
+            const jobject jVkGeneratedCommandsInfoNVObject,
+			VkGeneratedCommandsInfoNV *vkGeneratedCommandsInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkIndirectCommandsStreamNV(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsStreamNVObject,
+			VkIndirectCommandsStreamNV *vkIndirectCommandsStreamNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkIndirectCommandsStreamNVCollection(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsStreamNVCollectionObject,
+			VkIndirectCommandsStreamNV **vkIndirectCommandsStreamNVs,
+            int *numberOfVkIndirectCommandsStreamNVs,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
