@@ -57,7 +57,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCm
         return;
     }
 
-
     jclass vkQueryTypeEnumClass = env->GetObjectClass(jVkQueryTypeObject);
     if (env->ExceptionOccurred())
     {
