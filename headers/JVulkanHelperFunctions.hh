@@ -3304,7 +3304,17 @@ namespace jvulkan
 			VkRayTracingShaderGroupCreateInfoNV *vkRayTracingShaderGroupCreateInfoNV,
             std::vector<void *> *memoryToFree);
 
-    /*
+	void populateVkCooperativeMatrixPropertiesNVCollection(
+			JNIEnv *env,
+			jobject jVkCooperativeMatrixPropertiesNVCollectionObject,
+			VkCooperativeMatrixPropertiesNV const *vkCooperativeMatrixPropertiesNVs,
+			int numberOfVkCooperativeMatrixPropertiesNVs);
+
+	jobject createVkCooperativeMatrixPropertiesNV(
+			JNIEnv *env,
+			VkCooperativeMatrixPropertiesNV const *vkCooperativeMatrixPropertiesNV);
+
+	/*
 	 * Make sure you free() the resulting string.
 	 */
 	char *getClassName(JNIEnv *env, const jobject theObject);

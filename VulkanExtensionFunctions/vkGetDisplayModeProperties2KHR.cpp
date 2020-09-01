@@ -94,7 +94,8 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 			numberOfVkDisplayModeProperties2KHRs);
 
 	free(vkDisplayModeProperties2KHRs);
-    if (result != VK_SUCCESS)
+
+	if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Error calling populateVkPipelineExecutableStatisticKHRCollection");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);

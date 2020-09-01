@@ -39,7 +39,65 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 	}
 
-	LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	uint32_t propertiesCount = 0;
 
+    VkResult result = vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(
+    		physicalDeviceHandle,
+			&propertiesCount,
+			nullptr);
+
+    if (result != VK_SUCCESS)
+    {
+		LOGERROR(env, "%s", "First call to vkGetPhysicalDeviceCooperativeMatrixPropertiesNV failed.");
+		return jvulkan::createVkResult(env, result);
+    }
+    else
+    {
+    	if (propertiesCount == 0)
+    	{
+    		return jvulkan::createVkResult(env, result);
+    	}
+    }
+
+    VkCooperativeMatrixPropertiesNV *VkCooperativeMatrixPropertiesNVs =
+    		(VkCooperativeMatrixPropertiesNV *)calloc(propertiesCount, sizeof(VkCooperativeMatrixPropertiesNV));
+    if (VkCooperativeMatrixPropertiesNVs == nullptr)
+    {
+		LOGERROR(env, "%s", "Could allocate memory for VkCooperativeMatrixPropertiesNVs,");
+		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    for(int i = 0; i < propertiesCount; i++)
+    {
+    	VkCooperativeMatrixPropertiesNVs[i].sType = VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV;
+    	VkCooperativeMatrixPropertiesNVs[i].pNext = nullptr;  // This line is not really needed because of the calloc above
+    }
+
+    result = vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(
+    		physicalDeviceHandle,
+			&propertiesCount,
+			VkCooperativeMatrixPropertiesNVs);
+
+    if (result != VK_SUCCESS)
+    {
+		LOGERROR(env, "%s", "First call to vkGetPhysicalDeviceCooperativeMatrixPropertiesNV failed.");
+		return jvulkan::createVkResult(env, result);
+    }
+
+    jvulkan::populateVkCooperativeMatrixPropertiesNVCollection(
+			env,
+			jVkCooperativeMatrixPropertiesNVCollection,
+			VkCooperativeMatrixPropertiesNVs,
+			propertiesCount);
+
+
+    free(VkCooperativeMatrixPropertiesNVs);
+
+	if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling populateVkCooperativeMatrixPropertiesNVCollection");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }
