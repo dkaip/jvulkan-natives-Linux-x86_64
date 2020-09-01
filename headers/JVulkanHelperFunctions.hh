@@ -3342,6 +3342,18 @@ namespace jvulkan
 			VkPerformanceStreamMarkerInfoINTEL *vkPerformanceStreamMarkerInfoINTEL,
             std::vector<void *> *memoryToFree);
 
+    void getVkPerformanceOverrideInfoINTEL(
+            JNIEnv *env,
+            jobject jVkPerformanceOverrideInfoINTELObject,
+			VkPerformanceOverrideInfoINTEL *vkPerformanceOverrideInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPerformanceConfigurationAcquireInfoINTEL(
+            JNIEnv *env,
+            jobject jVkPerformanceConfigurationAcquireInfoINTELObject,
+			VkPerformanceConfigurationAcquireInfoINTEL *vkPerformanceConfigurationAcquireInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */

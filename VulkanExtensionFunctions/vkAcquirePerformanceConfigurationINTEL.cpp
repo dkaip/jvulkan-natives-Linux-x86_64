@@ -39,6 +39,30 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    std::vector<void *> memoryToFree(5);
+    VkPerformanceConfigurationAcquireInfoINTEL vkPerformanceConfigurationAcquireInfoINTEL = {};
+
+    jvulkan::getVkPerformanceConfigurationAcquireInfoINTEL(
+            env,
+			jVkPerformanceConfigurationAcquireInfoINTEL,
+            &vkPerformanceConfigurationAcquireInfoINTEL,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkPerformanceConfigurationAcquireInfoINTEL.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkPerformanceConfigurationINTEL_T *configurationHandle = nullptr;
+
+    VkResult result = vkAcquirePerformanceConfigurationINTEL(
+    		deviceHandle,
+			&vkPerformanceConfigurationAcquireInfoINTEL,
+			&configurationHandle);
+
+    jvulkan::setHandleValue(env, jVkPerformanceConfigurationINTEL, configurationHandle);
+
+    jvulkan::freeMemory(&memoryToFree);
+
+    return jvulkan::createVkResult(env, result);
 }

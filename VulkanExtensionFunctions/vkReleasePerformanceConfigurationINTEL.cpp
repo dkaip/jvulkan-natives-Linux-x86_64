@@ -39,6 +39,16 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkPerformanceConfigurationINTEL_T *configurationHandle = (VkPerformanceConfigurationINTEL_T *)jvulkan::getHandleValue(env, jVkPerformanceConfigurationINTEL);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "getHandleValue failed for jVkPerformanceConfigurationINTEL");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkResult result = vkReleasePerformanceConfigurationINTEL(
+    		deviceHandle,
+			configurationHandle);
+
+    return jvulkan::createVkResult(env, result);
 }
