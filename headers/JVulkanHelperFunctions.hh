@@ -3314,6 +3314,16 @@ namespace jvulkan
 			JNIEnv *env,
 			VkCooperativeMatrixPropertiesNV const *vkCooperativeMatrixPropertiesNV);
 
+	void populateVkCheckpointDataNVCollection(
+			JNIEnv *env,
+			jobject jVkCheckpointDataNVCollectionObject,
+			VkCheckpointDataNV const *vkCheckpointDataNVs,
+			int numberOfVkCheckpointDataNVs);
+
+	jobject createVkCheckpointDataNV(
+			JNIEnv *env,
+			VkCheckpointDataNV const *vkCheckpointDataNV);
+
 	/*
 	 * Make sure you free() the resulting string.
 	 */

@@ -59,24 +59,24 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     	}
     }
 
-    VkCooperativeMatrixPropertiesNV *VkCooperativeMatrixPropertiesNVs =
+    VkCooperativeMatrixPropertiesNV *vkCooperativeMatrixPropertiesNVs =
     		(VkCooperativeMatrixPropertiesNV *)calloc(propertiesCount, sizeof(VkCooperativeMatrixPropertiesNV));
-    if (VkCooperativeMatrixPropertiesNVs == nullptr)
+    if (vkCooperativeMatrixPropertiesNVs == nullptr)
     {
-		LOGERROR(env, "%s", "Could allocate memory for VkCooperativeMatrixPropertiesNVs,");
+		LOGERROR(env, "%s", "Could allocate memory for vkCooperativeMatrixPropertiesNVs,");
 		return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     for(int i = 0; i < propertiesCount; i++)
     {
-    	VkCooperativeMatrixPropertiesNVs[i].sType = VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV;
-    	VkCooperativeMatrixPropertiesNVs[i].pNext = nullptr;  // This line is not really needed because of the calloc above
+    	vkCooperativeMatrixPropertiesNVs[i].sType = VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV;
+    	vkCooperativeMatrixPropertiesNVs[i].pNext = nullptr;  // This line is not really needed because of the calloc above
     }
 
     result = vkGetPhysicalDeviceCooperativeMatrixPropertiesNV(
     		physicalDeviceHandle,
 			&propertiesCount,
-			VkCooperativeMatrixPropertiesNVs);
+			vkCooperativeMatrixPropertiesNVs);
 
     if (result != VK_SUCCESS)
     {
@@ -87,11 +87,11 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     jvulkan::populateVkCooperativeMatrixPropertiesNVCollection(
 			env,
 			jVkCooperativeMatrixPropertiesNVCollection,
-			VkCooperativeMatrixPropertiesNVs,
+			vkCooperativeMatrixPropertiesNVs,
 			propertiesCount);
 
 
-    free(VkCooperativeMatrixPropertiesNVs);
+    free(vkCooperativeMatrixPropertiesNVs);
 
 	if (env->ExceptionOccurred())
     {
