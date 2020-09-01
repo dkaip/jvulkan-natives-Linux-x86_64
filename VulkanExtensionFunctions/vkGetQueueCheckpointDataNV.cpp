@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -26,7 +26,57 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkQueue;Ljava/util/Collection;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetQueueCheckpointDataNV
-  (JNIEnv *, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkQueue, jobject jVkCheckpointDataNVCollectionObject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+	VkQueue_T *queueHandle = (VkQueue_T *)jvulkan::getHandleValue(env, jVkQueue);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not retrieve VkQueue handle");
+		return;
+	}
+
+	uint32_t checkpointDataCount = 0;
+
+    vkGetQueueCheckpointDataNV(
+    		queueHandle,
+			&checkpointDataCount,
+			nullptr);
+	if (checkpointDataCount == 0)
+	{
+		return;
+	}
+
+	VkCheckpointDataNV *vkCheckpointDataNVs =
+    		(VkCheckpointDataNV *)calloc(checkpointDataCount, sizeof(VkCheckpointDataNV));
+    if (vkCheckpointDataNVs == nullptr)
+    {
+		LOGERROR(env, "%s", "Could allocate memory for vkCheckpointDataNVs,");
+		return;
+    }
+
+    for(int i = 0; i < checkpointDataCount; i++)
+    {
+    	vkCheckpointDataNVs[i].sType = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV;
+    	vkCheckpointDataNVs[i].pNext = nullptr;  // This line is not really needed because of the calloc above
+    }
+
+    vkGetQueueCheckpointDataNV(
+    		queueHandle,
+			&checkpointDataCount,
+			vkCheckpointDataNVs);
+
+    jvulkan::populateVkCheckpointDataNVCollection(
+			env,
+			jVkCheckpointDataNVCollectionObject,
+			vkCheckpointDataNVs,
+			checkpointDataCount);
+
+
+    free(vkCheckpointDataNVs);
+
+	if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling populateVkCheckpointDataNVCollection");
+        return;
+    }
 }
