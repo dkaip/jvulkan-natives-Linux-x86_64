@@ -32,7 +32,32 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkCommandBuffer;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeneratedCommandsInfoNV;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCmdPreprocessGeneratedCommandsNV
-  (JNIEnv *env, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkCommandBuffer, jobject jGeneratedCommandsInfoObject)
 {
-	LOGERROR(env, "%s", "Not implemented yet.");
+    VkCommandBuffer_T *commandBufferHandle = (VkCommandBuffer_T *)jvulkan::getHandleValue(env, jVkCommandBuffer);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkCommandBuffer handle");
+        return;
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkGeneratedCommandsInfoNV generatedCommandsInfo = {};
+
+    jvulkan::getVkGeneratedCommandsInfoNV(
+            env,
+			jGeneratedCommandsInfoObject,
+            &generatedCommandsInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkGeneratedCommandsInfoNV.");
+        return;
+    }
+
+    vkCmdPreprocessGeneratedCommandsNV(
+    		commandBufferHandle,
+			&generatedCommandsInfo);
+
+    jvulkan::freeMemory(&memoryToFree);
 }

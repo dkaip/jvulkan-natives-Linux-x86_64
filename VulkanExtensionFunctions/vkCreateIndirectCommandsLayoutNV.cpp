@@ -32,8 +32,47 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/CreateInfos/VkIndirectCommandsLayoutCreateInfoNV;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkIndirectCommandsLayoutNV;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateIndirectCommandsLayoutNV
-  (JNIEnv *env, jobject, jobject, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkIndirectCommandsLayoutCreateInfoNVObject, jobject jAlternateAllocator, jobject jVkIndirectCommandsLayoutNVObject)
 {
-	LOGERROR(env, "%s", "Not implemented yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+	VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    std::vector<void *> memoryToFree(5);
+    VkIndirectCommandsLayoutCreateInfoNV createInfo = {};
+
+    jvulkan::getVkIndirectCommandsLayoutCreateInfoNV(
+            env,
+			jVkIndirectCommandsLayoutCreateInfoNVObject,
+            &createInfo,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkIndirectCommandsLayoutCreateInfoNV.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkAllocationCallbacks *allocatorCallbacks = nullptr;
+    if (jAlternateAllocator != nullptr)
+    {
+        allocatorCallbacks = new VkAllocationCallbacks();
+        jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
+    }
+
+    VkIndirectCommandsLayoutNV_T *indirectCommandsLayout = nullptr;
+
+    VkResult result = vkCreateIndirectCommandsLayoutNV(
+    		logicalDeviceHandle,
+			&createInfo,
+			allocatorCallbacks,
+			&indirectCommandsLayout);
+
+    jvulkan::freeMemory(&memoryToFree);
+
+    jvulkan::setHandleValue(env, jVkIndirectCommandsLayoutNVObject, indirectCommandsLayout);
+
+    return jvulkan::createVkResult(env, result);
 }

@@ -22,16 +22,39 @@ using namespace std;
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkCreateGraphicsPipelines
+ * Method:    vkCreateRaytracingPipelinesNVX
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipelineCache;Ljava/util/Collection;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkAllocationCallbacks;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateGraphicsPipelines
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipelineCache, jobject jVkGraphicsPipelineCreateInfoCollection, jobject jAlternateAllocator, jobject jVkPipelineCollection)
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkCreateRayTracingPipelinesNV
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipelineCache, jobject jVkRayTracingPipelineCreateInfoNVCollectionObject, jobject jAlternateAllocator, jobject jVkPipelineCollection)
 {
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkPipelineCache_T *pipelineCacheHandle = (VkPipelineCache_T *)jvulkan::getHandleValue(env, jVkPipelineCache);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not retrieve VkPipelineCache handle");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    std::vector<void *> memoryToFree(5);
+    int numberOfCreateInfos = 0;
+    VkRayTracingPipelineCreateInfoNV *vkRayTracingPipelineCreateInfoNV = nullptr;
+
+    jvulkan::getVkRayTracingPipelineCreateInfoNVCollection(
+            env,
+			jVkRayTracingPipelineCreateInfoNVCollectionObject,
+            &vkRayTracingPipelineCreateInfoNV,
+            &numberOfCreateInfos,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkRayTracingPipelineCreateInfoNVCollection.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -42,46 +65,20 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         jvulkan::getAllocatorCallbacks(env, jAlternateAllocator, allocatorCallbacks);
     }
 
-    VkPipelineCache_T *pipelineCacheHandle = nullptr;
-    if (jVkPipelineCache != nullptr)
-    {
-        pipelineCacheHandle = (VkPipelineCache_T *)jvulkan::getHandleValue(env, jVkPipelineCache);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not retrieve VkPipelineCache handle");
-            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-        }
-    }
-
-    std::vector<void *> memoryToFree(5);
-    int numberOfCreateInfos = 0;
-    VkGraphicsPipelineCreateInfo *vkGraphicsPipelineCreateInfo = nullptr;
-
-    jvulkan::getVkGraphicsPipelineCreateInfoCollection(
-            env,
-            jVkGraphicsPipelineCreateInfoCollection,
-            &vkGraphicsPipelineCreateInfo,
-            &numberOfCreateInfos,
-            &memoryToFree);
-    if (env->ExceptionOccurred())
-    {
-    	LOGERROR(env, "%s", "Error calling getVkGraphicsPipelineCreateInfoCollection.");
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
     VkPipeline *pipelines = (VkPipeline *)calloc(numberOfCreateInfos, sizeof(VkPipeline *));
-    VkResult result = vkCreateGraphicsPipelines(
-            logicalDeviceHandle,
-            pipelineCacheHandle,
-            numberOfCreateInfos,
-            vkGraphicsPipelineCreateInfo,
-            allocatorCallbacks,
-            pipelines);
+
+    VkResult result = vkCreateRayTracingPipelinesNV(
+    		logicalDeviceHandle,
+			pipelineCacheHandle,
+			numberOfCreateInfos,
+			vkRayTracingPipelineCreateInfoNV,
+			allocatorCallbacks,
+			pipelines);
 
     jvulkan::populatepNextChainCollection(
             env,
-			jVkGraphicsPipelineCreateInfoCollection,
-			(jvulkan::InfoStructure *)vkGraphicsPipelineCreateInfo,
+			jVkRayTracingPipelineCreateInfoNVCollectionObject,
+			(jvulkan::InfoStructure *)vkRayTracingPipelineCreateInfoNV,
 			&memoryToFree);
     if (env->ExceptionOccurred())
     {

@@ -608,6 +608,3 @@ namespace jvulkan
         vkGraphicsPipelineCreateInfo->basePipelineIndex = basePipelineIndex;
     }
 }
-
-
-

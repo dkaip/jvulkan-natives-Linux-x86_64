@@ -3252,6 +3252,58 @@ namespace jvulkan
 			jobject jVkImageViewAddressPropertiesNVXObject,
 			const VkImageViewAddressPropertiesNVX *vkImageViewAddressPropertiesNVX);
 
+    void getVkIndirectCommandsLayoutTokenNVCollection(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsLayoutTokenNVCollectionObject,
+			VkIndirectCommandsLayoutTokenNV **vkIndirectCommandsLayoutTokenNVs,
+            int *numberOfVkIndirectCommandsLayoutTokenNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkIndirectCommandsLayoutTokenNV(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsLayoutTokenNVObject,
+			VkIndirectCommandsLayoutTokenNV *vkIndirectCommandsLayoutTokenNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkIndexTypeCollection(
+            JNIEnv *env,
+            const jobject jVkIndexTypeCollectionObject,
+			VkIndexType **vkIndexTypes,
+            int *numberOfVkIndexTypes,
+            std::vector<void *> *memoryToFree);
+
+    void getVkIndirectCommandsLayoutCreateInfoNV(
+            JNIEnv *env,
+            const jobject jVkIndirectCommandsLayoutCreateInfoNVObject,
+			VkIndirectCommandsLayoutCreateInfoNV *vkIndirectCommandsLayoutCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRayTracingPipelineCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkRayTracingPipelineCreateInfoNVObject,
+			VkRayTracingPipelineCreateInfoNV *vkRayTracingPipelineCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRayTracingPipelineCreateInfoNVCollection(
+            JNIEnv *env,
+            const jobject jVkRayTracingPipelineCreateInfoNVCollectionObject,
+			VkRayTracingPipelineCreateInfoNV **vkRayTracingPipelineCreateInfoNVs,
+            int *numberOfVkRayTracingPipelineCreateInfoNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRayTracingShaderGroupCreateInfoNVCollection(
+            JNIEnv *env,
+            const jobject jVkRayTracingShaderGroupCreateInfoNVCollectionObject,
+			VkRayTracingShaderGroupCreateInfoNV **vkRayTracingShaderGroupCreateInfoNVs,
+            int *numberOfVkRayTracingShaderGroupCreateInfoNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRayTracingShaderGroupCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkRayTracingShaderGroupCreateInfoNVObject,
+			VkRayTracingShaderGroupCreateInfoNV *vkRayTracingShaderGroupCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
     /*
 	 * Make sure you free() the resulting string.
 	 */
