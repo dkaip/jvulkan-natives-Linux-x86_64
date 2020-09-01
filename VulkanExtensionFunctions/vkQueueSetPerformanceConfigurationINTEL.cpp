@@ -35,10 +35,20 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 	VkQueue_T *queueHandle = (VkQueue_T *)jvulkan::getHandleValue(env, jVkQueue);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "getHandleValue failed for jVkQueue");
+    	LOGERROR(env, "%s", "getHandleValue failed for VkQueue");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkPerformanceConfigurationINTEL_T *configurationHandle = (VkPerformanceConfigurationINTEL_T *)jvulkan::getHandleValue(env, jVkPerformanceConfigurationINTEL);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "getHandleValue failed for VkPerformanceConfigurationINTEL");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkResult result = vkQueueSetPerformanceConfigurationINTEL(
+    		queueHandle,
+			configurationHandle);
+
+    return jvulkan::createVkResult(env, result);
 }

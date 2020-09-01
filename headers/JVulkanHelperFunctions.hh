@@ -3324,7 +3324,25 @@ namespace jvulkan
 			JNIEnv *env,
 			VkCheckpointDataNV const *vkCheckpointDataNV);
 
-	/*
+    void getVkInitializePerformanceApiInfoINTEL(
+            JNIEnv *env,
+            jobject jVkInitializePerformanceApiInfoINTEL,
+			VkInitializePerformanceApiInfoINTEL *vkInitializePerformanceApiInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPerformanceMarkerInfoINTEL(
+            JNIEnv *env,
+            jobject jVkPerformanceMarkerInfoINTELObject,
+			VkPerformanceMarkerInfoINTEL *vkPerformanceMarkerInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPerformanceStreamMarkerInfoINTEL(
+            JNIEnv *env,
+            jobject jVkPerformanceStreamMarkerInfoINTELObject,
+			VkPerformanceStreamMarkerInfoINTEL *vkPerformanceStreamMarkerInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
+    /*
 	 * Make sure you free() the resulting string.
 	 */
 	char *getClassName(JNIEnv *env, const jobject theObject);

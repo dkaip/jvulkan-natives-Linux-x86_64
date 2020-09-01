@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
 
 using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -28,7 +28,7 @@ using namespace std;
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetAccelerationStructureHandleNV
   (JNIEnv *env, jobject, jobject, jobject, jobject)
 {
-    std::cerr << "Not implemented yet." << std::endl;
+    LOGERROR(env, "%s", "Not Implemented yet.");
 
     return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
 }

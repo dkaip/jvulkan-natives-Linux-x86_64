@@ -39,7 +39,26 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    std::vector<void *> memoryToFree(5);
+    VkPerformanceMarkerInfoINTEL vkPerformanceMarkerInfoINTEL = {};
+
+    jvulkan::getVkPerformanceMarkerInfoINTEL(
+            env,
+			jVkPerformanceMarkerInfoINTEL,
+            &vkPerformanceMarkerInfoINTEL,
+            &memoryToFree);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling getVkPerformanceMarkerInfoINTEL.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkResult result = vkCmdSetPerformanceMarkerINTEL(
+    		commandBufferHandle,
+			&vkPerformanceMarkerInfoINTEL);
+
+    jvulkan::freeMemory(&memoryToFree);
+
+    return jvulkan::createVkResult(env, result);
 }
 
