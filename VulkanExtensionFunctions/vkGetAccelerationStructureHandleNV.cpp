@@ -23,12 +23,33 @@ using namespace std;
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetAccelerationStructureHandleNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetAccelerationStructureHandleNV
-  (JNIEnv *env, jobject, jobject, jobject, jobject)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkAccelerationStructureKHR, jobject jVulkanHandle)
 {
-    LOGERROR(env, "%s", "Not Implemented yet.");
+	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "getHandleValue failed for VkDevice");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
 
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    VkAccelerationStructureKHR_T *accelerationStructureHandle = (VkAccelerationStructureKHR_T *)jvulkan::getHandleValue(env, jVkAccelerationStructureKHR);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "getHandleValue failed for VkAccelerationStructureKHR");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    void *data = nullptr;
+    VkResult result = vkGetAccelerationStructureHandleNV(
+    		deviceHandle,
+			accelerationStructureHandle,
+			sizeof(void *),
+			&data);
+
+    jvulkan::setHandleValue(env, jVulkanHandle, data);
+
+    return jvulkan::createVkResult(env, result);
 }

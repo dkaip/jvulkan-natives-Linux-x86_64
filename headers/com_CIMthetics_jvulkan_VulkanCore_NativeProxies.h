@@ -1682,7 +1682,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkFr
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetAccelerationStructureHandleNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Ljava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkAccelerationStructureKHR;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetAccelerationStructureHandleNV
   (JNIEnv *, jobject, jobject, jobject, jobject);
@@ -2362,25 +2362,17 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetRayTracingShaderGroupHandlesKHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IIJ[B)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IILjava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesKHR
-  (JNIEnv *, jobject, jobject, jobject, jint, jint, jlong, jbyteArray);
+  (JNIEnv *, jobject, jobject, jobject, jint, jint, jobject);
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetRayTracingShaderGroupHandlesNV
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IIJ[B)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
- */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesNV
-  (JNIEnv *, jobject, jobject, jobject, jint, jint, jlong, jbyteArray);
-
-/*
- * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
- * Method:    vkGetRayTracingShaderHandlesNV
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IILjava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
-JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderHandlesNV
+JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesNV
   (JNIEnv *, jobject, jobject, jobject, jint, jint, jobject);
 
 /*

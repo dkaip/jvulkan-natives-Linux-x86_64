@@ -27,10 +27,10 @@
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
  * Method:    vkGetRayTracingShaderGroupHandlesKHR
- * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IIJ[B)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
+ * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPipeline;IILjava/util/Collection;)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;
  */
 JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetRayTracingShaderGroupHandlesKHR
-  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipeline, jint firstGroup, jint groupCount, jlong, jbyteArray)
+  (JNIEnv *env, jobject, jobject jVkDevice, jobject jVkPipeline, jint jFirstGroup, jint jGroupCount, jobject jVulkanHandleCollectionObject)
 {
 	VkDevice_T *deviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
@@ -46,6 +46,72 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-	LOGERROR(env, "%s", "Not Implemented Yet.");
-    return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    uint32_t firstGroup = (uint32_t)jFirstGroup;
+    uint32_t groupCount = (uint32_t)jGroupCount;
+
+    size_t dataArraySize = sizeof(void *) * groupCount;
+    void **dataArray = (void **)calloc(groupCount, sizeof(void *));
+    if (dataArray == nullptr)
+    {
+    	LOGERROR(env, "Could not allocate %d bytes for an array of %d void pointers.", (int)dataArraySize, (int)groupCount);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    VkResult result = vkGetRayTracingShaderGroupHandlesKHR(
+    		deviceHandle,
+			pipelineHandle,
+			firstGroup,
+			groupCount,
+			dataArraySize,
+			dataArray);
+    if (result != VK_SUCCESS)
+    {
+    	free(dataArray);
+    	LOGERROR(env, "Call to vkGetRayTracingShaderGroupHandlesKHR failed with a result of %d.", result);
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jclass collectionClass = env->GetObjectClass(jVulkanHandleCollectionObject);
+    if (env->ExceptionOccurred())
+    {
+    	free(dataArray);
+    	LOGERROR(env, "%s", "Could not get class for jVulkanHandleCollectionObject.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
+    if (env->ExceptionOccurred())
+    {
+    	free(dataArray);
+    	LOGERROR(env, "%s", "Could not find method id for add.");
+        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    }
+
+    for (uint32_t i = 0; i < groupCount; i++)
+    {
+        jobject vulkanHandle = jvulkan::createVulkanHandle(env, "com/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle", dataArray[i]);
+        if (env->ExceptionOccurred())
+        {
+        	free(dataArray);
+        	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+
+        jboolean addResult = env->CallBooleanMethod(jVulkanHandleCollectionObject, addMethodId, vulkanHandle);
+        if (env->ExceptionOccurred())
+        {
+        	free(dataArray);
+        	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+
+        if (addResult == false)
+        {
+        	LOGERROR(env, "Handle %d was not added to collection.", i);
+        }
+    }
+
+    free(dataArray);
+
+    return jvulkan::createVkResult(env, result);
 }
