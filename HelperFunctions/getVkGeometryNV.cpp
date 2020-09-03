@@ -15,7 +15,7 @@
  */
 
 /*
- * getVkGeometryAABBNV.cpp
+ * getVkGeometryNV.cpp
  *
  *  Created on: Apr 1, 2019
  *      Author: Douglas Kaip
@@ -26,27 +26,27 @@
 
 namespace jvulkan
 {
-    void getVkGeometryAABBNV(
+    void getVkGeometryNV(
             JNIEnv *env,
-            const jobject jVkGeometryAABBNVObject,
-            VkGeometryAABBNV *vkGeometryAABBNV,
+            const jobject jVkGeometryNVObject,
+            VkGeometryNV *vkGeometryNV,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkGeometryAABBNVClass = env->GetObjectClass(jVkGeometryAABBNVObject);
+        jclass vkGeometryNVClass = env->GetObjectClass(jVkGeometryNVObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSType(env, jVkGeometryAABBNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkGeometryNVObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkGeometryAABBNVObject);
+        jobject pNextObject = getpNextObject(env, jVkGeometryNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -62,68 +62,68 @@ namespace jvulkan
         void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(vkGeometryAABBNVClass, "getAabbData", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkBuffer;");
+        jmethodID methodId = env->GetMethodID(vkGeometryNVClass, "getGeometryType", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkGeometryTypeNV;");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jobject jVkBufferHandleObject = env->CallObjectMethod(jVkGeometryAABBNVObject, methodId);
+        jobject jVkGeometryTypeNVObject = env->CallObjectMethod(jVkGeometryNVObject, methodId);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        VkBuffer_T *aabbDataHandle = (VkBuffer_T *)jvulkan::getHandleValue(env, jVkBufferHandleObject);
+        jclass vkGeometryTypeNVClass = env->GetObjectClass(jVkGeometryTypeNVObject);
+
+        jmethodID valueOfMethodId = env->GetMethodID(vkGeometryTypeNVClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryAABBNVClass, "getNumAABBs", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jint numAABBs = env->CallIntMethod(jVkGeometryAABBNVObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryAABBNVClass, "getStride", "()I");
-        if (env->ExceptionOccurred())
-        {
-            return;
-        }
-
-        jint stride = env->CallIntMethod(jVkGeometryAABBNVObject, methodId);
+        VkGeometryTypeNV vkGeometryTypeNVEnumValue = (VkGeometryTypeNV)env->CallIntMethod(jVkGeometryTypeNVObject, valueOfMethodId);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkGeometryAABBNVClass, "getOffset", "()J");
+        methodId = env->GetMethodID(vkGeometryNVClass, "getGeometry", "()Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkGeometryDataNV;");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jlong offset = env->CallLongMethod(jVkGeometryAABBNVObject, methodId);
+        jobject jVkGeometryDataNVObject = env->CallObjectMethod(jVkGeometryNVObject, methodId);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        vkGeometryAABBNV->sType         = sTypeValue;
-        vkGeometryAABBNV->pNext         = (void *)pNext;
-        vkGeometryAABBNV->aabbData      = aabbDataHandle;
-        vkGeometryAABBNV->numAABBs      = numAABBs;
-        vkGeometryAABBNV->stride        = stride;
-        vkGeometryAABBNV->offset        = offset;
+        ////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(vkGeometryNVClass, "getFlags", "()Ljava/util/EnumSet;");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
+        jobject flagsObject = env->CallObjectMethod(jVkGeometryNVObject, methodId);
+        VkGeometryFlagsNV flags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkGeometryFlagBitsNV");
+
+        vkGeometryNV->sType         = sTypeValue;
+        vkGeometryNV->pNext         = (void *)pNext;
+        vkGeometryNV->geometryType  = vkGeometryTypeNVEnumValue;
+
+        getVkGeometryDataNV(
+                env,
+                jVkGeometryDataNVObject,
+                &(vkGeometryNV->geometry),
+                memoryToFree);
+
+        vkGeometryNV->flags         = flags;
     }
 }

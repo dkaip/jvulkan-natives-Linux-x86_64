@@ -57,7 +57,7 @@ namespace jvulkan
 		void *pNext = nullptr;
 		if (jpNextObject != nullptr)
 		{
-			LOGERROR(env, "%s", "pNext must be NULL");
+			LOGERROR(env, "%s", "pNext must be null.");
 		}
 
 		////////////////////////////////////////////////////////////////////////

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getApplicationInfo.cpp
+ * getVkApplicationInfo.cpp
  *
  *  Created on: May 9, 2019
  *      Author: Douglas Kaip
@@ -56,6 +56,7 @@ namespace jvulkan
         if (pNextObject != nullptr)
         {
         	LOGERROR(env, "%s", "pNext must be null.");
+        	return;
         }
 
         void *pNext = nullptr;

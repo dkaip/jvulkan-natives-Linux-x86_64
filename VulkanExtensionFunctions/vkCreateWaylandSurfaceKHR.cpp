@@ -71,7 +71,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
     if (pNextObject != nullptr)
     {
-    	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+    	LOGERROR(env, "%s", "pNext must be null.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 

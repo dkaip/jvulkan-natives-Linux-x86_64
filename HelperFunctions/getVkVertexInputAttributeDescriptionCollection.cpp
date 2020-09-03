@@ -19,42 +19,42 @@
 
 namespace jvulkan
 {
-    void getVkBufferMemoryBarrierCollection(
+    void getVkVertexInputAttributeDescriptionCollection(
             JNIEnv *env,
-            const jobject jVkBufferMemoryBarrierCollectionObject,
-            VkBufferMemoryBarrier **vkBufferMemoryBarriers,
-            int *numberOfVkBufferMemoryBarriers,
+            const jobject jVkVertexInputAttributeDescriptionCollectionObject,
+            VkVertexInputAttributeDescription **vkVertexInputAttributeDescription,
+            int *numberOfVkVertexInputAttributeDescriptions,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkBufferMemoryBarrierCollectionClass = env->GetObjectClass(jVkBufferMemoryBarrierCollectionObject);
+        jclass vkVertexInputAttributeDescriptionCollectionClass = env->GetObjectClass(jVkVertexInputAttributeDescriptionCollectionObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkBufferMemoryBarrierCollectionClass, "size", "()I");
+        jmethodID methodId = env->GetMethodID(vkVertexInputAttributeDescriptionCollectionClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkBufferMemoryBarrierCollectionObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkVertexInputAttributeDescriptionCollectionObject, methodId);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        *numberOfVkBufferMemoryBarriers = numberOfElements;
-        *vkBufferMemoryBarriers = (VkBufferMemoryBarrier *)calloc(numberOfElements, sizeof(VkBufferMemoryBarrier));
-        memoryToFree->push_back(*vkBufferMemoryBarriers);
+        *numberOfVkVertexInputAttributeDescriptions = numberOfElements;
+        *vkVertexInputAttributeDescription = (VkVertexInputAttributeDescription *)calloc(numberOfElements, sizeof(VkVertexInputAttributeDescription));
+        memoryToFree->push_back(*vkVertexInputAttributeDescription);
 
-        jmethodID iteratorMethodId = env->GetMethodID(vkBufferMemoryBarrierCollectionClass, "iterator", "()Ljava/util/Iterator;");
+        jmethodID iteratorMethodId = env->GetMethodID(vkVertexInputAttributeDescriptionCollectionClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jobject iteratorObject = env->CallObjectMethod(jVkBufferMemoryBarrierCollectionObject, iteratorMethodId);
+        jobject iteratorObject = env->CallObjectMethod(jVkVertexInputAttributeDescriptionCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
             return;
@@ -92,17 +92,21 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkBufferMemoryBarrierObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkVertexInputAttributeDescriptionObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
                 break;
             }
 
-            getVkBufferMemoryBarrier(
+            getVkVertexInputAttributeDescription(
                     env,
-                    jVkBufferMemoryBarrierObject,
-                    &((*vkBufferMemoryBarriers)[i]),
+                    jVkVertexInputAttributeDescriptionObject,
+                    &((*vkVertexInputAttributeDescription)[i]),
                     memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+                return;
+            }
 
             i++;
         } while(true);

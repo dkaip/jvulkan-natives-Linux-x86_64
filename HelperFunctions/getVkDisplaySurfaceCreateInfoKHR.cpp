@@ -58,7 +58,7 @@ namespace jvulkan
 
         if (pNextObject != nullptr)
         {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
+        	LOGERROR(env, "%s", "pNext must be null.");
             return;
         }
 

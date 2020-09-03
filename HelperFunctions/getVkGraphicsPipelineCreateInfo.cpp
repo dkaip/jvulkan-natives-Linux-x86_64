@@ -55,20 +55,13 @@ namespace jvulkan
             return;
         }
 
-        void *pNext = nullptr;
         if (jpNextObject != nullptr)
         {
-        	getpNextChain(
-        			env,
-					jpNextObject,
-        			&pNext,
-        			memoryToFree);
-            if (env->ExceptionOccurred())
-            {
-            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
-                return;
-            }
+			LOGERROR(env, "%s", "pNext must be null.");
+			return;
         }
+
+        void *pNext = nullptr;
 
         ////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkGraphicsPipelineCreateInfoClass, "getFlags", "()Ljava/util/EnumSet;");

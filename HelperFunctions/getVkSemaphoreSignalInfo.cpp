@@ -54,12 +54,13 @@ namespace jvulkan
             return;
         }
 
-        void *pNext = nullptr;
         if (jpNextObject != nullptr)
         {
         	LOGERROR(env, "%s", "pNext must be null.");
             return;
         }
+
+        void *pNext = nullptr;
 
 		////////////////////////////////////////////////////////////////////////
 		jmethodID methodId = env->GetMethodID(theClass, "getSemaphore", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkSemaphore;");

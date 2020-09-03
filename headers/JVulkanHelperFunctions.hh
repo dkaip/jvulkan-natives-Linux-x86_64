@@ -171,17 +171,17 @@ namespace jvulkan
         VkPipelineLayoutCreateInfo *vkPipelineLayoutCreateInfo,
         std::vector<void *> *memoryToFree);
 
-    void getCollectionOfVkDescriptorSetLayout(
+    void getVkDescriptorSetLayoutCollection(
             JNIEnv *env,
             const jobject jVkDescriptorSetLayoutCollectionObject,
-            VkDescriptorSetLayout ***descriptorSetLayouts,
+            VkDescriptorSetLayout **descriptorSetLayouts,
             int *numberOfDescriptorSetLayouts,
             std::vector<void *> *memoryToFree);
 
-    void getCollectionOfVkPushConstantRange(
+    void getVkPushConstantRangeCollection(
             JNIEnv *env,
             const jobject jVkPushConstantRangeCollectionObject,
-            VkPushConstantRange **pushConstantRanges[],
+            VkPushConstantRange *pushConstantRanges[],
             int *numberOfPushConstantRanges,
             std::vector<void *> *memoryToFree);
 

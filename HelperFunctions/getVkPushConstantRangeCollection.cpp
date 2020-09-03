@@ -19,44 +19,52 @@
 
 namespace jvulkan
 {
-    void getVkBufferMemoryBarrierCollection(
+    void getVkPushConstantRangeCollection(
             JNIEnv *env,
-            const jobject jVkBufferMemoryBarrierCollectionObject,
-            VkBufferMemoryBarrier **vkBufferMemoryBarriers,
-            int *numberOfVkBufferMemoryBarriers,
+            const jobject jVkPushConstantRangeCollectionObject,
+            VkPushConstantRange *pushConstantRanges[],
+            int *numberOfPushConstantRanges,
             std::vector<void *> *memoryToFree)
     {
-        jclass vkBufferMemoryBarrierCollectionClass = env->GetObjectClass(jVkBufferMemoryBarrierCollectionObject);
+        if (jVkPushConstantRangeCollectionObject == nullptr)
+        {
+        	LOGERROR(env, "%s", "jVkPushConstantRangeCollectionObject was nullptr.");
+            return;
+        }
+
+        jclass vkPushConstantRangeCollectionClass = env->GetObjectClass(jVkPushConstantRangeCollectionObject);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jmethodID methodId = env->GetMethodID(vkBufferMemoryBarrierCollectionClass, "size", "()I");
+        jmethodID methodId = env->GetMethodID(vkPushConstantRangeCollectionClass, "size", "()I");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        jint numberOfElements = env->CallIntMethod(jVkBufferMemoryBarrierCollectionObject, methodId);
+        jint numberOfElements = env->CallIntMethod(jVkPushConstantRangeCollectionObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallIntMethod.");
+            return;
+        }
+
+        *numberOfPushConstantRanges = numberOfElements;
+        *pushConstantRanges = (VkPushConstantRange *)calloc(numberOfElements, sizeof(VkPushConstantRange));
+        memoryToFree->push_back(*pushConstantRanges);
+
+        jmethodID iteratorMethodId = env->GetMethodID(vkPushConstantRangeCollectionClass, "iterator", "()Ljava/util/Iterator;");
         if (env->ExceptionOccurred())
         {
             return;
         }
 
-        *numberOfVkBufferMemoryBarriers = numberOfElements;
-        *vkBufferMemoryBarriers = (VkBufferMemoryBarrier *)calloc(numberOfElements, sizeof(VkBufferMemoryBarrier));
-        memoryToFree->push_back(*vkBufferMemoryBarriers);
-
-        jmethodID iteratorMethodId = env->GetMethodID(vkBufferMemoryBarrierCollectionClass, "iterator", "()Ljava/util/Iterator;");
+        jobject iteratorObject = env->CallObjectMethod(jVkPushConstantRangeCollectionObject, iteratorMethodId);
         if (env->ExceptionOccurred())
         {
-            return;
-        }
-
-        jobject iteratorObject = env->CallObjectMethod(jVkBufferMemoryBarrierCollectionObject, iteratorMethodId);
-        if (env->ExceptionOccurred())
-        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
@@ -84,6 +92,7 @@ namespace jvulkan
             jboolean hasNext = env->CallBooleanMethod(iteratorObject, hasNextMethodId);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallBooleanMethod.");
                 break;
             }
 
@@ -92,17 +101,22 @@ namespace jvulkan
                 break;
             }
 
-            jobject jVkBufferMemoryBarrierObject = env->CallObjectMethod(iteratorObject, nextMethod);
+            jobject jVkPushConstantRangeObject = env->CallObjectMethod(iteratorObject, nextMethod);
             if (env->ExceptionOccurred())
             {
+            	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
                 break;
             }
 
-            getVkBufferMemoryBarrier(
+            getVkPushConstantRange(
                     env,
-                    jVkBufferMemoryBarrierObject,
-                    &((*vkBufferMemoryBarriers)[i]),
-                    memoryToFree);
+                    jVkPushConstantRangeObject,
+                    &(*pushConstantRanges)[i]);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling getVkPushConstantRange.");
+                return;
+            }
 
             i++;
         } while(true);

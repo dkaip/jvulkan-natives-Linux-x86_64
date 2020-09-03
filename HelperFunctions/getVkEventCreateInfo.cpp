@@ -54,11 +54,12 @@ namespace jvulkan
 			return;
 		}
 
-		void *pNext = nullptr;
 		if (jpNextObject != nullptr)
 		{
-			LOGERROR(env, "%s", "pNext must be NULL");
+			LOGERROR(env, "%s", "pNext must be null.");
 		}
+
+		void *pNext = nullptr;
 
 		////////////////////////////////////////////////////////////////////////
 		jmethodID methodId = env->GetMethodID(theClass, "getFlags", "()Ljava/util/EnumSet;");
