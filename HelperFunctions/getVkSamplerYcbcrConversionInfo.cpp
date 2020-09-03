@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkSamplerYcbcrConversionInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkSamplerYcbcrConversionInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

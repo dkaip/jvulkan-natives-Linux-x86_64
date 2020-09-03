@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

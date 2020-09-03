@@ -25,6 +25,7 @@
 
 using namespace std;
 
+#define ERROR_RETURN_CODE (VkStructureType)0x7FFFFFFF
 namespace jvulkan
 {
 	VkStructureType getSType(
@@ -35,44 +36,44 @@ namespace jvulkan
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
         jmethodID methodId = env->GetMethodID(vulkanStructureClass, "getSType", "()Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkStructureType;");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id getSType in class com/CIMthetics/jvulkan/VulkanCore/Structures/CreateInfos/VulkanCreateInfoStructure");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
         jobject sTypeObject = env->CallObjectMethod(vulkanStructureObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
         jclass enumClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkStructureType");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkStructureType");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
         methodId = env->GetMethodID(enumClass, "valueOf", "()I");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id valueOf in class com/CIMthetics/jvulkan/VulkanCore/Enums/VkStructureType");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
-        jint result = env->CallIntMethod(sTypeObject, methodId);
+        VkStructureType result = (VkStructureType)env->CallIntMethod(sTypeObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallIntMethod for valueOf");
-            return (VkStructureType)0x7FFFFFFF;
+            return ERROR_RETURN_CODE;
         }
 
-        return (VkStructureType)result;
+        return result;
     }
 }

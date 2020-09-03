@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDeviceGroupRenderPassBeginInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDeviceGroupRenderPassBeginInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkRenderPassInputAttachmentAspectCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkRenderPassInputAttachmentAspectCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

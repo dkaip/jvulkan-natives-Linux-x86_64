@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugUtilsMessengerCallbackDataEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugUtilsMessengerCallbackDataEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to getSTypeAsInt");
@@ -246,7 +246,7 @@ namespace jvulkan
         }
 
 
-        vkDebugUtilsMessengerCallbackDataEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugUtilsMessengerCallbackDataEXT->sType = sTypeValue;
         vkDebugUtilsMessengerCallbackDataEXT->pNext = (void *)pNext;
         vkDebugUtilsMessengerCallbackDataEXT->flags = flags;
         vkDebugUtilsMessengerCallbackDataEXT->pMessageIdName = theMessageIdName;

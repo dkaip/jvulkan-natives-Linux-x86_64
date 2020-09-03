@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineColorBlendStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineColorBlendStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -166,7 +166,7 @@ namespace jvulkan
         }
 
 
-        vkPipelineColorBlendStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineColorBlendStateCreateInfo->sType = sTypeValue;
         vkPipelineColorBlendStateCreateInfo->pNext = (void *)pNext;
         vkPipelineColorBlendStateCreateInfo->flags = (VkPipelineColorBlendStateCreateFlags)flags;
         vkPipelineColorBlendStateCreateInfo->logicOpEnable = jLogicOpEnable;

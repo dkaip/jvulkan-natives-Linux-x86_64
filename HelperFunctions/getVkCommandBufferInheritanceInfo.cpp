@@ -33,7 +33,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkCommandBufferInheritanceInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkCommandBufferInheritanceInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -182,7 +182,7 @@ namespace jvulkan
         }
 
 
-        vkCommandBufferInheritanceInfo->sType = (VkStructureType)sTypeValue;
+        vkCommandBufferInheritanceInfo->sType = sTypeValue;
         vkCommandBufferInheritanceInfo->pNext = (void *)pNext;
         vkCommandBufferInheritanceInfo->renderPass = renderPassHandle;
         vkCommandBufferInheritanceInfo->subpass = jsubpass;

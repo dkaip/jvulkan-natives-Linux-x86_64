@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDeviceGroupDeviceCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDeviceGroupDeviceCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -102,7 +102,7 @@ namespace jvulkan
             }
         }
 
-        vkDeviceGroupDeviceCreateInfo->sType 				= (VkStructureType)sTypeValue;
+        vkDeviceGroupDeviceCreateInfo->sType 				= sTypeValue;
         vkDeviceGroupDeviceCreateInfo->pNext 				= (void *)pNext;
         vkDeviceGroupDeviceCreateInfo->physicalDeviceCount 	= numberOfVkPhysicalDevices;
         vkDeviceGroupDeviceCreateInfo->pPhysicalDevices 	= vkPhysicalDevices;

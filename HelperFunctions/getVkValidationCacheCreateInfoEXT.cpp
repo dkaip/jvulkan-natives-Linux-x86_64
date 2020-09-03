@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkValidationCacheCreateInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkValidationCacheCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -125,7 +125,7 @@ namespace jvulkan
         }
 
 
-        vkValidationCacheCreateInfoEXT->sType = (VkStructureType)sTypeValue;
+        vkValidationCacheCreateInfoEXT->sType = sTypeValue;
         vkValidationCacheCreateInfoEXT->pNext = (void *)pNext;
         vkValidationCacheCreateInfoEXT->flags = flags;
         vkValidationCacheCreateInfoEXT->initialDataSize = initialDataSize;

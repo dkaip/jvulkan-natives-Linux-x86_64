@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkRenderPassBeginInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkRenderPassBeginInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -152,7 +152,7 @@ namespace jvulkan
             }
         }
 
-        vkRenderPassBeginInfo->sType = (VkStructureType)sTypeValue;
+        vkRenderPassBeginInfo->sType = sTypeValue;
         vkRenderPassBeginInfo->pNext = (void *)pNext;
         vkRenderPassBeginInfo->renderPass = renderPassHandle;
         vkRenderPassBeginInfo->framebuffer = framebufferHandle;

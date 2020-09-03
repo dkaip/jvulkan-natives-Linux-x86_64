@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkMemoryAllocateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkMemoryAllocateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -87,7 +87,7 @@ namespace jvulkan
             return;
         }
 
-        vkMemoryAllocateInfo->sType = (VkStructureType)sTypeValue;
+        vkMemoryAllocateInfo->sType = sTypeValue;
         vkMemoryAllocateInfo->pNext = (void *)pNext;
         vkMemoryAllocateInfo->allocationSize = jAllocationSize;
         vkMemoryAllocateInfo->memoryTypeIndex = jMemoryTypeIndex;

@@ -38,7 +38,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSType(env, jVkSwapchainCreateInfoKHR);
+		VkStructureType sTypeValue = getSType(env, jVkSwapchainCreateInfoKHR);
 		if (env->ExceptionOccurred())
 		{
 			return;
@@ -413,7 +413,7 @@ namespace jvulkan
 			oldSwapchainHandle = (VkSwapchainKHR_T *)getHandleValue(env, jOldSwapchainHandle);
 		}
 
-		swapchainCreateInfo->sType = (VkStructureType)sTypeValue;
+		swapchainCreateInfo->sType = sTypeValue;
 		swapchainCreateInfo->pNext = (void *)pNext;
 		swapchainCreateInfo->flags = flags;
 		swapchainCreateInfo->surface = surfaceHandle;

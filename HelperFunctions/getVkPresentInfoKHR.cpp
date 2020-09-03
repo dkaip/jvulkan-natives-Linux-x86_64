@@ -33,7 +33,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPresentInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkPresentInfoKHRObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -185,7 +185,7 @@ namespace jvulkan
             memoryToFree->push_back(vkResultsCollection);
         }
 
-        vkPresentInfoKHR->sType = (VkStructureType)sTypeValue;
+        vkPresentInfoKHR->sType = sTypeValue;
         vkPresentInfoKHR->pNext = (void *)pNext;
         vkPresentInfoKHR->waitSemaphoreCount = numberOfWaitSemaphores;
         vkPresentInfoKHR->pWaitSemaphores = waitSemaphores;

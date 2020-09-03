@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineViewportStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineViewportStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -127,7 +127,7 @@ namespace jvulkan
         }
 
 
-        vkPipelineViewportStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineViewportStateCreateInfo->sType = sTypeValue;
         vkPipelineViewportStateCreateInfo->pNext = (void *)pNext;
         vkPipelineViewportStateCreateInfo->flags = (VkPipelineViewportStateCreateFlags)flags;
         vkPipelineViewportStateCreateInfo->viewportCount = numberOfVkViewports;

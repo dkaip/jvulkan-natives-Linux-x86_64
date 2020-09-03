@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSType(env, jVkDeviceCreateInfo);
+		VkStructureType sTypeValue = getSType(env, jVkDeviceCreateInfo);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -214,7 +214,7 @@ namespace jvulkan
 			}
 		}
 
-		deviceCreateInfo->sType = (VkStructureType)sTypeValue;
+		deviceCreateInfo->sType = sTypeValue;
 		deviceCreateInfo->pNext = (void *)pNext;
 		deviceCreateInfo->flags = flags;
 		deviceCreateInfo->queueCreateInfoCount = numberOfVkDeviceQueueCreateInfos;

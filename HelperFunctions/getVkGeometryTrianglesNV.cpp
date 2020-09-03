@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkGeometryTrianglesNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkGeometryTrianglesNVObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -250,7 +250,7 @@ namespace jvulkan
             return;
         }
 
-        vkGeometryTrianglesNV->sType        = (VkStructureType)sTypeValue;
+        vkGeometryTrianglesNV->sType        = sTypeValue;
         vkGeometryTrianglesNV->pNext        = (void *)pNext;
         vkGeometryTrianglesNV->vertexData   = vertexDataHandle;
         vkGeometryTrianglesNV->vertexOffset = vertexOffset;

@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -238,7 +238,7 @@ namespace jvulkan
             return;
         }
 
-        vkPipelineRasterizationStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineRasterizationStateCreateInfo->sType = sTypeValue;
         vkPipelineRasterizationStateCreateInfo->pNext = (void *)pNext;
         vkPipelineRasterizationStateCreateInfo->flags = (VkPipelineRasterizationStateCreateFlags)flags;
         vkPipelineRasterizationStateCreateInfo->depthClampEnable = jDepthClampEnable;

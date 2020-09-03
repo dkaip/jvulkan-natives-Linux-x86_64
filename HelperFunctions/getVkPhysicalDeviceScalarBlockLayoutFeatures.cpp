@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPhysicalDeviceScalarBlockLayoutFeaturesObject);
+        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceScalarBlockLayoutFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

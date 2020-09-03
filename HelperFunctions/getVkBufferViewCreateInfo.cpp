@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkBufferViewCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkBufferViewCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -147,7 +147,7 @@ namespace jvulkan
             return;
         }
 
-        vkBufferViewCreateInfo->sType   = (VkStructureType)sTypeValue;
+        vkBufferViewCreateInfo->sType   = sTypeValue;
         vkBufferViewCreateInfo->pNext   = (void *)pNext;
         vkBufferViewCreateInfo->flags   = flags;
         vkBufferViewCreateInfo->buffer  = vkBufferHandle;

@@ -41,7 +41,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDisplayModeCreateInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkDisplayModeCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "getSTypeAsInt failed");
@@ -104,7 +104,7 @@ namespace jvulkan
         }
 
 
-        vkDisplayModeCreateInfoKHR->sType = (VkStructureType)sTypeValue;
+        vkDisplayModeCreateInfoKHR->sType = sTypeValue;
         vkDisplayModeCreateInfoKHR->pNext = (void *)pNext;
         vkDisplayModeCreateInfoKHR->flags = flags;
         vkDisplayModeCreateInfoKHR->parameters.visibleRegion.height = vkDisplayModeParametersKHR->visibleRegion.height;

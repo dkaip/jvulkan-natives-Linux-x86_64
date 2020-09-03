@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineInputAssemblyStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineInputAssemblyStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -113,7 +113,7 @@ namespace jvulkan
             restartEnable = true;
         }
 
-        vkPipelineInputAssemblyStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineInputAssemblyStateCreateInfo->sType = sTypeValue;
         vkPipelineInputAssemblyStateCreateInfo->pNext = (void *)pNext;
         vkPipelineInputAssemblyStateCreateInfo->flags = (VkPipelineInputAssemblyStateCreateFlags)flags;
         vkPipelineInputAssemblyStateCreateInfo->topology = (VkPrimitiveTopology)vkPrimitiveTopologyEnumValue;

@@ -41,7 +41,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDisplaySurfaceCreateInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkDisplaySurfaceCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "getSTypeAsInt failed");
@@ -230,7 +230,7 @@ namespace jvulkan
                 memoryToFree);
 
 
-        vkDisplaySurfaceCreateInfoKHR->sType 			= (VkStructureType)sTypeValue;
+        vkDisplaySurfaceCreateInfoKHR->sType 			= sTypeValue;
         vkDisplaySurfaceCreateInfoKHR->pNext 			= (void *)pNext;
         vkDisplaySurfaceCreateInfoKHR->flags 			= flags;
         vkDisplaySurfaceCreateInfoKHR->displayMode 		= vkDisplayModeKHRHandle;

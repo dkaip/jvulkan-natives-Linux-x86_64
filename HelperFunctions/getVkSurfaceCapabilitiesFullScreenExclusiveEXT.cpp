@@ -39,7 +39,7 @@ namespace jvulkan
 //        }
 //
 //        ////////////////////////////////////////////////////////////////////////
-//        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkSurfaceCapabilitiesFullScreenExclusiveEXTObject);
+//        VkStructureType sTypeValue = getSTypeAsInt(env, jVkSurfaceCapabilitiesFullScreenExclusiveEXTObject);
 //        if (env->ExceptionOccurred())
 //        {
 //        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

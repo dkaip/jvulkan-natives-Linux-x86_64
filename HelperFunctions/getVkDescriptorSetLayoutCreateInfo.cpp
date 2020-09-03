@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDescriptorSetLayoutCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDescriptorSetLayoutCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -104,7 +104,7 @@ namespace jvulkan
             }
         }
 
-        vkDescriptorSetLayoutCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkDescriptorSetLayoutCreateInfo->sType = sTypeValue;
         vkDescriptorSetLayoutCreateInfo->pNext = (void *)pNext;
         vkDescriptorSetLayoutCreateInfo->flags = flags;
         vkDescriptorSetLayoutCreateInfo->bindingCount = numberOfVkDescriptorSetLayoutBindingCollection;

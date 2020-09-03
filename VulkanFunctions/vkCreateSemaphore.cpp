@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     }
 
     ////////////////////////////////////////////////////////////////////////
-    int sTypeValue = jvulkan::getSType(env, jVkSemaphoreCreateInfoObject);
+    VkStructureType sTypeValue = jvulkan::getSType(env, jVkSemaphoreCreateInfoObject);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
@@ -92,7 +92,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
             "com/CIMthetics/jvulkan/VulkanCore/Enums/VkSemaphoreCreateFlagBits");
 
     VkSemaphoreCreateInfo vkSemaphoreCreateInfo = {};
-    vkSemaphoreCreateInfo.sType = (VkStructureType)sTypeValue;
+    vkSemaphoreCreateInfo.sType = sTypeValue;
     vkSemaphoreCreateInfo.pNext = (void *)pNext;
     vkSemaphoreCreateInfo.flags = flags;
 

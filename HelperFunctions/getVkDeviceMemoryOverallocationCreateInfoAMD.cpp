@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDeviceMemoryOverallocationCreateInfoAMDObject);
+        VkStructureType sTypeValue = getSType(env, jVkDeviceMemoryOverallocationCreateInfoAMDObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -106,7 +106,7 @@ namespace jvulkan
         }
 
 
-        vkDeviceMemoryOverallocationCreateInfoAMD->sType 				= (VkStructureType)sTypeValue;
+        vkDeviceMemoryOverallocationCreateInfoAMD->sType 				= sTypeValue;
         vkDeviceMemoryOverallocationCreateInfoAMD->pNext 				= (void *)pNext;
         vkDeviceMemoryOverallocationCreateInfoAMD->overallocationBehavior = vkMemoryOverallocationBehaviorAMDEnumValue;
     }

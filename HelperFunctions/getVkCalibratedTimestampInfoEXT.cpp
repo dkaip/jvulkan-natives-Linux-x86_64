@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkCalibratedTimestampInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkCalibratedTimestampInfoEXTObject);
         if (env->ExceptionOccurred())
         {
             return;

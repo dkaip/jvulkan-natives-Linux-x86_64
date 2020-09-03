@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPipelineCacheCreateInfoObject);
+		VkStructureType sTypeValue = getSType(env, jVkPipelineCacheCreateInfoObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -127,7 +127,7 @@ namespace jvulkan
 		}
 
 
-		vkPipelineCacheCreateInfo->sType 	= (VkStructureType)sTypeValue;
+		vkPipelineCacheCreateInfo->sType 	= sTypeValue;
 		vkPipelineCacheCreateInfo->pNext	= (void *)pNext;
 		vkPipelineCacheCreateInfo->flags 	= flags;
 		vkPipelineCacheCreateInfo->initialDataSize 	= initialDataSize;

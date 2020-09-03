@@ -372,7 +372,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineVertexInputStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineVertexInputStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -468,7 +468,7 @@ namespace jvulkan
             }
         }
 
-        vkPipelineVertexInputStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineVertexInputStateCreateInfo->sType = sTypeValue;
         vkPipelineVertexInputStateCreateInfo->pNext = (void *)pNext;
         vkPipelineVertexInputStateCreateInfo->flags = (VkPipelineVertexInputStateCreateFlags)flags;
         vkPipelineVertexInputStateCreateInfo->vertexBindingDescriptionCount = numberOfVertexInputBindingDescriptions;

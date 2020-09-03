@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkValidationFlagsEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkValidationFlagsEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");

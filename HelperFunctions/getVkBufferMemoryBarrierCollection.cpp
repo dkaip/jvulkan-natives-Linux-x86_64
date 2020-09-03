@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkBufferMemoryBarrierObject);
+        VkStructureType sTypeValue = getSType(env, jVkBufferMemoryBarrierObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -151,7 +151,7 @@ namespace jvulkan
             return;
         }
 
-        vkBufferMemoryBarrier->sType = (VkStructureType)sTypeValue;
+        vkBufferMemoryBarrier->sType = sTypeValue;
         vkBufferMemoryBarrier->pNext = (void *)pNext;
         vkBufferMemoryBarrier->srcAccessMask = srcAccessMask;
         vkBufferMemoryBarrier->dstAccessMask = dstAccessMask;

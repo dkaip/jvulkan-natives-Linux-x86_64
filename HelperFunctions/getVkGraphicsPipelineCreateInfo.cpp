@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkGraphicsPipelineCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkGraphicsPipelineCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -587,7 +587,7 @@ namespace jvulkan
             return;
         }
 
-        vkGraphicsPipelineCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkGraphicsPipelineCreateInfo->sType = sTypeValue;
         vkGraphicsPipelineCreateInfo->pNext = (void *)pNext;
         vkGraphicsPipelineCreateInfo->flags = (VkPipelineCreateFlags)flags;
         vkGraphicsPipelineCreateInfo->stageCount = numberOfPipelineShaderStageInfos;

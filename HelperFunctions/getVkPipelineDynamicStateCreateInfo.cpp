@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineDynamicStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineDynamicStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -94,7 +94,7 @@ namespace jvulkan
             return;
         }
 
-        vkPipelineDynamicStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineDynamicStateCreateInfo->sType = sTypeValue;
         vkPipelineDynamicStateCreateInfo->pNext = (void *)pNext;
         vkPipelineDynamicStateCreateInfo->flags = flags;
         vkPipelineDynamicStateCreateInfo->dynamicStateCount = numberOfVkDynamicStates;

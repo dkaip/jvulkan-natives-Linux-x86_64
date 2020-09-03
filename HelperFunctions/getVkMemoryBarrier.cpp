@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkMemoryBarrierObject);
+        VkStructureType sTypeValue = getSType(env, jVkMemoryBarrierObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -86,7 +86,7 @@ namespace jvulkan
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits");
 
-        vkMemoryBarrier->sType = (VkStructureType)sTypeValue;
+        vkMemoryBarrier->sType = sTypeValue;
         vkMemoryBarrier->pNext = (void *)pNext;
         vkMemoryBarrier->srcAccessMask = srcAccessMask;
         vkMemoryBarrier->dstAccessMask = dstAccessMask;

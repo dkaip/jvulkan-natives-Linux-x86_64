@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkApplicationInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkApplicationInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -160,7 +160,7 @@ namespace jvulkan
         }
 
 
-        vkApplicationInfo->sType 				= (VkStructureType)sTypeValue;
+        vkApplicationInfo->sType 				= sTypeValue;
         vkApplicationInfo->pNext 				= pNext;
         vkApplicationInfo->pApplicationName 	= applicationName;
         vkApplicationInfo->applicationVersion 	= applicationVersion;

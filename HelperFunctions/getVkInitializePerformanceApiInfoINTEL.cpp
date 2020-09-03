@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkInitializePerformanceApiInfoINTEL);
+        VkStructureType sTypeValue = getSType(env, jVkInitializePerformanceApiInfoINTEL);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");

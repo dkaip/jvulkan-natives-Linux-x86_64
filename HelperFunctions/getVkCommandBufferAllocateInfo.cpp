@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkCommandBufferAllocateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkCommandBufferAllocateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -113,7 +113,7 @@ namespace jvulkan
             return;
         }
 
-        vkCommandBufferAllocateInfo->sType = (VkStructureType)sTypeValue;
+        vkCommandBufferAllocateInfo->sType = sTypeValue;
         vkCommandBufferAllocateInfo->pNext = (void *)pNext;
         vkCommandBufferAllocateInfo->commandPool = commandPoolHandle;
         vkCommandBufferAllocateInfo->level = vkCommandBufferLevelEnumValue;

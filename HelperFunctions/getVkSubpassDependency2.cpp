@@ -40,7 +40,7 @@ namespace jvulkan
          }
 
          ////////////////////////////////////////////////////////////////////////
-         int sTypeValue = getSType(env, jVkSubpassDependency2Object);
+         VkStructureType sTypeValue = getSType(env, jVkSubpassDependency2Object);
          if (env->ExceptionOccurred())
          {
         	 LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -224,7 +224,7 @@ namespace jvulkan
          }
 
 
-         vkSubpassDependency2->sType = (VkStructureType)sTypeValue;
+         vkSubpassDependency2->sType = sTypeValue;
          vkSubpassDependency2->pNext = (void *)pNext;
          vkSubpassDependency2->srcSubpass = srcSubpass;
          vkSubpassDependency2->dstSubpass = dstSubpass;

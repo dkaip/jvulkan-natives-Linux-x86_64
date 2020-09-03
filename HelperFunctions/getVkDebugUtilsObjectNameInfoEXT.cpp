@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugUtilsObjectNameInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugUtilsObjectNameInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to getSTypeAsInt");
@@ -139,7 +139,7 @@ namespace jvulkan
         env->ReleaseStringUTFChars(jTheObjectName, tempString);
 
 
-        vkDebugUtilsObjectNameInfoEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugUtilsObjectNameInfoEXT->sType = sTypeValue;
         vkDebugUtilsObjectNameInfoEXT->pNext = (void *)pNext;
         vkDebugUtilsObjectNameInfoEXT->objectType = vkObjectTypeEnumValue;
         vkDebugUtilsObjectNameInfoEXT->objectHandle = objectHandle;

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkGeometryNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkGeometryNVObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -114,7 +114,7 @@ namespace jvulkan
                 flagsObject,
                 "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkGeometryFlagBitsNV");
 
-        vkGeometryNV->sType         = (VkStructureType)sTypeValue;
+        vkGeometryNV->sType         = sTypeValue;
         vkGeometryNV->pNext         = (void *)pNext;
         vkGeometryNV->geometryType  = vkGeometryTypeNVEnumValue;
 

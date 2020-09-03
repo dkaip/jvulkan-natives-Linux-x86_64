@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkGeometryAABBNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkGeometryAABBNVObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -119,7 +119,7 @@ namespace jvulkan
             return;
         }
 
-        vkGeometryAABBNV->sType         = (VkStructureType)sTypeValue;
+        vkGeometryAABBNV->sType         = sTypeValue;
         vkGeometryAABBNV->pNext         = (void *)pNext;
         vkGeometryAABBNV->aabbData      = aabbDataHandle;
         vkGeometryAABBNV->numAABBs      = numAABBs;

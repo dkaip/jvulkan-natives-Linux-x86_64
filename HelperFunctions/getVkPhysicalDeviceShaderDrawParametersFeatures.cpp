@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPhysicalDeviceShaderDrawParametersFeaturesObject);
+        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceShaderDrawParametersFeaturesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkCommandPoolCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkCommandPoolCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -81,7 +81,7 @@ namespace jvulkan
             return;
         }
 
-        vkCommandPoolCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkCommandPoolCreateInfo->sType = sTypeValue;
         vkCommandPoolCreateInfo->pNext = (void *)pNext;
         vkCommandPoolCreateInfo->flags = flags;
         vkCommandPoolCreateInfo->queueFamilyIndex = jQueueFamilyIndex;

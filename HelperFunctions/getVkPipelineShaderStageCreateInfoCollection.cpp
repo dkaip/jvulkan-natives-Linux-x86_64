@@ -256,7 +256,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineShaderStageCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineShaderStageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -389,7 +389,7 @@ namespace jvulkan
             }
         }
 
-        vkPipelineShaderStageCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineShaderStageCreateInfo->sType = sTypeValue;
         vkPipelineShaderStageCreateInfo->pNext = (void *)pNext;
         vkPipelineShaderStageCreateInfo->flags = (VkPipelineShaderStageCreateFlags)flags;
         vkPipelineShaderStageCreateInfo->stage = (VkShaderStageFlagBits)vkShaderStageFlagBitsEnumValue;

@@ -42,7 +42,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkExternalFormatANDROIDObject);
+		VkStructureType sTypeValue = getSType(env, jVkExternalFormatANDROIDObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -87,7 +87,7 @@ namespace jvulkan
         	return;
         }
 
-        vkExternalFormatANDROID->sType 	= (VkStructureType)sTypeValue;
+        vkExternalFormatANDROID->sType 	= sTypeValue;
         vkExternalFormatANDROID->pNext	= (void *)pNext;
         vkExternalFormatANDROID->externalFormat = (uint64_t)externalFormat;
 	}

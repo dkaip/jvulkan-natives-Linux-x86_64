@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkAcquireNextImageInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkAcquireNextImageInfoKHRObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -144,7 +144,7 @@ namespace jvulkan
             return;
         }
 
-        vkAcquireNextImageInfoKHR->sType = (VkStructureType)sTypeValue;
+        vkAcquireNextImageInfoKHR->sType = sTypeValue;
         vkAcquireNextImageInfoKHR->pNext = (void *)pNext;
         vkAcquireNextImageInfoKHR->swapchain = vkSwapchainKHRHandle;
         vkAcquireNextImageInfoKHR->timeout = timeout;

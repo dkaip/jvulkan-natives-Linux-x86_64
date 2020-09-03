@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSType(env, jVkShaderModuleCreateInfoObject);
+		VkStructureType sTypeValue = getSType(env, jVkShaderModuleCreateInfoObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not get getSTypeAsInt jVkShaderModuleCreateInfoObject");
@@ -123,7 +123,7 @@ namespace jvulkan
 			}
 		}
 
-		shaderModuleCreateInfo->sType = (VkStructureType)sTypeValue;
+		shaderModuleCreateInfo->sType = sTypeValue;
 		shaderModuleCreateInfo->pNext = (void *)pNext;
 		shaderModuleCreateInfo->flags = flags;
 		shaderModuleCreateInfo->codeSize = (size_t)codeSize;

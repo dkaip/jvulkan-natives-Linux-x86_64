@@ -406,7 +406,7 @@ namespace jvulkan
             }
         }
 
-        vkPipelineLayoutCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineLayoutCreateInfo->sType = sTypeValue;
         vkPipelineLayoutCreateInfo->pNext = (void *)pNext;
         vkPipelineLayoutCreateInfo->flags = flags;
         vkPipelineLayoutCreateInfo->setLayoutCount = numberOfDescriptorSetLayouts;

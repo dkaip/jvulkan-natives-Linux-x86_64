@@ -145,7 +145,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
 
     VkWaylandSurfaceCreateInfoKHR surfaceCreationInfo = {};
-    surfaceCreationInfo.sType = (VkStructureType)sTypeValue;
+    surfaceCreationInfo.sType = sTypeValue;
     surfaceCreationInfo.pNext = pNext;
     surfaceCreationInfo.flags = flags;
     surfaceCreationInfo.display = wlDisplay;

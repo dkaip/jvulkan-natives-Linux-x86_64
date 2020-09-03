@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkComputePipelineCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkComputePipelineCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -140,7 +140,7 @@ namespace jvulkan
             return;
         }
 
-        vkComputePipelineCreateInfo->sType              = (VkStructureType)sTypeValue;
+        vkComputePipelineCreateInfo->sType              = sTypeValue;
         vkComputePipelineCreateInfo->pNext              = (void *)pNext;
         vkComputePipelineCreateInfo->flags              = flags;
 

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPhysicalDeviceYcbcrImageArraysFeaturesEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceYcbcrImageArraysFeaturesEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

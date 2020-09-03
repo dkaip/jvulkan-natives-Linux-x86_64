@@ -33,7 +33,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkRenderPassCreateInfo2Object);
+        VkStructureType sTypeValue = getSType(env, jVkRenderPassCreateInfo2Object);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -208,7 +208,7 @@ namespace jvulkan
             }
         }
 
-        vkRenderPassCreateInfo2->sType = (VkStructureType)sTypeValue;
+        vkRenderPassCreateInfo2->sType = sTypeValue;
         vkRenderPassCreateInfo2->pNext = (void *)pNext;
         vkRenderPassCreateInfo2->flags = flags;
 

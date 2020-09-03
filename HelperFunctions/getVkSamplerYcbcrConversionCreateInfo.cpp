@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkSamplerYcbcrConversionCreateInfoObject);
+		VkStructureType sTypeValue = getSType(env, jVkSamplerYcbcrConversionCreateInfoObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -316,7 +316,7 @@ namespace jvulkan
         	return;
         }
 
-        vkSamplerYcbcrConversionCreateInfo->sType 	= (VkStructureType)sTypeValue;
+        vkSamplerYcbcrConversionCreateInfo->sType 	= sTypeValue;
         vkSamplerYcbcrConversionCreateInfo->pNext	= (void *)pNext;
         vkSamplerYcbcrConversionCreateInfo->format  = formatEnumValue;
         vkSamplerYcbcrConversionCreateInfo->ycbcrModel = ycbcrModelEnumValue;

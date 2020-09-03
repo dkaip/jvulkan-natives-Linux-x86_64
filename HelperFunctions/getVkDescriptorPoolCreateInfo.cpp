@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDescriptorPoolCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDescriptorPoolCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -111,7 +111,7 @@ namespace jvulkan
         }
 
 
-        vkDescriptorPoolCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkDescriptorPoolCreateInfo->sType = sTypeValue;
         vkDescriptorPoolCreateInfo->pNext = (void *)pNext;
         vkDescriptorPoolCreateInfo->flags = flags;
         vkDescriptorPoolCreateInfo->maxSets = jMaxSets;

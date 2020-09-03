@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDisplayPowerInfoEXTObject);
+		VkStructureType sTypeValue = getSType(env, jVkDisplayPowerInfoEXTObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -98,7 +98,7 @@ namespace jvulkan
         }
 
 
-        vkDisplayPowerInfoEXT->sType 		= (VkStructureType)sTypeValue;
+        vkDisplayPowerInfoEXT->sType 		= sTypeValue;
         vkDisplayPowerInfoEXT->pNext		= (void *)pNext;
         vkDisplayPowerInfoEXT->powerState 	= vkDisplayPowerStateEXTEnumValue;
 	}

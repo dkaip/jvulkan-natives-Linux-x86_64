@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineDepthStencilStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineDepthStencilStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -227,7 +227,7 @@ namespace jvulkan
         }
 
 
-        vkPipelineDepthStencilStateCreateInfo->sType            = (VkStructureType)sTypeValue;
+        vkPipelineDepthStencilStateCreateInfo->sType            = sTypeValue;
         vkPipelineDepthStencilStateCreateInfo->pNext            = (void *)pNext;
         vkPipelineDepthStencilStateCreateInfo->flags            = (VkPipelineDepthStencilStateCreateFlags)flags;
         vkPipelineDepthStencilStateCreateInfo->depthTestEnable  = jDepthTestEnable;

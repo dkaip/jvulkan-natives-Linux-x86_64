@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkImageMemoryBarrierObject);
+        VkStructureType sTypeValue = getSType(env, jVkImageMemoryBarrierObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -196,7 +196,7 @@ namespace jvulkan
                 &(vkImageMemoryBarrier->subresourceRange),
                 memoryToFree);
 
-        vkImageMemoryBarrier->sType = (VkStructureType)sTypeValue;
+        vkImageMemoryBarrier->sType = sTypeValue;
         vkImageMemoryBarrier->pNext = (void *)pNext;
         vkImageMemoryBarrier->srcAccessMask = srcAccessMask;
         vkImageMemoryBarrier->dstAccessMask = dstAccessMask;

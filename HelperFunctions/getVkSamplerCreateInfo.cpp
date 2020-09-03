@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkSamplerCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkSamplerCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -376,7 +376,7 @@ namespace jvulkan
             return;
         }
 
-        vkSamplerCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkSamplerCreateInfo->sType = sTypeValue;
         vkSamplerCreateInfo->pNext = (void *)pNext;
         vkSamplerCreateInfo->flags = flags;
         vkSamplerCreateInfo->magFilter = magFilterEnumValue;

@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineTessellationStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineTessellationStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -85,7 +85,7 @@ namespace jvulkan
             return;
         }
 
-        vkPipelineTessellationStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineTessellationStateCreateInfo->sType = sTypeValue;
         vkPipelineTessellationStateCreateInfo->pNext = (void *)pNext;
         vkPipelineTessellationStateCreateInfo->flags = flags;
         vkPipelineTessellationStateCreateInfo->patchControlPoints = patchControlPoints;

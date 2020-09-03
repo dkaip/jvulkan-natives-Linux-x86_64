@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -108,7 +108,7 @@ namespace jvulkan
 
 
 
-        vkDebugUtilsMessengerCreateInfoEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugUtilsMessengerCreateInfoEXT->sType = sTypeValue;
         vkDebugUtilsMessengerCreateInfoEXT->pNext = (void *)pNext;
         vkDebugUtilsMessengerCreateInfoEXT->flags = flags;
         vkDebugUtilsMessengerCreateInfoEXT->messageSeverity = messageSeverity;

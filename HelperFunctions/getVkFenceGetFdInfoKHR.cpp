@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkFenceGetFdInfoKHR);
+        VkStructureType sTypeValue = getSType(env, jVkFenceGetFdInfoKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkInstanceCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkInstanceCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");
@@ -173,7 +173,7 @@ namespace jvulkan
         }
 
 
-        vkInstanceCreateInfo->sType   					= (VkStructureType)sTypeValue;
+        vkInstanceCreateInfo->sType   					= sTypeValue;
         vkInstanceCreateInfo->pNext   					= (void *)pNext;
         vkInstanceCreateInfo->flags   					= flags;
         vkInstanceCreateInfo->pApplicationInfo			= vkApplicationInfo;

@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDescriptorUpdateTemplateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDescriptorUpdateTemplateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -229,7 +229,7 @@ namespace jvulkan
         }
 
 
-        vkDescriptorUpdateTemplateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkDescriptorUpdateTemplateCreateInfo->sType = sTypeValue;
         vkDescriptorUpdateTemplateCreateInfo->pNext = (void *)pNext;
         vkDescriptorUpdateTemplateCreateInfo->flags = flags;
         vkDescriptorUpdateTemplateCreateInfo->descriptorUpdateEntryCount = numberOfVkDescriptorUpdateTemplateEntries;

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugMarkerObjectTagInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugMarkerObjectTagInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -155,7 +155,7 @@ namespace jvulkan
         }
 
 
-        vkDebugMarkerObjectTagInfoEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugMarkerObjectTagInfoEXT->sType = sTypeValue;
         vkDebugMarkerObjectTagInfoEXT->pNext = (void *)pNext;
         vkDebugMarkerObjectTagInfoEXT->objectType = objectTypeEnumValue;
         vkDebugMarkerObjectTagInfoEXT->object = object;

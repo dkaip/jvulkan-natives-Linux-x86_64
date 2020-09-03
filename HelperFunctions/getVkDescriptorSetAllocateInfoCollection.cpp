@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDescriptorSetAllocateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDescriptorSetAllocateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -103,7 +103,7 @@ namespace jvulkan
             }
         }
 
-        vkDescriptorSetAllocateInfo->sType = (VkStructureType)sTypeValue;
+        vkDescriptorSetAllocateInfo->sType = sTypeValue;
         vkDescriptorSetAllocateInfo->pNext = (void *)pNext;
         vkDescriptorSetAllocateInfo->descriptorPool = descriptorPoolHandle;
         vkDescriptorSetAllocateInfo->descriptorSetCount = numberOfVkDescriptorSetLayouts;

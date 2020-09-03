@@ -33,7 +33,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkSubmitInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");
@@ -191,7 +191,7 @@ namespace jvulkan
             }
         }
 
-        vkSubmitInfo->sType = (VkStructureType)sTypeValue;
+        vkSubmitInfo->sType = sTypeValue;
         vkSubmitInfo->pNext = (void *)pNext;
         vkSubmitInfo->waitSemaphoreCount = numberOfWaitSemaphores;
         vkSubmitInfo->pWaitSemaphores = waitSemaphores;

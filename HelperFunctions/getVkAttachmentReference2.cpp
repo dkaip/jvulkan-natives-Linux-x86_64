@@ -41,7 +41,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkAttachmentReference2Object);
+        VkStructureType sTypeValue = getSType(env, jVkAttachmentReference2Object);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -154,7 +154,7 @@ namespace jvulkan
             return;
         }
 
-        vkAttachmentReference2->sType = (VkStructureType)sTypeValue;
+        vkAttachmentReference2->sType = sTypeValue;
         vkAttachmentReference2->pNext = (void *)pNext;
         vkAttachmentReference2->attachment = attachment;
         vkAttachmentReference2->layout = layoutEnumValue;

@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkAccelerationStructureInfoNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkAccelerationStructureInfoNVObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -114,7 +114,7 @@ namespace jvulkan
             return;
         }
 
-        vkAccelerationStructureInfoNV->sType = (VkStructureType)sTypeValue;
+        vkAccelerationStructureInfoNV->sType = sTypeValue;
         vkAccelerationStructureInfoNV->pNext = (void *)pNext;
         vkAccelerationStructureInfoNV->type  = vkAccelerationStructureTypeNVEnumValue;
         vkAccelerationStructureInfoNV->flags = flags;

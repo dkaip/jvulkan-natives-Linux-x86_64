@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkBindSparseInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkBindSparseInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error trying to getSTypeAsInt");

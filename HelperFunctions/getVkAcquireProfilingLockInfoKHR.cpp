@@ -103,7 +103,7 @@ namespace jvulkan
         }
 
 
-        vkAcquireProfilingLockInfoKHR->sType   = (VkStructureType)sTypeValue;
+        vkAcquireProfilingLockInfoKHR->sType   = sTypeValue;
         vkAcquireProfilingLockInfoKHR->pNext   = (void *)pNext;
         vkAcquireProfilingLockInfoKHR->flags   = flags;
         vkAcquireProfilingLockInfoKHR->timeout = (uint64_t)timeout;

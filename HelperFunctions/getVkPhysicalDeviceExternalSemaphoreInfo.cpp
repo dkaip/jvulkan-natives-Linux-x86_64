@@ -53,7 +53,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPhysicalDeviceExternalSemaphoreInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceExternalSemaphoreInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

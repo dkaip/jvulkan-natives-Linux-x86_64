@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkWriteDescriptorSetObject);
+        VkStructureType sTypeValue = getSType(env, jVkWriteDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
@@ -294,7 +294,7 @@ namespace jvulkan
                 descriptorCount = (uint32_t)numberOfVkBufferViews;
         }
 
-        vkWriteDescriptorSet->sType = (VkStructureType)sTypeValue;
+        vkWriteDescriptorSet->sType = sTypeValue;
         vkWriteDescriptorSet->pNext = (void *)pNext;
         vkWriteDescriptorSet->dstSet = descriptorSetHandle;
         vkWriteDescriptorSet->dstBinding = jDstBinding;

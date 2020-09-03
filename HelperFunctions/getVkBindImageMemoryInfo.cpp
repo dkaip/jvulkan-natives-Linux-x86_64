@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkBindImageMemoryInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkBindImageMemoryInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -118,7 +118,7 @@ namespace jvulkan
             return;
         }
 
-        vkBindImageMemoryInfo->sType = (VkStructureType)sTypeValue;
+        vkBindImageMemoryInfo->sType = sTypeValue;
         vkBindImageMemoryInfo->pNext = (void *)pNext;
         vkBindImageMemoryInfo->image = vkImageHandle;
         vkBindImageMemoryInfo->memory = vkDeviceMemoryHandle;

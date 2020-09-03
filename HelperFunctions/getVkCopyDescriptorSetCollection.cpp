@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkCopyDescriptorSetObject);
+        VkStructureType sTypeValue = getSType(env, jVkCopyDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -157,7 +157,7 @@ namespace jvulkan
             return;
         }
 
-        vkCopyDescriptorSet->sType = (VkStructureType)sTypeValue;
+        vkCopyDescriptorSet->sType = sTypeValue;
         vkCopyDescriptorSet->pNext = (void *)pNext;
         vkCopyDescriptorSet->srcSet = srcSetHandle;
         vkCopyDescriptorSet->srcBinding = jSrcBinding;

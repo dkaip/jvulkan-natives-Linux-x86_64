@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDescriptorSetLayoutBindingFlagsCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkDescriptorSetLayoutBindingFlagsCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -99,7 +99,7 @@ namespace jvulkan
 			return;
 		}
 
-        vkDescriptorSetLayoutBindingFlagsCreateInfo->sType 			= (VkStructureType)sTypeValue;
+        vkDescriptorSetLayoutBindingFlagsCreateInfo->sType 			= sTypeValue;
         vkDescriptorSetLayoutBindingFlagsCreateInfo->pNext 			= (void *)pNext;
         vkDescriptorSetLayoutBindingFlagsCreateInfo->bindingCount	= numberOfVkDescriptorBindingFlagsEXTs;
         vkDescriptorSetLayoutBindingFlagsCreateInfo->pBindingFlags	= vkDescriptorBindingFlagsEXTs;

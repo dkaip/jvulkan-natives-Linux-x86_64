@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugMarkerMarkerInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugMarkerMarkerInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");
@@ -121,7 +121,7 @@ namespace jvulkan
             }
         }
 
-        vkDebugMarkerMarkerInfoEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugMarkerMarkerInfoEXT->sType = sTypeValue;
         vkDebugMarkerMarkerInfoEXT->pNext = (void *)pNext;
         vkDebugMarkerMarkerInfoEXT->pMarkerName = theMarkerName;
         vkDebugMarkerMarkerInfoEXT->color[0] = colorsArray[0];

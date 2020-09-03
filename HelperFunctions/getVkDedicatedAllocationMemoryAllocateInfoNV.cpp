@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDedicatedAllocationMemoryAllocateInfoNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkDedicatedAllocationMemoryAllocateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

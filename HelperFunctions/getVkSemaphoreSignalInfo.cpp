@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkSemaphoreSignalInfo);
+        VkStructureType sTypeValue = getSType(env, jVkSemaphoreSignalInfo);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");

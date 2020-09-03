@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkPipelineMultisampleStateCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineMultisampleStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -182,7 +182,7 @@ namespace jvulkan
             return;
         }
 
-        vkPipelineMultisampleStateCreateInfo->sType = (VkStructureType)sTypeValue;
+        vkPipelineMultisampleStateCreateInfo->sType = sTypeValue;
         vkPipelineMultisampleStateCreateInfo->pNext = (void *)pNext;
         vkPipelineMultisampleStateCreateInfo->flags = (VkPipelineMultisampleStateCreateFlags)flags;
         vkPipelineMultisampleStateCreateInfo->rasterizationSamples = (VkSampleCountFlagBits)vkSampleCountFlagBitsEnumValue;

@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkImageViewCreateInfo);
+        VkStructureType sTypeValue = getSType(env, jVkImageViewCreateInfo);
         if (env->ExceptionOccurred())
         {
             return;
@@ -340,7 +340,7 @@ namespace jvulkan
         }
 
 
-        imageViewCreateInfo->sType = (VkStructureType)sTypeValue;
+        imageViewCreateInfo->sType = sTypeValue;
         imageViewCreateInfo->pNext = (void *)pNext;
         imageViewCreateInfo->flags = flags;
         imageViewCreateInfo->image = imageHandle;

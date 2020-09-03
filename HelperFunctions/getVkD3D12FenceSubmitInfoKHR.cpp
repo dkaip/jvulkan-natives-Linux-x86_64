@@ -39,7 +39,7 @@ namespace jvulkan
 //        }
 //
 //        ////////////////////////////////////////////////////////////////////////
-//        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkD3D12FenceSubmitInfoKHRObject);
+//        VkStructureType sTypeValue = getSTypeAsInt(env, jVkD3D12FenceSubmitInfoKHRObject);
 //        if (env->ExceptionOccurred())
 //        {
 //        	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

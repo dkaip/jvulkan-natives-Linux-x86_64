@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSType(env, jVkDebugUtilsLabelEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkDebugUtilsLabelEXTObject);
         if (env->ExceptionOccurred())
         {
             return;
@@ -109,7 +109,7 @@ namespace jvulkan
             }
         }
 
-        vkDebugUtilsLabelEXT->sType = (VkStructureType)sTypeValue;
+        vkDebugUtilsLabelEXT->sType = sTypeValue;
         vkDebugUtilsLabelEXT->pNext = (void *)pNext;
         vkDebugUtilsLabelEXT->pLabelName = theLabelName;
         vkDebugUtilsLabelEXT->color[0] = colorsArray[0];

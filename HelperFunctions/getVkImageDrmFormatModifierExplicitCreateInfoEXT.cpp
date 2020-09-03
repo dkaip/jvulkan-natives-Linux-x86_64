@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkImageDrmFormatModifierExplicitCreateInfoEXTObject);
+        VkStructureType sTypeValue = getSType(env, jVkImageDrmFormatModifierExplicitCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

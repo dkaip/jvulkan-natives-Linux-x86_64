@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkQueryPoolCreateInfoObject);
+		VkStructureType sTypeValue = getSType(env, jVkQueryPoolCreateInfoObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");
@@ -157,7 +157,7 @@ namespace jvulkan
 		}
 
 
-        vkQueryPoolCreateInfo->sType 	= (VkStructureType)sTypeValue;
+        vkQueryPoolCreateInfo->sType 	= sTypeValue;
         vkQueryPoolCreateInfo->pNext	= (void *)pNext;
         vkQueryPoolCreateInfo->flags 	= flags;
         vkQueryPoolCreateInfo->queryType = vkQueryTypeEnumValue;
