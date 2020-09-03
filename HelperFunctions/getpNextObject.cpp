@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getpNext.cpp
+ * getpNextObject.cpp
  *
  *  Created on: May 9, 2019
  *      Author: Douglas Kaip
