@@ -43,7 +43,7 @@ namespace jvulkan
         VkStructureType sTypeValue = getSType(env, jVkWriteDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");
+        	LOGERROR(env, "%s", "Error calling getSType.");
             return;
         }
 

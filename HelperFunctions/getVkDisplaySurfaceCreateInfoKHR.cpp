@@ -44,7 +44,7 @@ namespace jvulkan
         VkStructureType sTypeValue = getSType(env, jVkDisplaySurfaceCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "getSTypeAsInt failed");
+        	LOGERROR(env, "%s", "getSType failed");
             return;
         }
 

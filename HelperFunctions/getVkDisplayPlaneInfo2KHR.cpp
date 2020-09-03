@@ -42,7 +42,7 @@ namespace jvulkan
         VkStructureType sTypeValue = getSType(env, jVkDisplayPlaneInfo2KHR);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Failed calling getSTypeAsInt");
+        	LOGERROR(env, "%s", "Failed calling getSType");
             return;
         }
 

@@ -330,7 +330,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     VkStructureType sTypeValue = getSType(env, jVkDebugReportCallbackCreateInfoEXT);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Failed trying to get getSTypeAsInt");
+    	LOGERROR(env, "%s", "Failed trying to get getSType");
         jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
