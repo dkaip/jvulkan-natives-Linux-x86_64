@@ -298,7 +298,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSTypeAsInt(env, jVkPipelineLayoutCreateInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkPipelineLayoutCreateInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");

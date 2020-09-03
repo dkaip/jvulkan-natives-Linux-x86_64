@@ -53,7 +53,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkFilterCubicImageViewImageFormatPropertiesEXTObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkFilterCubicImageViewImageFormatPropertiesEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

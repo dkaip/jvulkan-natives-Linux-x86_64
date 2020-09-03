@@ -38,7 +38,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSTypeAsInt(env, jVkSwapchainCreateInfoKHR);
+		int sTypeValue = getSType(env, jVkSwapchainCreateInfoKHR);
 		if (env->ExceptionOccurred())
 		{
 			return;

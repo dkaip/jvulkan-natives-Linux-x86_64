@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkFramebufferCreateInfoObject);
+        int sTypeValue = getSType(env, jVkFramebufferCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

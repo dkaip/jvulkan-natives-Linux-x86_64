@@ -41,7 +41,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkDisplayModeCreateInfoKHRObject);
+        int sTypeValue = getSType(env, jVkDisplayModeCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "getSTypeAsInt failed");

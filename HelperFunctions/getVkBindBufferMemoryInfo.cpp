@@ -37,7 +37,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkBindBufferMemoryInfoObject);
+        int sTypeValue = getSType(env, jVkBindBufferMemoryInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

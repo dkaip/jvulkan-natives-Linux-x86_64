@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPipelineColorBlendStateCreateInfoObject);
+        int sTypeValue = getSType(env, jVkPipelineColorBlendStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

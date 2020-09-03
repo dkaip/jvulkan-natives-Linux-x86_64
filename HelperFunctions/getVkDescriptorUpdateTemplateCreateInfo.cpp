@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkDescriptorUpdateTemplateCreateInfoObject);
+        int sTypeValue = getSType(env, jVkDescriptorUpdateTemplateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

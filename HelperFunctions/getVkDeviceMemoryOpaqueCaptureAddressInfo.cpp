@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDeviceMemoryOpaqueCaptureAddressInfoObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDeviceMemoryOpaqueCaptureAddressInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

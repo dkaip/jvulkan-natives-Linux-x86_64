@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSTypeAsInt(env, jVkQueryPoolPerformanceCreateInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkQueryPoolPerformanceCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");

@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSTypeAsInt(env, jVkSubpassEndInfoObject);
+        VkStructureType sTypeValue = getSType(env, jVkSubpassEndInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

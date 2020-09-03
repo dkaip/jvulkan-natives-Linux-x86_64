@@ -256,7 +256,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPipelineShaderStageCreateInfoObject);
+        int sTypeValue = getSType(env, jVkPipelineShaderStageCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

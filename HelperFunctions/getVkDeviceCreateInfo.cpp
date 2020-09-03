@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSTypeAsInt(env, jVkDeviceCreateInfo);
+		int sTypeValue = getSType(env, jVkDeviceCreateInfo);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

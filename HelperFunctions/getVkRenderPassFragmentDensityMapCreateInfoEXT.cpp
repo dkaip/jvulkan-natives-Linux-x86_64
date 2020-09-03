@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkRenderPassFragmentDensityMapCreateInfoEXTObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkRenderPassFragmentDensityMapCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

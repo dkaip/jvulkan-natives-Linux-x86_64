@@ -33,7 +33,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPresentInfoKHRObject);
+        int sTypeValue = getSType(env, jVkPresentInfoKHRObject);
         if (env->ExceptionOccurred())
         {
             return;

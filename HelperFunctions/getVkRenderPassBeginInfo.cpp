@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkRenderPassBeginInfoObject);
+        int sTypeValue = getSType(env, jVkRenderPassBeginInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

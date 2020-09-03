@@ -40,7 +40,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkComputePipelineCreateInfoObject);
+        int sTypeValue = getSType(env, jVkComputePipelineCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

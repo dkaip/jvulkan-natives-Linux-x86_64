@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPipelineTessellationStateCreateInfoObject);
+        int sTypeValue = getSType(env, jVkPipelineTessellationStateCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

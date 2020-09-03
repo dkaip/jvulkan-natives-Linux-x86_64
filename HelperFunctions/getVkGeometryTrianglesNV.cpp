@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkGeometryTrianglesNVObject);
+        int sTypeValue = getSType(env, jVkGeometryTrianglesNVObject);
         if (env->ExceptionOccurred())
         {
             return;

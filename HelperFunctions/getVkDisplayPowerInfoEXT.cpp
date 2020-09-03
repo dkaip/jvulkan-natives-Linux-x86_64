@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDisplayPowerInfoEXTObject);
+		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDisplayPowerInfoEXTObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

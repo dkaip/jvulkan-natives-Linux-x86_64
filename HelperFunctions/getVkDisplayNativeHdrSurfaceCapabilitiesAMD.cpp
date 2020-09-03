@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDisplayNativeHdrSurfaceCapabilitiesAMDObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDisplayNativeHdrSurfaceCapabilitiesAMDObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

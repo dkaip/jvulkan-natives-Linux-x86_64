@@ -76,7 +76,7 @@ namespace jvulkan
 			std::vector<void *> *memoryToFree)
 	{
         ////////////////////////////////////////////////////////////////////////
-		VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVulkanCreateInfoStructureObject);
+		VkStructureType sTypeValue = (VkStructureType)getSType(env, jVulkanCreateInfoStructureObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt");

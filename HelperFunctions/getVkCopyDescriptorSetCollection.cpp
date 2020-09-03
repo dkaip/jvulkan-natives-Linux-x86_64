@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkCopyDescriptorSetObject);
+        int sTypeValue = getSType(env, jVkCopyDescriptorSetObject);
         if (env->ExceptionOccurred())
         {
             return;

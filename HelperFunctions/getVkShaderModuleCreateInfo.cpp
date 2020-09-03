@@ -39,7 +39,7 @@ namespace jvulkan
 		}
 
 		////////////////////////////////////////////////////////////////////////
-		int sTypeValue = getSTypeAsInt(env, jVkShaderModuleCreateInfoObject);
+		int sTypeValue = getSType(env, jVkShaderModuleCreateInfoObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Could not get getSTypeAsInt jVkShaderModuleCreateInfoObject");

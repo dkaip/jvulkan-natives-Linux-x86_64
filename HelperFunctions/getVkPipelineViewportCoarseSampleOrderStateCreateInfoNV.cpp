@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkPipelineViewportCoarseSampleOrderStateCreateInfoNVObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkPipelineViewportCoarseSampleOrderStateCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

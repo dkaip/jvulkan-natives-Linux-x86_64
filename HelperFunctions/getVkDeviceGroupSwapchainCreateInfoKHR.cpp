@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = (VkStructureType)getSTypeAsInt(env, jVkDeviceGroupSwapchainCreateInfoKHRObject);
+        VkStructureType sTypeValue = (VkStructureType)getSType(env, jVkDeviceGroupSwapchainCreateInfoKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

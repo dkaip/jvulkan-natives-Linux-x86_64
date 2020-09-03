@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkAccelerationStructureInfoNVObject);
+        int sTypeValue = getSType(env, jVkAccelerationStructureInfoNVObject);
         if (env->ExceptionOccurred())
         {
             return;

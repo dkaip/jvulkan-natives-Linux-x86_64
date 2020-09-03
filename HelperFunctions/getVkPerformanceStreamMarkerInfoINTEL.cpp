@@ -39,7 +39,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSTypeAsInt(env, jVkPerformanceStreamMarkerInfoINTELObject);
+        VkStructureType sTypeValue = getSType(env, jVkPerformanceStreamMarkerInfoINTELObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling getSTypeAsInt.");

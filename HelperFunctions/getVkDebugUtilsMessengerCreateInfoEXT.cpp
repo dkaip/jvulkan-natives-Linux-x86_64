@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
+        int sTypeValue = getSType(env, jVkDebugUtilsMessengerCreateInfoEXTObject);
         if (env->ExceptionOccurred())
         {
             return;

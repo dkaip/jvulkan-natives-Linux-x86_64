@@ -40,7 +40,7 @@ namespace jvulkan
          }
 
          ////////////////////////////////////////////////////////////////////////
-         int sTypeValue = getSTypeAsInt(env, jVkSubpassDependency2Object);
+         int sTypeValue = getSType(env, jVkSubpassDependency2Object);
          if (env->ExceptionOccurred())
          {
         	 LOGERROR(env, "%s", "Error calling getSTypeAsInt.");

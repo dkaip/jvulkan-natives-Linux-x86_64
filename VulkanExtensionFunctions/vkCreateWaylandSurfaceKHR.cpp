@@ -54,7 +54,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-    VkStructureType sTypeValue = jvulkan::getSTypeAsInt(env, jVkWaylandSurfaceCreateInfoKHR);
+    VkStructureType sTypeValue = jvulkan::getSType(env, jVkWaylandSurfaceCreateInfoKHR);
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Call to getSTypeAsInt failed.");

@@ -38,7 +38,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkImageViewCreateInfo);
+        int sTypeValue = getSType(env, jVkImageViewCreateInfo);
         if (env->ExceptionOccurred())
         {
             return;

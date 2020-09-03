@@ -48,7 +48,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     }
 
     ////////////////////////////////////////////////////////////////////////
-    int sTypeValue = jvulkan::getSTypeAsInt(env, jVkFenceCreateInfoObject);
+    int sTypeValue = jvulkan::getSType(env, jVkFenceCreateInfoObject);
     if (env->ExceptionOccurred())
     {
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);

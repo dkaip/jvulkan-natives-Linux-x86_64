@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkDescriptorSetLayoutCreateInfoObject);
+        int sTypeValue = getSType(env, jVkDescriptorSetLayoutCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

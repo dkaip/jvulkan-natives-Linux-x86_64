@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
+        int sTypeValue = getSType(env, jVkPipelineRasterizationStateCreateInfoInfoObject);
         if (env->ExceptionOccurred())
         {
             return;

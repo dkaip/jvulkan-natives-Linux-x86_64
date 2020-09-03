@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getSTypeAsInt.cpp
+ * getSType.cpp
  *
  *  Created on: Apr 22, 2019
  *      Author: Douglas Kaip
@@ -27,7 +27,7 @@ using namespace std;
 
 namespace jvulkan
 {
-	VkStructureType getSTypeAsInt(
+	VkStructureType getSType(
             JNIEnv *env,
             const jobject vulkanStructureObject)
     {

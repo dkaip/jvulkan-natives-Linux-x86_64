@@ -32,7 +32,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        int sTypeValue = getSTypeAsInt(env, jVkSamplerCreateInfoObject);
+        int sTypeValue = getSType(env, jVkSamplerCreateInfoObject);
         if (env->ExceptionOccurred())
         {
             return;
