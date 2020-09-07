@@ -78,7 +78,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     jvulkan::populatepNextChainCollection(
             env,
 			jVkRayTracingPipelineCreateInfoNVCollectionObject,
-			(jvulkan::InfoStructure *)vkRayTracingPipelineCreateInfoNV,
+			(VkBaseOutStructure *)vkRayTracingPipelineCreateInfoNV,
 			&memoryToFree);
     if (env->ExceptionOccurred())
     {

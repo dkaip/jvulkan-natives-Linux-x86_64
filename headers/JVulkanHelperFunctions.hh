@@ -32,19 +32,6 @@
 
 namespace jvulkan
 {
-	struct InfoStructure
-	{
-		VkStructureType  sType;
-		void			*pNext;
-	};
-
-	//    void getVkInstanceCreateInfo(
-//            JNIEnv *env,
-//            const jobject jInstanceCreateInfo,
-//            VkInstanceCreateInfo *instanceCreateInfo,
-//            VkApplicationInfo *applicationInfo,
-//            std::vector<void *> *memoryToFree);
-//
     void getAllocatorCallbacks(
             JNIEnv *env,
             const jobject jAlternateAllocator,
@@ -1661,7 +1648,7 @@ namespace jvulkan
     void populatepNextChainCollection(
             JNIEnv *env,
             const jobject jCollectionObject,
-			InfoStructure *collectionObjects,
+			VkBaseOutStructure *collectionObjects,
             std::vector<void *> *memoryToFree);
 
     void getVkPipelineCreationFeedbackCreateInfoEXT(

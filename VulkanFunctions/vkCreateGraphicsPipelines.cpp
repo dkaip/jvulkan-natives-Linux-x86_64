@@ -81,7 +81,7 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     jvulkan::populatepNextChainCollection(
             env,
 			jVkGraphicsPipelineCreateInfoCollection,
-			(jvulkan::InfoStructure *)vkGraphicsPipelineCreateInfo,
+			(VkBaseOutStructure *)vkGraphicsPipelineCreateInfo,
 			&memoryToFree);
     if (env->ExceptionOccurred())
     {

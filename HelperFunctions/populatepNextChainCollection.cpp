@@ -28,7 +28,7 @@ namespace jvulkan
     void populatepNextChainCollection(
             JNIEnv *env,
             const jobject jCollectionObject,
-			InfoStructure *collectionObjects,
+			VkBaseOutStructure *collectionObjects,
             std::vector<void *> *memoryToFree)
     {
         jclass theCollectionClass = env->GetObjectClass(jCollectionObject);

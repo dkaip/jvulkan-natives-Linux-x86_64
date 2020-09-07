@@ -43,7 +43,7 @@ namespace jvulkan
 			return;
 		}
 
-		VkStructureType sType = ((struct InfoStructure *)headOfpNextChain)->sType;
+		VkStructureType sType = ((VkBaseOutStructure *)headOfpNextChain)->sType;
 		switch(sType)
 		{
 			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT:
@@ -583,7 +583,7 @@ namespace jvulkan
 				break;
 		}
 
-		void *pNext = ((struct InfoStructure *)headOfpNextChain)->pNext;
+		void *pNext = ((VkBaseOutStructure *)headOfpNextChain)->pNext;
 
         jobject jpNextObject = getpNextObject(env, jVulkanCreateInfoStructureObject);
         if (env->ExceptionOccurred())
