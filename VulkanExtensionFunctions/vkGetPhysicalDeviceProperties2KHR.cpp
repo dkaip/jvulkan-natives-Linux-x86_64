@@ -32,8 +32,144 @@ using namespace std;
  * Signature: (Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkPhysicalDevice;Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties2;)V
  */
 JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGetPhysicalDeviceProperties2KHR
-  (JNIEnv *, jobject, jobject, jobject)
+  (JNIEnv *env , jobject, jobject jVkPhysicalDevice, jobject jVkPhysicalDeviceProperties2Object)
 {
+    VkPhysicalDevice_T *vkPhysicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not get handle for jVkPhysicalDevice");
+        return;
+    }
 
+    std::vector<void *> memoryToFree(20);
+    /*
+     * For "output" data we need to crawl the pNext chain "first" so that all of
+     * the pNext structures are already in place before the API call.  For "input"
+     * items their pNext has already been crawled in the "get" functions (in this
+     * case NA) before the API call.
+     */
+    void *headOfpNextChain = nullptr;
+    ////////////////////////////////////////////////////////////////////////
+    jobject jpNextObject = jvulkan::getpNextObject(env, jVkPhysicalDeviceProperties2Object);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Call to getpNext failed.");
+        return;
+    }
+
+    if (jpNextObject != nullptr)
+    {
+		/*
+		 * Crawl the pNext chain and identify / create any needed elements.
+		 */
+		jvulkan::getpNextChain(
+				env,
+				jpNextObject,
+				&headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
+    }
+
+    VkPhysicalDeviceProperties2 vkPhysicalDeviceProperties2 = {};
+    /*
+     * This needs to be done because the above line does not
+     * properly init the object.  In other cases a "get"
+     * helper function is called which does the job or it is
+     * taken care of in getpNextChain
+     */
+    vkPhysicalDeviceProperties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
+    vkPhysicalDeviceProperties2.pNext = headOfpNextChain;
+
+    vkGetPhysicalDeviceProperties2KHR(
+    		vkPhysicalDeviceHandle,
+			&vkPhysicalDeviceProperties2);
+
+    /*
+     * We have the data now we have some other work to do.
+     *
+     * First we need to crawl the pNext chain again and
+     * populate the Java Object equivalents that may be
+     * on it.  In this case the pNext chain data is out bound.
+     */
+
+    if (jpNextObject != nullptr)
+    {
+		jvulkan::populatepNextChain(
+				env,
+				jpNextObject,
+				headOfpNextChain,
+				&memoryToFree);
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Error trying to crawl the pNext chain.");
+			return;
+		}
+    }
+
+    /*
+     * Now populate the properties attribute of the VkPhysicalDeviceProperties2
+     * object
+     */
+	jclass vkPhysicalDevicePropertiesClass = env->FindClass(
+			"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties");
+		if (env->ExceptionOccurred())
+		{
+			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties");
+			return;
+		}
+
+	// Locate the constructor
+	jmethodID methodId = env->GetMethodID(vkPhysicalDevicePropertiesClass, "<init>", "()V");
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties");
+		return;
+	}
+
+	// Create the Java vkPhysicalDeviceProperties object
+	jobject jVkPhysicalDevicePropertiesObject =
+			env->NewObject(vkPhysicalDevicePropertiesClass, methodId);
+	if (env->ExceptionOccurred())
+	{
+		LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties");
+		return;
+	}
+
+    jvulkan::populateVkPhysicalDeviceProperties(
+    		env,
+			jVkPhysicalDevicePropertiesObject,
+			&vkPhysicalDeviceProperties2.properties);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceProperties");
+        return;
+    }
+
+    jclass vkPhysicalDeviceProperties2Class = env->GetObjectClass(jVkPhysicalDeviceProperties2Object);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not find class of jVkPhysicalDeviceProperties2");
+        return;
+    }
+
+    methodId = env->GetMethodID(vkPhysicalDeviceProperties2Class, "setProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceProperties;)V");
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Could not find method id setProperties for class jVkPhysicalDeviceProperties2");
+        return;
+    }
+
+    env->CallVoidMethod(jVkPhysicalDeviceProperties2Object, methodId, jVkPhysicalDevicePropertiesObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", voidMethodErrorText);
+        return;
+    }
+
+    jvulkan::freeMemory(&memoryToFree);
 }
 
