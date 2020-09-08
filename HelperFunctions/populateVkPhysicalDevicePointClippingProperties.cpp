@@ -47,23 +47,17 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkPointClippingBehaviorClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior");
+        jobject vkPointClippingBehaviorEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior",
+				vkPhysicalDevicePointClippingProperties->pointClippingBehavior);
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkPointClippingBehaviorClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior;");
-        if (env->ExceptionOccurred())
-        {
-			LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject vkPointClippingBehaviorEnum = env->CallStaticObjectMethod(vkPointClippingBehaviorClass, methodId, vkPhysicalDevicePointClippingProperties->pointClippingBehavior);
-
-        methodId = env->GetMethodID(theClass, "setPointClippingBehavior", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setPointClippingBehavior", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPointClippingBehavior;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setPointClippingBehavior");
@@ -76,6 +70,5 @@ namespace jvulkan
         	LOGERROR(env, "%s", "failed executing method setPointClippingBehavior");
             return;
         }
-
 	}
 }

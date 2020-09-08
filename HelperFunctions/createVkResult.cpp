@@ -20,13 +20,8 @@
  *      Author: Douglas Kaip
  */
 
-
-#include <cstring>
-#include <iostream>
-#include <stdlib.h>
-
 #include "JVulkanHelperFunctions.hh"
-
+#include "slf4j.hh"
 
 using namespace std;
 
@@ -46,23 +41,20 @@ namespace jvulkan
 		jboolean handlingException = env->ExceptionCheck();
 		if (handlingException == true)
 		{
+			LOGWARN(env, "%s", "Clearing an exception.");
 			env->ExceptionClear();
 		}
 
-		jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkResult");
+		jobject vkResultObject = createEnumFromValue(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkResult",
+				value);
 		if (env->ExceptionOccurred())
 		{
-			cout << "createVkResult: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/Enums/VkResult" << endl;
+			LOGERROR(env, "%s", "Error calling createEnumFromValue.");
 			return nullptr;
 		}
 
-		jmethodID methodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;");
-		if (env->ExceptionOccurred())
-		{
-			cout << "createVkResult: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkResult;" << endl;
-			return nullptr;
-		}
-
-		return env->CallStaticObjectMethod(vkResultClass, methodId, value);
+		return vkResultObject;
 	}
 }

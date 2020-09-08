@@ -27,20 +27,20 @@ namespace jvulkan
 {
     jobject createVkDebugUtilsLabelEXTCollection(JNIEnv *env, int labelsCount, const VkDebugUtilsLabelEXT labels[])
     {
-		jclass theClass = nullptr;
-		jobject theObject = nullptr;
+		jclass vkDebugUtilsLabelEXTCollectionClass = nullptr;
+		jobject vkDebugUtilsLabelEXTCollectionObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"java/util/LinkedList",
-				&theClass,
-				&theObject);
+				&vkDebugUtilsLabelEXTCollectionClass,
+				&vkDebugUtilsLabelEXTCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
-        jmethodID addMethodId = env->GetMethodID(theClass, "add", "(Ljava/lang/Object;)Z");
+        jmethodID addMethodId = env->GetMethodID(vkDebugUtilsLabelEXTCollectionClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could find add method for Java LinkedList class");
@@ -49,10 +49,14 @@ namespace jvulkan
 
     	for(int i = 0; i < labelsCount; i++)
     	{
-    		jobject vkDebugUtilsLabelEXTObject =
-    				createVkDebugUtilsLabelEXT(env, &labels[i]);
+    		jobject vkDebugUtilsLabelEXTObject = createVkDebugUtilsLabelEXT(env, &labels[i]);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling createVkDebugUtilsLabelEXT.");
+                return nullptr;
+            }
 
-    		env->CallVoidMethod(theObject, addMethodId, vkDebugUtilsLabelEXTObject);
+    		env->CallVoidMethod(vkDebugUtilsLabelEXTCollectionObject, addMethodId, vkDebugUtilsLabelEXTObject);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Failed trying to add a VkDebugUtilsLabelEXT object to a Java LinkedList");
@@ -60,6 +64,6 @@ namespace jvulkan
             }
     	}
 
-    	return theObject;
+    	return vkDebugUtilsLabelEXTCollectionObject;
     }
 }

@@ -20,10 +20,6 @@
  *      Author: Douglas Kaip
  */
 
-//#include <cstring>
-//#include <iostream>
-//#include <stdlib.h>
-
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -40,16 +36,16 @@ namespace jvulkan
             env->ExceptionClear();
         }
 
-		jclass theClass = nullptr;
-		jobject theObject = nullptr;
+		jclass vkDebugUtilsMessengerCallbackDataEXTClass = nullptr;
+		jobject vkDebugUtilsMessengerCallbackDataEXTObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsMessengerCallbackDataEXT",
-				&theClass,
-				&theObject);
+				&vkDebugUtilsMessengerCallbackDataEXTClass,
+				&vkDebugUtilsMessengerCallbackDataEXTObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
@@ -57,15 +53,20 @@ namespace jvulkan
         jobject jFlags = createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(
         		env,
 				pCallbackData->flags);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet.");
+            return nullptr;
+        }
 
-        jmethodID methodId = env->GetMethodID(theClass, "setFlags", "(Ljava/util/EnumSet;)V");
+        jmethodID methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setFlags", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setFlags");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, jFlags);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, jFlags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setFlags");
@@ -73,7 +74,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setMessageIdName", "(Ljava/lang/String;)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setMessageIdName", "(Ljava/lang/String;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setMessageIdName");
@@ -81,8 +82,13 @@ namespace jvulkan
         }
 
         jstring messageIdNameString = env->NewStringUTF(pCallbackData->pMessageIdName);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
-        env->CallVoidMethod(theObject, methodId, messageIdNameString);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, messageIdNameString);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setMessageIdName");
@@ -90,16 +96,21 @@ namespace jvulkan
         }
 
         env->DeleteLocalRef(messageIdNameString);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setMessageIdNumber", "(I)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setMessageIdNumber", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setMessageIdNumber");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, pCallbackData->messageIdNumber);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, pCallbackData->messageIdNumber);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setMessageIdNumber");
@@ -107,7 +118,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setMessage", "(Ljava/lang/String;)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setMessage", "(Ljava/lang/String;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setMessage");
@@ -115,8 +126,13 @@ namespace jvulkan
         }
 
         jstring messageString = env->NewStringUTF(pCallbackData->pMessage);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
-        env->CallVoidMethod(theObject, methodId, messageString);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, messageString);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setMessage");
@@ -124,10 +140,14 @@ namespace jvulkan
         }
 
         env->DeleteLocalRef(messageString);
-
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setQueueLabels", "(Ljava/util/Collection;)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setQueueLabels", "(Ljava/util/Collection;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setQueueLabels");
@@ -136,8 +156,13 @@ namespace jvulkan
 
         jobject queueLabelsCollection = createVkDebugUtilsLabelEXTCollection(
         		env, pCallbackData->queueLabelCount, pCallbackData->pQueueLabels);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVkDebugUtilsLabelEXTCollection.");
+            return nullptr;
+        }
 
-        env->CallVoidMethod(theObject, methodId, queueLabelsCollection);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, queueLabelsCollection);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setQueueLabels");
@@ -145,7 +170,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setCmdBufLabels", "(Ljava/util/Collection;)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setCmdBufLabels", "(Ljava/util/Collection;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setCmdBufLabels");
@@ -154,8 +179,13 @@ namespace jvulkan
 
         jobject cmdBufLabelsCollection = createVkDebugUtilsLabelEXTCollection(
         		env, pCallbackData->cmdBufLabelCount, pCallbackData->pCmdBufLabels);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVkDebugUtilsLabelEXTCollection.");
+            return nullptr;
+        }
 
-        env->CallVoidMethod(theObject, methodId, cmdBufLabelsCollection);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, cmdBufLabelsCollection);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setCmdBufLabels");
@@ -163,7 +193,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "setObjects", "(Ljava/util/Collection;)V");
+        methodId = env->GetMethodID(vkDebugUtilsMessengerCallbackDataEXTClass, "setObjects", "(Ljava/util/Collection;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setObjects");
@@ -172,15 +202,20 @@ namespace jvulkan
 
         jobject objectsCollection = createVkDebugUtilsObjectNameInfoEXTCollection(
         		env, pCallbackData->objectCount, pCallbackData->pObjects);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVkDebugUtilsObjectNameInfoEXTCollection.");
+            return nullptr;
+        }
 
 
-        env->CallVoidMethod(theObject, methodId, objectsCollection);
+        env->CallVoidMethod(vkDebugUtilsMessengerCallbackDataEXTObject, methodId, objectsCollection);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setObjects");
             return nullptr;
         }
 
-        return theObject;
+        return vkDebugUtilsMessengerCallbackDataEXTObject;
     }
 }

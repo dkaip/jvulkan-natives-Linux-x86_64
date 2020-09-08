@@ -77,24 +77,13 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkSharingModeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode");
+        jobject jsharingModeEnumObject = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode",
+				vkPhysicalDeviceImageDrmFormatModifierInfoEXT->sharingMode);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode");
-            return;
-        }
-
-        methodId = env->GetStaticMethodID(vkSharingModeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSharingMode;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject jsharingModeEnumObject = env->CallStaticObjectMethod(vkSharingModeClass, methodId, vkPhysicalDeviceImageDrmFormatModifierInfoEXT->sharingMode);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 

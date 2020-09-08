@@ -106,26 +106,15 @@ static void wlshellsurfaceHandleConfigure(void *data, struct wl_shell_surface *w
        return;
     }
 
-	jclass wlShellSurfaceResizeClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlShellSurfaceResizeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize;.");
-		return;
-	}
-
-	jobject edgesEnumObject = env->CallStaticObjectMethod(wlShellSurfaceResizeClass, methodId, edges);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject edgesEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlShellSurfaceResize",
+			edges);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlShellSurface, edgesEnumObject, width, height);
     if (env->ExceptionOccurred())

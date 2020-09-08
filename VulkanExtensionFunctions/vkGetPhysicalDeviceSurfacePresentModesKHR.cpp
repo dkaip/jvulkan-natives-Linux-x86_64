@@ -13,13 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include <iostream>
-#include <vector>
 
 using namespace std;
 
+#include <vector>
+
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -32,18 +33,20 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     VkPhysicalDevice_T *physicalDeviceHandle = (VkPhysicalDevice_T *)jvulkan::getHandleValue(env, jVkPhysicalDevice);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkPhysicalDevice handle.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     VkSurfaceKHR_T *surfaceKHRHandle = (VkSurfaceKHR_T *)jvulkan::getHandleValue(env, jVkSurfaceKHR);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not retrieve VkSurfaceKHR handle.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     if (jVkPresentModeKHRCollection == nullptr)
     {
-        cout << "ERROR: jVkPresentModeKHRCollection must be created before calling kGetPhysicalDeviceSurfacePresentModesKHR." << endl;
+    	LOGERROR(env, "%s", "jVkPresentModeKHRCollection must be created before calling kGetPhysicalDeviceSurfacePresentModesKHR.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -52,11 +55,13 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     VkResult result = vkGetPhysicalDeviceSurfacePresentModesKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfPresentationModes, nullptr);
     if (result != VK_SUCCESS)
     {
+    	LOGERROR(env, "Error calling vkGetPhysicalDeviceSurfacePresentModesKHR, result is %d.", result);
         return jvulkan::createVkResult(env, result);
     }
 
     if (numberOfPresentationModes == 0)
     {
+    	LOGWARN(env, "%s", "numberOfPresentationModes == 0.");
         return jvulkan::createVkResult(env, result);
     }
 
@@ -65,18 +70,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     result = vkGetPhysicalDeviceSurfacePresentModesKHR(physicalDeviceHandle, surfaceKHRHandle, &numberOfPresentationModes, presentationModes.data());
     if (result != VK_SUCCESS)
     {
+    	LOGERROR(env, "Error calling vkGetPhysicalDeviceSurfacePresentModesKHR, result is %d.", result);
         return jvulkan::createVkResult(env, result);
     }
 
     jclass collectionClass = env->GetObjectClass(jVkPresentModeKHRCollection);
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could get class for jVkPresentModeKHRCollection.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
     jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
     if (env->ExceptionOccurred())
     {
+    	LOGERROR(env, "%s", "Could not find method id for add.");
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
@@ -85,28 +93,21 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
     for (const auto& presentationMode : presentationModes)
     {
         ///////////////////////////////////////////////////////////////////////////
-
-        jclass vkPresentModeKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR");
+    	jobject vkPresentModeKHREnum = jvulkan::createEnumFromValue(
+    			env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR",
+				presentationMode);
         if (env->ExceptionOccurred())
         {
-            cout << "vkGetPhysicalDeviceSurfacePresentModesKHR: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR" << endl;
-            return nullptr;
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
-
-        methodId = env->GetStaticMethodID(vkPresentModeKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR;");
-        if (env->ExceptionOccurred())
-        {
-            cout << "vkGetPhysicalDeviceSurfacePresentModesKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPresentModeKHR;" << endl;
-            return nullptr;
-        }
-
-        jobject formatEnum = env->CallStaticObjectMethod(vkPresentModeKHRClass, methodId, presentationMode);
 
         bool successfulAdd = false;
-        successfulAdd = env->CallBooleanMethod(jVkPresentModeKHRCollection, addMethodId, formatEnum);
+        successfulAdd = env->CallBooleanMethod(jVkPresentModeKHRCollection, addMethodId, vkPresentModeKHREnum);
         if (successfulAdd == false)
         {
-            cout << "ERROR:vkGetPhysicalDeviceSurfacePresentModesKHR the new VkPresentModeKHR element was not added to jVkPresentModeKHRCollection" << endl;
+        	LOGERROR(env, "%s", "vkGetPhysicalDeviceSurfacePresentModesKHR the new VkPresentModeKHR element was not added to jVkPresentModeKHRCollection");
         }
     }
 

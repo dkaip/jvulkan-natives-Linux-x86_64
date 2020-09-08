@@ -78,21 +78,15 @@ namespace jvulkan
         env->DeleteLocalRef(descriptionString);
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkResultClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR");
+        jobject formatEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR",
+				vkPipelineExecutableStatisticKHR->format);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
-
-        jmethodID staticMethodId = env->GetStaticMethodID(vkResultClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR;");
-            return;
-        }
-
-        jobject formatEnum =  env->CallStaticObjectMethod(vkResultClass, methodId, vkPipelineExecutableStatisticKHR->format);
 
         methodId = env->GetMethodID(theClass, "setFormat", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPipelineExecutableStatisticFormatKHR;)V");
         if (env->ExceptionOccurred())

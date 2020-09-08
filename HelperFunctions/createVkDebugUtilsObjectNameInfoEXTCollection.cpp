@@ -27,20 +27,20 @@ namespace jvulkan
 {
 	jobject createVkDebugUtilsObjectNameInfoEXTCollection(JNIEnv *env, int objectCount, const VkDebugUtilsObjectNameInfoEXT objects[])
     {
-		jclass theClass = nullptr;
-		jobject theObject = nullptr;
+		jclass vkDebugUtilsObjectNameInfoEXTCollectionClass = nullptr;
+		jobject vkDebugUtilsObjectNameInfoEXTCollectionObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"java/util/LinkedList",
-				&theClass,
-				&theObject);
+				&vkDebugUtilsObjectNameInfoEXTCollectionClass,
+				&vkDebugUtilsObjectNameInfoEXTCollectionObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
-        jmethodID addMethodId = env->GetMethodID(theClass, "add", "(Ljava/lang/Object;)Z");
+        jmethodID addMethodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTCollectionClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could find add method for Java LinkedList class");
@@ -49,10 +49,14 @@ namespace jvulkan
 
         for(int i = 0; i < objectCount; i++)
     	{
-    		jobject vkDebugUtilsObjectNameInfoEXT =
-					createVkDebugUtilsObjectNameInfoEXT(env, &objects[i]);
+    		jobject vkDebugUtilsObjectNameInfoEXT = createVkDebugUtilsObjectNameInfoEXT(env, &objects[i]);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Error calling createVkDebugUtilsObjectNameInfoEXT.");
+                return nullptr;
+            }
 
-    		env->CallVoidMethod(theObject, addMethodId, vkDebugUtilsObjectNameInfoEXT);
+    		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTCollectionObject, addMethodId, vkDebugUtilsObjectNameInfoEXT);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Failed trying to add a VkDebugUtilsObjectNameInfoEXT object to a Java LinkedList");
@@ -60,6 +64,6 @@ namespace jvulkan
             }
     	}
 
-    	return theObject;
+    	return vkDebugUtilsObjectNameInfoEXTCollectionObject;
     }
 }

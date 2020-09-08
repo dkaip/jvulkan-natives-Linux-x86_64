@@ -36,50 +36,28 @@ namespace jvulkan
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkFormatClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat");
+        jobject formatEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat",
+				vkSurfaceFormatKHR->format);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat");
-            return nullptr;
-        }
-
-        jmethodID methodId = env->GetStaticMethodID(vkFormatClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return nullptr;
-        }
-
-        jobject formatEnum = env->CallStaticObjectMethod(vkFormatClass, methodId, vkSurfaceFormatKHR->format);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return nullptr;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkColorSpaceKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR");
+        jobject colorspaceEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR",
+				vkSurfaceFormatKHR->colorSpace);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return nullptr;
         }
 
-        methodId = env->GetStaticMethodID(vkColorSpaceKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return nullptr;
-        }
-
-        jobject colorspaceEnum = env->CallStaticObjectMethod(vkColorSpaceKHRClass, methodId, vkSurfaceFormatKHR->colorSpace);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-            return nullptr;
-        }
-
-
+        ///////////////////////////////////////////////////////////////////////////
 		jclass vkSurfaceFormatKHRClass = env->FindClass(
 				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSurfaceFormatKHR");
         if (env->ExceptionOccurred())
@@ -89,7 +67,7 @@ namespace jvulkan
         }
 
 		// Locate the constructor
-		methodId = env->GetMethodID(vkSurfaceFormatKHRClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;)V");
+		jmethodID methodId = env->GetMethodID(vkSurfaceFormatKHRClass, "<init>", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id <init> (Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;)V");

@@ -28,43 +28,37 @@ namespace jvulkan
 	jobject createVkDebugUtilsObjectNameInfoEXT(JNIEnv *env, const VkDebugUtilsObjectNameInfoEXT *objectNameInfo)
 	{
 		jclass vkDebugUtilsObjectNameInfoEXTclass = nullptr;
-		jobject theObject = nullptr;
+		jobject vkDebugUtilsObjectNameInfoEXTObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsObjectNameInfoEXT",
 				&vkDebugUtilsObjectNameInfoEXTclass,
-				&theObject);
+				&vkDebugUtilsObjectNameInfoEXTObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
 		////////////////////////////////////////////////////////////////////////
-		jclass theClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not find class \"com/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType\"");
-			return nullptr;
-		}
+        jobject vkObjectTypeObject = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType",
+				objectNameInfo->objectType);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+            return nullptr;
+        }
 
-		jmethodID methodId = env->GetStaticMethodID(theClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not find static method fromValue");
-			return nullptr;
-		}
-
-		jobject vkObjectTypeObject =  env->CallStaticObjectMethod(theClass, methodId, objectNameInfo->objectType);
-
-		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;)V");
+		jmethodID methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkObjectType;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setObjectType");
 			return nullptr;
 		}
 
-		env->CallVoidMethod(theObject, methodId, vkObjectTypeObject);
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, vkObjectTypeObject);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute methodId of setObjectType");
@@ -76,6 +70,11 @@ namespace jvulkan
 				env,
 				"com/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle",
 				(void *)objectNameInfo->objectHandle);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
+            return nullptr;
+        }
 
 		methodId = env->GetMethodID(vkDebugUtilsObjectNameInfoEXTclass, "setObjectHandle", "(Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VulkanHandle;)V");
 		if (env->ExceptionOccurred())
@@ -84,7 +83,7 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		env->CallVoidMethod(theObject, methodId, jObjectHandle);
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, jObjectHandle);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute methodId of setObjectHandle");
@@ -100,8 +99,13 @@ namespace jvulkan
 		}
 
 		jstring objectNameString = env->NewStringUTF(objectNameInfo->pObjectName);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
-		env->CallVoidMethod(theObject, methodId, objectNameString);
+		env->CallVoidMethod(vkDebugUtilsObjectNameInfoEXTObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute to get methodId of setObjectName");
@@ -109,7 +113,12 @@ namespace jvulkan
 		}
 
 		env->DeleteLocalRef(objectNameString);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
-		return theObject;
+		return vkDebugUtilsObjectNameInfoEXTObject;
 	}
 }

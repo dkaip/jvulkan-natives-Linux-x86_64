@@ -230,26 +230,15 @@ static void wlpointerHandleButton(void *data, struct wl_pointer *wl_pointer, uin
        return;
     }
 
-	jclass wlPointerButtonStateClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlPointerButtonState");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlPointerButtonState.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlPointerButtonStateClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerButtonState;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerButtonState;.");
-		return;
-	}
-
-	jobject buttonStateEnumObject = env->CallStaticObjectMethod(wlPointerButtonStateClass, methodId, state);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject buttonStateEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlPointerButtonState",
+			state);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlPointer, serialNumber, (uint64_t)time, button, buttonStateEnumObject);
     if (env->ExceptionOccurred())
@@ -300,26 +289,15 @@ static void wlpointerHandleAxis(void *data, struct wl_pointer *wl_pointer, uint3
        return;
     }
 
-	jclass wlPointerAxisTypeClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlPointerAxisTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;.");
-		return;
-	}
-
-	jobject axisTypeEnumObject = env->CallStaticObjectMethod(wlPointerAxisTypeClass, methodId, axisType);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject axisTypeEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType",
+			axisType);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     double doubleValue = wl_fixed_to_double(value);
 
@@ -421,26 +399,15 @@ static void wlpointerHandleAxisSource(void *data, struct wl_pointer *wl_pointer,
        return;
     }
 
-	jclass wlPointerAxisSourceClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisSource");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisSource.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlPointerAxisSourceClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisSource;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisSource;.");
-		return;
-	}
-
-	jobject axisSourceEnumObject = env->CallStaticObjectMethod(wlPointerAxisSourceClass, methodId, axisSource);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject axisSourceEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisSource",
+			axisSource);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlPointer, axisSourceEnumObject);
     if (env->ExceptionOccurred())
@@ -491,26 +458,15 @@ static void wlpointerHandleAxisStop(void *data, struct wl_pointer *wl_pointer, u
        return;
     }
 
-	jclass wlPointerAxisTypeClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlPointerAxisTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;.");
-		return;
-	}
-
-	jobject axisTypeEnumObject = env->CallStaticObjectMethod(wlPointerAxisTypeClass, methodId, axisType);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject axisTypeEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType",
+			axisType);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlPointer, (uint64_t)time, axisTypeEnumObject);
     if (env->ExceptionOccurred())
@@ -561,26 +517,15 @@ static void wlpointerHandleAxisDiscrete(void *data, struct wl_pointer *wl_pointe
        return;
     }
 
-	jclass wlPointerAxisTypeClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlPointerAxisTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType;.");
-		return;
-	}
-
-	jobject axisTypeEnumObject = env->CallStaticObjectMethod(wlPointerAxisTypeClass, methodId, axisType);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject axisTypeEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlPointerAxisType",
+			axisType);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlPointer, axisTypeEnumObject, discrete);
     if (env->ExceptionOccurred())

@@ -44,7 +44,7 @@ namespace jvulkan
 				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
@@ -81,6 +81,11 @@ namespace jvulkan
 		}
 
 		jstring objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->name);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
 		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
@@ -90,6 +95,11 @@ namespace jvulkan
 		}
 
 		env->DeleteLocalRef(objectNameString);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(theClass, "setCategory", "(Ljava/lang/String;)V");
@@ -100,6 +110,11 @@ namespace jvulkan
 		}
 
 		objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->category);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
 		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
@@ -109,6 +124,11 @@ namespace jvulkan
 		}
 
 		env->DeleteLocalRef(objectNameString);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
 		////////////////////////////////////////////////////////////////////////
 		methodId = env->GetMethodID(theClass, "setDescription", "(Ljava/lang/String;)V");
@@ -119,6 +139,11 @@ namespace jvulkan
 		}
 
 		objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->description);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
 		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
@@ -128,7 +153,11 @@ namespace jvulkan
 		}
 
 		env->DeleteLocalRef(objectNameString);
-
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
 		return theObject;
 	}

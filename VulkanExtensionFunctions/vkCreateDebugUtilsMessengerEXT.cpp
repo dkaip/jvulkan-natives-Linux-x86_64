@@ -90,6 +90,7 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
     }
 
     LOGWARN(localEnv, "%s", "A debug utils messenger callback has been triggered");
+
     /*
      * Lock the debugCallbackList vector so that we may
      * work with it.
@@ -131,17 +132,33 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
         return false;
     }
 
-    jobject jMessageSeverity = createVkDebugUtilsMessageSeverityFlagBitsEXT(
+    jobject jMessageSeverity = jvulkan::createEnumFromValue(
     		localEnv,
+			"com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDebugUtilsMessageSeverityFlagBitsEXT",
 			messageSeverity);
+    if (localEnv->ExceptionOccurred())
+    {
+        cout << "Error calling createEnumFromValue." << endl;
+        return false;
+    }
 
     jobject jMessageTypesEnumSet = createVkDebugUtilsMessageTypeFlagsEXTAsEnumSet(
     		localEnv,
 			messageTypes);
+    if (localEnv->ExceptionOccurred())
+    {
+        cout << "Error calling createEnumFromValue." << endl;
+        return false;
+    }
 
 	jobject jVkDebugUtilsMessengerCallbackDataEXT = createVkDebugUtilsMessengerCallbackDataEXT(
 			localEnv,
 			pCallbackData);
+    if (localEnv->ExceptionOccurred())
+    {
+        cout << "Error calling createEnumFromValue." << endl;
+        return false;
+    }
 
 
     jmethodID methodId = localEnv->GetMethodID(javaClass, "invoke",
@@ -157,9 +174,9 @@ static VKAPI_ATTR VkBool32 VKAPI_CALL messengerCallback(
 			jMessageTypesEnumSet,
 			jVkDebugUtilsMessengerCallbackDataEXT,
             javaUserData);
-
     if (localEnv->ExceptionOccurred())
     {
+        cout << "Error calling CallBooleanMethod." << endl;
         return false;
     }
 

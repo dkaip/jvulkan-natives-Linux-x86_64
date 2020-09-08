@@ -46,7 +46,7 @@ namespace jvulkan
 				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
@@ -57,7 +57,7 @@ namespace jvulkan
 				vkDisplayPropertiesKHR->display);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createVulkanHandle");
+        	LOGERROR(env, "%s", "Error calling createVulkanHandle.");
             return nullptr;
         }
 
@@ -84,6 +84,11 @@ namespace jvulkan
 		}
 
 		jstring displayNameString = env->NewStringUTF(vkDisplayPropertiesKHR->displayName);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling NewStringUTF.");
+            return nullptr;
+        }
 
 		env->CallVoidMethod(theObject, methodId, displayNameString);
 		if (env->ExceptionOccurred())
@@ -93,6 +98,11 @@ namespace jvulkan
 		}
 
 		env->DeleteLocalRef(displayNameString);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling DeleteLocalRef.");
+            return nullptr;
+        }
 
         ////////////////////////////////////////////////////////////////////////
         jobject jVkExtent2D = createVkExtent2D(

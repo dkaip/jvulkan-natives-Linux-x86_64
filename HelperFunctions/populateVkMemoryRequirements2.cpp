@@ -61,13 +61,13 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		jclass theClass = nullptr;
-		jobject theObject = nullptr;
+		jclass vkMemoryRequirementsClass = nullptr;
+		jobject vkMemoryRequirementsObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkMemoryRequirements",
-				&theClass,
-				&theObject);
+				&vkMemoryRequirementsClass,
+				&vkMemoryRequirementsObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
@@ -76,7 +76,7 @@ namespace jvulkan
 
         populateVkMemoryRequirements(
         		env,
-				theObject,
+				vkMemoryRequirementsObject,
     			&vkMemoryRequirements2->memoryRequirements);
         if (env->ExceptionOccurred())
         {
@@ -91,7 +91,7 @@ namespace jvulkan
             return;
         }
 
-        env->CallVoidMethod(jVkMemoryRequirements2Object, methodId, theObject);
+        env->CallVoidMethod(jVkMemoryRequirements2Object, methodId, vkMemoryRequirementsObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);

@@ -921,8 +921,6 @@ namespace jvulkan
 
     jobject createVkDebugUtilsMessengerCallbackDataFlagsEXTAsEnumSet(JNIEnv *env, VkDebugUtilsMessengerCallbackDataFlagsEXT flags);
 
-    jobject createVkDebugUtilsMessageSeverityFlagBitsEXT(JNIEnv *env, jint value);
-
     jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData);
 
     jobject createVkDebugUtilsLabelEXTCollection(JNIEnv *env, int labelsCount, const VkDebugUtilsLabelEXT labels[]);

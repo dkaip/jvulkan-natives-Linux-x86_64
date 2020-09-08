@@ -49,23 +49,17 @@ namespace jvulkan
 		}
 
         ////////////////////////////////////////////////////////////////////////
-        jclass vkDriverIdClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId");
+        jobject vkDriverIdEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId",
+				vkPhysicalDeviceDriverProperties->driverID);
         if (env->ExceptionOccurred())
         {
-			LOGERROR(env, "%s", "com/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkDriverIdClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId;");
-        if (env->ExceptionOccurred())
-        {
-			LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject vkDriverIdEnum = env->CallStaticObjectMethod(vkDriverIdClass, methodId, vkPhysicalDeviceDriverProperties->driverID);
-
-        methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setDriverId", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkDriverId;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method setDriverId");

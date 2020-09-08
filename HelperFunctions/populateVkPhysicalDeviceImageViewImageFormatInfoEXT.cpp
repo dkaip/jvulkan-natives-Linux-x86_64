@@ -62,28 +62,17 @@ namespace jvulkan
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkImageViewTypeClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType");
+        jobject jimageViewTypeObject = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType",
+				vkPhysicalDeviceImageViewImageFormatInfoEXT->imageViewType);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkImageViewTypeClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject jimageViewTypeObject = env->CallStaticObjectMethod(vkImageViewTypeClass, methodId, vkPhysicalDeviceImageViewImageFormatInfoEXT->imageViewType);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-            return;
-        }
-
-        methodId = env->GetMethodID(theClass, "setImageViewType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setImageViewType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageViewType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageViewType");

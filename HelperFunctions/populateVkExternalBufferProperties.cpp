@@ -61,13 +61,13 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		jclass theClass = nullptr;
-		jobject theObject = nullptr;
+		jclass vkExternalMemoryPropertiesClass = nullptr;
+		jobject vkExternalMemoryPropertiesObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
 				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkExternalMemoryProperties",
-				&theClass,
-				&theObject);
+				&vkExternalMemoryPropertiesClass,
+				&vkExternalMemoryPropertiesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
@@ -76,7 +76,7 @@ namespace jvulkan
 
         populateVkExternalMemoryProperties(
         		env,
-				theObject,
+				vkExternalMemoryPropertiesObject,
     			&vkExternalBufferProperties->externalMemoryProperties);
         if (env->ExceptionOccurred())
         {
@@ -92,7 +92,7 @@ namespace jvulkan
             return;
         }
 
-        env->CallVoidMethod(jVkExternalBufferPropertiesObject, methodId, theObject);
+        env->CallVoidMethod(jVkExternalBufferPropertiesObject, methodId, vkExternalMemoryPropertiesObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);

@@ -38,7 +38,6 @@ static void wloutputHandleGeometry(void *data, struct wl_output *wl_output, int3
 		int subpixel, const char *make, const char *model, int transform)
 {
     JNIEnv *env = jvulkan::getJNIEnv();
-//	LOGTRACE(env, "%s", "handleGeometry");
     if (env == nullptr)
     {
     	LOGERROR(env, "%s", "Failed trying to get JNI environment.");
@@ -67,26 +66,15 @@ static void wloutputHandleGeometry(void *data, struct wl_output *wl_output, int3
     }
 
 //    LOGERROR(env, "Subpixel is %d, transform is %d", subpixel, transform);
-	jclass wlOutputSubpixelClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlOutputSubpixel");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlOutputSubpixel.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlOutputSubpixelClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlOutputSubpixel;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlOutputSubpixel;.");
-		return;
-	}
-
-	jobject subpixelEnumObject = env->CallStaticObjectMethod(wlOutputSubpixelClass, methodId, subpixel);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject subpixelEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlOutputSubpixel",
+			subpixel);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
 //    LOGERROR(env, "Subpixel is %d, transform is %d : %lx", subpixel, transform, subpixelEnumObject);
 //
@@ -104,26 +92,15 @@ static void wloutputHandleGeometry(void *data, struct wl_output *wl_output, int3
 		return;
 	}
 
-	jclass wlOutputTransformClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlOutputTransform");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlOutputTransform.");
-		return;
-	}
-
-	methodId = env->GetStaticMethodID(wlOutputTransformClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlOutputTransform;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlOutputTransform;.");
-		return;
-	}
-
-	jobject transformEnumObject = env->CallStaticObjectMethod(wlOutputTransformClass, methodId, transform);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject transformEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlOutputTransform",
+			transform);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlOutput, x, y, physicalWidth, physicalHeight, subpixelEnumObject, makeString, modelString, transformEnumObject);
     if (env->ExceptionOccurred())

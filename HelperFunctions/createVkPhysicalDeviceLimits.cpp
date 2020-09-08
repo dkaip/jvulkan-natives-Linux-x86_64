@@ -209,6 +209,8 @@ namespace jvulkan
         env->CallVoidMethod(theObject, methodId, deviceLimits->maxSamplerAllocationCount);
         if (env->ExceptionOccurred())
         {
+        	LOGERROR(env, "%s", voidMethodErrorText);
+            return nullptr;
         }
 
         ///////////////////////////////////////////////////////////////////////////

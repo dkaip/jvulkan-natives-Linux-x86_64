@@ -48,28 +48,17 @@ namespace jvulkan
 		}
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkExternalMemoryHandleTypeFlagBitsClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits");
+        jobject jhandleTypeEnumObject = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits",
+				vkPhysicalDeviceExternalImageFormatInfo->handleType);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 
-        jmethodID methodId = env->GetStaticMethodID(vkExternalMemoryHandleTypeFlagBitsClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject jhandleTypeEnumObject = env->CallStaticObjectMethod(vkExternalMemoryHandleTypeFlagBitsClass, methodId, vkPhysicalDeviceExternalImageFormatInfo->handleType);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-            return;
-        }
-
-        methodId = env->GetMethodID(theClass, "setHandleType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setHandleType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkExternalMemoryHandleTypeFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setHandleType");
@@ -82,6 +71,5 @@ namespace jvulkan
         	LOGERROR(env, "%s", voidMethodErrorText);
             return;
         }
-
 	}
 }

@@ -181,24 +181,13 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        jclass vkSurfaceTransformFlagBitsKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR");
+        jobject jCurrentTransformEnum = createEnumFromValue(
+        		env,
+				"com/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR",
+				vkSurfaceCapabilitiesKHR->currentTransform);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR");
-            return;
-        }
-
-        methodId = env->GetStaticMethodID(vkSurfaceTransformFlagBitsKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSurfaceTransformFlagBitsKHR;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find static method id fromValue");
-            return;
-        }
-
-        jobject jCurrentTransformEnum = env->CallStaticObjectMethod(vkSurfaceTransformFlagBitsKHRClass, methodId, vkSurfaceCapabilitiesKHR->currentTransform);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
+        	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
             return;
         }
 

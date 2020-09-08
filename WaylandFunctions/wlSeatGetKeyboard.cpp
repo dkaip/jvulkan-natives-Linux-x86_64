@@ -65,26 +65,15 @@ static void wlkeyboardHandleKeymap(void *data, struct wl_keyboard *wl_keyboard, 
        return;
     }
 
-	jclass wlKeyboardKeymapFormatClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlKeyboardKeymapFormatClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat;.");
-		return;
-	}
-
-	jobject keymapFormatEnumObject = env->CallStaticObjectMethod(wlKeyboardKeymapFormatClass, methodId, format);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject keymapFormatEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeymapFormat",
+			format);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
 	char *keyMap = (char *)calloc(1, size);
 	if (keyMap == nullptr)
@@ -295,26 +284,15 @@ static void wlkeyboardHandleKey(void *data, struct wl_keyboard *wl_keyboard, uin
        return;
     }
 
-	jclass wlKeyboardKeyStateClass = env->FindClass("com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState.");
-		return;
-	}
-
-	jmethodID methodId = env->GetStaticMethodID(wlKeyboardKeyStateClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState;");
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Could not find static method fromValue with signature (I)Lcom/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState;.");
-		return;
-	}
-
-	jobject keyboardKeyStateEnumObject = env->CallStaticObjectMethod(wlKeyboardKeyStateClass, methodId, state);
-	if (env->ExceptionOccurred())
-	{
-    	LOGERROR(env, "%s", "Error calling CallStaticObjectMethod.");
-		return;
-	}
+    jobject keyboardKeyStateEnumObject = jvulkan::createEnumFromValue(
+    		env,
+			"com/CIMthetics/jvulkan/Wayland/Enums/WlKeyboardKeyState",
+			state);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createEnumFromValue.");
+       return;
+    }
 
     jobject jwaylandEventObject = env->NewObject(javaClass, constructorMethodId, jWlKeyboard, serialNumber, (uint64_t)time, key, keyboardKeyStateEnumObject);
     if (env->ExceptionOccurred())
