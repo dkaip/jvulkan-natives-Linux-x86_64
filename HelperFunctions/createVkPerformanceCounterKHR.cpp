@@ -29,33 +29,22 @@ namespace jvulkan
 {
 	jobject createVkPerformanceCounterKHR(JNIEnv *env, const VkPerformanceCounterKHR *vkPerformanceCounterKHR)
 	{
-		if (vkPerformanceCounterKHR)
+		if (vkPerformanceCounterKHR == nullptr)
 		{
 			LOGERROR(env, "%s", "vkPerformanceCounterKHR == nullptr");
 			return nullptr;
 		}
 
-		jclass vkPerformanceCounterKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkPerformanceCounterKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> (II)V");
-            return nullptr;
-        }
-
-		jobject jVkPerformanceCounterKHRObject =
-				env->NewObject(vkPerformanceCounterKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -70,14 +59,14 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkPerformanceCounterKHRClass, "setUnit", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterKHR;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setUnit", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setUnit");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPerformanceCounterKHRObject, methodId, theEnum);
+        env->CallVoidMethod(theObject, methodId, theEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method setDriverId");
@@ -95,14 +84,14 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkPerformanceCounterKHRClass, "setScope", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPerformanceCounterScopeKHR;)V");
+        methodId = env->GetMethodID(theClass, "setScope", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPerformanceCounterScopeKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setScope");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPerformanceCounterKHRObject, methodId, theEnum);
+        env->CallVoidMethod(theObject, methodId, theEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method CallVoidMethod");
@@ -120,14 +109,14 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkPerformanceCounterKHRClass, "setStorage", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPerformanceCounterStorageKHR;)V");
+        methodId = env->GetMethodID(theClass, "setStorage", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkPerformanceCounterStorageKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setStorage");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPerformanceCounterKHRObject, methodId, theEnum);
+        env->CallVoidMethod(theObject, methodId, theEnum);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "failed executing method CallVoidMethod");
@@ -135,7 +124,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkPerformanceCounterKHRClass, "setUuid", "([L)V");
+        methodId = env->GetMethodID(theClass, "setUuid", "([L)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setUuid");
@@ -156,13 +145,13 @@ namespace jvulkan
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPerformanceCounterKHRObject, methodId, uuid);
+        env->CallVoidMethod(theObject, methodId, uuid);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		return jVkPerformanceCounterKHRObject;
+		return theObject;
 	}
 }

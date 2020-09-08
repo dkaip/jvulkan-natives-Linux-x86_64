@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkDisplayProperties2KHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayProperties2KHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayProperties2KHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayProperties2KHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkDisplayProperties2KHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkDisplayProperties2KHRObject =
-				env->NewObject(vkDisplayProperties2KHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -68,20 +57,20 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkDisplayProperties2KHRClass, "setDisplayProperties", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setDisplayProperties", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplayProperties");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayProperties2KHRObject, methodId, jVkDisplayPropertiesKHRObject);
+        env->CallVoidMethod(theObject, methodId, jVkDisplayPropertiesKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkDisplayProperties2KHRObject;
+        return theObject;
 	}
 }

@@ -29,33 +29,22 @@ namespace jvulkan
 {
 	jobject createVkPerformanceCounterDescriptionKHR(JNIEnv *env, const VkPerformanceCounterDescriptionKHR *vkPerformanceCounterDescriptionKHR)
 	{
-		if (vkPerformanceCounterDescriptionKHR)
+		if (vkPerformanceCounterDescriptionKHR == nullptr)
 		{
 			LOGERROR(env, "%s", "vkPerformanceCounterDescriptionKHR == nullptr");
 			return nullptr;
 		}
 
-		jclass vkPerformanceCounterDescriptionKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterDescriptionKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterDescriptionKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPerformanceCounterDescriptionKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkPerformanceCounterDescriptionKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> (II)V");
-            return nullptr;
-        }
-
-		jobject jVkPerformanceCounterDescriptionKHRObject =
-				env->NewObject(vkPerformanceCounterDescriptionKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -69,14 +58,14 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkPerformanceCounterDescriptionKHRClass, "setFlags", "(Ljava/util/EnumSet;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setFlags", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFlags");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPerformanceCounterDescriptionKHRObject, methodId, jVkPerformanceCounterDescriptionFlagsKHR);
+        env->CallVoidMethod(theObject, methodId, jVkPerformanceCounterDescriptionFlagsKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -84,7 +73,7 @@ namespace jvulkan
         }
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkPerformanceCounterDescriptionKHRClass, "setName", "(Ljava/lang/String;)V");
+		methodId = env->GetMethodID(theClass, "setName", "(Ljava/lang/String;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setName");
@@ -93,7 +82,7 @@ namespace jvulkan
 
 		jstring objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->name);
 
-		env->CallVoidMethod(jVkPerformanceCounterDescriptionKHRObject, methodId, objectNameString);
+		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute to get methodId of setName");
@@ -103,7 +92,7 @@ namespace jvulkan
 		env->DeleteLocalRef(objectNameString);
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkPerformanceCounterDescriptionKHRClass, "setCategory", "(Ljava/lang/String;)V");
+		methodId = env->GetMethodID(theClass, "setCategory", "(Ljava/lang/String;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setCategory");
@@ -112,7 +101,7 @@ namespace jvulkan
 
 		objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->category);
 
-		env->CallVoidMethod(jVkPerformanceCounterDescriptionKHRObject, methodId, objectNameString);
+		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute to get methodId of setCategory");
@@ -122,7 +111,7 @@ namespace jvulkan
 		env->DeleteLocalRef(objectNameString);
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkPerformanceCounterDescriptionKHRClass, "setDescription", "(Ljava/lang/String;)V");
+		methodId = env->GetMethodID(theClass, "setDescription", "(Ljava/lang/String;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setDescription");
@@ -131,7 +120,7 @@ namespace jvulkan
 
 		objectNameString = env->NewStringUTF(vkPerformanceCounterDescriptionKHR->description);
 
-		env->CallVoidMethod(jVkPerformanceCounterDescriptionKHRObject, methodId, objectNameString);
+		env->CallVoidMethod(theObject, methodId, objectNameString);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute to get methodId of setDescription");
@@ -141,6 +130,6 @@ namespace jvulkan
 		env->DeleteLocalRef(objectNameString);
 
 
-		return jVkPerformanceCounterDescriptionKHRObject;
+		return theObject;
 	}
 }

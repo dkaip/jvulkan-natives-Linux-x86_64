@@ -38,24 +38,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
     }
 
-//    jclass vkPhysicalDeviceClass = env->GetObjectClass(jVkPhysicalDevice);
-//    if (env->ExceptionOccurred())
-//    {
-//        return VK_RESULT_MAX_ENUM;
-//    }
-//
-//    jmethodID methodId = env->GetMethodID(vkPhysicalDeviceClass, "getHandle", "()J");
-//    if (env->ExceptionOccurred())
-//    {
-//        return VK_RESULT_MAX_ENUM;
-//    }
-//
-//    jlong deviceHandle = env->CallLongMethod(jVkPhysicalDevice, methodId);
-//    if (env->ExceptionOccurred())
-//    {
-//        return VK_RESULT_MAX_ENUM;
-//    }
-//
     uint32_t numberOfPhysicalDeviceExtensionProperties = 0;
 
     const char *layerName = nullptr;
@@ -98,6 +80,12 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
             return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
         }
 
+        jmethodID constructor = env->GetMethodID(javaClass, "<init>", "()V");
+        if (env->ExceptionOccurred())
+        {
+            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+        }
+
         jclass collectionClass = env->GetObjectClass(jEnumerateDeviceExtensionPropertiesCollection);
         if (env->ExceptionOccurred())
         {
@@ -112,12 +100,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
         for (const auto& extension : extensionList)
         {
-            jmethodID constructor = env->GetMethodID(javaClass, "<init>", "()V");
-            if (env->ExceptionOccurred())
-            {
-                return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-            }
-
             jobject newObject = env->NewObject(javaClass, constructor);
             if (env->ExceptionOccurred())
             {

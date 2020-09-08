@@ -23,6 +23,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 static jobject getVkQueueFlagBits(JNIEnv *env, VkQueueFlags vkQueueFlagBits);
 
@@ -77,6 +78,12 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
             return;
         }
 
+        jmethodID constructor = env->GetMethodID(javaClass, "<init>", "()V");
+        if (env->ExceptionOccurred())
+        {
+            return;
+        }
+
         jmethodID addMethodId = env->GetMethodID(collectionClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
@@ -85,12 +92,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
 
         for (const auto& queueFamily : propertyList)
         {
-            jmethodID constructor = env->GetMethodID(javaClass, "<init>", "()V");
-            if (env->ExceptionOccurred())
-            {
-                return;
-            }
-
             jobject newObject = env->NewObject(javaClass, constructor);
             if (env->ExceptionOccurred())
             {
@@ -185,44 +186,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
             {
                 return;
             }
-
-
-//            methodId = env->GetMethodID(vkExtent3DClass, "setWidth", "(I)V");
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
-//            env->CallVoidMethod(vkExtent3DObject, methodId, queueFamily.minImageTransferGranularity.width);
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
-//            methodId = env->GetMethodID(vkExtent3DClass, "setHeight", "(I)V");
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
-//            env->CallVoidMethod(vkExtent3DObject, methodId, queueFamily.minImageTransferGranularity.height);
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
-//            methodId = env->GetMethodID(vkExtent3DClass, "setDepth", "(I)V");
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
-//            env->CallVoidMethod(vkExtent3DObject, methodId, queueFamily.minImageTransferGranularity.depth);
-//            if (env->ExceptionOccurred())
-//            {
-//                return;
-//            }
-//
 
             env->CallVoidMethod(jQueueFamilyPropertiesCollection, addMethodId, newObject);
             if (env->ExceptionOccurred())

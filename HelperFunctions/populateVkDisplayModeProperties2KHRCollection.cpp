@@ -45,20 +45,6 @@ namespace jvulkan
             return;
         }
 
-        jclass vkDisplayModeProperties2KHRClass = env->FindClass("Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR;");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeProperties2KHR");
-            return;
-        }
-
-        jmethodID constructorMethodId = env->GetMethodID(vkDisplayModeProperties2KHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id for <init>");
-            return;
-        }
-
         for(int i = 0; i < numberOfVkDisplayModeProperties2KHRs; i++)
         {
             jobject jVkDisplayModeProperties2KHRObject = createVkDisplayModeProperties2KHR(

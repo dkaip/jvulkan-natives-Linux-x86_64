@@ -29,38 +29,27 @@ namespace jvulkan
 {
 	jobject createVkQueueFamilyProperties(JNIEnv *env, const VkQueueFamilyProperties *vkQueueFamilyProperties)
 	{
-		if (vkQueueFamilyProperties)
+		if (vkQueueFamilyProperties == nullptr)
 		{
 			LOGERROR(env, "%s", "vkQueueFamilyProperties == nullptr");
 			return nullptr;
 		}
 
-		jclass vkQueueFamilyPropertiesClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkQueueFamilyPropertiesObject =
-				env->NewObject(vkQueueFamilyPropertiesClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setQueueFlags", "(Ljava/util/EnumSet;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setQueueFlags", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setQueueFlags");
@@ -74,7 +63,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkQueueFamilyPropertiesObject, methodId, jqueueFlags);
+        env->CallVoidMethod(theObject, methodId, jqueueFlags);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -82,14 +71,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setQueueCount", "(I)V");
+		methodId = env->GetMethodID(theClass, "setQueueCount", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setQueueCount");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkQueueFamilyPropertiesObject, methodId, vkQueueFamilyProperties->queueCount);
+        env->CallVoidMethod(theObject, methodId, vkQueueFamilyProperties->queueCount);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -97,14 +86,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setTimestampValidBits", "(I)V");
+		methodId = env->GetMethodID(theClass, "setTimestampValidBits", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setTimestampValidBits");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkQueueFamilyPropertiesObject, methodId, vkQueueFamilyProperties->timestampValidBits);
+        env->CallVoidMethod(theObject, methodId, vkQueueFamilyProperties->timestampValidBits);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -119,20 +108,20 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkQueueFamilyPropertiesClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
+        methodId = env->GetMethodID(theClass, "setMinImageTransferGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinImageTransferGranularity");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkQueueFamilyPropertiesObject, methodId, vkExtent3D);
+        env->CallVoidMethod(theObject, methodId, vkExtent3D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		return jVkQueueFamilyPropertiesObject;
+		return theObject;
 	}
 }

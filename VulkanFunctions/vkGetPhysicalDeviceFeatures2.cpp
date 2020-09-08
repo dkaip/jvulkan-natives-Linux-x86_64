@@ -41,7 +41,6 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
 
     std::vector<void *> memoryToFree(20);
 
-
     /*
      * For "output" data we need to crawl the pNext chain "first" so that all of
      * the pNext structures are already in place before the API call.  For "input"
@@ -114,30 +113,18 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
      * Now populate the properties attribute of the VkPhysicalDeviceFeatures2
      * object
      */
-	jclass vkPhysicalDeviceFeaturesClass = env->FindClass(
-			"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures");
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures");
-			return;
-		}
-
-	// Locate the constructor
-	jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFeaturesClass, "<init>", "()V");
-	if (env->ExceptionOccurred())
-	{
-		LOGERROR(env, "%s", "Could not find method id <init> for class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures");
-		return;
-	}
-
-	// Create the Java VkPhysicalDeviceFeatures object
-	jobject jVkPhysicalDeviceFeaturesObject =
-			env->NewObject(vkPhysicalDeviceFeaturesClass, methodId);
-	if (env->ExceptionOccurred())
-	{
-		LOGERROR(env, "%s", "Could construct class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures");
-		return;
-	}
+	jclass vkPhysicalDeviceFeaturesClass = nullptr;
+	jobject jVkPhysicalDeviceFeaturesObject = nullptr;
+	jvulkan::createJavaObjectUsingDefaultConstructor(
+			env,
+			"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures",
+			&vkPhysicalDeviceFeaturesClass,
+			&jVkPhysicalDeviceFeaturesObject);
+    if (env->ExceptionOccurred())
+    {
+    	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
+        return;
+    }
 
     jvulkan::populateVkPhysicalDeviceFeatures(
     		env,
@@ -157,7 +144,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
         return;
     }
 
-    methodId = env->GetMethodID(vkPhysicalDeviceFeatures2Class, "setFeatures", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures;)V");
+    jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFeatures2Class, "setFeatures", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures;)V");
     if (env->ExceptionOccurred())
     {
     	LOGERROR(env, "%s", "Could not find method id setFeatures for class jVkPhysicalDeviceProperties2");

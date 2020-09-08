@@ -3341,7 +3341,17 @@ namespace jvulkan
 			VkPerformanceConfigurationAcquireInfoINTEL *vkPerformanceConfigurationAcquireInfoINTEL,
             std::vector<void *> *memoryToFree);
 
-    /*
+    void createJavaObjectUsingDefaultConstructor(
+    		JNIEnv *env,
+			const char *className,
+			jclass *theClass,
+			jobject *newJavaObject);
+
+	jobject createVkPhysicalDeviceSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties);
+
+	jobject createVkPhysicalDeviceLimits(JNIEnv *env, const VkPhysicalDeviceLimits *deviceLimits);
+
+	/*
 	 * Make sure you free() the resulting string.
 	 */
 	char *getClassName(JNIEnv *env, const jobject theObject);

@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkSparseImageMemoryRequirements2Class = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements2");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkSparseImageMemoryRequirements2Class, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkSparseImageMemoryRequirements2Object =
-				env->NewObject(vkSparseImageMemoryRequirements2Class, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -70,20 +59,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirements2Class, "setMemoryRequirements", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setMemoryRequirements", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMemoryRequirements");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirements2Object, methodId, jVkSparseImageMemoryRequirements);
+        env->CallVoidMethod(theObject, methodId, jVkSparseImageMemoryRequirements);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkSparseImageMemoryRequirements2Object;
+        return theObject;
 	}
 }

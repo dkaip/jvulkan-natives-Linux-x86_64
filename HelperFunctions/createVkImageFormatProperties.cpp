@@ -27,21 +27,23 @@ namespace jvulkan
 {
 	jobject createVkImageFormatProperties(JNIEnv *env, const VkImageFormatProperties *vkImageFormatProperties)
 	{
-		// Locate the VkImageFormatProperties class
-		jclass theClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties");
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(theClass, "<init>", "()V");
-
-		// Create the Java VkImageFormatProperties object
-		jobject jVkImageFormatPropertiesObject =
-				env->NewObject(theClass, methodId);
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkImageFormatProperties",
+				&theClass,
+				&theObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+            return nullptr;
+        }
 
         ///////////////////////////////////////////////////////////////////////////
 		populateVkImageFormatProperties(
 				env,
-				jVkImageFormatPropertiesObject,
+				theObject,
 				vkImageFormatProperties,
 				nullptr);
 	    if (env->ExceptionOccurred())
@@ -50,6 +52,6 @@ namespace jvulkan
 	    	return nullptr;
 	    }
 
-		return jVkImageFormatPropertiesObject;
+		return theObject;
 	}
 }

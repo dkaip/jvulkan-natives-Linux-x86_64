@@ -32,19 +32,21 @@ namespace jvulkan
 {
     jobject createVkDebugUtilsLabelEXT(JNIEnv *env, const VkDebugUtilsLabelEXT *labelData)
     {
-        // Locate the VkDebugUtilsMessengerCallbackDataEXT class
-        jclass vkDebugUtilsLabelEXTClass = env->FindClass(
-        		"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsLabelEXT");
-
-        // Locate the constructor
-        jmethodID methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "<init>", "()V");
-
-        // Create the Java VkDebugUtilsLabelEXT object
-        jobject vkDebugUtilsLabelEXTObject =
-        		env->NewObject(vkDebugUtilsLabelEXTClass, methodId);
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDebugUtilsLabelEXT",
+				&theClass,
+				&theObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+            return nullptr;
+        }
 
         ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "setLabelName", "(Ljava/lang/String;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setLabelName", "(Ljava/lang/String;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying to get methodId of setLabelName");
@@ -53,7 +55,7 @@ namespace jvulkan
 
         jstring labelNameString = env->NewStringUTF(labelData->pLabelName);
 
-        env->CallVoidMethod(vkDebugUtilsLabelEXTObject, methodId, labelNameString);
+        env->CallVoidMethod(theObject, methodId, labelNameString);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying execute to get methodId of setLabelName");
@@ -67,20 +69,20 @@ namespace jvulkan
 
         env->SetFloatArrayRegion(jColorArray, 0, sizeof(labelData->color), labelData->color);
 
-        methodId = env->GetMethodID(vkDebugUtilsLabelEXTClass, "setColor", "([F)V");
+        methodId = env->GetMethodID(theClass, "setColor", "([F)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying to get methodId of setColor");
             return nullptr;
         }
 
-        env->CallVoidMethod(vkDebugUtilsLabelEXTObject, methodId, jColorArray);
+        env->CallVoidMethod(theObject, methodId, jColorArray);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Failed trying execute to get methodId of setColor");
             return nullptr;
         }
 
-        return vkDebugUtilsLabelEXTObject;
+        return theObject;
     }
 }

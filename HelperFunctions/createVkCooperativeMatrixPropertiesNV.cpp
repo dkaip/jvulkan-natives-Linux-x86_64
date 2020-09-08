@@ -37,39 +37,28 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkCooperativeMatrixPropertiesNVClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCooperativeMatrixPropertiesNV");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCooperativeMatrixPropertiesNV",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCooperativeMatrixPropertiesNV");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkCooperativeMatrixPropertiesNVObject =
-				env->NewObject(vkCooperativeMatrixPropertiesNVClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setmSize", "(I)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setmSize", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setmSize");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, vkCooperativeMatrixPropertiesNV->MSize);
+        env->CallVoidMethod(theObject, methodId, vkCooperativeMatrixPropertiesNV->MSize);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -77,14 +66,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setnSize", "(I)V");
+		methodId = env->GetMethodID(theClass, "setnSize", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setnSize");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, vkCooperativeMatrixPropertiesNV->NSize);
+        env->CallVoidMethod(theObject, methodId, vkCooperativeMatrixPropertiesNV->NSize);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -92,14 +81,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setkSize", "(I)V");
+		methodId = env->GetMethodID(theClass, "setkSize", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setkSize");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, vkCooperativeMatrixPropertiesNV->KSize);
+        env->CallVoidMethod(theObject, methodId, vkCooperativeMatrixPropertiesNV->KSize);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -117,14 +106,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setaType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
+		methodId = env->GetMethodID(theClass, "setaType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setaType");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, jVkComponentTypeNV);
+        env->CallVoidMethod(theObject, methodId, jVkComponentTypeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -142,14 +131,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setbType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
+		methodId = env->GetMethodID(theClass, "setbType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setbType");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, jVkComponentTypeNV);
+        env->CallVoidMethod(theObject, methodId, jVkComponentTypeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -167,14 +156,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setcType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
+		methodId = env->GetMethodID(theClass, "setcType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setcType");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, jVkComponentTypeNV);
+        env->CallVoidMethod(theObject, methodId, jVkComponentTypeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -192,14 +181,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setdType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
+		methodId = env->GetMethodID(theClass, "setdType", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkComponentTypeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setdType");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, jVkComponentTypeNV);
+        env->CallVoidMethod(theObject, methodId, jVkComponentTypeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -217,20 +206,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCooperativeMatrixPropertiesNVClass, "setScope", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkScopeNV;)V");
+		methodId = env->GetMethodID(theClass, "setScope", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkScopeNV;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setScope");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCooperativeMatrixPropertiesNVObject, methodId, jVkScopeNV);
+        env->CallVoidMethod(theObject, methodId, jVkScopeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkCooperativeMatrixPropertiesNVObject;
+        return theObject;
 	}
 }

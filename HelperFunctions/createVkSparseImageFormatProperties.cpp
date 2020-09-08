@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkSparseImageFormatPropertiesClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkSparseImageFormatPropertiesClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkSparseImageFormatPropertiesObject =
-				env->NewObject(vkSparseImageFormatPropertiesClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -71,14 +60,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageFormatPropertiesClass, "setSupportedAlpha", "(Ljava/util/EnumSet;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setSupportedAlpha", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSupportedAlpha");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageFormatPropertiesObject, methodId, vkImageAspectFlagsEnumSet);
+        env->CallVoidMethod(theObject, methodId, vkImageAspectFlagsEnumSet);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -95,14 +84,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageFormatPropertiesClass, "setImageGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
+		methodId = env->GetMethodID(theClass, "setImageGranularity", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent3D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageGranularity");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageFormatPropertiesObject, methodId, jVkExtent3D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent3D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -119,20 +108,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageFormatPropertiesClass, "setFlags", "(Ljava/util/EnumSet;)V");
+		methodId = env->GetMethodID(theClass, "setFlags", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFlags");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageFormatPropertiesObject, methodId, vkSparseImageFormatFlagsEnumSet);
+        env->CallVoidMethod(theObject, methodId, vkSparseImageFormatFlagsEnumSet);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkSparseImageFormatPropertiesObject;
+        return theObject;
 	}
 }

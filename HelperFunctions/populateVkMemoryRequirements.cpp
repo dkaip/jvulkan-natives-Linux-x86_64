@@ -92,6 +92,11 @@ namespace jvulkan
 
         ////////////////////////////////////////////////////////////////////////////
         jclass bitSetClass = env->FindClass("java/util/BitSet");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find class for java/util/BitSet.");
+            return;
+        }
 
         methodId = env->GetMethodID(bitSetClass, "<init>", "(I)V");
         if (env->ExceptionOccurred())

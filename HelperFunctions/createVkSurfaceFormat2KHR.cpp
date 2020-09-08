@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkSurfaceFormat2KHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormat2KHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormat2KHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormat2KHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkSurfaceFormat2KHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkSurfaceFormat2KHRObject =
-				env->NewObject(vkSurfaceFormat2KHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -68,20 +57,20 @@ namespace jvulkan
             return nullptr;
         }
 
-        methodId = env->GetMethodID(vkSurfaceFormat2KHRClass, "setSurfaceFormat", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormatKHR;)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setSurfaceFormat", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkSurfaceFormatKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSurfaceFormat");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSurfaceFormat2KHRObject, methodId, jVkSurfaceFormatKHRObject);
+        env->CallVoidMethod(theObject, methodId, jVkSurfaceFormatKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkSurfaceFormat2KHRObject;
+        return theObject;
 	}
 }

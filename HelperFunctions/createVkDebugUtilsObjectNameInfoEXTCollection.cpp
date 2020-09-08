@@ -27,28 +27,20 @@ namespace jvulkan
 {
 	jobject createVkDebugUtilsObjectNameInfoEXTCollection(JNIEnv *env, int objectCount, const VkDebugUtilsObjectNameInfoEXT objects[])
     {
-    	jclass linkedListClass = env->FindClass("java/util/LinkedList");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"java/util/LinkedList",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class \"java/util/LinkedList\"");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
-    	jmethodID linkedListConstructor = env->GetMethodID(linkedListClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find constructor for \"java/util/LinkedList\"");
-            return nullptr;
-        }
-
-    	jobject jLinkedList = env->NewObject(linkedListClass, linkedListConstructor);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not create a Java LinkedList");
-            return nullptr;
-        }
-
-        jmethodID addMethodId = env->GetMethodID(linkedListClass, "add", "(Ljava/lang/Object;)Z");
+        jmethodID addMethodId = env->GetMethodID(theClass, "add", "(Ljava/lang/Object;)Z");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could find add method for Java LinkedList class");
@@ -60,7 +52,7 @@ namespace jvulkan
     		jobject vkDebugUtilsObjectNameInfoEXT =
 					createVkDebugUtilsObjectNameInfoEXT(env, &objects[i]);
 
-    		env->CallVoidMethod(jLinkedList, addMethodId, vkDebugUtilsObjectNameInfoEXT);
+    		env->CallVoidMethod(theObject, addMethodId, vkDebugUtilsObjectNameInfoEXT);
             if (env->ExceptionOccurred())
             {
             	LOGERROR(env, "%s", "Failed trying to add a VkDebugUtilsObjectNameInfoEXT object to a Java LinkedList");
@@ -68,6 +60,6 @@ namespace jvulkan
             }
     	}
 
-    	return jLinkedList;
+    	return theObject;
     }
 }

@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkDisplayPlaneCapabilitiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlaneCapabilitiesKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlaneCapabilitiesKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlaneCapabilitiesKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkDisplayPlaneCapabilitiesKHRObject =
-				env->NewObject(vkDisplayPlaneCapabilitiesKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -71,14 +60,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setSupportedAlpha", "(Ljava/util/EnumSet;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setSupportedAlpha", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSupportedAlpha");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, VkDisplayPlaneAlphaFlagBitsKHREnumSet);
+        env->CallVoidMethod(theObject, methodId, VkDisplayPlaneAlphaFlagBitsKHREnumSet);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -95,14 +84,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMinSrcPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
+		methodId = env->GetMethodID(theClass, "setMinSrcPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinSrcPosition");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkOffset2D);
+        env->CallVoidMethod(theObject, methodId, jVkOffset2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -119,14 +108,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMaxSrcPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
+		methodId = env->GetMethodID(theClass, "setMaxSrcPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxSrcPosition");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkOffset2D);
+        env->CallVoidMethod(theObject, methodId, jVkOffset2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -143,14 +132,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMinSrcExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setMinSrcExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinSrcExtent");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -167,14 +156,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMaxSrcExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setMaxSrcExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxSrcExtent");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -191,14 +180,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMinDstPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
+		methodId = env->GetMethodID(theClass, "setMinDstPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinDstPosition");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkOffset2D);
+        env->CallVoidMethod(theObject, methodId, jVkOffset2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -215,14 +204,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMaxDstPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
+		methodId = env->GetMethodID(theClass, "setMaxDstPosition", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkOffset2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxDstPosition");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkOffset2D);
+        env->CallVoidMethod(theObject, methodId, jVkOffset2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -239,14 +228,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMinDstExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setMinDstExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinDstExtent");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -263,20 +252,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlaneCapabilitiesKHRClass, "setMaxDstExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setMaxDstExtent", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMaxDstExtent");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlaneCapabilitiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkDisplayPlaneCapabilitiesKHRObject;
+        return theObject;
 	}
 }

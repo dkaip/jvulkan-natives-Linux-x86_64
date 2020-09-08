@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkPhysicalDeviceSparseImageFormatInfo2Class = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseImageFormatInfo2",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseImageFormatInfo2");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkPhysicalDeviceSparseImageFormatInfo2Object =
-				env->NewObject(vkPhysicalDeviceSparseImageFormatInfo2Class, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -72,14 +61,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setFormat", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setFormat", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFormat");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceSparseImageFormatInfo2Object, methodId, jVkFormat);
+        env->CallVoidMethod(theObject, methodId, jVkFormat);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -97,14 +86,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType;)V");
+		methodId = env->GetMethodID(theClass, "setType", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageType;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setType");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceSparseImageFormatInfo2Object, methodId, jVkImageType);
+        env->CallVoidMethod(theObject, methodId, jVkImageType);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -122,14 +111,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;)V");
+		methodId = env->GetMethodID(theClass, "setSamples", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkSampleCountFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSamples");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceSparseImageFormatInfo2Object, methodId, jVkSampleCountFlagBits);
+        env->CallVoidMethod(theObject, methodId, jVkSampleCountFlagBits);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -146,14 +135,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setUsage", "(Ljava/util/EnumSet;)V");
+		methodId = env->GetMethodID(theClass, "setUsage", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setUsage");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceSparseImageFormatInfo2Object, methodId, jUsage);
+        env->CallVoidMethod(theObject, methodId, jUsage);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -171,21 +160,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkPhysicalDeviceSparseImageFormatInfo2Class, "setTiling", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling;)V");
+		methodId = env->GetMethodID(theClass, "setTiling", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkImageTiling;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setTiling");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkPhysicalDeviceSparseImageFormatInfo2Object, methodId, jVkImageTiling);
+        env->CallVoidMethod(theObject, methodId, jVkImageTiling);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-
-        return jVkPhysicalDeviceSparseImageFormatInfo2Object;
+        return theObject;
 	}
 }

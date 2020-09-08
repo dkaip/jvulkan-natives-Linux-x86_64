@@ -20,6 +20,7 @@ using namespace std;
 
 #include "com_CIMthetics_jvulkan_VulkanCore_NativeProxies.h"
 #include "JVulkanHelperFunctions.hh"
+#include "slf4j.hh"
 
 /*
  * Class:     com_CIMthetics_jvulkan_VulkanCore_NativeProxies
@@ -32,12 +33,14 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     VkDevice_T *logicalDeviceHandle = (VkDevice_T *)jvulkan::getHandleValue(env, jVkDevice);
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not retrieve VkDevice handle");
         return;
     }
 
     VkImage_T *imageHandle = (VkImage_T *)jvulkan::getHandleValue(env, jVkImage);
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not retrieve VkImage handle");
         return;
     }
 
@@ -48,6 +51,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     jclass vkMemoryRequirementsClass = env->GetObjectClass(jVkMemoryRequirements);
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not get class for jVkMemoryRequirements.");
         return;
     }
 
@@ -55,38 +59,58 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     jmethodID methodId = env->GetMethodID(vkMemoryRequirementsClass, "setSize", "(J)V");
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not find method id for setSize.");
         return;
     }
 
     env->CallVoidMethod(jVkMemoryRequirements, methodId, vkMemoryRequirements.size);
+    if (env->ExceptionOccurred())
+    {
+		LOGERROR(env, "%s", "Error calling CallVoidMethod.");
+        return;
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     methodId = env->GetMethodID(vkMemoryRequirementsClass, "setAlignment", "(J)V");
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not find method id for setAlignment.");
         return;
     }
 
     env->CallVoidMethod(jVkMemoryRequirements, methodId, vkMemoryRequirements.alignment);
+    if (env->ExceptionOccurred())
+    {
+		LOGERROR(env, "%s", "Error calling CallVoidMethod.");
+        return;
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     jclass bitSetClass = env->FindClass("java/util/BitSet");
+    if (env->ExceptionOccurred())
+    {
+		LOGERROR(env, "%s", "Could not get class for java/util/BitSet.");
+        return;
+    }
 
     methodId = env->GetMethodID(bitSetClass, "<init>", "(I)V");
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not find method id for <init>.");
         return;
     }
 
     jobject bitSetObject = env->NewObject(bitSetClass, methodId, 32);
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Error calling NewObject.");
         return;
     }
 
     methodId = env->GetMethodID(bitSetClass, "set", "(I)V");
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not find method id for set.");
         return;
     }
 
@@ -97,6 +121,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
             env->CallVoidMethod(bitSetObject, methodId, i);
             if (env->ExceptionOccurred())
             {
+        		LOGERROR(env, "%s", "Error calling CallVoidMethod.");
                 return;
             }
         }
@@ -105,10 +130,16 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     methodId = env->GetMethodID(vkMemoryRequirementsClass, "setMemoryTypeBits", "(Ljava/util/BitSet;)V");
     if (env->ExceptionOccurred())
     {
+		LOGERROR(env, "%s", "Could not find method id for setMemoryTypeBits.");
         return;
     }
 
     env->CallVoidMethod(jVkMemoryRequirements, methodId, bitSetObject);
+    if (env->ExceptionOccurred())
+    {
+		LOGERROR(env, "%s", "Error calling CallVoidMethod.");
+        return;
+    }
 
     return;
 }

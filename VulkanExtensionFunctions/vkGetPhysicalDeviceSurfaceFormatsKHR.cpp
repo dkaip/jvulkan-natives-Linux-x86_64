@@ -69,21 +69,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
         return jvulkan::createVkResult(env, result);
     }
 
-//    jclass vkSurfaceFormatKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkSurfaceFormatKHR");
-//    if (env->ExceptionOccurred())
-//    {
-//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-//    }
-//
-//    jmethodID vkSurfaceFormatKHRConstructor = env->GetMethodID(
-//            vkSurfaceFormatKHRClass,
-//            "<init>",
-//            "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;)V");
-//    if (env->ExceptionOccurred())
-//    {
-//        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-//    }
-//
     jclass collectionClass = env->GetObjectClass(jVkSurfaceFormatKHRCollection);
     if (env->ExceptionOccurred())
     {
@@ -100,50 +85,6 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 
     for (const auto& surfaceFormat : surfaceFormats)
     {
-//        ///////////////////////////////////////////////////////////////////////////
-//
-//        jclass vkFormatClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat");
-//        if (env->ExceptionOccurred())
-//        {
-//            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "com/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat" << endl;
-//            return nullptr;
-//        }
-//
-//        methodId = env->GetStaticMethodID(vkFormatClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;");
-//        if (env->ExceptionOccurred())
-//        {
-//            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkFormat;" << endl;
-//            return nullptr;
-//        }
-//
-//        jobject formatEnum = env->CallStaticObjectMethod(vkFormatClass, methodId, surfaceFormat.format);
-//
-//        ///////////////////////////////////////////////////////////////////////////
-//
-//        jclass vkColorSpaceKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR");
-//        if (env->ExceptionOccurred())
-//        {
-//            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find class " << "ccom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR" << endl;
-//            return nullptr;
-//        }
-//
-//        methodId = env->GetStaticMethodID(vkColorSpaceKHRClass, "fromValue", "(I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;");
-//        if (env->ExceptionOccurred())
-//        {
-//            cout << "vkGetPhysicalDeviceSurfaceFormatsKHR: could not find static method " << "fromValue with signature (I)Lcom/CIMthetics/jvulkan/VulkanExtensions/Enums/VkColorSpaceKHR;" << endl;
-//            return nullptr;
-//        }
-//
-//        jobject colorspaceEnum = env->CallStaticObjectMethod(vkColorSpaceKHRClass, methodId, surfaceFormat.colorSpace);
-//
-//        ///////////////////////////////////////////////////////////////////////////
-//
-//        jobject newVkSurfaceFormatKHR = env->NewObject(vkSurfaceFormatKHRClass, vkSurfaceFormatKHRConstructor, formatEnum, colorspaceEnum);
-//        if (env->ExceptionOccurred())
-//        {
-//            return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-//        }
-//
         jobject newVkSurfaceFormatKHR = jvulkan::createVkSurfaceFormatKHR(env, &surfaceFormat);
         if (env->ExceptionOccurred())
         {

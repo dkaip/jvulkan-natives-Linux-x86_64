@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkDisplayPlanePropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlanePropertiesKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlanePropertiesKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPlanePropertiesKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkDisplayPlanePropertiesKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkDisplayPlanePropertiesKHRObject =
-				env->NewObject(vkDisplayPlanePropertiesKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -72,14 +61,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPlanePropertiesKHRClass, "setCurrentDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setCurrentDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCurrentDisplay");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlanePropertiesKHRObject, methodId, jVkDisplayKHR);
+        env->CallVoidMethod(theObject, methodId, jVkDisplayKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -87,20 +76,20 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkDisplayPlanePropertiesKHRClass, "setCurrentStackIndex", "(I)V");
+		methodId = env->GetMethodID(theClass, "setCurrentStackIndex", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCurrentStackIndex");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPlanePropertiesKHRObject, methodId, vkDisplayPlanePropertiesKHR->currentStackIndex);
+        env->CallVoidMethod(theObject, methodId, vkDisplayPlanePropertiesKHR->currentStackIndex);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkDisplayPlanePropertiesKHRObject;
+        return theObject;
 	}
 }

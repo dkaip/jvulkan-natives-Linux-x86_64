@@ -29,26 +29,28 @@ namespace jvulkan
 {
 	jobject createVkConformanceVersion(JNIEnv *env, const VkConformanceVersion *vkConformanceVersion)
 	{
-		// Locate the VkConformanceVersion class
-		jclass vkConformanceVersionClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkConformanceVersion");
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkConformanceVersionClass, "<init>", "()V");
-
-		// Create the Java jVkConformanceVersionObject object
-		jobject jVkConformanceVersionObject =
-				env->NewObject(vkConformanceVersionClass, methodId);
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkConformanceVersion",
+				&theClass,
+				&theObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+            return nullptr;
+        }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkConformanceVersionClass, "setMajor", "(B)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setMajor", "(B)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMajor");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkConformanceVersionObject, methodId, vkConformanceVersion->major);
+        env->CallVoidMethod(theObject, methodId, vkConformanceVersion->major);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -56,14 +58,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkConformanceVersionClass, "setMinor", "(B)V");
+        methodId = env->GetMethodID(theClass, "setMinor", "(B)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setMinor");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkConformanceVersionObject, methodId, vkConformanceVersion->minor);
+        env->CallVoidMethod(theObject, methodId, vkConformanceVersion->minor);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -71,14 +73,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkConformanceVersionClass, "setSubminor", "(B)V");
+        methodId = env->GetMethodID(theClass, "setSubminor", "(B)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSubminor");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkConformanceVersionObject, methodId, vkConformanceVersion->subminor);
+        env->CallVoidMethod(theObject, methodId, vkConformanceVersion->subminor);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -86,20 +88,20 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkConformanceVersionClass, "setPatch", "(B)V");
+        methodId = env->GetMethodID(theClass, "setPatch", "(B)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPatch");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkConformanceVersionObject, methodId, vkConformanceVersion->patch);
+        env->CallVoidMethod(theObject, methodId, vkConformanceVersion->patch);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		return jVkConformanceVersionObject;
+		return theObject;
 	}
 }

@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkSparseImageMemoryRequirementsClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageMemoryRequirements");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkSparseImageMemoryRequirementsObject =
-				env->NewObject(vkSparseImageMemoryRequirementsClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -92,76 +81,76 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setFormatProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkSparseImageFormatProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setFormatProperties");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirementsObject, methodId, jVkSparseImageFormatProperties);
+        env->CallVoidMethod(theObject, methodId, jVkSparseImageFormatProperties);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setImageMipTailFirstLod", "(I)V");
+		methodId = env->GetMethodID(theClass, "setImageMipTailFirstLod", "(I)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageMipTailFirstLod");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirementsObject, methodId, vkSparseImageMemoryRequirements->imageMipTailFirstLod);
+        env->CallVoidMethod(theObject, methodId, vkSparseImageMemoryRequirements->imageMipTailFirstLod);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setImageMipTailSize", "(J)V");
+		methodId = env->GetMethodID(theClass, "setImageMipTailSize", "(J)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageMipTailSize");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirementsObject, methodId, vkSparseImageMemoryRequirements->imageMipTailSize);
+        env->CallVoidMethod(theObject, methodId, vkSparseImageMemoryRequirements->imageMipTailSize);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setImageMipTailOffset", "(J)V");
+		methodId = env->GetMethodID(theClass, "setImageMipTailOffset", "(J)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageMipTailOffset");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirementsObject, methodId, vkSparseImageMemoryRequirements->imageMipTailOffset);
+        env->CallVoidMethod(theObject, methodId, vkSparseImageMemoryRequirements->imageMipTailOffset);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkSparseImageMemoryRequirementsClass, "setImageMipTailStride", "(J)V");
+		methodId = env->GetMethodID(theClass, "setImageMipTailStride", "(J)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setImageMipTailStride");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkSparseImageMemoryRequirementsObject, methodId, vkSparseImageMemoryRequirements->imageMipTailStride);
+        env->CallVoidMethod(theObject, methodId, vkSparseImageMemoryRequirements->imageMipTailStride);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkSparseImageMemoryRequirementsObject;
+        return theObject;
 	}
 }

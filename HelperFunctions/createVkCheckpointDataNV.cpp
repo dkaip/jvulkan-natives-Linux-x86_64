@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkCheckpointDataNVClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCheckpointDataNV");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCheckpointDataNV",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkCheckpointDataNV");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkCheckpointDataNVClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkCheckpointDataNVObject =
-				env->NewObject(vkCheckpointDataNVClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -72,14 +61,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCheckpointDataNVClass, "setStage", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setStage", "(Lcom/CIMthetics/jvulkan/VulkanCore/Enums/VkPipelineStageFlagBits;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setStage");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCheckpointDataNVObject, methodId, jVkComponentTypeNV);
+        env->CallVoidMethod(theObject, methodId, jVkComponentTypeNV);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -97,20 +86,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkCheckpointDataNVClass, "setCheckpointMarker", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/CheckpointMarker;)V");
+		methodId = env->GetMethodID(theClass, "setCheckpointMarker", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/CheckpointMarker;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setCheckpointMarker");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkCheckpointDataNVObject, methodId, jCheckpointMarker);
+        env->CallVoidMethod(theObject, methodId, jCheckpointMarker);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkCheckpointDataNVObject;
+        return theObject;
 	}
 }

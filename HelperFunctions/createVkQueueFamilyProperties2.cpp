@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkQueueFamilyProperties2Class = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties2");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkQueueFamilyProperties2Class, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkQueueFamilyProperties2Object =
-				env->NewObject(vkQueueFamilyProperties2Class, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -70,20 +59,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkQueueFamilyProperties2Class, "setQueueFamilyProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setQueueFamilyProperties", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkQueueFamilyProperties;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setQueueFamilyProperties");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkQueueFamilyProperties2Object, methodId, jVkQueueFamilyProperties);
+        env->CallVoidMethod(theObject, methodId, jVkQueueFamilyProperties);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkQueueFamilyProperties2Object;
+        return theObject;
 	}
 }

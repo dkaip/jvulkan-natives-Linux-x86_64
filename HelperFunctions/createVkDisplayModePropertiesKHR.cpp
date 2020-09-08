@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkDisplayModePropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModePropertiesKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkDisplayModePropertiesKHRObject =
-				env->NewObject(vkDisplayModePropertiesKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -71,14 +60,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setDisplayMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setDisplayMode", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayModeKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplayMode");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayModePropertiesKHRObject, methodId, jVkDisplayModeKHR);
+        env->CallVoidMethod(theObject, methodId, jVkDisplayModeKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -94,20 +83,20 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayModePropertiesKHRClass, "setParameters", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR;)V");
+		methodId = env->GetMethodID(theClass, "setParameters", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayModeParametersKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setParameters");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayModePropertiesKHRObject, methodId, jVkDisplayModeParametersKHR);
+        env->CallVoidMethod(theObject, methodId, jVkDisplayModeParametersKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkDisplayModePropertiesKHRObject;
+        return theObject;
 	}
 }

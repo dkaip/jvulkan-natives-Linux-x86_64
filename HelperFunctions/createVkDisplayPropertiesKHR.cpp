@@ -37,27 +37,16 @@ namespace jvulkan
 			return nullptr;
 		}
 
-		jclass vkDisplayPropertiesKHRClass = env->FindClass(
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR");
+		jclass theClass = nullptr;
+		jobject theObject = nullptr;
+		createJavaObjectUsingDefaultConstructor(
+				env,
+				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR",
+				&theClass,
+				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could find class com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkDisplayPropertiesKHR");
-            return nullptr;
-        }
-
-		// Locate the constructor
-		jmethodID methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "<init>", "()V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id <init> ()V");
-            return nullptr;
-        }
-
-		jobject jVkDisplayPropertiesKHRObject =
-				env->NewObject(vkDisplayPropertiesKHRClass, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling <init>(constructor)");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
             return nullptr;
         }
 
@@ -72,14 +61,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
+		jmethodID methodId = env->GetMethodID(theClass, "setDisplay", "(Lcom/CIMthetics/jvulkan/VulkanExtensions/Handles/VkDisplayKHR;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setDisplay");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, jVkDisplayKHR);
+        env->CallVoidMethod(theObject, methodId, jVkDisplayKHR);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -87,7 +76,7 @@ namespace jvulkan
         }
 
 		////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setDisplayName", "(Ljava/lang/String;)V");
+		methodId = env->GetMethodID(theClass, "setDisplayName", "(Ljava/lang/String;)V");
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying to get methodId of setDisplayName");
@@ -96,7 +85,7 @@ namespace jvulkan
 
 		jstring displayNameString = env->NewStringUTF(vkDisplayPropertiesKHR->displayName);
 
-		env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, displayNameString);
+		env->CallVoidMethod(theObject, methodId, displayNameString);
 		if (env->ExceptionOccurred())
 		{
 			LOGERROR(env, "%s", "Failed trying execute to get methodId of setDisplayName");
@@ -115,14 +104,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalDimensions", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setPhysicalDimensions", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPhysicalDimensions");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -139,14 +128,14 @@ namespace jvulkan
             return nullptr;
         }
 
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPhysicalResolution", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
+		methodId = env->GetMethodID(theClass, "setPhysicalResolution", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkExtent2D;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPhysicalResolution");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, jVkExtent2D);
+        env->CallVoidMethod(theObject, methodId, jVkExtent2D);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -154,7 +143,7 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setSupportedTransforms", "(Ljava/util/EnumSet;)V");
+        methodId = env->GetMethodID(theClass, "setSupportedTransforms", "(Ljava/util/EnumSet;)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setSupportedTransforms");
@@ -168,7 +157,7 @@ namespace jvulkan
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, jsupportedTransforms);
+        env->CallVoidMethod(theObject, methodId, jsupportedTransforms);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -176,14 +165,14 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPlaneReorderPossible", "(Z)V");
+		methodId = env->GetMethodID(theClass, "setPlaneReorderPossible", "(Z)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPlaneReorderPossible");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, vkDisplayPropertiesKHR->planeReorderPossible);
+        env->CallVoidMethod(theObject, methodId, vkDisplayPropertiesKHR->planeReorderPossible);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -191,20 +180,20 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(vkDisplayPropertiesKHRClass, "setPersistentContent", "(Z)V");
+		methodId = env->GetMethodID(theClass, "setPersistentContent", "(Z)V");
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Could not find method id setPersistentContent");
             return nullptr;
         }
 
-        env->CallVoidMethod(jVkDisplayPropertiesKHRObject, methodId, vkDisplayPropertiesKHR->persistentContent);
+        env->CallVoidMethod(theObject, methodId, vkDisplayPropertiesKHR->persistentContent);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-        return jVkDisplayPropertiesKHRObject;
+        return theObject;
 	}
 }

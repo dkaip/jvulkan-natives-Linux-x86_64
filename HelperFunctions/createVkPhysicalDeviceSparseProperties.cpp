@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * createVkPastPresentationTimingGOOGLE.cpp
+ * createVkPhysicalDeviceSparseProperties.cpp
  *
- *  Created on: Nov 4, 2019
+ *  Created on: Sep 7, 2020
  *      Author: Douglas Kaip
  */
 
@@ -27,11 +27,11 @@ extern const char *voidMethodErrorText;
 
 namespace jvulkan
 {
-	jobject createVkPastPresentationTimingGOOGLE(JNIEnv *env, const VkPastPresentationTimingGOOGLE *vkPastPresentationTimingGOOGLE)
+	jobject createVkPhysicalDeviceSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties)
 	{
-		if (vkPastPresentationTimingGOOGLE)
+		if (sparseProperties == nullptr)
 		{
-			LOGERROR(env, "%s", "vkPastPresentationTimingGOOGLE == nullptr");
+			LOGERROR(env, "%s", "sparseProperties == nullptr");
 			return nullptr;
 		}
 
@@ -39,24 +39,24 @@ namespace jvulkan
 		jobject theObject = nullptr;
 		createJavaObjectUsingDefaultConstructor(
 				env,
-				"com/CIMthetics/jvulkan/VulkanExtensions/Structures/VkPastPresentationTimingGOOGLE",
+				"com/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceSparseProperties",
 				&theClass,
 				&theObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor");
+        	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
             return nullptr;
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		jmethodID methodId = env->GetMethodID(theClass, "setPresentID", "(I)V");
+        jmethodID methodId = env->GetMethodID(theClass, "setResidencyStandard2DBlockShape", "(Z)V");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id setPresentID");
+        	LOGERROR(env, "%s", "Could not find method id setResidencyStandard2DBlockShape");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, vkPastPresentationTimingGOOGLE->presentMargin);
+        env->CallVoidMethod(theObject, methodId, sparseProperties->residencyStandard2DBlockShape);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -64,29 +64,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "setDesiredPresentTime", "(J)V");
+        methodId = env->GetMethodID(theClass, "setResidencyStandard2DMultisampleBlockShape", "(Z)V");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id setDesiredPresentTime");
+        	LOGERROR(env, "%s", "Could not find method id setResidencyStandard2DMultisampleBlockShape");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, vkPastPresentationTimingGOOGLE->desiredPresentTime);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", voidMethodErrorText);
-            return nullptr;
-        }
-
-        ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "setActualPresentTime", "(J)V");
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Could not find method id setActualPresentTime");
-            return nullptr;
-        }
-
-        env->CallVoidMethod(theObject, methodId, vkPastPresentationTimingGOOGLE->actualPresentTime);
+        env->CallVoidMethod(theObject, methodId, sparseProperties->residencyStandard2DMultisampleBlockShape);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -94,14 +79,14 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "setEarliestPresentTime", "(J)V");
+        methodId = env->GetMethodID(theClass, "setResidencyStandard3DBlockShape", "(Z)V");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id setEarliestPresentTime");
+        	LOGERROR(env, "%s", "Could not find method id setResidencyStandard3DBlockShape");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, vkPastPresentationTimingGOOGLE->earliestPresentTime);
+        env->CallVoidMethod(theObject, methodId, sparseProperties->residencyStandard3DBlockShape);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
@@ -109,20 +94,35 @@ namespace jvulkan
         }
 
         ///////////////////////////////////////////////////////////////////////////
-		methodId = env->GetMethodID(theClass, "setPresentMargin", "(J)V");
+        methodId = env->GetMethodID(theClass, "setResidencyAlignedMipSize", "(Z)V");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id setPresentMargin");
+        	LOGERROR(env, "%s", "Could not find method id setResidencyAlignedMipSize");
             return nullptr;
         }
 
-        env->CallVoidMethod(theObject, methodId, vkPastPresentationTimingGOOGLE->presentMargin);
+        env->CallVoidMethod(theObject, methodId, sparseProperties->residencyAlignedMipSize);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", voidMethodErrorText);
             return nullptr;
         }
 
-		return theObject;
+        ///////////////////////////////////////////////////////////////////////////
+        methodId = env->GetMethodID(theClass, "setResidencyNonResidentStrict", "(Z)V");
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Could not find method id setResidencyAlignedMipSize");
+            return nullptr;
+        }
+
+        env->CallVoidMethod(theObject, methodId, sparseProperties->residencyNonResidentStrict);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", voidMethodErrorText);
+            return nullptr;
+        }
+
+        return theObject;
 	}
 }

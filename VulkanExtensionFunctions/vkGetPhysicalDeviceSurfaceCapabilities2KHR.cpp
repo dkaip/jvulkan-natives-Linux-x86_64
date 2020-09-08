@@ -147,28 +147,17 @@ JNIEXPORT jobject JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_v
 		}
     }
 
-    jclass vkSurfaceCapabilitiesKHRClass = env->FindClass("com/CIMthetics/jvulkan/VulkanCore/Structures/VkSurfaceCapabilitiesKHR");
+	jclass vkSurfaceCapabilitiesKHRClass = nullptr;
+	jobject jVkSurfaceCapabilitiesKHRObject = nullptr;
+	jvulkan::createJavaObjectUsingDefaultConstructor(
+			env,
+			"com/CIMthetics/jvulkan/VulkanCore/Structures/VkSurfaceCapabilitiesKHR",
+			&vkSurfaceCapabilitiesKHRClass,
+			&jVkSurfaceCapabilitiesKHRObject);
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not find class com/CIMthetics/jvulkan/VulkanCore/Structures/VkSurfaceCapabilitiesKHR.");
-        jvulkan::freeMemory(&memoryToFree);
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-    jmethodID constructorMethodId = env->GetMethodID(vkSurfaceCapabilitiesKHRClass, "<init>", "()V");
-    if (env->ExceptionOccurred())
-    {
-    	LOGERROR(env, "%s", "Could not find method id <init>.");
-        jvulkan::freeMemory(&memoryToFree);
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
-    }
-
-	jobject jVkSurfaceCapabilitiesKHRObject = env->NewObject(vkSurfaceCapabilitiesKHRClass, constructorMethodId);
-    if (env->ExceptionOccurred())
-    {
-    	LOGERROR(env, "%s", "Error calling NewObject");
-        jvulkan::freeMemory(&memoryToFree);
-        return jvulkan::createVkResult(env, VK_RESULT_MAX_ENUM);
+    	LOGERROR(env, "%s", "Error calling createJavaObjectUsingDefaultConstructor.");
+        return nullptr;
     }
 
 	jvulkan::populateVkSurfaceCapabilitiesKHR(
