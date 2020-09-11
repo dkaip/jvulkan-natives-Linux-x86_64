@@ -127,7 +127,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     }
 
     /*
-     * Now populate the properties attribute of the VkPhysicalDeviceProperties2
+     * Now populate the properties attribute of the jVkFormatProperties2Object
      * object
      */
 	jclass vkFormatPropertiesClass = env->FindClass(

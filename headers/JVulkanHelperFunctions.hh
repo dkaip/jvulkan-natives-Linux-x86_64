@@ -1359,12 +1359,12 @@ namespace jvulkan
 			VkPhysicalDeviceFeatures2 *vkPhysicalDeviceFeatures2,
             std::vector<void *> *memoryToFree);
 
-    void getVkPhysicalDeviceFloat16Int8FeaturesKHR(
-            JNIEnv *env,
-            const jobject jVkPhysicalDeviceFloat16Int8FeaturesKHRObject,
-			VkPhysicalDeviceFloat16Int8FeaturesKHR *vkPhysicalDeviceFloat16Int8FeaturesKHR,
-            std::vector<void *> *memoryToFree);
-
+//    void getVkPhysicalDeviceFloat16Int8FeaturesKHR(
+//            JNIEnv *env,
+//            const jobject jVkPhysicalDeviceFloat16Int8FeaturesKHRObject,
+//			VkPhysicalDeviceFloat16Int8FeaturesKHR *vkPhysicalDeviceFloat16Int8FeaturesKHR,
+//            std::vector<void *> *memoryToFree);
+//
     void getVkPhysicalDeviceFragmentDensityMapFeaturesEXT(
             JNIEnv *env,
             const jobject jVkPhysicalDeviceFragmentDensityMapFeaturesEXTObject,
@@ -3348,6 +3348,427 @@ namespace jvulkan
 	jobject createVkPhysicalDeviceSparseProperties(JNIEnv *env, const VkPhysicalDeviceSparseProperties *sparseProperties);
 
 	jobject createVkPhysicalDeviceLimits(JNIEnv *env, const VkPhysicalDeviceLimits *deviceLimits);
+
+	void populateVkPhysicalDeviceCustomBorderColorPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceCustomBorderColorPropertiesEXTObject,
+			const VkPhysicalDeviceCustomBorderColorPropertiesEXT *vkPhysicalDeviceCustomBorderColorPropertiesEXT);
+
+	void populateVkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceDeviceGeneratedCommandsPropertiesNVObject,
+			const VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV *vkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV);
+
+	void populateVkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceFragmentDensityMap2PropertiesEXTObject,
+			const VkPhysicalDeviceFragmentDensityMap2PropertiesEXT *vkPhysicalDeviceFragmentDensityMap2PropertiesEXT);
+
+	void populateVkPhysicalDeviceLineRasterizationPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceLineRasterizationPropertiesEXTObject,
+			const VkPhysicalDeviceLineRasterizationPropertiesEXT *vkPhysicalDeviceLineRasterizationPropertiesEXT);
+
+	void populateVkPhysicalDevicePerformanceQueryPropertiesKHR(
+			JNIEnv *env,
+			jobject jVkPhysicalDevicePerformanceQueryPropertiesKHRObject,
+			const VkPhysicalDevicePerformanceQueryPropertiesKHR *vkPhysicalDevicePerformanceQueryPropertiesKHR);
+
+	/*
+	 * This is here because the spec says it should be here, but, it is not in the
+	 * vulkan_core.h header file.
+	 */
+	typedef struct VkPhysicalDeviceRayTracingPropertiesKHR {
+	    VkStructureType    sType;
+	    void*              pNext;
+	    uint32_t           shaderGroupHandleSize;
+	    uint32_t           maxRecursionDepth;
+	    uint32_t           maxShaderGroupStride;
+	    uint32_t           shaderGroupBaseAlignment;
+	    uint64_t           maxGeometryCount;
+	    uint64_t           maxInstanceCount;
+	    uint64_t           maxPrimitiveCount;
+	    uint32_t           maxDescriptorSetAccelerationStructures;
+	    uint32_t           shaderGroupHandleCaptureReplaySize;
+	} VkPhysicalDeviceRayTracingPropertiesKHR;
+
+	void populateVkPhysicalDeviceRayTracingPropertiesKHR(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceRayTracingPropertiesKHRObject,
+			const VkPhysicalDeviceRayTracingPropertiesKHR *vkPhysicalDeviceRayTracingPropertiesKHR,
+			std::vector<void *> *memoryToFree);
+
+	void populateVkPhysicalDeviceRobustness2PropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceRobustness2PropertiesEXTObject,
+			const VkPhysicalDeviceRobustness2PropertiesEXT *vkPhysicalDeviceRobustness2PropertiesEXT);
+
+	void populateVkPhysicalDeviceShaderCoreProperties2AMD(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceShaderCoreProperties2AMDObject,
+			const VkPhysicalDeviceShaderCoreProperties2AMD *vkPhysicalDeviceShaderCoreProperties2AMD,
+			std::vector<void *> *memoryToFree);
+
+    jobject createVkShaderCorePropertiesFlagBitsAMDAsEnumSet(JNIEnv *env, VkShaderCorePropertiesFlagsAMD vkShaderCorePropertiesFlagsAMD);
+
+	void populateVkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceShaderSMBuiltinsPropertiesNVObject,
+			const VkPhysicalDeviceShaderSMBuiltinsPropertiesNV *vkPhysicalDeviceShaderSMBuiltinsPropertiesNV);
+
+	void populateVkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceSubgroupSizeControlPropertiesEXTObject,
+			const VkPhysicalDeviceSubgroupSizeControlPropertiesEXT *vkPhysicalDeviceSubgroupSizeControlPropertiesEXT);
+
+	void populateVkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceTexelBufferAlignmentPropertiesEXTObject,
+			const VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT *vkPhysicalDeviceTexelBufferAlignmentPropertiesEXT);
+
+	void populateVkPhysicalDeviceTimelineSemaphoreProperties(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceTimelineSemaphorePropertiesObject,
+			const VkPhysicalDeviceTimelineSemaphoreProperties *vkPhysicalDeviceTimelineSemaphoreProperties);
+
+	void populateVkPhysicalDeviceVulkan11Properties(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceVulkan11PropertiesObject,
+			const VkPhysicalDeviceVulkan11Properties *vkPhysicalDeviceVulkan11Properties);
+
+	void populateVkPhysicalDeviceVulkan12Properties(
+			JNIEnv *env,
+			jobject jVkPhysicalDeviceVulkan12PropertiesObject,
+			const VkPhysicalDeviceVulkan12Properties *vkPhysicalDeviceVulkan12Properties);
+
+    void getVkDeviceDiagnosticsConfigCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkDeviceDiagnosticsConfigCreateInfoNVObject,
+			VkDeviceDiagnosticsConfigCreateInfoNV *vkDeviceDiagnosticsConfigCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDevicePrivateDataCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkDevicePrivateDataCreateInfoEXTObject,
+			VkDevicePrivateDataCreateInfoEXT *vkDevicePrivateDataCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceCoherentMemoryFeaturesAMD(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceCoherentMemoryFeaturesAMDObject,
+			VkPhysicalDeviceCoherentMemoryFeaturesAMD *vkPhysicalDeviceCoherentMemoryFeaturesAMD,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceCoverageReductionModeFeaturesNV(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceCoverageReductionModeFeaturesNVObject,
+			VkPhysicalDeviceCoverageReductionModeFeaturesNV *vkPhysicalDeviceCoverageReductionModeFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceCustomBorderColorFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceCustomBorderColorFeaturesEXTObject,
+			VkPhysicalDeviceCustomBorderColorFeaturesEXT *vkPhysicalDeviceCustomBorderColorFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceDeviceGeneratedCommandsFeaturesNVObject,
+			VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *vkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceDiagnosticsConfigFeaturesNV(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceDiagnosticsConfigFeaturesNVObject,
+			VkPhysicalDeviceDiagnosticsConfigFeaturesNV *vkPhysicalDeviceDiagnosticsConfigFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceExtendedDynamicStateFeaturesEXTObject,
+			VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *vkPhysicalDeviceExtendedDynamicStateFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceFragmentDensityMap2FeaturesEXTObject,
+			VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *vkPhysicalDeviceFragmentDensityMap2FeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceFragmentShaderInterlockFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceFragmentShaderInterlockFeaturesEXTObject,
+			VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *vkPhysicalDeviceFragmentShaderInterlockFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceImageRobustnessFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceImageRobustnessFeaturesEXTObject,
+			VkPhysicalDeviceImageRobustnessFeaturesEXT *vkPhysicalDeviceImageRobustnessFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceImagelessFramebufferFeatures(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceImagelessFramebufferFeaturesObject,
+			VkPhysicalDeviceImagelessFramebufferFeatures *vkPhysicalDeviceImagelessFramebufferFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceIndexTypeUint8FeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceIndexTypeUint8FeaturesEXTObject,
+			VkPhysicalDeviceIndexTypeUint8FeaturesEXT *vkPhysicalDeviceIndexTypeUint8FeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceLineRasterizationFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceLineRasterizationFeaturesEXTObject,
+			VkPhysicalDeviceLineRasterizationFeaturesEXT *vkPhysicalDeviceLineRasterizationFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevicePerformanceQueryFeaturesKHR(
+            JNIEnv *env,
+            jobject jVkPhysicalDevicePerformanceQueryFeaturesKHRObject,
+			VkPhysicalDevicePerformanceQueryFeaturesKHR *vkPhysicalDevicePerformanceQueryFeaturesKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDevicePipelineCreationCacheControlFeaturesEXTObject,
+			VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT *vkPhysicalDevicePipelineCreationCacheControlFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
+            JNIEnv *env,
+            jobject jVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHRObject,
+			VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *vkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDevicePrivateDataFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDevicePrivateDataFeaturesEXTObject,
+			VkPhysicalDevicePrivateDataFeaturesEXT *vkPhysicalDevicePrivateDataFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+//    void getVkPhysicalDeviceRayTracingFeaturesKHR(
+//            JNIEnv *env,
+//            jobject jVkPhysicalDeviceRayTracingFeaturesKHRObject,
+//			VkPhysicalDeviceRayTracingFeaturesKHR *vkPhysicalDeviceRayTracingFeaturesKHR,
+//            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceRobustness2FeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceRobustness2FeaturesEXTObject,
+			VkPhysicalDeviceRobustness2FeaturesEXT *vkPhysicalDeviceRobustness2FeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesObject,
+			VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *vkPhysicalDeviceSeparateDepthStencilLayoutsFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderAtomicFloatFeaturesEXTObject,
+			VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *vkPhysicalDeviceShaderAtomicFloatFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderClockFeaturesKHR(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderClockFeaturesKHRObject,
+			VkPhysicalDeviceShaderClockFeaturesKHR *vkPhysicalDeviceShaderClockFeaturesKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXTObject,
+			VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT *vkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderFloat16Int8Features(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderFloat16Int8FeaturesObject,
+			VkPhysicalDeviceShaderFloat16Int8Features *vkPhysicalDeviceShaderFloat16Int8Features,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderIntegerFunctions2FeaturesINTELObject,
+			VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *vkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderSMBuiltinsFeaturesNVObject,
+			VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *vkPhysicalDeviceShaderSMBuiltinsFeaturesNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesObject,
+			VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *vkPhysicalDeviceShaderSubgroupExtendedTypesFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceSubgroupSizeControlFeaturesEXTObject,
+			VkPhysicalDeviceSubgroupSizeControlFeaturesEXT *vkPhysicalDeviceSubgroupSizeControlFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceTexelBufferAlignmentFeaturesEXTObject,
+			VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *vkPhysicalDeviceTexelBufferAlignmentFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXTObject,
+			VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT *vkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceTimelineSemaphoreFeatures(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceTimelineSemaphoreFeaturesObject,
+			VkPhysicalDeviceTimelineSemaphoreFeatures *vkPhysicalDeviceTimelineSemaphoreFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceUniformBufferStandardLayoutFeatures(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceUniformBufferStandardLayoutFeaturesObject,
+			VkPhysicalDeviceUniformBufferStandardLayoutFeatures *vkPhysicalDeviceUniformBufferStandardLayoutFeatures,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceVulkan11Features(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceVulkan11FeaturesObject,
+			VkPhysicalDeviceVulkan11Features *vkPhysicalDeviceVulkan11Features,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPhysicalDeviceVulkan12Features(
+            JNIEnv *env,
+            jobject jVkPhysicalDeviceVulkan12FeaturesObject,
+			VkPhysicalDeviceVulkan12Features *vkPhysicalDeviceVulkan12Features,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCommandBufferInheritanceConditionalRenderingInfoEXT(
+            JNIEnv *env,
+            jobject jVkCommandBufferInheritanceConditionalRenderingInfoEXTObject,
+			VkCommandBufferInheritanceConditionalRenderingInfoEXT *vkCommandBufferInheritanceConditionalRenderingInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkCommandBufferInheritanceRenderPassTransformInfoQCOM(
+            JNIEnv *env,
+            jobject jVkCommandBufferInheritanceRenderPassTransformInfoQCOMObject,
+			VkCommandBufferInheritanceRenderPassTransformInfoQCOM *vkCommandBufferInheritanceRenderPassTransformInfoQCOM,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPerformanceQuerySubmitInfoKHR(
+            JNIEnv *env,
+            jobject jVkPerformanceQuerySubmitInfoKHRObject,
+			VkPerformanceQuerySubmitInfoKHR *vkPerformanceQuerySubmitInfoKHR,
+            std::vector<void *> *memoryToFree);
+
+    void getVkTimelineSemaphoreSubmitInfo(
+            JNIEnv *env,
+            jobject jVkTimelineSemaphoreSubmitInfoObject,
+			VkTimelineSemaphoreSubmitInfo *vkTimelineSemaphoreSubmitInfo,
+            std::vector<void *> *memoryToFree);
+
+#ifdef _WIN64
+    void getVkWin32KeyedMutexAcquireReleaseInfoKHR(
+            JNIEnv *env,
+            jobject jVkWin32KeyedMutexAcquireReleaseInfoKHRObject,
+			VkWin32KeyedMutexAcquireReleaseInfoKHR *vkWin32KeyedMutexAcquireReleaseInfoKHR,
+            std::vector<void *> *memoryToFree)
+#endif
+
+    void getVkDeviceMemoryCollection(
+            JNIEnv *env,
+            const jobject jVkDeviceMemoryCollectionObject,
+			VkDeviceMemory **vkDeviceMemorys,
+            int *numberOfVkDeviceMemory,
+            std::vector<void *> *memoryToFree);
+
+#ifdef _WIN64
+    void getVkWin32KeyedMutexAcquireReleaseInfoKHR(
+            JNIEnv *env,
+            jobject jVkWin32KeyedMutexAcquireReleaseInfoKHRObject,
+			VkWin32KeyedMutexAcquireReleaseInfoKHR *vkWin32KeyedMutexAcquireReleaseInfoKHR,
+            std::vector<void *> *memoryToFree);
+#endif
+
+#ifdef _WIN64
+    void getVkWin32KeyedMutexAcquireReleaseInfoNV(
+            JNIEnv *env,
+            jobject jVkWin32KeyedMutexAcquireReleaseInfoNVObject,
+			VkWin32KeyedMutexAcquireReleaseInfoNV *vkWin32KeyedMutexAcquireReleaseInfoNV,
+            std::vector<void *> *memoryToFree);
+#endif
+
+    void getVkSemaphoreTypeCreateInfo(
+            JNIEnv *env,
+            jobject jVkSemaphoreTypeCreateInfoObject,
+			VkSemaphoreTypeCreateInfo *vkSemaphoreTypeCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassAttachmentBeginInfo(
+            JNIEnv *env,
+            jobject jVkRenderPassAttachmentBeginInfoObject,
+			VkRenderPassAttachmentBeginInfo *vkRenderPassAttachmentBeginInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkRenderPassTransformBeginInfoQCOM(
+            JNIEnv *env,
+            jobject jVkRenderPassTransformBeginInfoQCOMObject,
+			VkRenderPassTransformBeginInfoQCOM *vkRenderPassTransformBeginInfoQCOM,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCompilerControlCreateInfoAMD(
+            JNIEnv *env,
+            jobject jVkPipelineCompilerControlCreateInfoAMDObject,
+			VkPipelineCompilerControlCreateInfoAMD *vkPipelineCompilerControlCreateInfoAMD,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGraphicsPipelineShaderGroupsCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkGraphicsPipelineShaderGroupsCreateInfoNVObject,
+			VkGraphicsPipelineShaderGroupsCreateInfoNV *vkGraphicsPipelineShaderGroupsCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCollection(
+            JNIEnv *env,
+            const jobject jVkPipelineCollectionObject,
+			VkPipeline **vkPipelines,
+            int *numberOfVkPipelines,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGraphicsShaderGroupCreateInfoNVCollection(
+            JNIEnv *env,
+            const jobject jVkGraphicsShaderGroupCreateInfoNVCollectionObject,
+			VkGraphicsShaderGroupCreateInfoNV **vkGraphicsShaderGroupCreateInfoNVs,
+            int *numberOfVkGraphicsShaderGroupCreateInfoNVs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkGraphicsShaderGroupCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkGraphicsShaderGroupCreateInfoNVObject,
+			VkGraphicsShaderGroupCreateInfoNV *vkGraphicsShaderGroupCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+
+
+
+
+
+
+
+
+//    void getVkPhysicalDevice4444FormatsFeaturesEXT(
+//            JNIEnv *env,
+//            jobject jVkPhysicalDevice4444FormatsFeaturesEXTObject,
+//			VkPhysicalDevice4444FormatsFeaturesEXT *vkPhysicalDevice4444FormatsFeaturesEXT,
+//            std::vector<void *> *memoryToFree);
 
 	/*
 	 * Make sure you free() the resulting string.

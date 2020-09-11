@@ -147,7 +147,7 @@ JNIEXPORT void JNICALL Java_com_CIMthetics_jvulkan_VulkanCore_NativeProxies_vkGe
     jmethodID methodId = env->GetMethodID(vkPhysicalDeviceFeatures2Class, "setFeatures", "(Lcom/CIMthetics/jvulkan/VulkanCore/Structures/VkPhysicalDeviceFeatures;)V");
     if (env->ExceptionOccurred())
     {
-    	LOGERROR(env, "%s", "Could not find method id setFeatures for class jVkPhysicalDeviceProperties2");
+    	LOGERROR(env, "%s", "Could not find method id setFeatures for class jVkPhysicalDeviceFeatures2Object");
         return;
     }
 

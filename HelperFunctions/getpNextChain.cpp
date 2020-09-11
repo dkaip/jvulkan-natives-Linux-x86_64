@@ -23,6 +23,11 @@
 #include <vulkan/vulkan.h>
 #include <vulkan/vulkan_core.h>
 #include <vulkan/vulkan_android.h>
+
+#ifdef _WIN64
+#include <vulkan/vulkan_win32.h>
+#endif
+
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
@@ -997,27 +1002,6 @@ namespace jvulkan
 	            *headOfpNextChain = vkPhysicalDeviceFeatures2;
 			}
 			break;
-			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR:
-			{
-	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR");
-
-	        	VkPhysicalDeviceFloat16Int8FeaturesKHR *vkPhysicalDeviceFloat16Int8FeaturesKHR = (VkPhysicalDeviceFloat16Int8FeaturesKHR *)calloc(1, sizeof(VkPhysicalDeviceFloat16Int8FeaturesKHR));
-	        	memoryToFree->push_back(vkPhysicalDeviceFloat16Int8FeaturesKHR);
-
-	            getVkPhysicalDeviceFloat16Int8FeaturesKHR(
-	                    env,
-						jVulkanCreateInfoStructureObject,
-						vkPhysicalDeviceFloat16Int8FeaturesKHR,
-	                    memoryToFree);
-	            if (env->ExceptionOccurred())
-	            {
-	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceFloat16Int8FeaturesKHR failed.");
-	                return;
-	            }
-
-	            *headOfpNextChain = vkPhysicalDeviceFloat16Int8FeaturesKHR;
-			}
-			break;
 			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT:
 			{
 	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT");
@@ -1438,27 +1422,29 @@ namespace jvulkan
 	            *headOfpNextChain = vkPhysicalDeviceYcbcrImageArraysFeaturesEXT;
 			}
 			break;
-//			case VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR:
-//			{
-//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR");
-//
-//	        	VkD3D12FenceSubmitInfoKHR *vkD3D12FenceSubmitInfoKHR = (VkD3D12FenceSubmitInfoKHR *)calloc(1, sizeof(VkD3D12FenceSubmitInfoKHR));
-//	        	memoryToFree->push_back(vkD3D12FenceSubmitInfoKHR);
-//
-//	            getVkD3D12FenceSubmitInfoKHR(
-//	                    env,
-//						jVulkanCreateInfoStructureObject,
-//						vkD3D12FenceSubmitInfoKHR,
-//	                    memoryToFree);
-//	            if (env->ExceptionOccurred())
-//	            {
-//	            	LOGERROR(env, "%s", "Call to getVkD3D12FenceSubmitInfoKHR failed.");
-//	                return;
-//	            }
-//
-//	            *headOfpNextChain = vkD3D12FenceSubmitInfoKHR;
-//			}
-//			break;
+#ifdef _WIN64
+			case VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR");
+
+	        	VkD3D12FenceSubmitInfoKHR *vkD3D12FenceSubmitInfoKHR = (VkD3D12FenceSubmitInfoKHR *)calloc(1, sizeof(VkD3D12FenceSubmitInfoKHR));
+	        	memoryToFree->push_back(vkD3D12FenceSubmitInfoKHR);
+
+	            getVkD3D12FenceSubmitInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkD3D12FenceSubmitInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkD3D12FenceSubmitInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkD3D12FenceSubmitInfoKHR;
+			}
+			break;
+#endif
 			case VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO:
 			{
 	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO");
@@ -2950,6 +2936,995 @@ namespace jvulkan
 	            *headOfpNextChain = vkQueueFamilyCheckpointPropertiesNV;
 			}
 			break;
+			case VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV");
+
+	        	VkDeviceDiagnosticsConfigCreateInfoNV *vkDeviceDiagnosticsConfigCreateInfoNV = (VkDeviceDiagnosticsConfigCreateInfoNV *)calloc(1, sizeof(VkDeviceDiagnosticsConfigCreateInfoNV));
+	        	memoryToFree->push_back(vkDeviceDiagnosticsConfigCreateInfoNV);
+
+	            getVkDeviceDiagnosticsConfigCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceDiagnosticsConfigCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceDiagnosticsConfigCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceDiagnosticsConfigCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT");
+
+	        	VkDevicePrivateDataCreateInfoEXT *vkDevicePrivateDataCreateInfoEXT = (VkDevicePrivateDataCreateInfoEXT *)calloc(1, sizeof(VkDevicePrivateDataCreateInfoEXT));
+	        	memoryToFree->push_back(vkDevicePrivateDataCreateInfoEXT);
+
+	            getVkDevicePrivateDataCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDevicePrivateDataCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDevicePrivateDataCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDevicePrivateDataCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT");
+
+	        	VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *vkPhysicalDeviceBufferDeviceAddressFeaturesEXT = (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceBufferDeviceAddressFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceBufferDeviceAddressFeaturesEXT);
+
+	            getVkPhysicalDeviceBufferDeviceAddressFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceBufferDeviceAddressFeatures *)vkPhysicalDeviceBufferDeviceAddressFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceBufferDeviceAddressFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceBufferDeviceAddressFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD");
+
+	        	VkPhysicalDeviceCoherentMemoryFeaturesAMD *vkPhysicalDeviceCoherentMemoryFeaturesAMD = (VkPhysicalDeviceCoherentMemoryFeaturesAMD *)calloc(1, sizeof(VkPhysicalDeviceCoherentMemoryFeaturesAMD));
+	        	memoryToFree->push_back(vkPhysicalDeviceCoherentMemoryFeaturesAMD);
+
+	            getVkPhysicalDeviceCoherentMemoryFeaturesAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceCoherentMemoryFeaturesAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceCoherentMemoryFeaturesAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceCoherentMemoryFeaturesAMD;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV");
+
+	        	VkPhysicalDeviceCoverageReductionModeFeaturesNV *vkPhysicalDeviceCoverageReductionModeFeaturesNV = (VkPhysicalDeviceCoverageReductionModeFeaturesNV *)calloc(1, sizeof(VkPhysicalDeviceCoverageReductionModeFeaturesNV));
+	        	memoryToFree->push_back(vkPhysicalDeviceCoverageReductionModeFeaturesNV);
+
+	            getVkPhysicalDeviceCoverageReductionModeFeaturesNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceCoverageReductionModeFeaturesNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceCoverageReductionModeFeaturesNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceCoverageReductionModeFeaturesNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT");
+
+	        	VkPhysicalDeviceCustomBorderColorFeaturesEXT *vkPhysicalDeviceCustomBorderColorFeaturesEXT = (VkPhysicalDeviceCustomBorderColorFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceCustomBorderColorFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceCustomBorderColorFeaturesEXT);
+
+	            getVkPhysicalDeviceCustomBorderColorFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceCustomBorderColorFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceCustomBorderColorFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceCustomBorderColorFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV");
+
+	        	VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *vkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV = (VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV *)calloc(1, sizeof(VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV));
+	        	memoryToFree->push_back(vkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV);
+
+	            getVkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV");
+
+	        	VkPhysicalDeviceDiagnosticsConfigFeaturesNV *vkPhysicalDeviceDiagnosticsConfigFeaturesNV = (VkPhysicalDeviceDiagnosticsConfigFeaturesNV *)calloc(1, sizeof(VkPhysicalDeviceDiagnosticsConfigFeaturesNV));
+	        	memoryToFree->push_back(vkPhysicalDeviceDiagnosticsConfigFeaturesNV);
+
+	            getVkPhysicalDeviceDiagnosticsConfigFeaturesNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceDiagnosticsConfigFeaturesNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceDiagnosticsConfigFeaturesNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT");
+
+	        	VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *vkPhysicalDeviceExtendedDynamicStateFeaturesEXT = (VkPhysicalDeviceExtendedDynamicStateFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceExtendedDynamicStateFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceExtendedDynamicStateFeaturesEXT);
+
+	            getVkPhysicalDeviceExtendedDynamicStateFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceExtendedDynamicStateFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceExtendedDynamicStateFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceExtendedDynamicStateFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT");
+
+	        	VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *vkPhysicalDeviceFragmentDensityMap2FeaturesEXT = (VkPhysicalDeviceFragmentDensityMap2FeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceFragmentDensityMap2FeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceFragmentDensityMap2FeaturesEXT);
+
+	            getVkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceFragmentDensityMap2FeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceFragmentDensityMap2FeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceFragmentDensityMap2FeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT");
+
+	        	VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *vkPhysicalDeviceFragmentShaderInterlockFeaturesEXT = (VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceFragmentShaderInterlockFeaturesEXT);
+
+	            getVkPhysicalDeviceFragmentShaderInterlockFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceFragmentShaderInterlockFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceFragmentShaderInterlockFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceFragmentShaderInterlockFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT");
+
+	        	VkPhysicalDeviceImageRobustnessFeaturesEXT *vkPhysicalDeviceImageRobustnessFeaturesEXT = (VkPhysicalDeviceImageRobustnessFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceImageRobustnessFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceImageRobustnessFeaturesEXT);
+
+	            getVkPhysicalDeviceImageRobustnessFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceImageRobustnessFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceImageRobustnessFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceImageRobustnessFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES");
+
+	        	VkPhysicalDeviceImagelessFramebufferFeatures *vkPhysicalDeviceImagelessFramebufferFeatures = (VkPhysicalDeviceImagelessFramebufferFeatures *)calloc(1, sizeof(VkPhysicalDeviceImagelessFramebufferFeatures));
+	        	memoryToFree->push_back(vkPhysicalDeviceImagelessFramebufferFeatures);
+
+	            getVkPhysicalDeviceImagelessFramebufferFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceImagelessFramebufferFeatures,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceImagelessFramebufferFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceImagelessFramebufferFeatures;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT");
+
+	        	VkPhysicalDeviceIndexTypeUint8FeaturesEXT *vkPhysicalDeviceIndexTypeUint8FeaturesEXT = (VkPhysicalDeviceIndexTypeUint8FeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceIndexTypeUint8FeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceIndexTypeUint8FeaturesEXT);
+
+	            getVkPhysicalDeviceIndexTypeUint8FeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceIndexTypeUint8FeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceIndexTypeUint8FeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceIndexTypeUint8FeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT");
+
+	        	VkPhysicalDeviceLineRasterizationFeaturesEXT *vkPhysicalDeviceLineRasterizationFeaturesEXT = (VkPhysicalDeviceLineRasterizationFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceLineRasterizationFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceLineRasterizationFeaturesEXT);
+
+	            getVkPhysicalDeviceLineRasterizationFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceLineRasterizationFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceLineRasterizationFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceLineRasterizationFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR");
+
+	        	VkPhysicalDevicePerformanceQueryFeaturesKHR *vkPhysicalDevicePerformanceQueryFeaturesKHR = (VkPhysicalDevicePerformanceQueryFeaturesKHR *)calloc(1, sizeof(VkPhysicalDevicePerformanceQueryFeaturesKHR));
+	        	memoryToFree->push_back(vkPhysicalDevicePerformanceQueryFeaturesKHR);
+
+	            getVkPhysicalDevicePerformanceQueryFeaturesKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDevicePerformanceQueryFeaturesKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDevicePerformanceQueryFeaturesKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDevicePerformanceQueryFeaturesKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT");
+
+	        	VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT *vkPhysicalDevicePipelineCreationCacheControlFeaturesEXT = (VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT *)calloc(1, sizeof(VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDevicePipelineCreationCacheControlFeaturesEXT);
+
+	            getVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDevicePipelineCreationCacheControlFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDevicePipelineCreationCacheControlFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDevicePipelineCreationCacheControlFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR");
+
+	        	VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *vkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR = (VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR *)calloc(1, sizeof(VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR));
+	        	memoryToFree->push_back(vkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR);
+
+	            getVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT");
+
+	        	VkPhysicalDevicePrivateDataFeaturesEXT *vkPhysicalDevicePrivateDataFeaturesEXT = (VkPhysicalDevicePrivateDataFeaturesEXT *)calloc(1, sizeof(VkPhysicalDevicePrivateDataFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDevicePrivateDataFeaturesEXT);
+
+	            getVkPhysicalDevicePrivateDataFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDevicePrivateDataFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDevicePrivateDataFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDevicePrivateDataFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT");
+
+	        	VkPhysicalDeviceRobustness2FeaturesEXT *vkPhysicalDeviceRobustness2FeaturesEXT = (VkPhysicalDeviceRobustness2FeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceRobustness2FeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceRobustness2FeaturesEXT);
+
+	            getVkPhysicalDeviceRobustness2FeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceRobustness2FeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceRobustness2FeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceRobustness2FeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES");
+
+	        	VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *vkPhysicalDeviceSeparateDepthStencilLayoutsFeatures = (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures *)calloc(1, sizeof(VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures));
+	        	memoryToFree->push_back(vkPhysicalDeviceSeparateDepthStencilLayoutsFeatures);
+
+	            getVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceSeparateDepthStencilLayoutsFeatures,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceSeparateDepthStencilLayoutsFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceSeparateDepthStencilLayoutsFeatures;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT");
+
+	        	VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *vkPhysicalDeviceShaderAtomicFloatFeaturesEXT = (VkPhysicalDeviceShaderAtomicFloatFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceShaderAtomicFloatFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderAtomicFloatFeaturesEXT);
+
+	            getVkPhysicalDeviceShaderAtomicFloatFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderAtomicFloatFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderAtomicFloatFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderAtomicFloatFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR");
+
+	        	VkPhysicalDeviceShaderClockFeaturesKHR *vkPhysicalDeviceShaderClockFeaturesKHR = (VkPhysicalDeviceShaderClockFeaturesKHR *)calloc(1, sizeof(VkPhysicalDeviceShaderClockFeaturesKHR));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderClockFeaturesKHR);
+
+	            getVkPhysicalDeviceShaderClockFeaturesKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderClockFeaturesKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderClockFeaturesKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderClockFeaturesKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT");
+
+	        	VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT *vkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT = (VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT);
+
+	            getVkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES");
+
+	        	VkPhysicalDeviceShaderFloat16Int8Features *vkPhysicalDeviceShaderFloat16Int8Features = (VkPhysicalDeviceShaderFloat16Int8Features *)calloc(1, sizeof(VkPhysicalDeviceShaderFloat16Int8Features));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderFloat16Int8Features);
+
+	            getVkPhysicalDeviceShaderFloat16Int8Features(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderFloat16Int8Features,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderFloat16Int8Features failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderFloat16Int8Features;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL");
+
+	        	VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *vkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL = (VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL *)calloc(1, sizeof(VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL);
+
+	            getVkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV");
+
+	        	VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *vkPhysicalDeviceShaderSMBuiltinsFeaturesNV = (VkPhysicalDeviceShaderSMBuiltinsFeaturesNV *)calloc(1, sizeof(VkPhysicalDeviceShaderSMBuiltinsFeaturesNV));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderSMBuiltinsFeaturesNV);
+
+	            getVkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderSMBuiltinsFeaturesNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderSMBuiltinsFeaturesNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderSMBuiltinsFeaturesNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES");
+
+	        	VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *vkPhysicalDeviceShaderSubgroupExtendedTypesFeatures = (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures *)calloc(1, sizeof(VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures));
+	        	memoryToFree->push_back(vkPhysicalDeviceShaderSubgroupExtendedTypesFeatures);
+
+	            getVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceShaderSubgroupExtendedTypesFeatures,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceShaderSubgroupExtendedTypesFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceShaderSubgroupExtendedTypesFeatures;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT");
+
+	        	VkPhysicalDeviceSubgroupSizeControlFeaturesEXT *vkPhysicalDeviceSubgroupSizeControlFeaturesEXT = (VkPhysicalDeviceSubgroupSizeControlFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceSubgroupSizeControlFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceSubgroupSizeControlFeaturesEXT);
+
+	            getVkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceSubgroupSizeControlFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceSubgroupSizeControlFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceSubgroupSizeControlFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT");
+
+	        	VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *vkPhysicalDeviceTexelBufferAlignmentFeaturesEXT = (VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceTexelBufferAlignmentFeaturesEXT);
+
+	            getVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceTexelBufferAlignmentFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceTexelBufferAlignmentFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceTexelBufferAlignmentFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT");
+
+	        	VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT *vkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT = (VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT *)calloc(1, sizeof(VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT));
+	        	memoryToFree->push_back(vkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT);
+
+	            getVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES");
+
+	        	VkPhysicalDeviceTimelineSemaphoreFeatures *vkPhysicalDeviceTimelineSemaphoreFeatures = (VkPhysicalDeviceTimelineSemaphoreFeatures *)calloc(1, sizeof(VkPhysicalDeviceTimelineSemaphoreFeatures));
+	        	memoryToFree->push_back(vkPhysicalDeviceTimelineSemaphoreFeatures);
+
+	            getVkPhysicalDeviceTimelineSemaphoreFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceTimelineSemaphoreFeatures,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceTimelineSemaphoreFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceTimelineSemaphoreFeatures;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES");
+
+	        	VkPhysicalDeviceUniformBufferStandardLayoutFeatures *vkPhysicalDeviceUniformBufferStandardLayoutFeatures = (VkPhysicalDeviceUniformBufferStandardLayoutFeatures *)calloc(1, sizeof(VkPhysicalDeviceUniformBufferStandardLayoutFeatures));
+	        	memoryToFree->push_back(vkPhysicalDeviceUniformBufferStandardLayoutFeatures);
+
+	            getVkPhysicalDeviceUniformBufferStandardLayoutFeatures(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceUniformBufferStandardLayoutFeatures,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceUniformBufferStandardLayoutFeatures failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceUniformBufferStandardLayoutFeatures;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES");
+
+	        	VkPhysicalDeviceVulkan11Features *vkPhysicalDeviceVulkan11Features = (VkPhysicalDeviceVulkan11Features *)calloc(1, sizeof(VkPhysicalDeviceVulkan11Features));
+	        	memoryToFree->push_back(vkPhysicalDeviceVulkan11Features);
+
+	            getVkPhysicalDeviceVulkan11Features(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceVulkan11Features,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceVulkan11Features failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceVulkan11Features;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES");
+
+	        	VkPhysicalDeviceVulkan12Features *vkPhysicalDeviceVulkan12Features = (VkPhysicalDeviceVulkan12Features *)calloc(1, sizeof(VkPhysicalDeviceVulkan12Features));
+	        	memoryToFree->push_back(vkPhysicalDeviceVulkan12Features);
+
+	            getVkPhysicalDeviceVulkan12Features(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPhysicalDeviceVulkan12Features,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceVulkan12Features failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPhysicalDeviceVulkan12Features;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT");
+
+	        	VkCommandBufferInheritanceConditionalRenderingInfoEXT *vkCommandBufferInheritanceConditionalRenderingInfoEXT = (VkCommandBufferInheritanceConditionalRenderingInfoEXT *)calloc(1, sizeof(VkCommandBufferInheritanceConditionalRenderingInfoEXT));
+	        	memoryToFree->push_back(vkCommandBufferInheritanceConditionalRenderingInfoEXT);
+
+	            getVkCommandBufferInheritanceConditionalRenderingInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkCommandBufferInheritanceConditionalRenderingInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkCommandBufferInheritanceConditionalRenderingInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkCommandBufferInheritanceConditionalRenderingInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM");
+
+	        	VkCommandBufferInheritanceRenderPassTransformInfoQCOM *vkCommandBufferInheritanceRenderPassTransformInfoQCOM = (VkCommandBufferInheritanceRenderPassTransformInfoQCOM *)calloc(1, sizeof(VkCommandBufferInheritanceRenderPassTransformInfoQCOM));
+	        	memoryToFree->push_back(vkCommandBufferInheritanceRenderPassTransformInfoQCOM);
+
+	            getVkCommandBufferInheritanceRenderPassTransformInfoQCOM(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkCommandBufferInheritanceRenderPassTransformInfoQCOM,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkCommandBufferInheritanceRenderPassTransformInfoQCOM failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkCommandBufferInheritanceRenderPassTransformInfoQCOM;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR");
+
+	        	VkPerformanceQuerySubmitInfoKHR *vkPerformanceQuerySubmitInfoKHR = (VkPerformanceQuerySubmitInfoKHR *)calloc(1, sizeof(VkPerformanceQuerySubmitInfoKHR));
+	        	memoryToFree->push_back(vkPerformanceQuerySubmitInfoKHR);
+
+	            getVkPerformanceQuerySubmitInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPerformanceQuerySubmitInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPerformanceQuerySubmitInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPerformanceQuerySubmitInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO");
+
+	        	VkTimelineSemaphoreSubmitInfo *vkTimelineSemaphoreSubmitInfo = (VkTimelineSemaphoreSubmitInfo *)calloc(1, sizeof(VkTimelineSemaphoreSubmitInfo));
+	        	memoryToFree->push_back(vkTimelineSemaphoreSubmitInfo);
+
+	            getVkTimelineSemaphoreSubmitInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkTimelineSemaphoreSubmitInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkTimelineSemaphoreSubmitInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkTimelineSemaphoreSubmitInfo;
+			}
+			break;
+#ifdef _WIN64
+			case VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR");
+
+	        	VkWin32KeyedMutexAcquireReleaseInfoKHR *vkWin32KeyedMutexAcquireReleaseInfoKHR = (VkWin32KeyedMutexAcquireReleaseInfoKHR *)calloc(1, sizeof(VkWin32KeyedMutexAcquireReleaseInfoKHR));
+	        	memoryToFree->push_back(vkWin32KeyedMutexAcquireReleaseInfoKHR);
+
+	            getVkWin32KeyedMutexAcquireReleaseInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkWin32KeyedMutexAcquireReleaseInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkWin32KeyedMutexAcquireReleaseInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkWin32KeyedMutexAcquireReleaseInfoKHR;
+			}
+			break;
+#endif
+			case VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO");
+
+	        	VkSemaphoreTypeCreateInfo *vkSemaphoreTypeCreateInfo = (VkSemaphoreTypeCreateInfo *)calloc(1, sizeof(VkSemaphoreTypeCreateInfo));
+	        	memoryToFree->push_back(vkSemaphoreTypeCreateInfo);
+
+	            getVkSemaphoreTypeCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSemaphoreTypeCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSemaphoreTypeCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSemaphoreTypeCreateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO");
+
+	        	VkRenderPassAttachmentBeginInfo *vkRenderPassAttachmentBeginInfo = (VkRenderPassAttachmentBeginInfo *)calloc(1, sizeof(VkRenderPassAttachmentBeginInfo));
+	        	memoryToFree->push_back(vkRenderPassAttachmentBeginInfo);
+
+	            getVkRenderPassAttachmentBeginInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassAttachmentBeginInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassAttachmentBeginInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassAttachmentBeginInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM");
+
+	        	VkRenderPassTransformBeginInfoQCOM *vkRenderPassTransformBeginInfoQCOM = (VkRenderPassTransformBeginInfoQCOM *)calloc(1, sizeof(VkRenderPassTransformBeginInfoQCOM));
+	        	memoryToFree->push_back(vkRenderPassTransformBeginInfoQCOM);
+
+	            getVkRenderPassTransformBeginInfoQCOM(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkRenderPassTransformBeginInfoQCOM,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkRenderPassTransformBeginInfoQCOM failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkRenderPassTransformBeginInfoQCOM;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD");
+
+	        	VkPipelineCompilerControlCreateInfoAMD *vkPipelineCompilerControlCreateInfoAMD = (VkPipelineCompilerControlCreateInfoAMD *)calloc(1, sizeof(VkPipelineCompilerControlCreateInfoAMD));
+	        	memoryToFree->push_back(vkPipelineCompilerControlCreateInfoAMD);
+
+	            getVkPipelineCompilerControlCreateInfoAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineCompilerControlCreateInfoAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineCompilerControlCreateInfoAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineCompilerControlCreateInfoAMD;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV");
+
+	        	VkGraphicsPipelineShaderGroupsCreateInfoNV *vkGraphicsPipelineShaderGroupsCreateInfoNV = (VkGraphicsPipelineShaderGroupsCreateInfoNV *)calloc(1, sizeof(VkGraphicsPipelineShaderGroupsCreateInfoNV));
+	        	memoryToFree->push_back(vkGraphicsPipelineShaderGroupsCreateInfoNV);
+
+	            getVkGraphicsPipelineShaderGroupsCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkGraphicsPipelineShaderGroupsCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkGraphicsPipelineShaderGroupsCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkGraphicsPipelineShaderGroupsCreateInfoNV;
+			}
+			break;
+//			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR:
+//			{
+//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR");
+//
+//	        	VkPhysicalDeviceRayTracingFeaturesKHR *vkPhysicalDeviceRayTracingFeaturesKHR = (VkPhysicalDeviceRayTracingFeaturesKHR *)calloc(1, sizeof(VkPhysicalDeviceRayTracingFeaturesKHR));
+//	        	memoryToFree->push_back(vkPhysicalDeviceRayTracingFeaturesKHR);
+//
+//	            getVkPhysicalDeviceRayTracingFeaturesKHR(
+//	                    env,
+//						jVulkanCreateInfoStructureObject,
+//						vkPhysicalDeviceRayTracingFeaturesKHR,
+//	                    memoryToFree);
+//	            if (env->ExceptionOccurred())
+//	            {
+//	            	LOGERROR(env, "%s", "Call to getVkPhysicalDeviceRayTracingFeaturesKHR failed.");
+//	                return;
+//	            }
+//
+//	            *headOfpNextChain = vkPhysicalDeviceRayTracingFeaturesKHR;
+//			}
+//			break;
+//			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT:
+//			{
+//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT");
+//
+//	        	VkPhysicalDevice4444FormatsFeaturesEXT *vkPhysicalDevice4444FormatsFeaturesEXT = (VkPhysicalDevice4444FormatsFeaturesEXT *)calloc(1, sizeof(VkPhysicalDevice4444FormatsFeaturesEXT));
+//	        	memoryToFree->push_back(vkDevicePrivateDataCreateInfoEXT);
+//
+//	            getVkPhysicalDevice4444FormatsFeaturesEXT(
+//	                    env,
+//						jVulkanCreateInfoStructureObject,
+//						vkPhysicalDevice4444FormatsFeaturesEXT,
+//	                    memoryToFree);
+//	            if (env->ExceptionOccurred())
+//	            {
+//	            	LOGERROR(env, "%s", "Call to getVkPhysicalDevice4444FormatsFeaturesEXT failed.");
+//	                return;
+//	            }
+//
+//	            *headOfpNextChain = vkDevicePrivateDataCreateInfoEXT;
+//			}
+//			break;
 			default:
 				LOGWARN(env, "Unhandled sType of %d", sTypeValue);
 			break;

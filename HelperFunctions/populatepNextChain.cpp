@@ -564,6 +564,176 @@ namespace jvulkan
 					return;
 				}
 				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT");
+				populateVkPhysicalDeviceCustomBorderColorPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceCustomBorderColorPropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceCustomBorderColorPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV");
+				populateVkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT");
+				populateVkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceFragmentDensityMap2PropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceFragmentDensityMap2PropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT");
+				populateVkPhysicalDeviceLineRasterizationPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceLineRasterizationPropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceLineRasterizationPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR");
+				populateVkPhysicalDevicePerformanceQueryPropertiesKHR(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDevicePerformanceQueryPropertiesKHR *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling VkPhysicalDevicePerformanceQueryPropertiesKHR.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR");
+				populateVkPhysicalDeviceRayTracingPropertiesKHR(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceRayTracingPropertiesKHR *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceRayTracingPropertiesKHR.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT");
+				populateVkPhysicalDeviceRobustness2PropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceRobustness2PropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceRobustness2PropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD");
+				populateVkPhysicalDeviceShaderCoreProperties2AMD(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceShaderCoreProperties2AMD *)headOfpNextChain,
+						memoryToFree);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceShaderCoreProperties2AMD.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV");
+				populateVkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceShaderSMBuiltinsPropertiesNV *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceShaderSMBuiltinsPropertiesNV.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT");
+				populateVkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceSubgroupSizeControlPropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceSubgroupSizeControlPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT");
+				populateVkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceTexelBufferAlignmentPropertiesEXT.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES");
+				populateVkPhysicalDeviceTimelineSemaphoreProperties(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceTimelineSemaphoreProperties *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceTimelineSemaphoreProperties.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES");
+				populateVkPhysicalDeviceVulkan11Properties(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceVulkan11Properties *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceVulkan11Properties.");
+					return;
+				}
+				break;
+			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES:
+				LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES");
+				populateVkPhysicalDeviceVulkan12Properties(
+						env,
+						jVulkanCreateInfoStructureObject,
+						(VkPhysicalDeviceVulkan12Properties *)headOfpNextChain);
+				if (env->ExceptionOccurred())
+				{
+					LOGERROR(env, "%s", "Error calling populateVkPhysicalDeviceVulkan12Properties.");
+					return;
+				}
+				break;
 			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2:
 				/*
 				 *  This should not be in the pNext chain except for the first

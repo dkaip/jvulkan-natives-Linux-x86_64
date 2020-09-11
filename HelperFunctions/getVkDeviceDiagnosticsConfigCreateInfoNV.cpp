@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 /*
- * getVkPhysicalDeviceFloat16Int8FeaturesKHR.cpp
+ * getVkDeviceDiagnosticsConfigCreateInfoNV.cpp
  *
- *  Created on: May 17, 2019
+ *  Created on: Sep 9, 2020
  *      Author: Douglas Kaip
  */
 
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkPhysicalDeviceFloat16Int8FeaturesKHR(
+    void getVkDeviceDiagnosticsConfigCreateInfoNV(
             JNIEnv *env,
-            const jobject jVkPhysicalDeviceFloat16Int8FeaturesKHRObject,
-			VkPhysicalDeviceFloat16Int8FeaturesKHR *vkPhysicalDeviceFloat16Int8FeaturesKHR,
+            jobject jVkDeviceDiagnosticsConfigCreateInfoNVObject,
+			VkDeviceDiagnosticsConfigCreateInfoNV *vkDeviceDiagnosticsConfigCreateInfoNV,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkPhysicalDeviceFloat16Int8FeaturesKHRObject);
+        jclass theClass = env->GetObjectClass(jVkDeviceDiagnosticsConfigCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkPhysicalDeviceFloat16Int8FeaturesKHRObject");
+        	LOGERROR(env, "%s", "Could not get class for jVkDeviceDiagnosticsConfigCreateInfoNVObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSType(env, jVkPhysicalDeviceFloat16Int8FeaturesKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkDeviceDiagnosticsConfigCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSType failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkPhysicalDeviceFloat16Int8FeaturesKHRObject);
+        jobject jpNextObject = getpNextObject(env, jVkDeviceDiagnosticsConfigCreateInfoNVObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -70,40 +70,33 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jmethodID methodId = env->GetMethodID(theClass, "isShaderFloat16", "()Z");
+        jmethodID methodId = env->GetMethodID(theClass, "getFlags", "()Ljava/util/EnumSet;");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isShaderFloat16");
+        	LOGERROR(env, "%s", "Could not find method id for getFlags.");
             return;
         }
 
-        jboolean shaderFloat16 = env->CallBooleanMethod(jVkPhysicalDeviceFloat16Int8FeaturesKHRObject, methodId);
+        jobject flagsObject = env->CallObjectMethod(jVkDeviceDiagnosticsConfigCreateInfoNVObject, methodId);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
             return;
         }
 
-
-        ////////////////////////////////////////////////////////////////////////
-        methodId = env->GetMethodID(theClass, "isShaderInt8", "()Z");
+        VkDeviceDiagnosticsConfigFlagsNV flags = getEnumSetValue(
+                env,
+                flagsObject,
+                "com/CIMthetics/jvulkan/VulkanExtensions/Enums/VkDeviceDiagnosticsConfigFlagBitsNV");
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find method id for isShaderInt8");
-            return;
-        }
-
-        jboolean shaderInt8 = env->CallBooleanMethod(jVkPhysicalDeviceFloat16Int8FeaturesKHRObject, methodId);
-        if (env->ExceptionOccurred())
-        {
-        	LOGERROR(env, "%s", "Error calling CallBooleanMethod");
+        	LOGERROR(env, "%s", "Error calling getEnumSetValue.");
             return;
         }
 
 
-        vkPhysicalDeviceFloat16Int8FeaturesKHR->sType = sTypeValue;
-        vkPhysicalDeviceFloat16Int8FeaturesKHR->pNext = pNext;
-        vkPhysicalDeviceFloat16Int8FeaturesKHR->shaderFloat16 = shaderFloat16;
-        vkPhysicalDeviceFloat16Int8FeaturesKHR->shaderInt8 = shaderInt8;
+        vkDeviceDiagnosticsConfigCreateInfoNV->sType 	= sTypeValue;
+        vkDeviceDiagnosticsConfigCreateInfoNV->pNext 	= (void *)pNext;
+        vkDeviceDiagnosticsConfigCreateInfoNV->flags	= flags;
     }
 }

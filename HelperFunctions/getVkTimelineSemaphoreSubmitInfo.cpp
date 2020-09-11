@@ -1,5 +1,5 @@
 /*
- * Copyright 2019-2020 Douglas Kaip
+ * Copyright 2020 Douglas Kaip
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,34 +14,32 @@
  * limitations under the License.
  */
 /*
- * getVkD3D12FenceSubmitInfoKHR.cpp
+ * getVkTimelineSemaphoreSubmitInfo.cpp
  *
- *  Created on: May 19, 2019
+ *  Created on: Sep 10, 2020
  *      Author: Douglas Kaip
  */
-
-#ifdef _WIN64
 
 #include "JVulkanHelperFunctions.hh"
 #include "slf4j.hh"
 
 namespace jvulkan
 {
-    void getVkD3D12FenceSubmitInfoKHR(
+    void getVkTimelineSemaphoreSubmitInfo(
             JNIEnv *env,
-            const jobject jVkD3D12FenceSubmitInfoKHRObject,
-			VkD3D12FenceSubmitInfoKHR *vkD3D12FenceSubmitInfoKHR,
+            jobject jVkTimelineSemaphoreSubmitInfoObject,
+			VkTimelineSemaphoreSubmitInfo *vkTimelineSemaphoreSubmitInfo,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkD3D12FenceSubmitInfoKHRObject);
+        jclass theClass = env->GetObjectClass(jVkTimelineSemaphoreSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkD3D12FenceSubmitInfoKHRObject");
+        	LOGERROR(env, "%s", "Could not get class for jVkTimelineSemaphoreSubmitInfoObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSType(env, jVkD3D12FenceSubmitInfoKHRObject);
+        VkStructureType sTypeValue = getSType(env, jVkTimelineSemaphoreSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSType failed.");
@@ -49,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkD3D12FenceSubmitInfoKHRObject);
+        jobject jpNextObject = getpNextObject(env, jVkTimelineSemaphoreSubmitInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -79,7 +77,7 @@ namespace jvulkan
             return;
         }
 
-        jlongArray jWaitSemaphoreValuesArrayObject = env->CallObjectMethod(jVkD3D12FenceSubmitInfoKHRObject, methodId);
+        jlongArray jWaitSemaphoreValuesArrayObject = (jlongArray)env->CallObjectMethod(jVkTimelineSemaphoreSubmitInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -87,23 +85,20 @@ namespace jvulkan
         }
 
         uint64_t *pWaitSemaphoreValues = nullptr;
-        jsize arrayLength = 0;
+        uint32_t waitSemaphoreValueCount = 0;
         if (jWaitSemaphoreValuesArrayObject != nullptr)
         {
-            arrayLength = env->GetArrayLength(jWaitSemaphoreValuesArrayObject);
+        	waitSemaphoreValueCount = env->GetArrayLength(jWaitSemaphoreValuesArrayObject);
 
-            pWaitSemaphoreValues = (uint64_t *)calloc(arrayLength, sizeof(uint64_t));
+            pWaitSemaphoreValues = (uint64_t *)calloc(waitSemaphoreValueCount, sizeof(uint64_t));
             memoryToFree->push_back(pWaitSemaphoreValues);
 
-            env->GetLongArrayRegion(jWaitSemaphoreValuesArrayObject, 0, arrayLength, (long int *)pWaitSemaphoreValues);
+            env->GetLongArrayRegion(jWaitSemaphoreValuesArrayObject, 0, waitSemaphoreValueCount, (long int *)pWaitSemaphoreValues);
             if (env->ExceptionOccurred())
             {
                 return;
             }
         }
-
-        vkD3D12FenceSubmitInfoKHR->waitSemaphoreValuesCount = arrayLength;
-        vkD3D12FenceSubmitInfoKHR->pWaitSemaphoreValues = pWaitSemaphoreValues;
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(theClass, "getSignalSemaphoreValues", "()[J");
@@ -113,7 +108,7 @@ namespace jvulkan
             return;
         }
 
-        jlongArray jSignalSemaphoreValuesArrayObject = env->CallObjectMethod(jVkD3D12FenceSubmitInfoKHRObject, methodId);
+        jlongArray jSignalSemaphoreValuesArrayObject = (jlongArray)env->CallObjectMethod(jVkTimelineSemaphoreSubmitInfoObject, methodId);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Error calling CallObjectMethod");
@@ -121,29 +116,27 @@ namespace jvulkan
         }
 
         uint64_t *pSignalSemaphoreValues = nullptr;
-        arrayLength = 0;
+        uint32_t signalSemaphoreValueCount = 0;
         if (jSignalSemaphoreValuesArrayObject != nullptr)
         {
-            arrayLength = env->GetArrayLength(jSignalSemaphoreValuesArrayObject);
+        	signalSemaphoreValueCount = env->GetArrayLength(jSignalSemaphoreValuesArrayObject);
 
-            pSignalSemaphoreValues = (uint64_t *)calloc(arrayLength, sizeof(uint64_t));
+            pSignalSemaphoreValues = (uint64_t *)calloc(signalSemaphoreValueCount, sizeof(uint64_t));
             memoryToFree->push_back(pSignalSemaphoreValues);
 
-            env->GetLongArrayRegion(jSignalSemaphoreValuesArrayObject, 0, arrayLength, (long int *)pSignalSemaphoreValues);
+            env->GetLongArrayRegion(jSignalSemaphoreValuesArrayObject, 0, signalSemaphoreValueCount, (long int *)pSignalSemaphoreValues);
             if (env->ExceptionOccurred())
             {
                 return;
             }
         }
 
-        vkD3D12FenceSubmitInfoKHR->signalSemaphoreValuesCount = arrayLength;
-        vkD3D12FenceSubmitInfoKHR->pSignalSemaphoreValues = pSignalSemaphoreValues;
 
-
-
-        vkD3D12FenceSubmitInfoKHR->sType = sTypeValue;
-        vkD3D12FenceSubmitInfoKHR->pNext = pNext;
+        vkTimelineSemaphoreSubmitInfo->sType 	= sTypeValue;
+        vkTimelineSemaphoreSubmitInfo->pNext 	= (void *)pNext;
+        vkTimelineSemaphoreSubmitInfo->waitSemaphoreValueCount = waitSemaphoreValueCount;
+        vkTimelineSemaphoreSubmitInfo->pWaitSemaphoreValues = pWaitSemaphoreValues;
+        vkTimelineSemaphoreSubmitInfo->signalSemaphoreValueCount = signalSemaphoreValueCount;
+        vkTimelineSemaphoreSubmitInfo->pSignalSemaphoreValues = pSignalSemaphoreValues;
     }
 }
-
-#endif

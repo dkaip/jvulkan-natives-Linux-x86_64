@@ -41,20 +41,27 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkCommandBufferInheritanceInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkCommandBufferInheritanceInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
         void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return;
+            }
+        }
 
         ////////////////////////////////////////////////////////////////////////
         jmethodID methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getRenderPass", "()Lcom/CIMthetics/jvulkan/VulkanCore/Handles/VkRenderPass;");
@@ -154,7 +161,6 @@ namespace jvulkan
         	LOGERROR(env, "%s", "Call to getEnumSetValue failed.");
             return;
         }
-
 
         ////////////////////////////////////////////////////////////////////////
         methodId = env->GetMethodID(vkCommandBufferInheritanceInfoClass, "getPipelineStatistics", "()Ljava/util/EnumSet;");
