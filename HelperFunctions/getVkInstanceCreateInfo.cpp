@@ -78,6 +78,12 @@ namespace jvulkan
         }
 
         jobject flagsObject = env->CallObjectMethod(jVkInstanceCreateInfoObject, methodId);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Error calling CallObjectMethod.");
+            return;
+        }
+
         VkInstanceCreateFlags flags = getEnumSetValue(
                 env,
                 flagsObject,

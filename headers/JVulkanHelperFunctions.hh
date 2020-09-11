@@ -23,6 +23,7 @@
 #include <vector>
 #include <jni.h>
 #include <vulkan/vulkan.h>
+#include <vulkan/vulkan_beta.h>
 #include <vulkan/vulkan_core.h>
 #include <vulkan/vulkan_android.h>
 #include <vulkan/vulkan_wayland.h>
@@ -1875,10 +1876,10 @@ namespace jvulkan
             int *numberOfVkAccelerationStructureNVs,
             std::vector<void *> *memoryToFree);
 
-    void getVkWriteDescriptorSetAccelerationStructureNV(
+    void getVkWriteDescriptorSetAccelerationStructureKHR(
             JNIEnv *env,
-            const jobject jVkWriteDescriptorSetAccelerationStructureNVObject,
-			VkWriteDescriptorSetAccelerationStructureNV *vkWriteDescriptorSetAccelerationStructureNV,
+            const jobject jVkWriteDescriptorSetAccelerationStructureKHRObject,
+			VkWriteDescriptorSetAccelerationStructureKHR *vkWriteDescriptorSetAccelerationStructureKHR,
             std::vector<void *> *memoryToFree);
 
     void getVkWriteDescriptorSetInlineUniformBlockEXT(
@@ -3756,9 +3757,59 @@ namespace jvulkan
 			VkGraphicsShaderGroupCreateInfoNV *vkGraphicsShaderGroupCreateInfoNV,
             std::vector<void *> *memoryToFree);
 
+    void getVkDeferredOperationInfoKHR(
+            JNIEnv *env,
+            jobject jVkDeferredOperationInfoKHRObject,
+			VkDeferredOperationInfoKHR *vkDeferredOperationInfoKHR,
+            std::vector<void *> *memoryToFree);
 
+    void getVkImportAndroidHardwareBufferInfoANDROID(
+            JNIEnv *env,
+            jobject jVkImportAndroidHardwareBufferInfoANDROIDObject,
+			VkImportAndroidHardwareBufferInfoANDROID *vkImportAndroidHardwareBufferInfoANDROID,
+            std::vector<void *> *memoryToFree);
 
+    void getVkMemoryOpaqueCaptureAddressAllocateInfo(
+            JNIEnv *env,
+            jobject jVkMemoryOpaqueCaptureAddressAllocateInfoObject,
+			VkMemoryOpaqueCaptureAddressAllocateInfo *vkMemoryOpaqueCaptureAddressAllocateInfo,
+            std::vector<void *> *memoryToFree);
 
+    void getVkBufferOpaqueCaptureAddressCreateInfo(
+            JNIEnv *env,
+            jobject jVkBufferOpaqueCaptureAddressCreateInfoObject,
+			VkBufferOpaqueCaptureAddressCreateInfo *vkBufferOpaqueCaptureAddressCreateInfo,
+            std::vector<void *> *memoryToFree);
+
+    void getVkSamplerCustomBorderColorCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkSamplerCustomBorderColorCreateInfoEXTObject,
+			VkSamplerCustomBorderColorCreateInfoEXT *vkSamplerCustomBorderColorCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkQueryPoolPerformanceQueryCreateInfoINTEL(
+            JNIEnv *env,
+            jobject jVkQueryPoolPerformanceQueryCreateInfoINTELObject,
+			VkQueryPoolPerformanceQueryCreateInfoINTEL *vkQueryPoolPerformanceQueryCreateInfoINTEL,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineRasterizationLineStateCreateInfoEXT(
+            JNIEnv *env,
+            jobject jVkPipelineRasterizationLineStateCreateInfoEXTObject,
+			VkPipelineRasterizationLineStateCreateInfoEXT *vkPipelineRasterizationLineStateCreateInfoEXT,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPipelineCoverageReductionStateCreateInfoNV(
+            JNIEnv *env,
+            jobject jVkPipelineCoverageReductionStateCreateInfoNVObject,
+			VkPipelineCoverageReductionStateCreateInfoNV *vkPipelineCoverageReductionStateCreateInfoNV,
+            std::vector<void *> *memoryToFree);
+
+    void getVkDeviceGroupBindSparseInfo(
+            JNIEnv *env,
+            jobject jVkDeviceGroupBindSparseInfoObject,
+			VkDeviceGroupBindSparseInfo *vkDeviceGroupBindSparseInfo,
+            std::vector<void *> *memoryToFree);
 
 
 

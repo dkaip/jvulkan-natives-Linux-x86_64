@@ -46,19 +46,28 @@ namespace jvulkan
 			return;
 		}
 
-		////////////////////////////////////////////////////////////////////////
-		jobject jpNextObject = getpNextObject(env, jVkQueryPoolCreateInfoObject);
-		if (env->ExceptionOccurred())
-		{
-			LOGERROR(env, "%s", "Call to getpNext failed.");
-			return;
-		}
+        ////////////////////////////////////////////////////////////////////////
+        jobject jpNextObject = getpNextObject(env, jVkQueryPoolCreateInfoObject);
+        if (env->ExceptionOccurred())
+        {
+        	LOGERROR(env, "%s", "Call to getpNext failed.");
+            return;
+        }
 
-		void *pNext = nullptr;
-		if (jpNextObject != nullptr)
-		{
-			LOGERROR(env, "%s", "pNext must be null.");
-		}
+        void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return;
+            }
+        }
 
 		////////////////////////////////////////////////////////////////////////
 		jmethodID methodId = env->GetMethodID(theClass, "getFlags", "()Ljava/util/EnumSet;");

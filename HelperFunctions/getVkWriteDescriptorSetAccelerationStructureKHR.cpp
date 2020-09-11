@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /*
- * getVkWriteDescriptorSetAccelerationStructureNV.cpp
+ * getVkWriteDescriptorSetAccelerationStructureKHR.cpp
  *
  *  Created on: May 28, 2019
  *      Author: Douglas Kaip
@@ -25,21 +25,21 @@
 
 namespace jvulkan
 {
-    void getVkWriteDescriptorSetAccelerationStructureNV(
+    void getVkWriteDescriptorSetAccelerationStructureKHR(
             JNIEnv *env,
-            const jobject jVkWriteDescriptorSetAccelerationStructureNVObject,
-			VkWriteDescriptorSetAccelerationStructureNV *vkWriteDescriptorSetAccelerationStructureNV,
+            const jobject jVkWriteDescriptorSetAccelerationStructureKHRObject,
+			VkWriteDescriptorSetAccelerationStructureKHR *vkWriteDescriptorSetAccelerationStructureKHR,
             std::vector<void *> *memoryToFree)
     {
-        jclass theClass = env->GetObjectClass(jVkWriteDescriptorSetAccelerationStructureNVObject);
+        jclass theClass = env->GetObjectClass(jVkWriteDescriptorSetAccelerationStructureKHRObject);
         if (env->ExceptionOccurred())
         {
-        	LOGERROR(env, "%s", "Could not find class for jVkWriteDescriptorSetAccelerationStructureNVObject");
+        	LOGERROR(env, "%s", "Could not find class for jVkWriteDescriptorSetAccelerationStructureKHRObject");
             return;
         }
 
         ////////////////////////////////////////////////////////////////////////
-        VkStructureType sTypeValue = getSType(env, jVkWriteDescriptorSetAccelerationStructureNVObject);
+        VkStructureType sTypeValue = getSType(env, jVkWriteDescriptorSetAccelerationStructureKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getSType failed.");
@@ -47,7 +47,7 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject jpNextObject = getpNextObject(env, jVkWriteDescriptorSetAccelerationStructureNVObject);
+        jobject jpNextObject = getpNextObject(env, jVkWriteDescriptorSetAccelerationStructureKHRObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
@@ -76,20 +76,20 @@ namespace jvulkan
             return;
         }
 
-        jobject jVkAccelerationStructureNVCollection = env->CallObjectMethod(jVkWriteDescriptorSetAccelerationStructureNVObject, methodId);
+        jobject jVkAccelerationStructureKHRCollection = env->CallObjectMethod(jVkWriteDescriptorSetAccelerationStructureKHRObject, methodId);
         if (env->ExceptionOccurred())
         {
             return;
         }
 
         int numberOfAccelerationStructures = 0;
-        VkAccelerationStructureNV *vkAccelerationStructureNVHandles = nullptr;
-        if (jVkAccelerationStructureNVCollection != nullptr)
+        VkAccelerationStructureKHR *vkAccelerationStructureKHRHandles = nullptr;
+        if (jVkAccelerationStructureKHRCollection != nullptr)
         {
             getVkAccelerationStructureKHRCollection(
                     env,
-					jVkAccelerationStructureNVCollection,
-                    &vkAccelerationStructureNVHandles,
+					jVkAccelerationStructureKHRCollection,
+                    &vkAccelerationStructureKHRHandles,
                     &numberOfAccelerationStructures,
                     memoryToFree);
             if (env->ExceptionOccurred())
@@ -100,9 +100,9 @@ namespace jvulkan
         }
 
 
-        vkWriteDescriptorSetAccelerationStructureNV->sType = sTypeValue;
-        vkWriteDescriptorSetAccelerationStructureNV->pNext = pNext;
-        vkWriteDescriptorSetAccelerationStructureNV->accelerationStructureCount = numberOfAccelerationStructures;
-        vkWriteDescriptorSetAccelerationStructureNV->pAccelerationStructures = vkAccelerationStructureNVHandles;
+        vkWriteDescriptorSetAccelerationStructureKHR->sType = sTypeValue;
+        vkWriteDescriptorSetAccelerationStructureKHR->pNext = pNext;
+        vkWriteDescriptorSetAccelerationStructureKHR->accelerationStructureCount = numberOfAccelerationStructures;
+        vkWriteDescriptorSetAccelerationStructureKHR->pAccelerationStructures = vkAccelerationStructureKHRHandles;
     }
 }

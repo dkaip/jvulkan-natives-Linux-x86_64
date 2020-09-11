@@ -47,20 +47,27 @@ namespace jvulkan
         }
 
         ////////////////////////////////////////////////////////////////////////
-        jobject pNextObject = getpNextObject(env, jVkBindSparseInfoObject);
+        jobject jpNextObject = getpNextObject(env, jVkBindSparseInfoObject);
         if (env->ExceptionOccurred())
         {
         	LOGERROR(env, "%s", "Call to getpNext failed.");
             return;
         }
 
-        if (pNextObject != nullptr)
-        {
-        	LOGERROR(env, "%s", "Unhandled case where pNextObject is not null.");
-            return;
-        }
-
         void *pNext = nullptr;
+        if (jpNextObject != nullptr)
+        {
+        	getpNextChain(
+        			env,
+					jpNextObject,
+        			&pNext,
+        			memoryToFree);
+            if (env->ExceptionOccurred())
+            {
+            	LOGERROR(env, "%s", "Call to getpNextChain failed.");
+                return;
+            }
+        }
 
 		////////////////////////////////////////////////////////////////////////
 		jmethodID methodId = env->GetMethodID(theClass, "getWaitSemaphores", "()Ljava/util/Collection;");

@@ -2243,25 +2243,25 @@ namespace jvulkan
 	            *headOfpNextChain = vkSamplerReductionModeCreateInfo;
 			}
 			break;
-			case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV:
+			case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR:
 			{
-	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV");
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR");
 
-	        	VkWriteDescriptorSetAccelerationStructureNV *vkWriteDescriptorSetAccelerationStructureNV = (VkWriteDescriptorSetAccelerationStructureNV *)calloc(1, sizeof(VkWriteDescriptorSetAccelerationStructureNV));
-	        	memoryToFree->push_back(vkWriteDescriptorSetAccelerationStructureNV);
+	        	VkWriteDescriptorSetAccelerationStructureKHR *vkWriteDescriptorSetAccelerationStructureKHR = (VkWriteDescriptorSetAccelerationStructureKHR *)calloc(1, sizeof(VkWriteDescriptorSetAccelerationStructureKHR));
+	        	memoryToFree->push_back(vkWriteDescriptorSetAccelerationStructureKHR);
 
-	            getVkWriteDescriptorSetAccelerationStructureNV(
+	            getVkWriteDescriptorSetAccelerationStructureKHR(
 	                    env,
 						jVulkanCreateInfoStructureObject,
-						vkWriteDescriptorSetAccelerationStructureNV,
+						vkWriteDescriptorSetAccelerationStructureKHR,
 	                    memoryToFree);
 	            if (env->ExceptionOccurred())
 	            {
-	            	LOGERROR(env, "%s", "Call to getVkWriteDescriptorSetAccelerationStructureNV failed.");
+	            	LOGERROR(env, "%s", "Call to getVkWriteDescriptorSetAccelerationStructureKHR failed.");
 	                return;
 	            }
 
-	            *headOfpNextChain = vkWriteDescriptorSetAccelerationStructureNV;
+	            *headOfpNextChain = vkWriteDescriptorSetAccelerationStructureKHR;
 			}
 			break;
 			case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT:
@@ -3881,6 +3881,195 @@ namespace jvulkan
 	            }
 
 	            *headOfpNextChain = vkGraphicsPipelineShaderGroupsCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_DEFERRED_OPERATION_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEFERRED_OPERATION_INFO_KHR");
+
+	        	VkDeferredOperationInfoKHR *vkDeferredOperationInfoKHR = (VkDeferredOperationInfoKHR *)calloc(1, sizeof(VkDeferredOperationInfoKHR));
+	        	memoryToFree->push_back(vkDeferredOperationInfoKHR);
+
+	            getVkDeferredOperationInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeferredOperationInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeferredOperationInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeferredOperationInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO");
+
+	        	VkMemoryOpaqueCaptureAddressAllocateInfo *vkMemoryOpaqueCaptureAddressAllocateInfo = (VkMemoryOpaqueCaptureAddressAllocateInfo *)calloc(1, sizeof(VkMemoryOpaqueCaptureAddressAllocateInfo));
+	        	memoryToFree->push_back(vkMemoryOpaqueCaptureAddressAllocateInfo);
+
+	            getVkMemoryOpaqueCaptureAddressAllocateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkMemoryOpaqueCaptureAddressAllocateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkMemoryOpaqueCaptureAddressAllocateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkMemoryOpaqueCaptureAddressAllocateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO");
+
+	        	VkBufferOpaqueCaptureAddressCreateInfo *vkBufferOpaqueCaptureAddressCreateInfo = (VkBufferOpaqueCaptureAddressCreateInfo *)calloc(1, sizeof(VkBufferOpaqueCaptureAddressCreateInfo));
+	        	memoryToFree->push_back(vkBufferOpaqueCaptureAddressCreateInfo);
+
+	            getVkBufferOpaqueCaptureAddressCreateInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkBufferOpaqueCaptureAddressCreateInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkBufferOpaqueCaptureAddressCreateInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkBufferOpaqueCaptureAddressCreateInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT");
+
+	        	VkSamplerCustomBorderColorCreateInfoEXT *vkSamplerCustomBorderColorCreateInfoEXT = (VkSamplerCustomBorderColorCreateInfoEXT *)calloc(1, sizeof(VkSamplerCustomBorderColorCreateInfoEXT));
+	        	memoryToFree->push_back(vkSamplerCustomBorderColorCreateInfoEXT);
+
+	            getVkSamplerCustomBorderColorCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSamplerCustomBorderColorCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSamplerCustomBorderColorCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSamplerCustomBorderColorCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR");
+
+	        	VkQueryPoolPerformanceCreateInfoKHR *vkQueryPoolPerformanceCreateInfoKHR = (VkQueryPoolPerformanceCreateInfoKHR *)calloc(1, sizeof(VkQueryPoolPerformanceCreateInfoKHR));
+	        	memoryToFree->push_back(vkQueryPoolPerformanceCreateInfoKHR);
+
+	            getVkQueryPoolPerformanceCreateInfoKHR(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkQueryPoolPerformanceCreateInfoKHR,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkQueryPoolPerformanceCreateInfoKHR failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkQueryPoolPerformanceCreateInfoKHR;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL");
+
+	        	VkQueryPoolPerformanceQueryCreateInfoINTEL *vkQueryPoolPerformanceQueryCreateInfoINTEL = (VkQueryPoolPerformanceQueryCreateInfoINTEL *)calloc(1, sizeof(VkQueryPoolPerformanceQueryCreateInfoINTEL));
+	        	memoryToFree->push_back(vkQueryPoolPerformanceQueryCreateInfoINTEL);
+
+	            getVkQueryPoolPerformanceQueryCreateInfoINTEL(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkQueryPoolPerformanceQueryCreateInfoINTEL,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkQueryPoolPerformanceQueryCreateInfoINTEL failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkQueryPoolPerformanceQueryCreateInfoINTEL;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT");
+
+	        	VkPipelineRasterizationLineStateCreateInfoEXT *vkPipelineRasterizationLineStateCreateInfoEXT = (VkPipelineRasterizationLineStateCreateInfoEXT *)calloc(1, sizeof(VkPipelineRasterizationLineStateCreateInfoEXT));
+	        	memoryToFree->push_back(vkPipelineRasterizationLineStateCreateInfoEXT);
+
+	            getVkPipelineRasterizationLineStateCreateInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineRasterizationLineStateCreateInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineRasterizationLineStateCreateInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineRasterizationLineStateCreateInfoEXT;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV");
+
+	        	VkPipelineCoverageReductionStateCreateInfoNV *vkPipelineCoverageReductionStateCreateInfoNV = (VkPipelineCoverageReductionStateCreateInfoNV *)calloc(1, sizeof(VkPipelineCoverageReductionStateCreateInfoNV));
+	        	memoryToFree->push_back(vkPipelineCoverageReductionStateCreateInfoNV);
+
+	            getVkPipelineCoverageReductionStateCreateInfoNV(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPipelineCoverageReductionStateCreateInfoNV,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPipelineCoverageReductionStateCreateInfoNV failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPipelineCoverageReductionStateCreateInfoNV;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO");
+
+	        	VkDeviceGroupBindSparseInfo *vkDeviceGroupBindSparseInfo = (VkDeviceGroupBindSparseInfo *)calloc(1, sizeof(VkDeviceGroupBindSparseInfo));
+	        	memoryToFree->push_back(vkDeviceGroupBindSparseInfo);
+
+	            getVkDeviceGroupBindSparseInfo(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkDeviceGroupBindSparseInfo,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkDeviceGroupBindSparseInfo failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkDeviceGroupBindSparseInfo;
 			}
 			break;
 //			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR:
