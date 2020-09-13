@@ -2537,27 +2537,29 @@ namespace jvulkan
 	            *headOfpNextChain = vkPipelineSampleLocationsStateCreateInfoEXT;
 			}
 			break;
-//			case VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT:
-//			{
-//	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT");
-//
-//	        	VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT = (VkSurfaceFullScreenExclusiveInfoEXT *)calloc(1, sizeof(VkSurfaceFullScreenExclusiveInfoEXT));
-//	        	memoryToFree->push_back(vkSurfaceFullScreenExclusiveInfoEXT);
-//
-//	            getVkSurfaceFullScreenExclusiveInfoEXT(
-//	                    env,
-//						jVulkanCreateInfoStructureObject,
-//						vkSurfaceFullScreenExclusiveInfoEXT,
-//	                    memoryToFree);
-//	            if (env->ExceptionOccurred())
-//	            {
-//	            	LOGERROR(env, "%s", "Call to getVkSurfaceFullScreenExclusiveInfoEXT failed.");
-//	                return;
-//	            }
-//
-//	            *headOfpNextChain = vkSurfaceFullScreenExclusiveInfoEXT;
-//			}
-//			break;
+#ifdef _WIN64
+			case VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT");
+
+	        	VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT = (VkSurfaceFullScreenExclusiveInfoEXT *)calloc(1, sizeof(VkSurfaceFullScreenExclusiveInfoEXT));
+	        	memoryToFree->push_back(vkSurfaceFullScreenExclusiveInfoEXT);
+
+	            getVkSurfaceFullScreenExclusiveInfoEXT(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSurfaceFullScreenExclusiveInfoEXT,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSurfaceFullScreenExclusiveInfoEXT failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSurfaceFullScreenExclusiveInfoEXT;
+			}
+			break;
+#endif
 			case VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD:
 			{
 	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD");
@@ -4070,6 +4072,111 @@ namespace jvulkan
 	            }
 
 	            *headOfpNextChain = vkDeviceGroupBindSparseInfo;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE");
+
+	        	VkPresentTimesInfoGOOGLE *vkPresentTimesInfoGOOGLE = (VkPresentTimesInfoGOOGLE *)calloc(1, sizeof(VkPresentTimesInfoGOOGLE));
+	        	memoryToFree->push_back(vkPresentTimesInfoGOOGLE);
+
+	            getVkPresentTimesInfoGOOGLE(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkPresentTimesInfoGOOGLE,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkPresentTimesInfoGOOGLE failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkPresentTimesInfoGOOGLE;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID");
+
+	        	VkAndroidHardwareBufferUsageANDROID *vkAndroidHardwareBufferUsageANDROID = (VkAndroidHardwareBufferUsageANDROID *)calloc(1, sizeof(VkAndroidHardwareBufferUsageANDROID));
+	        	memoryToFree->push_back(vkAndroidHardwareBufferUsageANDROID);
+
+	            getVkAndroidHardwareBufferUsageANDROID(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkAndroidHardwareBufferUsageANDROID,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkAndroidHardwareBufferUsageANDROID failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkAndroidHardwareBufferUsageANDROID;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES");
+
+	        	VkExternalImageFormatProperties *vkExternalImageFormatProperties = (VkExternalImageFormatProperties *)calloc(1, sizeof(VkExternalImageFormatProperties));
+	        	memoryToFree->push_back(vkExternalImageFormatProperties);
+
+	            getVkExternalImageFormatProperties(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkExternalImageFormatProperties,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkExternalImageFormatProperties failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkExternalImageFormatProperties;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES");
+
+	        	VkSamplerYcbcrConversionImageFormatProperties *vkSamplerYcbcrConversionImageFormatProperties = (VkSamplerYcbcrConversionImageFormatProperties *)calloc(1, sizeof(VkSamplerYcbcrConversionImageFormatProperties));
+	        	memoryToFree->push_back(vkSamplerYcbcrConversionImageFormatProperties);
+
+	            getVkSamplerYcbcrConversionImageFormatProperties(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkSamplerYcbcrConversionImageFormatProperties,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkSamplerYcbcrConversionImageFormatProperties failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkSamplerYcbcrConversionImageFormatProperties;
+			}
+			break;
+			case VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD:
+			{
+	        	LOGTRACE(env, "%s", "Handling VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD");
+
+	        	VkTextureLODGatherFormatPropertiesAMD *vkTextureLODGatherFormatPropertiesAMD = (VkTextureLODGatherFormatPropertiesAMD *)calloc(1, sizeof(VkTextureLODGatherFormatPropertiesAMD));
+	        	memoryToFree->push_back(vkTextureLODGatherFormatPropertiesAMD);
+
+	            getVkTextureLODGatherFormatPropertiesAMD(
+	                    env,
+						jVulkanCreateInfoStructureObject,
+						vkTextureLODGatherFormatPropertiesAMD,
+	                    memoryToFree);
+	            if (env->ExceptionOccurred())
+	            {
+	            	LOGERROR(env, "%s", "Call to getVkTextureLODGatherFormatPropertiesAMD failed.");
+	                return;
+	            }
+
+	            *headOfpNextChain = vkTextureLODGatherFormatPropertiesAMD;
 			}
 			break;
 //			case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR:

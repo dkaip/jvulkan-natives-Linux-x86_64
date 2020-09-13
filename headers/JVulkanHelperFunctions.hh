@@ -2044,12 +2044,13 @@ namespace jvulkan
 			VkPhysicalDeviceSurfaceInfo2KHR *vkPhysicalDeviceSurfaceInfo2KHR,
             std::vector<void *> *memoryToFree);
 
-//    void getVkSurfaceFullScreenExclusiveInfoEXT(
-//            JNIEnv *env,
-//            const jobject jVkSurfaceFullScreenExclusiveInfoEXTObject,
-//			VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT,
-//            std::vector<void *> *memoryToFree);
-
+#ifdef _WIN64
+    void getVkSurfaceFullScreenExclusiveInfoEXT(
+            JNIEnv *env,
+            const jobject jVkSurfaceFullScreenExclusiveInfoEXTObject,
+			VkSurfaceFullScreenExclusiveInfoEXT *vkSurfaceFullScreenExclusiveInfoEXT,
+            std::vector<void *> *memoryToFree);
+#endif
 	void populateVkSurfaceCapabilitiesKHR(
 			JNIEnv *env,
 			jobject jVkSurfaceCapabilitiesKHRObject,
@@ -3810,6 +3811,57 @@ namespace jvulkan
             jobject jVkDeviceGroupBindSparseInfoObject,
 			VkDeviceGroupBindSparseInfo *vkDeviceGroupBindSparseInfo,
             std::vector<void *> *memoryToFree);
+
+    void getVkPresentTimesInfoGOOGLE(
+            JNIEnv *env,
+            jobject jVkPresentTimesInfoGOOGLEObject,
+			VkPresentTimesInfoGOOGLE *vkPresentTimesInfoGOOGLE,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPresentTimeGOOGLECollection(
+            JNIEnv *env,
+            const jobject jVkPresentTimeGOOGLECollectionObject,
+			VkPresentTimeGOOGLE **vkPresentTimeGOOGLEs,
+            int *numberOfVkPresentTimeGOOGLEs,
+            std::vector<void *> *memoryToFree);
+
+    void getVkPresentTimeGOOGLE(
+            JNIEnv *env,
+            jobject jVkPresentTimeGOOGLEObject,
+			VkPresentTimeGOOGLE *vkPresentTimeGOOGLE,
+            std::vector<void *> *memoryToFree);
+
+    void getVkAndroidHardwareBufferUsageANDROID(
+            JNIEnv *env,
+            jobject jVkAndroidHardwareBufferUsageANDROIDObject,
+			VkAndroidHardwareBufferUsageANDROID *vkAndroidHardwareBufferUsageANDROID,
+            std::vector<void *> *memoryToFree);
+
+	void getVkExternalImageFormatProperties(
+        JNIEnv *env,
+        const jobject jVkExternalImageFormatPropertiesObject,
+		VkExternalImageFormatProperties *vkExternalImageFormatProperties,
+        std::vector<void *> *memoryToFree);
+
+    void getVkExternalMemoryProperties(
+            JNIEnv *env,
+            const jobject jVkExternalMemoryPropertiesObject,
+			VkExternalMemoryProperties *vkExternalMemoryProperties,
+            std::vector<void *> *memoryToFree);
+
+	void getVkSamplerYcbcrConversionImageFormatProperties(
+        JNIEnv *env,
+        const jobject jVkSamplerYcbcrConversionImageFormatPropertiesObject,
+		VkSamplerYcbcrConversionImageFormatProperties *vkSamplerYcbcrConversionImageFormatProperties,
+        std::vector<void *> *memoryToFree);
+
+	void getVkTextureLODGatherFormatPropertiesAMD(
+        JNIEnv *env,
+        const jobject jVkTextureLODGatherFormatPropertiesAMDObject,
+		VkTextureLODGatherFormatPropertiesAMD *vkTextureLODGatherFormatPropertiesAMD,
+        std::vector<void *> *memoryToFree);
+
+
 
 
 
